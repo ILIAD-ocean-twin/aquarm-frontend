@@ -1,37 +1,59 @@
-import { createSignal, type Component, For } from 'solid-js';
+import { createSignal, type Component, For, onMount, createEffect, Accessor } from 'solid-js';
+import { createStore } from "solid-js/store";
 import { MapContainer } from './MapContainer';
+import { BasicWeek, Filters } from './types';
+import { Select, createOptions } from "@thisbeyond/solid-select";
+import "@thisbeyond/solid-select/style.css";
 
-const PLACEMENTS = ["SJØ", "HAV", "LAND"];
 
 const App: Component = () => {
-  const [placement, setPlacement] = createSignal<string>("SJØ");
+  const [data, setData] = createSignal<BasicWeek[]>([]);
+  const [filters, setFilters] = createStore<Filters>({ fallow: true, organizations: [] });
+  const [orgs, setOrgs] = createSignal<string[]>([]);
+
+  const toggleFallow = () => {
+    setFilters({ fallow: !filters.fallow });
+  }
+
+  const setSelectedOrgs = (orgs: string[]) => {
+    setFilters({ organizations: orgs })
+  }
+
+  onMount(() => {
+    fetch("basic-all-2023-52.json")
+      .then(d => d.json() as Promise<BasicWeek[]>)
+      .then(d => d.filter(bw => bw.placement == "SJØ"))
+      .then(setData);
+  });
+
+  createEffect(() => {
+    setOrgs([...data().reduce((agg, cur) => {
+      cur.organizations?.forEach(org => agg.add(org));
+      return agg;
+    }, new Set<string>())]);
+  })
 
   return (
-    <div class="container mx-auto mt-12 flex gap-4">
-      <div class="w-48 text-white">
-        <h2 class="text-lg">Placement:</h2>
-        <div class="flex flex-col mt-1 gap-1">
-          <For each={PLACEMENTS}>{(p) => {
-            return (
-              <label class="text-sm">
-                <input
-                  class="mr-2"
-                  onChange={
-                    ev => {
-                      if (ev.target.checked) {
-                        setPlacement(p)
-                      }
-                    }
-                  }
-                  type="radio"
-                  checked={placement() == p} />
-                {p}
-              </label>)
-          }}</For>
+    <div class="container mx-auto mt-6 flex gap-4">
+      <div class="w-64 text-white">
+
+        <label class="select-none mb-3">
+          Show fallow:
+          <input
+            class="ml-2"
+            checked={filters.fallow}
+            onchange={() => toggleFallow()}
+            type="checkbox" />
+        </label>
+
+        <div class="mb-3 text-black">
+          <h2 class="text-white mb-1 mt-3">Owner organization:</h2>
+          <Select class='bg-slate-500 rounded text-sm' multiple {...createOptions(orgs())} onChange={setSelectedOrgs} />
         </div>
+
       </div>
       <div class="grow h-[800px]">
-        <MapContainer placement={placement} />
+        <MapContainer data={data} filters={filters} />
       </div>
     </div>
   );
