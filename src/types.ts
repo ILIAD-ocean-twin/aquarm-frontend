@@ -5,6 +5,7 @@ export interface BasicWeek {
     lon: number
     rank: number,
     isFallow: boolean,
+    siteId: number,
     lice?: number
     organizations?: string[]
     purposes?: string[]
@@ -16,4 +17,9 @@ export interface BasicWeek {
 export interface Filters {
     fallow: boolean
     organizations: string[]
+}
+
+export interface SiteSelection {
+    id: number
+    coords: number[]
 }
