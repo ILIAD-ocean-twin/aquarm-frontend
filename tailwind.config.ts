@@ -10,6 +10,9 @@ const config: Config = {
     extend: {
       fontFamily: {
         'nunito': ['Nunito', 'sans-serif']
+      },
+      colors: {
+        'iliad': "#00D06E"
       }
     },
   },

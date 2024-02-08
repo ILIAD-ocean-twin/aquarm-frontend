@@ -1,4 +1,4 @@
-import { onMount, type Component, Accessor, createEffect, onCleanup, on, createSignal, Setter, batch } from 'solid-js';
+import { onMount, type Component, Accessor, createEffect, onCleanup, on, createSignal, Setter, batch, Switch, Match } from 'solid-js';
 import TileLayer from 'ol/layer/Tile';
 import Map from 'ol/Map';
 import XYZ from 'ol/source/XYZ';
@@ -7,16 +7,19 @@ import { transform } from 'ol/proj';
 import { View } from 'ol';
 import { BasicWeek, Filters, SiteSelection } from './types';
 import { AquacultureSitesLayer } from './AquacultureSitesLayer';
+import { getRiskLayer } from './RiskLayer';
+import { getTrajectoryLayer } from './TrajectoryLayer';
 
 
 interface MapContainerProps {
   data: Accessor<BasicWeek[]>,
   filters: Filters,
-  selectedSites: Accessor<SiteSelection[]>
+  dataLayers: Accessor<string[]>,
+  selectedSites: Accessor<SiteSelection[]>,
   setSelectedSites: Setter<SiteSelection[]>
 }
 
-export const MapContainer: Component<MapContainerProps> = ({ data, filters, selectedSites, setSelectedSites }) => {
+export const MapContainer: Component<MapContainerProps> = ({ data, filters, selectedSites, setSelectedSites, dataLayers }) => {
   const [filteredData, setFilteredData] = createSignal<BasicWeek[]>([]);
   const [selectedFeatures, setSelectedFeatures] = createSignal<any[]>([]);
   const [hoveredFeature, setHoveredFeature] = createSignal<any>(null);
@@ -25,8 +28,10 @@ export const MapContainer: Component<MapContainerProps> = ({ data, filters, sele
   let mapElement: HTMLDivElement;
   let tooltip: HTMLDivElement;
   let sitesLayer: AquacultureSitesLayer;
+  let layers: Record<string, any> = {};
 
-  onMount(() => {
+
+  onMount(async () => {
     map = new Map({
       layers: [
         /*
@@ -74,6 +79,9 @@ export const MapContainer: Component<MapContainerProps> = ({ data, filters, sele
       else {
         const f = features[0];
         const sID = f.get('siteId');
+        if (!sID) {
+          return;
+        }
         if (selectedFeatures().every(v => v.get('siteId') != sID)) {
           setSelectedFeatures([f, ...selectedFeatures()]);
           // @ts-ignore
@@ -89,15 +97,26 @@ export const MapContainer: Component<MapContainerProps> = ({ data, filters, sele
 
     // @ts-ignore
     mapElement.getElementsByClassName("ol-viewport")[0].style.borderRadius = "16px";
+
+    layers["risk"] = await getRiskLayer();
+    layers["trajectory"] = await getTrajectoryLayer();
+    Object.values(layers).forEach(l => map.addLayer(l));
   })
 
+  // Toggle data layers' visibility
+  createEffect(on(dataLayers, dl => {
+    Object.keys(layers).forEach(l => {
+      layers[l].setVisible(dl.includes(l));
+    })
+  }))
+
+  // Show/Hide tooltip on hover
   createEffect(on(hoveredFeature, f => {
     if (!f) {
       mapElement.classList.toggle('cursor-pointer', false);
       tooltip.classList.toggle("hidden", true);
     } else {
       mapElement.classList.toggle('cursor-pointer', true);
-
       tooltip.classList.toggle("hidden", false);
     }
   }))
@@ -107,6 +126,7 @@ export const MapContainer: Component<MapContainerProps> = ({ data, filters, sele
     map.dispose();
   })
 
+  // Propagate selected sites upward (to App)
   createEffect(() => {
     const sites = selectedFeatures().map(f => ({
       id: f.get("siteId"),
@@ -158,8 +178,17 @@ export const MapContainer: Component<MapContainerProps> = ({ data, filters, sele
   return (
     <div ref={mapElement} class="w-full h-full rounded-2xl shadow-lg relative">
       <div ref={tooltip} class="absolute bg-white p-1 w-[140px] z-50 rounded shadow text-black opacity-90">
-        <h2 class="font-semibold">{hoveredFeature()?.get("name") ?? "Ukjent"}</h2>
-        <div><span>Lusetall:</span> {hoveredFeature()?.get("lice")?.toFixed(2) ?? "ikke målt"}</div>
+        <Switch fallback={<>
+          <h2 class="font-semibold">{hoveredFeature()?.get("name") ?? "Ukjent"}</h2>
+          <div><span>Lusetall:</span> {hoveredFeature()?.get("lice")?.toFixed(2) ?? "ikke målt"}</div>
+        </>}>
+          <Match when={hoveredFeature()?.get('awareness_level') != undefined}>
+            <div>
+              <h2 class="font-semibold">{hoveredFeature()?.get('area')}</h2>
+              <p class="text-sm">{hoveredFeature()?.get('description')}</p>
+            </div>
+          </Match>
+        </Switch>
       </div>
     </div>
   );

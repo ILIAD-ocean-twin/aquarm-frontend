@@ -4,33 +4,44 @@ import { MapContainer } from './MapContainer';
 import { BasicWeek, Filters, SiteSelection } from './types';
 import { Select, createOptions } from "@thisbeyond/solid-select";
 import "@thisbeyond/solid-select/style.css";
+import { Windrose } from './components/windrose';
+import { getRiskLayer } from './RiskLayer';
+import { getTrajectoryLayer } from './TrajectoryLayer';
 
 
 const App: Component = () => {
   const [data, setData] = createSignal<BasicWeek[]>([]);
   const [filters, setFilters] = createStore<Filters>({ fallow: true, organizations: [] });
   const [orgs, setOrgs] = createSignal<string[]>([]);
-
   const [timeSelection, setTimeSelection] = createSignal<{ year: number, week: number }>({ year: 2023, week: 52 });
-
   const [selectedSites, setSelectedSites] = createSignal<SiteSelection[]>([]);
+  const [dataLayers, setDataLayers] = createSignal<string[]>([]);
 
   const toggleFallow = () => {
     setFilters({ fallow: !filters.fallow });
+  }
+
+  const toggleLayer = (layer: string) => {
+    const remove = dataLayers().includes(layer);
+    if (remove) {
+      setDataLayers(dataLayers().filter(l => l != layer))
+    } else {
+      setDataLayers([layer, ...dataLayers()]);
+    }
   }
 
   const setSelectedOrgs = (orgs: string[]) => {
     setFilters({ organizations: orgs })
   }
 
-  onMount(() => {
+  onMount(async () => {
     fetch("/basic-all/2023/52")
       .then(d => d.json() as Promise<BasicWeek[]>)
       .then(d => d.filter(bw => bw.placement == "SJØ"))
       .then(setData);
   });
 
-  createEffect(() => {
+  createEffect(async () => {
     fetch(`/basic-all/${timeSelection().year}/${timeSelection().week}`)
       .then(d => d.json() as Promise<BasicWeek[]>)
       .then(d => d.filter(bw => bw.placement == "SJØ"))
@@ -48,10 +59,10 @@ const App: Component = () => {
     <div class="container mx-auto mt-6 font-nunito">
       <div class="flex gap-4">
         <div class="w-64 text-white">
-
+          <h2 class="text-lg font-semibold text-iliad mb-2">Filters</h2>
           <div class="flex flex-col gap-4">
             <div>
-              <h2 class="w-14 inline-block">Year:</h2>
+              <h2 class="w-14 inline-block text-white/80">Year</h2>
               <input
                 class="bg-slate-500 p-1 w-20"
                 type='number'
@@ -89,9 +100,30 @@ const App: Component = () => {
             </div>
           </div>
 
+          <h2 class="text-lg font-semibold text-iliad my-2">Data layers</h2>
+          <div class="flex flex-col gap-4">
+            <label class="select-none">
+              Weather warnings:
+              <input
+                class="ml-2 cursor-pointer"
+                checked={dataLayers().includes("risk")}
+                onchange={() => toggleLayer("risk")}
+                type="checkbox" />
+            </label>
+
+            <label class="select-none">
+              Trajectory simulations:
+              <input
+                class="ml-2 cursor-pointer"
+                checked={dataLayers().includes("trajectory")}
+                onchange={() => toggleLayer("trajectory")}
+                type="checkbox" />
+            </label>
+          </div>
+
         </div>
         <div class="grow h-[800px]">
-          <MapContainer data={data} filters={filters} selectedSites={selectedSites} setSelectedSites={setSelectedSites} />
+          <MapContainer data={data} filters={filters} selectedSites={selectedSites} setSelectedSites={setSelectedSites} dataLayers={dataLayers} />
         </div>
       </div>
       {selectedSites().map(s => `[${s.id}, ${s.coords}], `)}
