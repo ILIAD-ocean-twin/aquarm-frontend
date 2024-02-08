@@ -45,32 +45,48 @@ const App: Component = () => {
   })
 
   return (
-    <div class="container mx-auto mt-6 ">
+    <div class="container mx-auto mt-6 font-nunito">
       <div class="flex gap-4">
         <div class="w-64 text-white">
 
-          <h2 class="w-12 inline-block mb-3">Year:</h2>
-          <input class="bg-slate-500 p-1" type='number' value={timeSelection().year}
-            onChange={(e) => setTimeSelection({ year: e.target.valueAsNumber, week: timeSelection().week })}
-          />
+          <div class="flex flex-col gap-4">
+            <div>
+              <h2 class="w-14 inline-block">Year:</h2>
+              <input
+                class="bg-slate-500 p-1 w-20"
+                type='number'
+                value={timeSelection().year}
+                min={2012}
+                max={2024}
+                onChange={(e) => setTimeSelection({ year: e.target.valueAsNumber, week: timeSelection().week })}
+              />
+            </div>
 
-          <h2 class="w-12 inline-block mb-3">Week:</h2>
-          <input class="bg-slate-500 p-1" type="number" value={timeSelection().week}
-            onChange={(e) => setTimeSelection({ week: e.target.valueAsNumber, year: timeSelection().year })}
-          />
+            <div>
+              <h2 class="w-14 inline-block">Week:</h2>
+              <input
+                class="bg-slate-500 p-1 w-20"
+                type="number"
+                value={timeSelection().week}
+                min={1}
+                max={52}
+                onChange={(e) => setTimeSelection({ week: e.target.valueAsNumber, year: timeSelection().year })}
+              />
+            </div>
 
-          <label class="select-none mb-3">
-            Show fallow:
-            <input
-              class="ml-2 cursor-pointer"
-              checked={filters.fallow}
-              onchange={() => toggleFallow()}
-              type="checkbox" />
-          </label>
+            <label class="select-none">
+              Show fallow:
+              <input
+                class="ml-2 cursor-pointer"
+                checked={filters.fallow}
+                onchange={() => toggleFallow()}
+                type="checkbox" />
+            </label>
 
-          <div class="mb-3 text-black">
-            <h2 class="text-white mb-1 mt-3">Owner organization:</h2>
-            <Select class='bg-slate-500 rounded text-sm' multiple {...createOptions(orgs())} onChange={setSelectedOrgs} />
+            <div class="mb-3 text-black">
+              <h2 class="text-white mb-1">Owner organization:</h2>
+              <Select class='bg-slate-500 rounded text-sm' multiple {...createOptions(orgs())} onChange={setSelectedOrgs} />
+            </div>
           </div>
 
         </div>

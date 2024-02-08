@@ -7,7 +7,11 @@ const config: Config = {
   ],
   darkMode: 'class',
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'nunito': ['Nunito', 'sans-serif']
+      }
+    },
   },
   plugins: [],
 };
