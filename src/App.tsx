@@ -34,13 +34,6 @@ const App: Component = () => {
     setFilters({ organizations: orgs })
   }
 
-  onMount(async () => {
-    fetch("/basic-all/2023/52")
-      .then(d => d.json() as Promise<BasicWeek[]>)
-      .then(d => d.filter(bw => bw.placement == "SJØ"))
-      .then(setData);
-  });
-
   createEffect(async () => {
     fetch(`/basic-all/${timeSelection().year}/${timeSelection().week}`)
       .then(d => d.json() as Promise<BasicWeek[]>)
@@ -62,7 +55,7 @@ const App: Component = () => {
           <h2 class="text-lg font-semibold text-iliad mb-2">Filters</h2>
           <div class="flex flex-col gap-4">
             <div>
-              <h2 class="w-14 inline-block text-white/80">Year</h2>
+              <h2 class="w-14 inline-block">Year</h2>
               <input
                 class="bg-slate-500 p-1 w-20"
                 type='number'
@@ -117,6 +110,15 @@ const App: Component = () => {
                 class="ml-2 cursor-pointer"
                 checked={dataLayers().includes("trajectory")}
                 onchange={() => toggleLayer("trajectory")}
+                type="checkbox" />
+            </label>
+
+            <label class="select-none">
+              Sea temperature:
+              <input
+                class="ml-2 cursor-pointer"
+                checked={dataLayers().includes("temp")}
+                onchange={() => toggleLayer("temp")}
                 type="checkbox" />
             </label>
           </div>

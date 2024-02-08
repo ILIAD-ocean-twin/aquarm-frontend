@@ -9,6 +9,7 @@ import { BasicWeek, Filters, SiteSelection } from './types';
 import { AquacultureSitesLayer } from './AquacultureSitesLayer';
 import { getRiskLayer } from './RiskLayer';
 import { getTrajectoryLayer } from './TrajectoryLayer';
+import { getOceanTemp } from './OceanTempLayer';
 
 
 interface MapContainerProps {
@@ -59,7 +60,7 @@ export const MapContainer: Component<MapContainerProps> = ({ data, filters, sele
       }
 
       const features = map.getFeaturesAtPixel(ev.pixel);
-      if (features.length) {
+      if (features.length && (features[0].get('siteId') || features[0].get('area'))) {
         // @ts-ignore
         features[0].set('hover', 1);
         setHoveredFeature(features[0]);
@@ -100,6 +101,7 @@ export const MapContainer: Component<MapContainerProps> = ({ data, filters, sele
 
     layers["risk"] = await getRiskLayer();
     layers["trajectory"] = await getTrajectoryLayer();
+    layers['temp'] = await getOceanTemp();
     Object.values(layers).forEach(l => map.addLayer(l));
   })
 
@@ -112,13 +114,8 @@ export const MapContainer: Component<MapContainerProps> = ({ data, filters, sele
 
   // Show/Hide tooltip on hover
   createEffect(on(hoveredFeature, f => {
-    if (!f) {
-      mapElement.classList.toggle('cursor-pointer', false);
-      tooltip.classList.toggle("hidden", true);
-    } else {
-      mapElement.classList.toggle('cursor-pointer', true);
-      tooltip.classList.toggle("hidden", false);
-    }
+    tooltip.classList.toggle("hidden", !!!f);
+    mapElement.classList.toggle('cursor-pointer', !!f?.get('siteId'));
   }))
 
   onCleanup(() => {
