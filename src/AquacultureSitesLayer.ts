@@ -126,9 +126,12 @@ export class AquacultureSitesLayer {
         return new VectorSource({
             features: data.map(dp => new Feature({
                 siteId: dp.id,
+                name: dp.name,
                 lice: dp.lice,
                 rank: dp.rank,
                 fallow: dp.isFallow ? 1 : 0,
+                lat: dp.lat,
+                lon: dp.lon,
                 geometry: new Point(
                     transform([dp.lon, dp.lat], 'EPSG:4326', 'EPSG:3857')
                 )

@@ -11,6 +11,8 @@ const App: Component = () => {
   const [filters, setFilters] = createStore<Filters>({ fallow: true, organizations: [] });
   const [orgs, setOrgs] = createSignal<string[]>([]);
 
+  const [timeSelection, setTimeSelection] = createSignal<{ year: number, week: number }>({ year: 2023, week: 52 });
+
   const [selectedSites, setSelectedSites] = createSignal<SiteSelection[]>([]);
 
   const toggleFallow = () => {
@@ -22,11 +24,18 @@ const App: Component = () => {
   }
 
   onMount(() => {
-    fetch("basic-all-2023-52.json")
+    fetch("/basic-all/2023/52")
       .then(d => d.json() as Promise<BasicWeek[]>)
       .then(d => d.filter(bw => bw.placement == "SJØ"))
       .then(setData);
   });
+
+  createEffect(() => {
+    fetch(`/basic-all/${timeSelection().year}/${timeSelection().week}`)
+      .then(d => d.json() as Promise<BasicWeek[]>)
+      .then(d => d.filter(bw => bw.placement == "SJØ"))
+      .then(setData);
+  })
 
   createEffect(() => {
     setOrgs([...data().reduce((agg, cur) => {
@@ -39,6 +48,16 @@ const App: Component = () => {
     <div class="container mx-auto mt-6 ">
       <div class="flex gap-4">
         <div class="w-64 text-white">
+
+          <h2 class="w-12 inline-block mb-3">Year:</h2>
+          <input class="bg-slate-500 p-1" type='number' value={timeSelection().year}
+            onChange={(e) => setTimeSelection({ year: e.target.valueAsNumber, week: timeSelection().week })}
+          />
+
+          <h2 class="w-12 inline-block mb-3">Week:</h2>
+          <input class="bg-slate-500 p-1" type="number" value={timeSelection().week}
+            onChange={(e) => setTimeSelection({ week: e.target.valueAsNumber, year: timeSelection().year })}
+          />
 
           <label class="select-none mb-3">
             Show fallow:
@@ -59,7 +78,7 @@ const App: Component = () => {
           <MapContainer data={data} filters={filters} selectedSites={selectedSites} setSelectedSites={setSelectedSites} />
         </div>
       </div>
-      {selectedSites().map(s => `${s.id}, `)}
+      {selectedSites().map(s => `[${s.id}, ${s.coords}], `)}
     </div>
   );
 };

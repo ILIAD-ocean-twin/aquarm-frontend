@@ -1,7 +1,8 @@
-import { onMount, type Component, Accessor, createEffect, onCleanup, on, createSignal, Setter } from 'solid-js';
+import { onMount, type Component, Accessor, createEffect, onCleanup, on, createSignal, Setter, batch } from 'solid-js';
 import TileLayer from 'ol/layer/Tile';
 import Map from 'ol/Map';
 import XYZ from 'ol/source/XYZ';
+import OSM from 'ol/source/OSM.js';
 import { transform } from 'ol/proj';
 import { View } from 'ol';
 import { BasicWeek, Filters, SiteSelection } from './types';
@@ -18,20 +19,25 @@ interface MapContainerProps {
 export const MapContainer: Component<MapContainerProps> = ({ data, filters, selectedSites, setSelectedSites }) => {
   const [filteredData, setFilteredData] = createSignal<BasicWeek[]>([]);
   const [selectedFeatures, setSelectedFeatures] = createSignal<any[]>([]);
+  const [hoveredFeature, setHoveredFeature] = createSignal<any>(null);
 
   let map: Map;
   let mapElement: HTMLDivElement;
+  let tooltip: HTMLDivElement;
   let sitesLayer: AquacultureSitesLayer;
-  let hoveredFeature = null;
 
   onMount(() => {
     map = new Map({
       layers: [
+        /*
         new TileLayer({
           source: new XYZ({
             url: "https://{1-4}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png",
             crossOrigin: 'anonymous',
           })
+        })*/
+        new TileLayer({
+          source: new OSM(),
         })
       ],
       view: new View({
@@ -43,21 +49,20 @@ export const MapContainer: Component<MapContainerProps> = ({ data, filters, sele
     })
 
     map.on('pointermove', function (ev) {
-      if (hoveredFeature !== null) {
-        hoveredFeature.set('hover', 0);
-        hoveredFeature = null;
-        mapElement.classList.toggle('cursor-pointer', true);
-      }
-      else {
-        mapElement.classList.toggle('cursor-pointer', false);
+      if (hoveredFeature() !== null) {
+        hoveredFeature().set('hover', 0);
       }
 
-      map.forEachFeatureAtPixel(ev.pixel, function (feature) {
+      const features = map.getFeaturesAtPixel(ev.pixel);
+      if (features.length) {
         // @ts-ignore
-        feature.set('hover', 1);
-        hoveredFeature = feature;
-        return true;
-      });
+        features[0].set('hover', 1);
+        setHoveredFeature(features[0]);
+        tooltip.style.left = ev.pixel[0] - 70 + "px";
+        tooltip.style.top = (ev.pixel[1] - tooltip.clientHeight - 30) + "px";
+      } else {
+        setHoveredFeature(null);
+      }
     });
 
     map.on('click', function (ev) {
@@ -82,8 +87,20 @@ export const MapContainer: Component<MapContainerProps> = ({ data, filters, sele
       }
     });
 
-    mapElement.getElementsByTagName("div")[0].style.borderRadius = "16px";
+    // @ts-ignore
+    mapElement.getElementsByClassName("ol-viewport")[0].style.borderRadius = "16px";
   })
+
+  createEffect(on(hoveredFeature, f => {
+    if (!f) {
+      mapElement.classList.toggle('cursor-pointer', false);
+      tooltip.classList.toggle("hidden", true);
+    } else {
+      mapElement.classList.toggle('cursor-pointer', true);
+
+      tooltip.classList.toggle("hidden", false);
+    }
+  }))
 
   onCleanup(() => {
     sitesLayer?.layer.dispose();
@@ -130,7 +147,20 @@ export const MapContainer: Component<MapContainerProps> = ({ data, filters, sele
     return orgs;
   }, filters.organizations)
 
+  createEffect(on(data, d => {
+    if (!filters.organizations.length) {
+      setFilteredData(d);
+    } else {
+      setFilteredData(d.filter(bw => !bw.organizations.every(o => !filters.organizations.includes(o))));
+    }
+  }))
+
   return (
-    <div ref={mapElement} class="w-full h-full rounded-2xl shadow-lg" />
+    <div ref={mapElement} class="w-full h-full rounded-2xl shadow-lg relative">
+      <div ref={tooltip} class="absolute bg-white p-1 w-[140px] z-50 rounded shadow text-black opacity-90">
+        <h2 class="font-semibold">{hoveredFeature()?.get("name") ?? "Ukjent"}</h2>
+        <div><span>Lusetall:</span> {hoveredFeature()?.get("lice")?.toFixed(2) ?? "ikke målt"}</div>
+      </div>
+    </div>
   );
 };

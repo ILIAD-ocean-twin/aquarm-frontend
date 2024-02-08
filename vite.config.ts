@@ -13,8 +13,13 @@ export default defineConfig({
   ],
   server: {
     port: 3000,
+    proxy: {
+      '/basic-all': {
+        target: 'http://10.218.116.24'
+      },
+    },
   },
   build: {
     target: 'esnext',
-  },
+  }
 });
