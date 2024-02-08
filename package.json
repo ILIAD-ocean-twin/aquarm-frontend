@@ -21,6 +21,8 @@
   },
   "dependencies": {
     "@thisbeyond/solid-select": "^0.14.0",
+    "echarts": "^5.4.3",
+    "echarts-solid": "^0.1.0",
     "ol": "^8.2.0",
     "solid-js": "^1.8.11"
   }
