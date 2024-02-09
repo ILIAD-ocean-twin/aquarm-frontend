@@ -17,6 +17,12 @@ export default defineConfig({
       '/basic-all': {
         target: 'http://10.218.116.24'
       },
+      '/lice': {
+        target: 'http://10.218.116.24'
+      },
+      '/connectivity': {
+        target: 'http://10.218.116.24'
+      },
       '/trajectory': {
         target: 'http://10.218.116.24'
       },
@@ -41,6 +47,7 @@ Endpoint for historisk lusedata finnes
 Ø
   Tabs
   Sammenlignet med snitt for produksjonsområde
+  
 B
   Copernicus data
 

@@ -1,8 +1,8 @@
 import VectorSource from "ol/source/Vector";
 import GeoJSON from 'ol/format/GeoJSON.js';
 import WebGLVectorLayerRenderer from 'ol/renderer/webgl/VectorLayer.js';
-import { Projection } from "ol/proj";
 import Layer from "ol/layer/Layer";
+import { dataProj, mapProj } from "./constants";
 
 class WebGLLayer extends Layer {
     createRenderer() {
@@ -16,16 +16,6 @@ class WebGLLayer extends Layer {
         });
     }
 }
-
-const dataProj = new Projection({
-    code: "EPSG:4326",
-    units: "degrees"
-})
-
-const mapProj = new Projection({
-    code: "EPSG:3857",
-    units: "m"
-})
 
 const geoJsonConsumer = async () => fetch('/2023-03-30T12-trajectories-5.json') //('/trajectory')
     .then(response => response.json())

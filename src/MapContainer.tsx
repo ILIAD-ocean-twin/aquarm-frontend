@@ -10,6 +10,7 @@ import { AquacultureSitesLayer } from './AquacultureSitesLayer';
 import { getRiskLayer } from './RiskLayer';
 import { getTrajectoryLayer } from './TrajectoryLayer';
 import { getOceanTemp } from './OceanTempLayer';
+import { getCountyLayer } from './CountyLayer';
 
 
 interface MapContainerProps {
@@ -102,6 +103,7 @@ export const MapContainer: Component<MapContainerProps> = ({ data, filters, sele
     layers["risk"] = await getRiskLayer();
     layers["trajectory"] = await getTrajectoryLayer();
     layers['temp'] = await getOceanTemp();
+    // layers['counties'] = await getCountyLayer();
     Object.values(layers).forEach(l => map.addLayer(l));
   })
 
