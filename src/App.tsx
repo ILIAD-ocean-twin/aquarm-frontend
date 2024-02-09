@@ -6,6 +6,7 @@ import { Select, createOptions } from "@thisbeyond/solid-select";
 import "@thisbeyond/solid-select/style.css";
 import { SingleSiteDetails } from './SingleSiteDetails';
 import { OverviewDetails } from './OverviewDetails';
+import { MultiSelectDetails } from './MultiSelectDetails';
 
 
 const App: Component = () => {
@@ -149,10 +150,10 @@ const App: Component = () => {
           <OverviewDetails data={data} filters={filters} />
         </Match>
         <Match when={selectedData().length == 1}>
-          <SingleSiteDetails site={selectedData()[0]} />
+          <SingleSiteDetails site={selectedData()[0]} time={timeSelection()} />
         </Match>
         <Match when={selectedData().length > 1}>
-          {selectedSites().map(s => `[${s.id}, ${s.coords}], `)}
+          <MultiSelectDetails sites={selectedData()} time={timeSelection()} />
         </Match>
       </Switch>
     </div>
