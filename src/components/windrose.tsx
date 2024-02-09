@@ -8,26 +8,27 @@ export const Windrose = (props: {angleBins: string[], radialBins: string[], data
             type: 'category',
             startAngle: 180 + 360/(2*props.angleBins.length),
             data: props.angleBins,
-            splitArea: {show:true}
-          },
+            splitArea: { show: true },
+        },
         radiusAxis: {
-            axisLabel: {show:false},
-            axisPointer: {show:false},
-            axisLine:{show:false}
+            axisLabel: { show: false },
+            axisPointer: { show: false },
+            axisLine: { show: false }
         },
         polar: {
         },
         series: props.radialBins.map((radialbin, idx) => {
             return (
                 {
-                type: 'bar',
-                data: props.data[idx],
-                barWidth: "95%",
-                coordinateSystem: 'polar',
-                name: radialbin,
-                stack: 'a',
-                emphasis: {
-                  focus: 'series'
+                    type: 'bar',
+                    data: props.data[idx],
+                    coordinateSystem: 'polar',
+                    name: radialbin,
+                    barWidth: "95%",
+                    stack: 'a',
+                    emphasis: {
+                        focus: 'series'
+                    }
                 }
               }
               )

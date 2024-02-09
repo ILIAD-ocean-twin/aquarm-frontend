@@ -17,6 +17,9 @@ export default defineConfig({
       '/basic-all': {
         target: 'http://10.218.116.24'
       },
+      '/trajectory': {
+        target: 'http://10.218.116.24'
+      },
     },
   },
   build: {
