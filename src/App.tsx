@@ -1,12 +1,10 @@
-import { createSignal, type Component, For, onMount, createEffect, Accessor } from 'solid-js';
+import { createSignal, type Component, For, onMount, createEffect, Accessor, Switch, Match } from 'solid-js';
 import { createStore } from "solid-js/store";
 import { MapContainer } from './MapContainer';
 import { BasicWeek, Filters, SiteSelection } from './types';
 import { Select, createOptions } from "@thisbeyond/solid-select";
 import "@thisbeyond/solid-select/style.css";
-import { Windrose } from './components/windrose';
-import { getRiskLayer } from './RiskLayer';
-import { getTrajectoryLayer } from './TrajectoryLayer';
+import { SingleSiteDetails } from './SingleSiteDetails';
 
 
 const App: Component = () => {
@@ -16,6 +14,8 @@ const App: Component = () => {
   const [timeSelection, setTimeSelection] = createSignal<{ year: number, week: number }>({ year: 2023, week: 52 });
   const [selectedSites, setSelectedSites] = createSignal<SiteSelection[]>([]);
   const [dataLayers, setDataLayers] = createSignal<string[]>([]);
+
+  const [selectedData, setSelectedData] = createSignal<BasicWeek[]>([]);
 
   const toggleFallow = () => {
     setFilters({ fallow: !filters.fallow });
@@ -39,6 +39,11 @@ const App: Component = () => {
       .then(d => d.json() as Promise<BasicWeek[]>)
       .then(d => d.filter(bw => bw.placement == "SJØ"))
       .then(setData);
+  })
+
+  createEffect(() => {
+    const ids = selectedSites().map(s => s.id);
+    setSelectedData(data().filter(d => ids.includes(d.id)));
   })
 
   createEffect(() => {
@@ -128,7 +133,15 @@ const App: Component = () => {
           <MapContainer data={data} filters={filters} selectedSites={selectedSites} setSelectedSites={setSelectedSites} dataLayers={dataLayers} />
         </div>
       </div>
-      {selectedSites().map(s => `[${s.id}, ${s.coords}], `)}
+
+      <Switch>
+        <Match when={selectedData().length == 1}>
+          <SingleSiteDetails site={selectedData()[0]} />
+        </Match>
+        <Match when={selectedData().length > 1}>
+          {selectedSites().map(s => `[${s.id}, ${s.coords}], `)}
+        </Match>
+      </Switch>
     </div>
   );
 };

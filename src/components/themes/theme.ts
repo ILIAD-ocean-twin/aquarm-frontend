@@ -12,7 +12,7 @@ export const theme = {
         "#91ca8c",
         "#f49f42"
     ],
-    "backgroundColor": "rgba(51,51,51,1)",
+    "backgroundColor": "rgba(51,51,51,0)",
     "textStyle": {},
     "title": {
         "textStyle": {
@@ -42,7 +42,7 @@ export const theme = {
         },
         "symbolSize": 4,
         "symbol": "circle",
-        "smooth": false
+        "smooth": false,
     },
     "bar": {
         "itemStyle": {
@@ -54,7 +54,7 @@ export const theme = {
         "itemStyle": {
             "borderWidth": 0,
             "borderColor": "#ccc"
-        }
+        },
     },
     "scatter": {
         "itemStyle": {
@@ -199,7 +199,7 @@ export const theme = {
             "show": false,
             "areaStyle": {
                 "color": [
-                    "#eeeeee"
+                    "rgba(0,0,0,0)"
                 ]
             }
         }
