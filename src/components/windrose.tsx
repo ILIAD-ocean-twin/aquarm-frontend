@@ -1,13 +1,15 @@
 import { EChartsAutoSize } from "echarts-solid"
 import { theme } from "./themes/theme"
 
-export const Windrose = (props: { angleBins: string[], radialBins: string[], data: number[][] }) => {
+export const Windrose = (props: { data: number[][] }) => {
+    const radialBins = ['Flau vind', 'Svak vind', 'Lett bris', 'Laber bris', 'Frisk bris', 'Liten kuling', 'Stiv kuling', 'Sterk kuling', 'Liten storm', 'Full storm', 'Sterk storm', 'Orkan'];
+    const angleBins = ['V', 'NV', 'N', 'NØ', 'Ø', 'SØ', 'S', 'SV'];
 
     const options = {
         angleAxis: {
             type: 'category',
-            startAngle: 180 + 360 / (2 * props.angleBins.length),
-            data: props.angleBins,
+            startAngle: 180 + 360 / (2 * angleBins.length),
+            data: angleBins,
             splitArea: { show: true },
         },
         radiusAxis: {
@@ -17,7 +19,7 @@ export const Windrose = (props: { angleBins: string[], radialBins: string[], dat
         },
         polar: {
         },
-        series: props.radialBins.map((radialbin, idx) => {
+        series: radialBins.map((radialbin, idx) => {
             return (
                 {
                     type: 'bar',
@@ -37,7 +39,7 @@ export const Windrose = (props: { angleBins: string[], radialBins: string[], dat
             show: true,
             orient: "vertical",
             right: 'right',
-            data: props.radialBins
+            data: radialBins
         },
         tooltip: {
             show: true,
