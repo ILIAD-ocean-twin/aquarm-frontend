@@ -5,6 +5,7 @@ import { BasicWeek, Filters, SiteSelection } from './types';
 import { Select, createOptions } from "@thisbeyond/solid-select";
 import "@thisbeyond/solid-select/style.css";
 import { SingleSiteDetails } from './SingleSiteDetails';
+import { OverviewDetails } from './OverviewDetails';
 
 
 const App: Component = () => {
@@ -110,6 +111,15 @@ const App: Component = () => {
             </label>
 
             <label class="select-none">
+              County borders:
+              <input
+                class="ml-2 cursor-pointer"
+                checked={dataLayers().includes("counties")}
+                onchange={() => toggleLayer("counties")}
+                type="checkbox" />
+            </label>
+
+            <label class="select-none">
               Trajectory simulations:
               <input
                 class="ml-2 cursor-pointer"
@@ -135,6 +145,9 @@ const App: Component = () => {
       </div>
 
       <Switch>
+        <Match when={selectedData().length == 0}>
+          <OverviewDetails data={data} filters={filters} />
+        </Match>
         <Match when={selectedData().length == 1}>
           <SingleSiteDetails site={selectedData()[0]} />
         </Match>
