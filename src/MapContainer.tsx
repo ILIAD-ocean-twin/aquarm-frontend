@@ -5,23 +5,27 @@ import XYZ from 'ol/source/XYZ';
 import OSM from 'ol/source/OSM.js';
 import { transform } from 'ol/proj';
 import { View } from 'ol';
-import { BasicWeek, Filters, SiteSelection } from './types';
+import { BasicWeek, Filters, LayerName, SiteSelection } from './types';
 import { AquacultureSitesLayer } from './AquacultureSitesLayer';
 import { getRiskLayer } from './RiskLayer';
 import { getTrajectoryLayer } from './TrajectoryLayer';
-import { getOceanTemp } from './OceanTempLayer';
-import { getCountyLayer } from './CountyLayer';
+import { getOceanTempLayer, getOceanTempSource } from './OceanTempLayer';
+import Layer from 'ol/layer/Layer';
 
 
 interface MapContainerProps {
   data: Accessor<BasicWeek[]>,
+  dataLayers: { name: LayerName; visible: boolean; }[],
   filters: Filters,
-  dataLayers: Accessor<string[]>,
+  timeSelection: Accessor<{
+    year: number;
+    week: number;
+  }>,
   selectedSites: Accessor<SiteSelection[]>,
   setSelectedSites: Setter<SiteSelection[]>
 }
 
-export const MapContainer: Component<MapContainerProps> = ({ data, filters, selectedSites, setSelectedSites, dataLayers }) => {
+export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers, filters, timeSelection, selectedSites, setSelectedSites }) => {
   const [filteredData, setFilteredData] = createSignal<BasicWeek[]>([]);
   const [selectedFeatures, setSelectedFeatures] = createSignal<any[]>([]);
   const [hoveredFeature, setHoveredFeature] = createSignal<any>(null);
@@ -30,22 +34,26 @@ export const MapContainer: Component<MapContainerProps> = ({ data, filters, sele
   let mapElement: HTMLDivElement;
   let tooltip: HTMLDivElement;
   let sitesLayer: AquacultureSitesLayer;
-  let layers: Record<string, any> = {};
 
+  let layers: Record<LayerName, Layer> = {
+    'Weather warnings': undefined,
+    'Trajectory simulations': undefined,
+    'Sea temperature': undefined
+  };
 
   onMount(async () => {
     map = new Map({
       layers: [
-        /*
+
         new TileLayer({
           source: new XYZ({
             url: "https://{1-4}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png",
             crossOrigin: 'anonymous',
           })
-        })*/
+        })/*
         new TileLayer({
           source: new OSM(),
-        })
+        })*/
       ],
       view: new View({
         center: transform([12.9, 65.5], 'EPSG:4326', 'EPSG:3857'),
@@ -100,30 +108,33 @@ export const MapContainer: Component<MapContainerProps> = ({ data, filters, sele
     // @ts-ignore
     mapElement.getElementsByClassName("ol-viewport")[0].style.borderRadius = "16px";
 
-    layers["risk"] = await getRiskLayer();
-    layers["trajectory"] = await getTrajectoryLayer();
-    layers['temp'] = await getOceanTemp();
-    // layers['counties'] = await getCountyLayer();
+    sitesLayer = new AquacultureSitesLayer(filters);
+    map.addLayer(sitesLayer.layer);
+
+    layers["Weather warnings"] = await getRiskLayer(false);
+    layers["Trajectory simulations"] = await getTrajectoryLayer();
+    layers['Sea temperature'] = getOceanTempLayer(timeSelection().year, timeSelection().week);
+    // // layers['counties'] = await getCountyLayer();
     Object.values(layers).forEach(l => map.addLayer(l));
   })
 
+  onCleanup(() => {
+    sitesLayer?.layer.dispose();
+    map.dispose();
+  })
+
   // Toggle data layers' visibility
-  createEffect(on(dataLayers, dl => {
-    Object.keys(layers).forEach(l => {
-      layers[l].setVisible(dl.includes(l));
-    })
-  }))
+  createEffect(() => {
+    dataLayers.forEach(({ name, visible }) => {
+      layers[name]?.setVisible(visible);
+    });
+  })
 
   // Show/Hide tooltip on hover
   createEffect(on(hoveredFeature, f => {
     tooltip.classList.toggle("hidden", !!!f);
     mapElement.classList.toggle('cursor-pointer', !!f?.get('siteId'));
   }))
-
-  onCleanup(() => {
-    sitesLayer?.layer.dispose();
-    map.dispose();
-  })
 
   // Propagate selected sites upward (to App)
   createEffect(() => {
@@ -134,16 +145,17 @@ export const MapContainer: Component<MapContainerProps> = ({ data, filters, sele
     setSelectedSites(sites);
   })
 
-  createEffect(on(filteredData, d => {
-    if (map && d && !sitesLayer) {
-      sitesLayer = new AquacultureSitesLayer(d, filters);
-      map.addLayer(sitesLayer.layer);
-    } else if (map && d && sitesLayer != undefined) {
-      map.removeLayer(sitesLayer.layer);
-      sitesLayer.layer.dispose();
-      sitesLayer = new AquacultureSitesLayer(d, filters);
-      map.addLayer(sitesLayer.layer);
+  createEffect(() => {
+    const { year, week } = timeSelection();
+    const layer = layers['Sea temperature'];
+    if (layer !== undefined) {
+      layer.setSource(getOceanTempSource(year, week));
     }
+  })
+
+  createEffect(on(filteredData, d => {
+    if (map && d)
+      sitesLayer.updateSource(d);
   }))
 
   createEffect(() => {

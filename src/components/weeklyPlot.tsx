@@ -30,7 +30,7 @@ export const mapLiceData = (lice_data: Record<string, HistoricLiceData[]>): any 
     }))
 
     data.push(lice_data[location].map((d) => {
-      return d.rank
+      return d.avgAdultFemaleLice
     }))
   })
 

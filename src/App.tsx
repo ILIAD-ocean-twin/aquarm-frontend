@@ -1,4 +1,4 @@
-import { createSignal, type Component, For, onMount, createEffect, Accessor, Switch, Match } from 'solid-js';
+import { createSignal, type Component, For, createEffect, Switch, Match } from 'solid-js';
 import { createStore } from "solid-js/store";
 import { MapContainer } from './MapContainer';
 import { BasicWeek, Filters, SiteSelection } from './types';
@@ -7,29 +7,27 @@ import "@thisbeyond/solid-select/style.css";
 import { SingleSiteDetails } from './SingleSiteDetails';
 import { OverviewDetails } from './OverviewDetails';
 import { MultiSelectDetails } from './MultiSelectDetails';
+import { LAYERS } from './constants';
 
 
 const App: Component = () => {
   const [data, setData] = createSignal<BasicWeek[]>([]);
   const [filters, setFilters] = createStore<Filters>({ fallow: true, organizations: [] });
   const [orgs, setOrgs] = createSignal<string[]>([]);
-  const [timeSelection, setTimeSelection] = createSignal<{ year: number, week: number }>({ year: 2023, week: 52 });
+  const [timeSelection, setTimeSelection] = createSignal<{ year: number, week: number }>({ year: 2024, week: 6 });
   const [selectedSites, setSelectedSites] = createSignal<SiteSelection[]>([]);
-  const [dataLayers, setDataLayers] = createSignal<string[]>([]);
-
   const [selectedData, setSelectedData] = createSignal<BasicWeek[]>([]);
+
+  const [layers, setLayers] = createStore(
+    LAYERS.map(name => ({ name, visible: false }))
+  );
+
+  const toggleLayer = (layer: string) => {
+    setLayers(l => l.name === layer, "visible", visible => !visible);
+  }
 
   const toggleFallow = () => {
     setFilters({ fallow: !filters.fallow });
-  }
-
-  const toggleLayer = (layer: string) => {
-    const remove = dataLayers().includes(layer);
-    if (remove) {
-      setDataLayers(dataLayers().filter(l => l != layer))
-    } else {
-      setDataLayers([layer, ...dataLayers()]);
-    }
   }
 
   const setSelectedOrgs = (orgs: string[]) => {
@@ -102,46 +100,24 @@ const App: Component = () => {
 
           <h2 class="text-lg font-semibold text-iliad my-2">Data layers</h2>
           <div class="flex flex-col gap-4">
-            <label class="select-none">
-              Weather warnings:
-              <input
-                class="ml-2 cursor-pointer"
-                checked={dataLayers().includes("risk")}
-                onchange={() => toggleLayer("risk")}
-                type="checkbox" />
-            </label>
 
-            <label class="select-none">
-              County borders:
-              <input
-                class="ml-2 cursor-pointer"
-                checked={dataLayers().includes("counties")}
-                onchange={() => toggleLayer("counties")}
-                type="checkbox" />
-            </label>
-
-            <label class="select-none">
-              Trajectory simulations:
-              <input
-                class="ml-2 cursor-pointer"
-                checked={dataLayers().includes("trajectory")}
-                onchange={() => toggleLayer("trajectory")}
-                type="checkbox" />
-            </label>
-
-            <label class="select-none">
-              Sea temperature:
-              <input
-                class="ml-2 cursor-pointer"
-                checked={dataLayers().includes("temp")}
-                onchange={() => toggleLayer("temp")}
-                type="checkbox" />
-            </label>
+            <For each={layers}>
+              {dl =>
+                <label class="select-none">
+                  {dl.name}:
+                  <input
+                    class="ml-2 cursor-pointer"
+                    checked={dl.visible}
+                    onchange={() => toggleLayer(dl.name)}
+                    type="checkbox" />
+                </label>
+              }
+            </For>
           </div>
 
         </div>
         <div class="grow h-[800px]">
-          <MapContainer data={data} filters={filters} selectedSites={selectedSites} setSelectedSites={setSelectedSites} dataLayers={dataLayers} />
+          <MapContainer data={data} dataLayers={layers} timeSelection={timeSelection} filters={filters} selectedSites={selectedSites} setSelectedSites={setSelectedSites} />
         </div>
       </div>
 

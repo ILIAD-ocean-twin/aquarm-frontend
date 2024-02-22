@@ -4,18 +4,7 @@ import GeoJSON from 'ol/format/GeoJSON.js';
 import Fill from "ol/style/Fill";
 import Stroke from "ol/style/Stroke";
 import Style from "ol/style/Style";
-import { Projection } from "ol/proj";
-
-
-const dataProj = new Projection({
-    code: "EPSG:4326",
-    units: "degrees"
-})
-
-const mapProj = new Projection({
-    code: "EPSG:3857",
-    units: "m"
-})
+import { dataProj, mapProj } from "./constants";
 
 
 const awareness_levels = {
@@ -37,7 +26,7 @@ const style = new Style({
     }),
 });
 
-export const getRiskLayer = () => {
+export const getRiskLayer = (visible: boolean) => {
     let weatherRiskSource;
     return geoJsonConsumer()
         .then((data) => {
@@ -46,7 +35,7 @@ export const getRiskLayer = () => {
             });
 
             return new VectorLayer({
-                visible: false,
+                visible,
                 source: weatherRiskSource,
                 style: (feature) => {
                     style.setFill(new Fill({

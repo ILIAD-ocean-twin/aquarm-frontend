@@ -3,16 +3,13 @@ import { BasicWeek, Filters } from "./types";
 import { Point } from "ol/geom";
 import VectorSource from "ol/source/Vector";
 import { Feature } from "ol";
-import Map from 'ol/Map';
 import { transform } from "ol/proj";
 
 export class AquacultureSitesLayer {
     public layer: WebGLPointsLayer<VectorSource>;
     public style: any;
-    public source: VectorSource;
 
-    constructor(data: any, filters: Filters) {
-        this.source = this.getSource(data);
+    constructor(filters: Filters) {
         this.style = {
             variables: {
                 fallow: filters.fallow ? 1 : 0
@@ -106,36 +103,34 @@ export class AquacultureSitesLayer {
         };
 
         this.layer = new WebGLPointsLayer({
-            source: this.source,
+            source: this.getSource([]),
             style: this.style
         })
     }
 
-    public update(map: Map) {
-        const newLayer = new WebGLPointsLayer({
-            source: this.source,
-            style: this.style
-        });
-        map.addLayer(newLayer);
-        map.removeLayer(this.layer);
-        this.layer.dispose();
-        this.layer = newLayer;
+    public updateSource(data: BasicWeek[]) {
+        this.layer.getSource().clear();
+        this.layer.getSource().addFeatures(this.getFeatures(data));
     }
 
     private getSource(data: BasicWeek[]) {
         return new VectorSource({
-            features: data.map(dp => new Feature({
-                siteId: dp.id,
-                name: dp.name,
-                lice: dp.lice,
-                rank: dp.rank,
-                fallow: dp.isFallow ? 1 : 0,
-                lat: dp.lat,
-                lon: dp.lon,
-                geometry: new Point(
-                    transform([dp.lon, dp.lat], 'EPSG:4326', 'EPSG:3857')
-                )
-            }))
+            features: this.getFeatures(data)
         })
+    }
+
+    private getFeatures(data: BasicWeek[]) {
+        return data.map(dp => new Feature({
+            siteId: dp.id,
+            name: dp.name,
+            lice: dp.lice,
+            rank: dp.rank,
+            fallow: dp.isFallow ? 1 : 0,
+            lat: dp.lat,
+            lon: dp.lon,
+            geometry: new Point(
+                transform([dp.lon, dp.lat], 'EPSG:4326', 'EPSG:3857')
+            )
+        }))
     }
 }

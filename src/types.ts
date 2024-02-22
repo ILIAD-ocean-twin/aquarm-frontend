@@ -1,3 +1,5 @@
+import { LAYERS } from "./constants"
+
 export interface BasicWeek {
     id: number
     name: string
@@ -23,3 +25,5 @@ export interface SiteSelection {
     id: number
     coords: number[]
 }
+
+export type LayerName = typeof LAYERS[number];
