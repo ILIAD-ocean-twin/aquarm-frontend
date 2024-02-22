@@ -26,9 +26,7 @@ export const SingleSiteDetails: Component<SingleSiteDetailsProps> = ({ site, tim
 
         fetch(`/lice?localities=${site.id}&from_year=${time.year - 1}&from_week=${time.week}&to_year=${time.year}&to_week=${time.week}`)
             .then(resp => resp.json())
-            .then(data => {
-                setLiceData(mapLiceData(data))
-            })
+            .then(setLiceData);
 
         marinogram.src = `https://jtimeseries.k8s.met.no/jtimeseries-webservices/marinogram?latitude=${site.lat}&longitude=${site.lon}&waterTemperature=true&airTemperature=true&dewpointTemperature=true&pressure=true&waveHeight=true&waveDirection=true&currentDirection=true&currentSpeed=true&windDirection=true&windSpeed=true&timezone=Europe%2FOslo&language=en`;
     })
@@ -42,7 +40,7 @@ export const SingleSiteDetails: Component<SingleSiteDetailsProps> = ({ site, tim
                     <h3 class="text-white/80 font-semibold text-xl mb-1">Lice counts</h3>
                     <div class="h-[508px]">
                         <Show when={liceData()} fallback={"loading..."}>
-                            <WeekLineChart {...liceData()} />
+                            <WeekLineChart liceData={liceData} sites={[site]} />
                         </Show>
                     </div>
 

@@ -129,7 +129,7 @@ const App: Component = () => {
           <SingleSiteDetails site={selectedData()[0]} time={timeSelection()} />
         </Match>
         <Match when={selectedData().length > 1}>
-          <MultiSelectDetails sites={selectedData()} time={timeSelection()} />
+          <MultiSelectDetails sites={selectedData} time={timeSelection()} />
         </Match>
       </Switch>
     </div>

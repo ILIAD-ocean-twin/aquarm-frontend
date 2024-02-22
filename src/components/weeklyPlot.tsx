@@ -1,5 +1,7 @@
 import { EChartsAutoSize } from "echarts-solid"
 import { theme } from "./themes/theme"
+import { BasicWeek } from "../types"
+import { Accessor, Component, createEffect, createSignal, on } from "solid-js"
 
 export interface HistoricLiceData {
   year: number,
@@ -17,70 +19,87 @@ const compare_historic_times = (a: HistoricLiceData, b: HistoricLiceData) => {
   }
 }
 
-export const mapLiceData = (lice_data: Record<string, HistoricLiceData[]>): any => {
+export const mapLiceData = (lice_data: Record<string, HistoricLiceData[]>, sites: BasicWeek[]): any => {
+  const names = sites.reduce((pre, cur) => { pre[cur.id] = cur.name; return pre; }, {})
   const locations: string[] = []
   const data: (number | null)[][] = []
-  let timestamps: string[] = []
+  const timestamps = Object.values(lice_data)[0].map(d => `W${d.week}/${d.year}`);
 
-  Object.keys(lice_data).map((location) => {
-    lice_data[location].sort(compare_historic_times)
-    locations.push(location)
-    timestamps = (lice_data[location].map((d) => {
-      return `W${d.week}/${d.year}`
-    }))
-
-    data.push(lice_data[location].map((d) => {
-      return d.avgAdultFemaleLice
-    }))
+  Object.keys(lice_data).forEach((location) => {
+    lice_data[location].sort(compare_historic_times);
+    locations.push(names[location]);
+    data.push(lice_data[location].map(d => d.avgAdultFemaleLice));
   })
 
   return { locations, timestamps, data }
 }
 
-export const WeekLineChart = (props: { locations: string[], timestamps: string[], data: (number | null)[][] }) => {
+interface WeekLineChartProps {
+  liceData: Accessor<Record<string, HistoricLiceData[]>>,
+  sites: BasicWeek[]
+}
 
-  const options = {
-    xAxis: {
-      type: 'category',
-      data: props.timestamps,
-      splitArea: { show: true }
+export const WeekLineChart: Component<WeekLineChartProps> = (props) => {
+  const [options, setOptions] = createSignal<any>({
+    animation: false,
+    grid: {
+      left: 30,
     },
     yAxis: {
       type: 'value',
     },
-    series: props.locations.map((location, idx) => {
-      return (
-        {
-          type: 'line',
-          data: props.data[idx],
-          barWidth: "95%",
-          name: location,
-          stack: 'a',
-          emphasis: {
-            focus: 'series'
-          }
-        }
-      )
-    }),
+    tooltip: {
+      trigger: 'axis',
+      show: true,
+    },
+    xAxis: {
+      type: 'category',
+      data: [],
+      splitArea: { show: true }
+    },
+    series: [],
     legend: {
       show: true,
       orient: "horsiontal",
       right: 'right',
-      data: props.locations
-    },
-    tooltip: {
-      show: true,
+      data: []
     }
+  })
 
-  }
+  createEffect(on(props.liceData, ld => {
+    const { locations, timestamps, data } = mapLiceData(ld, props.sites);
+    setOptions({
+      ...options(),
+      xAxis: {
+        type: 'category',
+        data: timestamps,
+        splitArea: { show: true }
+      },
+      series: locations.map((location, idx) => (
+        {
+          type: 'line',
+          data: data[idx],
+          barWidth: "95%",
+          name: location,
+          emphasis: {
+            focus: 'series'
+          }
+        }
+      )),
+      legend: {
+        show: true,
+        orient: "horsiontal",
+        right: 'right',
+        data: locations
+      }
+    })
+  }));
 
   return (
-    <>
-      <EChartsAutoSize
-        //@ts-ignore
-        option={options}
-        theme={theme}
-      />
-    </>
+    <EChartsAutoSize
+      //@ts-ignore
+      option={options()}
+      theme={theme}
+    />
   )
 }
