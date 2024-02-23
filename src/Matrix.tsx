@@ -1,57 +1,38 @@
-import { EChartsAutoSize } from "echarts-solid"
-import { theme } from "./components/themes/theme"
+import { Accessor, Component, For } from "solid-js"
+import { BasicWeek, ConnectivityData } from "./types"
 
 
-export const CorrelationMatrix = (props: { locations: number[], data: (number)[][] }) => {
+interface MatrixProps {
+    sites: Accessor<BasicWeek[]>,
+    matrix: Accessor<ConnectivityData>
+}
 
-    const mapped_data = props.data.flat().map((d, idx) => {
-        return [idx % 3, Math.floor(idx / 3), d]
-    })
-    console.log(mapped_data)
-    const options = {
-        xAxis: {
-            type: 'category',
-            data: props.locations,
-        },
-        yAxis: {
-            type: 'category',
-            data: props.locations,
-        },
-        grid: {
-            height: '50%',
-            top: '10%',
-        },
-        visualMap: {
-            min: 0,
-            max: 10,
-            calculable: true,
-            orient: 'horizontal',
-            left: 'center',
-            bottom: '15%'
-        },
-        series: {
-            type: 'heatmap',
-            data: mapped_data,
-            barWidth: "95%",
-            name: "Connectivity",
-            stack: 'a',
-            emphasis: {
-                focus: 'series'
-            }
-        },
-        tooltip: {
-            show: true,
-        }
+export const CorrelationMatrix: Component<MatrixProps> = (props) => {
+    const rows = () => props.matrix().connectivity_matrix;
 
+    return <Grid rows={rows()} />
+}
+
+const Grid: Component<{ rows: number[][] }> = (props) => {
+    return <div class="">
+        <For each={props.rows}>{r =>
+            <GridRow values={r} />
+        }</For>
+    </div>
+}
+
+const GridRow: Component<{ values: number[] }> = ({ values }) => {
+    return <div class="flex">
+        <For each={values}>{v =>
+            <GridCell value={v} />
+        }</For>
+    </div>
+}
+
+const GridCell: Component<{ value: number }> = ({ value }) => {
+    const style = {
+        background: `rgba(${value / 500000 * 255}, 20, 20, ${value > 50 ? 1 : 0})`
     }
 
-    return (
-        <>
-            <EChartsAutoSize
-                //@ts-ignore
-                option={options}
-                theme={theme}
-            />
-        </>
-    )
+    return <div style={style} class="border w-10 h-10" aria-label="sdfsdf" />
 }

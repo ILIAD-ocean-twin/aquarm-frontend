@@ -16,6 +16,11 @@ export interface BasicWeek {
     placement?: string
 }
 
+export interface ConnectivityData {
+    localities: number[]
+    connectivity_matrix: number[][]
+}
+
 export interface Filters {
     fallow: boolean
     organizations: string[]

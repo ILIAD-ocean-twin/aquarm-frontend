@@ -1,7 +1,7 @@
 import { Component, Show, createSignal, onMount } from "solid-js";
 import { BasicWeek } from "./types";
 import { Windrose } from "./components/windrose";
-import { WeekLineChart, mapLiceData } from "./components/weeklyPlot";
+import { WeekLineChart } from "./components/weeklyPlot";
 
 
 interface SingleSiteDetailsProps {

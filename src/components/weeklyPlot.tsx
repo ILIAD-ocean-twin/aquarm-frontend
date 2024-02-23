@@ -44,6 +44,7 @@ export const WeekLineChart: Component<WeekLineChartProps> = (props) => {
     animation: false,
     grid: {
       left: 30,
+      top: 10
     },
     yAxis: {
       type: 'value',
@@ -72,14 +73,12 @@ export const WeekLineChart: Component<WeekLineChartProps> = (props) => {
       ...options(),
       xAxis: {
         type: 'category',
-        data: timestamps,
-        splitArea: { show: true }
+        data: timestamps
       },
       series: locations.map((location, idx) => (
         {
           type: 'line',
           data: data[idx],
-          barWidth: "95%",
           name: location,
           emphasis: {
             focus: 'series'
