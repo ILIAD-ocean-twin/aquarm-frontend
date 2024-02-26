@@ -13,20 +13,26 @@ interface MultiSelectDetailsProps {
 }
 
 export const MultiSelectDetails: Component<MultiSelectDetailsProps> = (props) => {
-
     const [liceData, setLiceData] = createSignal<any>();
     const [connData, setConnData] = createSignal<any>();
 
     createEffect(() => {
         const locs = props.sites().map(s => s.id)
+        updateLiceData(locs);
+        updateConnectivityData(locs);
+    })
+
+    const updateLiceData = async (locs: number[]) => {
         fetch(`/lice?localities=${locs.join(",")}&from_year=${props.time.year - 1}&from_week=${props.time.week}&to_year=${props.time.year}&to_week=${props.time.week}`)
             .then(resp => resp.json())
             .then(setLiceData);
+    }
 
+    const updateConnectivityData = async (locs: number[]) => {
         fetch(`/connectivity?localities=${locs}`)
             .then(resp => resp.json())
-            .then(setConnData)
-    })
+            .then(setConnData);
+    }
 
     return (
         <div class="pl-64 ml-4 mt-4">
@@ -34,7 +40,7 @@ export const MultiSelectDetails: Component<MultiSelectDetailsProps> = (props) =>
 
             <div class="pb-12 mt-2 w-full">
                 <div class="">
-                    <h3 class="text-white/80 font-semibold text-xl mb-1">Connectivity</h3>
+                    <h3 class="text-white/80 font-semibold text-xl mb-2">Connectivity</h3>
                     <Show when={connData()} fallback={"loading..."}>
                         <CorrelationMatrix matrix={connData} sites={props.sites} />
                     </Show>

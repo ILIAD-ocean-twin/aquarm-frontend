@@ -98,6 +98,7 @@ export const WeekLineChart: Component<WeekLineChartProps> = (props) => {
     <EChartsAutoSize
       //@ts-ignore
       option={options()}
+      notMerge={true}
       theme={theme}
     />
   )
