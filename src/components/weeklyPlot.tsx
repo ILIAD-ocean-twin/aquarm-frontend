@@ -43,8 +43,9 @@ export const WeekLineChart: Component<WeekLineChartProps> = (props) => {
   const [options, setOptions] = createSignal<any>({
     animation: false,
     grid: {
-      left: 30,
-      top: 10
+      left: 32,
+      top: 25,
+      right: 18
     },
     yAxis: {
       type: 'value',
@@ -55,13 +56,13 @@ export const WeekLineChart: Component<WeekLineChartProps> = (props) => {
     },
     xAxis: {
       type: 'category',
+      splitline: {show: false},
       data: [],
       splitArea: { show: true }
     },
     series: [],
     legend: {
       show: true,
-      orient: "horsiontal",
       right: 'right',
       data: []
     }
@@ -87,8 +88,7 @@ export const WeekLineChart: Component<WeekLineChartProps> = (props) => {
       )),
       legend: {
         show: true,
-        orient: "horsiontal",
-        right: 'right',
+        right: 0,
         data: locations
       }
     })

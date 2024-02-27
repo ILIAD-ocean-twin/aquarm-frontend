@@ -27,9 +27,9 @@ export const theme = {
             "borderWidth": 1
         },
         "lineStyle": {
-            "width": 2
+            "width": 1.5
         },
-        "symbolSize": 4,
+        "symbolSize": 1,
         "symbol": "circle",
         "smooth": false
     },
@@ -188,7 +188,7 @@ export const theme = {
             "color": "#eeeeee"
         },
         "splitLine": {
-            "show": true,
+            "show": false,
             "lineStyle": {
                 "color": [
                     "#aaaaaa"

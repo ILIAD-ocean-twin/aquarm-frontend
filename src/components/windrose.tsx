@@ -1,9 +1,13 @@
 import { EChartsAutoSize } from "echarts-solid"
 import { theme } from "./themes/theme"
+import chroma from "chroma-js";
+
+const spectral = chroma.scale('Spectral');
 
 export const Windrose = (props: { data: number[][] }) => {
     const radialBins = ['Flau vind', 'Svak vind', 'Lett bris', 'Laber bris', 'Frisk bris', 'Liten kuling', 'Stiv kuling', 'Sterk kuling', 'Liten storm', 'Full storm', 'Sterk storm', 'Orkan'];
     const angleBins = ['V', 'NV', 'N', 'NØ', 'Ø', 'SØ', 'S', 'SV'];
+    const colors = spectral.colors(radialBins.length);
 
     const options = {
         angleAxis: {
@@ -17,6 +21,9 @@ export const Windrose = (props: { data: number[][] }) => {
             axisPointer: { show: false },
             axisLine: { show: false }
         },
+        grid: {
+            left:0,
+        },
         polar: {
         },
         series: radialBins.map((radialbin, idx) => {
@@ -26,6 +33,7 @@ export const Windrose = (props: { data: number[][] }) => {
                     data: props.data[idx],
                     coordinateSystem: 'polar',
                     name: radialbin,
+                    color: colors[radialBins.length - idx - 1],
                     barWidth: "100%",
                     stack: 'a',
                     emphasis: {

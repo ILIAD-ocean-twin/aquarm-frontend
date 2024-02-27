@@ -38,7 +38,7 @@ export const SingleSiteDetails: Component<SingleSiteDetailsProps> = ({ site, tim
             <div class="grid grid-cols-2 gap-x-8 gap-y-6 pb-12 mt-2 w-full justify-stretch">
                 <div>
                     <h3 class="text-white/80 font-semibold text-xl mb-1">Lice counts</h3>
-                    <div class="h-[508px]">
+                    <div class="h-[480px]">
                         <Show when={liceData()} fallback={"loading..."}>
                             <WeekLineChart liceData={liceData} sites={[site]} />
                         </Show>
@@ -47,7 +47,7 @@ export const SingleSiteDetails: Component<SingleSiteDetailsProps> = ({ site, tim
                 </div>
                 <div>
                     <h3 class="text-white/80 font-semibold text-xl">Wind rose <span class="text-sm">(9-day forecast)</span></h3>
-                    <div class="h-[508px]">
+                    <div class="h-[480px]">
                         <Show when={windData()} fallback={"loading..."}>
                             <Windrose data={windData()} />
                         </Show>
