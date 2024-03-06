@@ -1,4 +1,4 @@
-import { Accessor, Component, For } from "solid-js"
+import { Accessor, Component, For, onMount } from "solid-js"
 import { BasicWeek, ConnectivityData } from "./types"
 import chroma from "chroma-js";
 
@@ -36,13 +36,15 @@ export const CorrelationMatrix: Component<MatrixProps> = (props) => {
 
 const Grid: Component<{ rows: number[][] }> = (props) => {
     return (
-        <table class="border-collapse border">
-            <tbody>
-                <For each={props.rows}>{r =>
-                    <GridRow values={r} />
-                }</For>
-            </tbody>
-        </table>
+        <div class="">
+            <table class="border-collapse border">
+                <tbody>
+                    <For each={props.rows}>{r =>
+                        <GridRow values={r} />
+                    }</For>
+                </tbody>
+            </table>
+        </div>
     )
 }
 
@@ -55,10 +57,24 @@ const GridRow: Component<{ values: number[] }> = ({ values }) => {
 }
 
 const GridCell: Component<{ value: number }> = ({ value }) => {
+    let tooltip, cell;
+
     const style = {
         background: spectral(value / 500000), //  `rgba(${value / 500000 * 255}, 20, 20, ${value > 50 ? 1 : 0})`
-        opacity: `${value > 500 ? '90%' : '60%'}`
+        //opacity: `${value > 500 ? '90%' : '60%'}`
     }
 
-    return <td style={style} class="border border-neutral-600 size-10" title={value?.toString() ?? '0'} />
+    onMount(() => {
+        cell.onmouseenter = () => tooltip.style.opacity = "100%";
+        cell.onmouseleave = () => tooltip.style.opacity = "0%";
+        tooltip.style.left = (cell.clientWidth / 2) - (tooltip.clientWidth / 2) + "px";
+    })
+
+    return (
+        <td ref={cell} style={style} class="border border-neutral-600 size-10 relative">
+            <div ref={tooltip} class="absolute text-center bg-neutral-50 text-sm px-2 py-1 rounded top-[-16px] opacity-0 z-50 pointer-events-none">
+                {value?.toFixed(0) ?? '0'}
+            </div>
+        </td>
+    )
 }

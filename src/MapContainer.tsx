@@ -11,6 +11,7 @@ import { getRiskLayer } from './RiskLayer';
 import { getTrajectoryLayer } from './TrajectoryLayer';
 import { getOceanTempLayer, getOceanTempSource } from './OceanTempLayer';
 import Layer from 'ol/layer/Layer';
+import { getProductionAreaLayer } from './ProductionAreaLayer';
 
 
 interface MapContainerProps {
@@ -38,7 +39,8 @@ export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers, f
   let layers: Record<LayerName, Layer> = {
     'Weather warnings': undefined,
     'Trajectory simulations': undefined,
-    'Sea temperature': undefined
+    'Sea temperature': undefined,
+    'Production areas': undefined
   };
 
   onMount(async () => {
@@ -50,8 +52,8 @@ export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers, f
             url: "https://{1-4}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png",
             crossOrigin: 'anonymous',
           })
-        })/*
-        new TileLayer({
+        })
+        /*new TileLayer({
           source: new OSM(),
         })*/
       ],
@@ -68,8 +70,10 @@ export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers, f
         hoveredFeature().set('hover', 0);
       }
 
-      const features = map.getFeaturesAtPixel(ev.pixel);
-      if (features.length && (features[0].get('siteId') || features[0].get('area'))) {
+      const features = map.getFeaturesAtPixel(ev.pixel)
+        .filter(f => f.get('siteId') || f.get('area'));
+      features.sort(f => f.get('siteId') ? -1 : 1);
+      if (features.length) {
         // @ts-ignore
         features[0].set('hover', 1);
         setHoveredFeature(features[0]);
@@ -81,7 +85,7 @@ export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers, f
     });
 
     map.on('click', function (ev) {
-      const features = map.getFeaturesAtPixel(ev.pixel);
+      const features = map.getFeaturesAtPixel(ev.pixel).filter(f => f.get('siteId'));
       if (features.length == 0) {
         selectedFeatures().forEach(f => f.set('selected', 0));
         setSelectedFeatures([]);
@@ -114,7 +118,7 @@ export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers, f
     layers["Weather warnings"] = await getRiskLayer(false);
     layers["Trajectory simulations"] = await getTrajectoryLayer();
     layers['Sea temperature'] = getOceanTempLayer(timeSelection().year, timeSelection().week);
-    // // layers['counties'] = await getCountyLayer();
+    layers['Production areas'] = await getProductionAreaLayer();
     Object.values(layers).forEach(l => map.addLayer(l));
   })
 

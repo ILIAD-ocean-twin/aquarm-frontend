@@ -62,11 +62,17 @@ export class AquacultureSitesLayer {
                     ['linear'],
                     ['get', 'lice'],
                     0,
-                    "#00FF00",
+                    "#00D06E",
+                    0.25,
+                    "#00D06E",
+                    0.2501,
+                    "#fbbf24",
+                    0.499,
+                    "#fbbf24",
                     0.5,
                     "#FF0000",
                 ],
-                "#777"
+                "#555"
             ],
             'circle-stroke-width': [
                 'interpolate',
@@ -81,16 +87,8 @@ export class AquacultureSitesLayer {
                 'match',
                 ['get', 'fallow'],
                 1,
-                "#000",
-                [
-                    'interpolate',
-                    ['linear'],
-                    ['get', 'rank'],
-                    0,
-                    "#FFF",
-                    1,
-                    "#000",
-                ]
+                "rgba(255, 255, 255, 0.5)",
+                "rgba(0, 0, 0, 0.75)"
             ],
             'circle-opacity': [
                 'case',

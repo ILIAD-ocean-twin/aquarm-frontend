@@ -79,6 +79,8 @@ export const WeekLineChart: Component<WeekLineChartProps> = (props) => {
       series: locations.map((location, idx) => (
         {
           type: 'line',
+          stack: 'Total',
+          areaStyle: {},
           data: data[idx],
           name: location,
           emphasis: {

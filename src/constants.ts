@@ -13,5 +13,6 @@ export const mapProj = new Projection({
 export const LAYERS = [
     "Weather warnings",
     "Trajectory simulations",
-    "Sea temperature"
+    "Sea temperature",
+    "Production areas"
 ] as const;
