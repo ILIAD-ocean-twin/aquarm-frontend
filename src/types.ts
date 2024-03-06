@@ -21,6 +21,8 @@ export interface ConnectivityData {
     connectivity_matrix: number[][]
 }
 
+export type TimeSelection = { year: number, week: number };
+
 export interface Filters {
     fallow: boolean
     organizations: string[]

@@ -4,7 +4,7 @@ import GeoJSON from 'ol/format/GeoJSON.js';
 import Fill from "ol/style/Fill";
 import Stroke from "ol/style/Stroke";
 import Style from "ol/style/Style";
-import { dataProj, mapProj } from "./constants";
+import { dataProj, mapProj } from "../constants";
 
 
 const awareness_levels = {

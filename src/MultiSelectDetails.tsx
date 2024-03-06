@@ -1,22 +1,21 @@
-import { Accessor, Component, For, Setter, Show, createEffect, createSignal, onMount } from "solid-js";
+import { Accessor, Component, For, Setter, Show, createEffect, createSignal } from "solid-js";
 import { BasicWeek, SiteSelection } from "./types";
-import { WeekLineChart, mapLiceData } from "./components/weeklyPlot";
-import { CorrelationMatrix } from "./Matrix";
+import { WeekLineChart } from "./components/weeklyPlot";
+import { CorrelationMatrix } from "./components/Matrix";
+import { useState } from "./state";
 
 
 interface MultiSelectDetailsProps {
     sites: Accessor<BasicWeek[]>
     selectedSites: Accessor<SiteSelection[]>
     setSelectedSites: Setter<SiteSelection[]>
-    time: {
-        year: number
-        week: number
-    }
 }
 
 export const MultiSelectDetails: Component<MultiSelectDetailsProps> = (props) => {
     const [liceData, setLiceData] = createSignal<any>();
     const [connData, setConnData] = createSignal<any>();
+
+    const [state, _] = useState();
 
     createEffect(() => {
         const locs = props.sites().map(s => s.id)
@@ -25,7 +24,7 @@ export const MultiSelectDetails: Component<MultiSelectDetailsProps> = (props) =>
     })
 
     const updateLiceData = async (locs: number[]) => {
-        fetch(`/lice?localities=${locs.join(",")}&from_year=${props.time.year - 1}&from_week=${props.time.week}&to_year=${props.time.year}&to_week=${props.time.week}`)
+        fetch(`/lice?localities=${locs.join(",")}&from_year=${state.time.year - 1}&from_week=${state.time.week}&to_year=${state.time.year}&to_week=${state.time.week}`)
             .then(resp => resp.json())
             .then(data => {
                 for (let d in data) {

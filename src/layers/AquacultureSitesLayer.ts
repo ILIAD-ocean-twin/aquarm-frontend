@@ -1,5 +1,5 @@
 import WebGLPointsLayer from "ol/layer/WebGLPoints";
-import { BasicWeek, Filters } from "./types";
+import { BasicWeek, Filters } from "../types";
 import { Point } from "ol/geom";
 import VectorSource from "ol/source/Vector";
 import { Feature } from "ol";

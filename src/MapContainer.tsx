@@ -1,4 +1,4 @@
-import { onMount, type Component, Accessor, createEffect, onCleanup, on, createSignal, Setter, batch, Switch, Match } from 'solid-js';
+import { onMount, type Component, Accessor, createEffect, onCleanup, on, createSignal, Setter, Switch, Match } from 'solid-js';
 import TileLayer from 'ol/layer/Tile';
 import Map from 'ol/Map';
 import XYZ from 'ol/source/XYZ';
@@ -6,30 +6,27 @@ import OSM from 'ol/source/OSM.js';
 import { transform } from 'ol/proj';
 import { View } from 'ol';
 import { BasicWeek, Filters, LayerName, SiteSelection } from './types';
-import { AquacultureSitesLayer } from './AquacultureSitesLayer';
-import { getRiskLayer } from './RiskLayer';
-import { getTrajectoryLayer } from './TrajectoryLayer';
-import { getOceanTempLayer, getOceanTempSource } from './OceanTempLayer';
+import { AquacultureSitesLayer } from './layers/AquacultureSitesLayer';
+import { getRiskLayer } from './layers/RiskLayer';
+import { getTrajectoryLayer } from './layers/TrajectoryLayer';
+import { getOceanTempLayer, getOceanTempSource } from './layers/OceanTempLayer';
 import Layer from 'ol/layer/Layer';
-import { getProductionAreaLayer } from './ProductionAreaLayer';
+import { getProductionAreaLayer } from './layers/ProductionAreaLayer';
+import { useState } from './state';
 
 
 interface MapContainerProps {
   data: Accessor<BasicWeek[]>,
   dataLayers: { name: LayerName; visible: boolean; }[],
-  filters: Filters,
-  timeSelection: Accessor<{
-    year: number;
-    week: number;
-  }>,
-  selectedSites: Accessor<SiteSelection[]>,
   setSelectedSites: Setter<SiteSelection[]>
 }
 
-export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers, filters, timeSelection, selectedSites, setSelectedSites }) => {
+export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers, setSelectedSites }) => {
   const [filteredData, setFilteredData] = createSignal<BasicWeek[]>([]);
   const [selectedFeatures, setSelectedFeatures] = createSignal<any[]>([]);
   const [hoveredFeature, setHoveredFeature] = createSignal<any>(null);
+
+  const [state, setState] = useState();
 
   let map: Map;
   let mapElement: HTMLDivElement;
@@ -112,12 +109,12 @@ export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers, f
     // @ts-ignore
     mapElement.getElementsByClassName("ol-viewport")[0].style.borderRadius = "16px";
 
-    sitesLayer = new AquacultureSitesLayer(filters);
+    sitesLayer = new AquacultureSitesLayer(state.filters);
     map.addLayer(sitesLayer.layer);
 
     layers["Weather warnings"] = await getRiskLayer(false);
     layers["Trajectory simulations"] = await getTrajectoryLayer();
-    layers['Sea temperature'] = getOceanTempLayer(timeSelection().year, timeSelection().week);
+    layers['Sea temperature'] = getOceanTempLayer(state.time.year, state.time.week);
     layers['Production areas'] = await getProductionAreaLayer();
     Object.values(layers).forEach(l => map.addLayer(l));
   })
@@ -150,7 +147,7 @@ export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers, f
   })
 
   createEffect(() => {
-    const { year, week } = timeSelection();
+    const [year, week] = [state.time.year, state.time.week];
     const layer = layers['Sea temperature'];
     if (layer !== undefined) {
       layer.setSource(getOceanTempSource(year, week));
@@ -163,7 +160,7 @@ export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers, f
   }))
 
   createEffect(() => {
-    const showFallow = filters.fallow ? 1 : 0;
+    const showFallow = state.filters.fallow ? 1 : 0;
     if (sitesLayer) {
       sitesLayer.style.variables.fallow = showFallow;
       map.render();
@@ -171,22 +168,22 @@ export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers, f
   })
 
   createEffect((prev) => {
-    const orgs = filters.organizations;
+    const orgs = state.filters.organizations;
     if (orgs !== prev || !filteredData().length) {
       if (!orgs.length) {
         setFilteredData(data());
       } else {
-        setFilteredData(data().filter(bw => !bw.organizations.every(o => !filters.organizations.includes(o))));
+        setFilteredData(data().filter(bw => !bw.organizations.every(o => !state.filters.organizations.includes(o))));
       }
     }
     return orgs;
-  }, filters.organizations)
+  }, state.filters.organizations)
 
   createEffect(on(data, d => {
-    if (!filters.organizations.length) {
+    if (!state.filters.organizations.length) {
       setFilteredData(d);
     } else {
-      setFilteredData(d.filter(bw => !bw.organizations.every(o => !filters.organizations.includes(o))));
+      setFilteredData(d.filter(bw => !bw.organizations.every(o => !state.filters.organizations.includes(o))));
     }
   }))
 

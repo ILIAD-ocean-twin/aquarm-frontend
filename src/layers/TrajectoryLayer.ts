@@ -2,7 +2,7 @@ import VectorSource from "ol/source/Vector";
 import GeoJSON from 'ol/format/GeoJSON.js';
 import WebGLVectorLayerRenderer from 'ol/renderer/webgl/VectorLayer.js';
 import Layer from "ol/layer/Layer";
-import { dataProj, mapProj } from "./constants";
+import { dataProj, mapProj } from "../constants";
 
 class WebGLLayer extends Layer {
     createRenderer() {
