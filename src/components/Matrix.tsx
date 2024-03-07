@@ -1,5 +1,5 @@
 import { Accessor, Component, For, onMount } from "solid-js"
-import { BasicWeek, ConnectivityData } from "./types"
+import { BasicWeek, ConnectivityData } from "../types"
 import chroma from "chroma-js";
 
 interface MatrixProps {

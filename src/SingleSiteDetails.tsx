@@ -1,20 +1,19 @@
-import { Component, Show, createEffect, createSignal, onMount } from "solid-js";
+import { Component, Show, createEffect, createSignal } from "solid-js";
 import { BasicWeek } from "./types";
 import { Windrose } from "./components/windrose";
 import { WeekLineChart } from "./components/weeklyPlot";
+import { useState } from "./state";
 
 
 interface SingleSiteDetailsProps {
     site: BasicWeek
-    time: {
-        year: number
-        week: number
-    }
 }
 
 export const SingleSiteDetails: Component<SingleSiteDetailsProps> = (props) => {
     const [windData, setWindData] = createSignal<any>();
     const [liceData, setLiceData] = createSignal<any>();
+
+    const [state, _] = useState();
 
     const seaTemp = () => {
         if (liceData())
@@ -31,7 +30,7 @@ export const SingleSiteDetails: Component<SingleSiteDetailsProps> = (props) => {
             .then(r => r.json())
             .then(setWindData);
 
-        fetch(`/lice?localities=${props.site.id}&from_year=${props.time.year - 1}&from_week=${props.time.week}&to_year=${props.time.year}&to_week=${props.time.week}`)
+        fetch(`/lice?localities=${props.site.id}&from_year=${state.time.year - 1}&from_week=${state.time.week}&to_year=${state.time.year}&to_week=${state.time.week}`)
             .then(resp => resp.json())
             .then(data => {
                 for (let d in data) {
@@ -54,7 +53,7 @@ export const SingleSiteDetails: Component<SingleSiteDetailsProps> = (props) => {
             <div class="flex gap-2 items-center">
                 <div class="text-white font-bold text-2xl">{props.site.name}</div>
                 <div class="bg-neutral-800 text-neutral-300 text-sm px-2 py-[2px] rounded">
-                    week {props.time.week}
+                    week {state.time.week}
                 </div>
             </div>
 

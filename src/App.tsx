@@ -1,20 +1,20 @@
-import { createSignal, type Component, For, createEffect, Switch, Match } from 'solid-js';
+import { createSignal, type Component, For, createEffect, Switch, Match, createResource } from 'solid-js';
 import { createStore } from "solid-js/store";
 import { MapContainer } from './MapContainer';
-import { BasicWeek, Filters, SiteSelection } from './types';
+import { BasicWeek, SiteSelection } from './types';
 import { Select, createOptions } from "@thisbeyond/solid-select";
 import "@thisbeyond/solid-select/style.css";
 import { SingleSiteDetails } from './SingleSiteDetails';
 import { OverviewDetails } from './OverviewDetails';
 import { MultiSelectDetails } from './MultiSelectDetails';
 import { LAYERS } from './constants';
+import { useState } from './state';
 
 
 const App: Component = () => {
-  const [data, setData] = createSignal<BasicWeek[]>([]);
-  const [filters, setFilters] = createStore<Filters>({ fallow: true, organizations: [] });
-  const [orgs, setOrgs] = createSignal<string[]>([]);
-  const [timeSelection, setTimeSelection] = createSignal<{ year: number, week: number }>({ year: 2024, week: 6 });
+  const [state, setState] = useState();
+  const [data] = createResource(() => [state.time.year, state.time.week], fetchBasic, { initialValue: [] })
+
   const [selectedSites, setSelectedSites] = createSignal<SiteSelection[]>([]);
   const [selectedData, setSelectedData] = createSignal<BasicWeek[]>([]);
 
@@ -26,20 +26,9 @@ const App: Component = () => {
     setLayers(l => l.name === layer, "visible", visible => !visible);
   }
 
-  const toggleFallow = () => {
-    setFilters({ fallow: !filters.fallow });
-  }
-
   const setSelectedOrgs = (orgs: string[]) => {
-    setFilters({ organizations: orgs })
+    setState("filters", "organizations", orgs)
   }
-
-  createEffect(async () => {
-    fetch(`/basic-all/${timeSelection().year}/${timeSelection().week}`)
-      .then(d => d.json() as Promise<BasicWeek[]>)
-      .then(d => d.filter(bw => bw.placement == "SJØ"))
-      .then(setData);
-  })
 
   createEffect(() => {
     const ids = selectedSites().map(s => s.id);
@@ -47,10 +36,12 @@ const App: Component = () => {
   })
 
   createEffect(() => {
-    setOrgs([...data().reduce((agg, cur) => {
+    const orgs = [...data().reduce((agg, cur) => {
       cur.organizations?.forEach(org => agg.add(org));
       return agg;
-    }, new Set<string>())]);
+    }, new Set<string>())];
+
+    setState("filters", "organizations", orgs);
   })
 
   return (
@@ -62,24 +53,24 @@ const App: Component = () => {
             <div>
               <h2 class="w-14 inline-block">Year</h2>
               <input
-                class="bg-slate-500 p-1 w-20"
+                class="bg-slate-500 p-1 w-20 rounded"
                 type='number'
-                value={timeSelection().year}
+                value={state.time.year}
                 min={2012}
                 max={2024}
-                onChange={(e) => setTimeSelection({ year: e.target.valueAsNumber, week: timeSelection().week })}
+                onChange={e => setState("time", "year", e.target.valueAsNumber)}
               />
             </div>
 
             <div>
-              <h2 class="w-14 inline-block">Week:</h2>
+              <h2 class="w-14 inline-block">Week</h2>
               <input
-                class="bg-slate-500 p-1 w-20"
+                class="bg-slate-500 p-1 w-20 rounded"
                 type="number"
-                value={timeSelection().week}
+                value={state.time.week}
                 min={1}
                 max={52}
-                onChange={(e) => setTimeSelection({ week: e.target.valueAsNumber, year: timeSelection().year })}
+                onChange={e => setState("time", "week", e.target.valueAsNumber)}
               />
             </div>
 
@@ -87,14 +78,14 @@ const App: Component = () => {
               Show fallow:
               <input
                 class="ml-2 cursor-pointer"
-                checked={filters.fallow}
-                onchange={() => toggleFallow()}
+                checked={state.filters.fallow}
+                onchange={() => setState("filters", "fallow", !state.filters.fallow)}
                 type="checkbox" />
             </label>
 
             <div class="mb-3 text-black">
               <h2 class="text-white mb-1">Owner organization:</h2>
-              <Select class='bg-slate-500 rounded text-sm' multiple {...createOptions(orgs())} onChange={setSelectedOrgs} />
+              <Select class='bg-slate-500 rounded text-sm' multiple {...createOptions(state.filters.organizations)} onChange={setSelectedOrgs} />
             </div>
           </div>
 
@@ -117,23 +108,28 @@ const App: Component = () => {
 
         </div>
         <div class="grow h-[800px]">
-          <MapContainer data={data} dataLayers={layers} timeSelection={timeSelection} filters={filters} selectedSites={selectedSites} setSelectedSites={setSelectedSites} />
+          <MapContainer data={data} dataLayers={layers} setSelectedSites={setSelectedSites} />
         </div>
       </div>
 
       <Switch>
         <Match when={selectedData().length == 0}>
-          <OverviewDetails data={data} filters={filters} />
+          <OverviewDetails data={data} />
         </Match>
         <Match when={selectedData().length == 1}>
-          <SingleSiteDetails site={selectedData()[0]} time={timeSelection()} />
+          <SingleSiteDetails site={selectedData()[0]} />
         </Match>
         <Match when={selectedData().length > 1}>
-          <MultiSelectDetails sites={selectedData} setSelectedSites={setSelectedSites} selectedSites={selectedSites} time={timeSelection()} />
+          <MultiSelectDetails sites={selectedData} setSelectedSites={setSelectedSites} selectedSites={selectedSites} />
         </Match>
       </Switch>
     </div>
   );
 };
+
+const fetchBasic = async (time: number[]) =>
+  fetch(`/basic-all/${time[0]}/${time[1]}`)
+    .then(d => d.json() as Promise<BasicWeek[]>)
+    .then(d => d.filter(bw => bw.placement == "SJØ"));
 
 export default App;

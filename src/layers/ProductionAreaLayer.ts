@@ -4,14 +4,14 @@ import GeoJSON from 'ol/format/GeoJSON.js';
 import Fill from "ol/style/Fill";
 import Stroke from "ol/style/Stroke";
 import Style from "ol/style/Style";
-import { dataProj, mapProj } from "./constants";
+import { dataProj, mapProj } from "../constants";
 
-const geoJsonConsumer = async () => fetch('/kommunegrenser.geojson')
+const geoJsonConsumer = async () => fetch('/production_areas.geojson')
     .then(response => response.json())
 
 const style = new Style({
     fill: new Fill({
-        color: '#eeeeee',
+        color: 'rgba(127, 127, 127, 0.1)',
     }),
     stroke: new Stroke({
         color: 'rgba(127, 127, 127, 0.3)',
@@ -19,17 +19,17 @@ const style = new Style({
     }),
 });
 
-export const getCountyLayer = () => {
-    let countySource;
+export const getProductionAreaLayer = () => {
+    let paSource;
     return geoJsonConsumer()
         .then((data) => {
-            countySource = new VectorSource({
+            paSource = new VectorSource({
                 features: new GeoJSON().readFeatures(data, { dataProjection: dataProj, featureProjection: mapProj })
             });
 
             return new VectorLayer({
                 visible: false,
-                source: countySource,
+                source: paSource,
                 style
             });
         })
