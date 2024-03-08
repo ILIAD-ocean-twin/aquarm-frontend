@@ -1,15 +1,17 @@
 import { createContext, useContext } from "solid-js";
 import { createStore } from "solid-js/store";
-import { Filters, TimeSelection } from "./types";
+import { BasicWeek, Filters, TimeSelection } from "./types";
 
 type State = {
   time: TimeSelection
   filters: Filters
+  selectedSites: number[]
 }
 
 const initialState: State = {
   time: { year: 2024, week: 5 },
-  filters: { fallow: true, organizations: [] }
+  filters: { fallow: true, organizations: [] },
+  selectedSites: []
 }
 
 export const makeStateContext = () => {

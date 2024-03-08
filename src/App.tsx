@@ -14,9 +14,8 @@ import { useState } from './state';
 const App: Component = () => {
   const [state, setState] = useState();
   const [data] = createResource(() => [state.time.year, state.time.week], fetchBasic, { initialValue: [] })
-
-  const [selectedSites, setSelectedSites] = createSignal<SiteSelection[]>([]);
-  const [selectedData, setSelectedData] = createSignal<BasicWeek[]>([]);
+  const selectedData = () => data().filter(d => state.selectedSites.includes(d.id));
+  const numSelected = () => state.selectedSites.length;
 
   const [layers, setLayers] = createStore(
     LAYERS.map(name => ({ name, visible: false }))
@@ -29,11 +28,6 @@ const App: Component = () => {
   const setSelectedOrgs = (orgs: string[]) => {
     setState("filters", "organizations", orgs)
   }
-
-  createEffect(() => {
-    const ids = selectedSites().map(s => s.id);
-    setSelectedData(data().filter(d => ids.includes(d.id)));
-  })
 
   createEffect(() => {
     const orgs = [...data().reduce((agg, cur) => {
@@ -91,7 +85,6 @@ const App: Component = () => {
 
           <h2 class="text-lg font-semibold text-iliad my-2">Data layers</h2>
           <div class="flex flex-col gap-4">
-
             <For each={layers}>
               {dl =>
                 <label class="select-none">
@@ -108,19 +101,19 @@ const App: Component = () => {
 
         </div>
         <div class="grow h-[800px]">
-          <MapContainer data={data} dataLayers={layers} setSelectedSites={setSelectedSites} />
+          <MapContainer data={data} dataLayers={layers} />
         </div>
       </div>
 
       <Switch>
-        <Match when={selectedData().length == 0}>
+        <Match when={numSelected() == 0}>
           <OverviewDetails data={data} />
         </Match>
-        <Match when={selectedData().length == 1}>
+        <Match when={numSelected() == 1}>
           <SingleSiteDetails site={selectedData()[0]} />
         </Match>
-        <Match when={selectedData().length > 1}>
-          <MultiSelectDetails sites={selectedData} setSelectedSites={setSelectedSites} selectedSites={selectedSites} />
+        <Match when={numSelected() > 1}>
+          <MultiSelectDetails sites={selectedData} />
         </Match>
       </Switch>
     </div>

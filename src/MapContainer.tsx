@@ -17,21 +17,20 @@ import { useState } from './state';
 
 interface MapContainerProps {
   data: Accessor<BasicWeek[]>,
-  dataLayers: { name: LayerName; visible: boolean; }[],
-  setSelectedSites: Setter<SiteSelection[]>
+  dataLayers: { name: LayerName; visible: boolean; }[]
 }
 
-export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers, setSelectedSites }) => {
-  const [filteredData, setFilteredData] = createSignal<BasicWeek[]>([]);
-  const [selectedFeatures, setSelectedFeatures] = createSignal<any[]>([]);
-  const [hoveredFeature, setHoveredFeature] = createSignal<any>(null);
-
+export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers }) => {
   const [state, setState] = useState();
+
+  const [filteredData, setFilteredData] = createSignal<BasicWeek[]>([]);
+  const [hoveredFeature, setHoveredFeature] = createSignal<any>(null);
 
   let map: Map;
   let mapElement: HTMLDivElement;
   let tooltip: HTMLDivElement;
   let sitesLayer: AquacultureSitesLayer;
+  let selectedFeatures = [];
 
   let layers: Record<LayerName, Layer> = {
     'Weather warnings': undefined,
@@ -84,26 +83,26 @@ export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers, s
     map.on('click', function (ev) {
       const features = map.getFeaturesAtPixel(ev.pixel).filter(f => f.get('siteId'));
       if (features.length == 0) {
-        selectedFeatures().forEach(f => f.set('selected', 0));
-        setSelectedFeatures([]);
+        selectedFeatures.forEach(f => f.set('selected', 0));
+        selectedFeatures = [];
       }
       else {
         const f = features[0];
         const sID = f.get('siteId');
-        if (!sID) {
-          return;
-        }
-        if (selectedFeatures().every(v => v.get('siteId') != sID)) {
-          setSelectedFeatures([f, ...selectedFeatures()]);
-          // @ts-ignore
-          f.set('selected', 1);
-        }
-        else {
-          // @ts-ignore
-          f.set('selected', 0);
-          setSelectedFeatures(selectedFeatures().filter(v => v.get('siteId') != sID));
+        if (sID) {
+          if (selectedFeatures.every(v => v.get('siteId') != sID)) {
+            selectedFeatures.push(f);
+            // @ts-ignore
+            f.set('selected', 1);
+          }
+          else {
+            // @ts-ignore
+            f.set('selected', 0);
+            selectedFeatures = selectedFeatures.filter(v => v.get('siteId') != sID);
+          }
         }
       }
+      setState("selectedSites", selectedFeatures.map(f => f.get("siteId")));
     });
 
     // @ts-ignore
@@ -137,13 +136,10 @@ export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers, s
     mapElement.classList.toggle('cursor-pointer', !!f?.get('siteId'));
   }))
 
-  // Propagate selected sites upward (to App)
   createEffect(() => {
-    const sites = selectedFeatures().map(f => ({
-      id: f.get("siteId"),
-      coords: [f.get('lon'), f.get('lat')]
-    }));
-    setSelectedSites(sites);
+    const sites = state.selectedSites;
+    selectedFeatures.forEach(f => f.set('selected', sites.includes(f.get('siteId'))));
+    selectedFeatures = selectedFeatures.filter(f => sites.includes(f.get('siteId')));
   })
 
   createEffect(() => {

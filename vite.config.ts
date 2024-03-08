@@ -15,19 +15,19 @@ export default defineConfig({
     port: 3000,
     proxy: {
       '/basic-all': {
-        target: 'http://10.218.116.24'
+        target: 'http://localhost:8000'
       },
       '/lice': {
-        target: 'http://10.218.116.24'
+        target: 'http://localhost:8000'
       },
       '/connectivity': {
-        target: 'http://10.218.116.24'
+        target: 'http://localhost:8000'
       },
       '/trajectory': {
-        target: 'http://10.218.116.24'
+        target: 'http://localhost:8000'
       },
       '/windrose': {
-        target: 'http://10.218.116.24'
+        target: 'http://localhost:8000'
       },
     },
   },
