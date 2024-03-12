@@ -35,8 +35,8 @@ export const SingleSiteDetails: Component<SingleSiteDetailsProps> = (props) => {
     let meteogram: HTMLImageElement;
 
     createEffect(() => {
-        // meteogram.src = `https://www.yr.no/en/content/${props.site.lat},${props.site.lon}/meteogram.svg?mode=dark`;
-        // marinogram.src = `https://jtimeseries.k8s.met.no/jtimeseries-webservices/marinogram?latitude=${props.site.lat}&longitude=${props.site.lon}&waterTemperature=true&airTemperature=true&dewpointTemperature=true&pressure=true&waveHeight=true&waveDirection=true&currentDirection=true&currentSpeed=true&windDirection=true&windSpeed=true&timezone=Europe%2FOslo&language=en`;
+        meteogram.src = `https://www.yr.no/en/content/${props.site.lat},${props.site.lon}/meteogram.svg?mode=dark`;
+        marinogram.src = `https://jtimeseries.k8s.met.no/jtimeseries-webservices/marinogram?latitude=${props.site.lat}&longitude=${props.site.lon}&waterTemperature=true&airTemperature=true&dewpointTemperature=true&pressure=true&waveHeight=true&waveDirection=true&currentDirection=true&currentSpeed=true&windDirection=true&windSpeed=true&timezone=Europe%2FOslo&language=en`;
     })
 
     return (
