@@ -1,11 +1,11 @@
-import { onMount, type Component, Accessor, createEffect, onCleanup, on, createSignal, Setter, Switch, Match } from 'solid-js';
+import { onMount, type Component, Accessor, createEffect, onCleanup, on, createSignal, Switch, Match } from 'solid-js';
 import TileLayer from 'ol/layer/Tile';
 import Map from 'ol/Map';
 import XYZ from 'ol/source/XYZ';
 import OSM from 'ol/source/OSM.js';
 import { transform } from 'ol/proj';
 import { View } from 'ol';
-import { BasicWeek, Filters, LayerName, SiteSelection } from './types';
+import { BasicWeek, LayerName } from './types';
 import { AquacultureSitesLayer } from './layers/AquacultureSitesLayer';
 import { getRiskLayer } from './layers/RiskLayer';
 import { getTrajectoryLayer } from './layers/TrajectoryLayer';

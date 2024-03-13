@@ -1,15 +1,7 @@
 import { EChartsAutoSize } from "echarts-solid"
 import { theme } from "./themes/theme"
-import { BasicWeek } from "../types"
+import { BasicWeek, HistoricLiceData } from "../types"
 import { Accessor, Component, createEffect, createSignal, on } from "solid-js"
-
-export interface HistoricLiceData {
-  year: number,
-  week: number,
-  avgAdultFemaleLice: number | null,
-  avgMobileLice: number | null,
-  rank: number | null
-}
 
 const compare_historic_times = (a: HistoricLiceData, b: HistoricLiceData) => {
   if (a.year == b.year) {
@@ -56,7 +48,7 @@ export const CorrelationChart: Component<CorrelationChartProps> = (props) => {
     },
     xAxis: {
       type: 'category',
-      splitline: {show: false},
+      splitline: { show: false },
       data: [],
       splitArea: { show: true }
     },

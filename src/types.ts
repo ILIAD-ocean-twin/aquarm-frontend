@@ -34,3 +34,12 @@ export interface SiteSelection {
 }
 
 export type LayerName = typeof LAYERS[number];
+
+export interface HistoricLiceData {
+    year: number,
+    week: number,
+    avgAdultFemaleLice: number | null,
+    avgMobileLice: number | null,
+    rank: number | null
+    seaTemperature: number
+}

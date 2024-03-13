@@ -1,6 +1,6 @@
 import { createContext, useContext } from "solid-js";
 import { createStore } from "solid-js/store";
-import { BasicWeek, Filters, TimeSelection } from "./types";
+import { Filters, TimeSelection } from "./types";
 
 type State = {
   time: TimeSelection

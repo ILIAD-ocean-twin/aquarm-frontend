@@ -1,9 +1,10 @@
 import { Component, Show, createEffect, createResource } from "solid-js";
 import { BasicWeek } from "./types";
 import { Windrose } from "./components/windrose";
-import { WeekLineChart } from "./components/weeklyPlot";
+import { WeeklyLiceChart } from "./components/WeeklyLiceChart";
 import { useState } from "./state";
 import { Spinner } from "./components/Spinner";
+import { fetchLiceData } from "./utils";
 
 
 interface SingleSiteDetailsProps {
@@ -18,7 +19,7 @@ export const SingleSiteDetails: Component<SingleSiteDetailsProps> = (props) => {
         fetchWindForecast);
 
     const [liceData] = createResource(
-        () => [state.selectedSites[0], state.time.year, state.time.week],
+        () => [[state.selectedSites[0]], state.time.year, state.time.week],
         fetchLiceData);
 
     const seaTemp = () => {
@@ -69,7 +70,7 @@ export const SingleSiteDetails: Component<SingleSiteDetailsProps> = (props) => {
                     <h3 class="text-white/80 font-semibold text-xl mb-1">Lice counts <span class="text-sm">(Adult female lice)</span></h3>
                     <div class="h-[480px]">
                         <Show when={!liceData.loading} fallback={"loading..."}>
-                            <WeekLineChart liceData={liceData} sites={[props.site]} />
+                            <WeeklyLiceChart liceData={liceData} sites={[props.site]} />
                         </Show>
                     </div>
                 </div>
@@ -97,18 +98,3 @@ const NumberDisplay: Component<{ value: number | string | undefined, subtitle: s
 
 const fetchWindForecast = ([lat, lon]) =>
     fetch(`/windrose?lat=${lat}&lon=${lon}`).then(r => r.json());
-
-const fetchLiceData = ([id, year, week]) =>
-    fetch(`/lice?localities=${id}&from_year=${year - 1}&from_week=${week}&to_year=${year}&to_week=${week}`)
-        .then(resp => resp.json())
-        .then(data => {
-            for (let d in data) {
-                data[d].sort((a, b) => {
-                    if (a.year != b.year)
-                        return a.year - b.year;
-                    else
-                        return a.week - b.week;
-                })
-            }
-            return data;
-        });

@@ -1,7 +1,7 @@
-import { createSignal, type Component, For, createEffect, Switch, Match, createResource } from 'solid-js';
+import { type Component, For, createEffect, Switch, Match, createResource } from 'solid-js';
 import { createStore } from "solid-js/store";
 import { MapContainer } from './MapContainer';
-import { BasicWeek, SiteSelection } from './types';
+import { BasicWeek } from './types';
 import { Select, createOptions } from "@thisbeyond/solid-select";
 import "@thisbeyond/solid-select/style.css";
 import { SingleSiteDetails } from './SingleSiteDetails';
