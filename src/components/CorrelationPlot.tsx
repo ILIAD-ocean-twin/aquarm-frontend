@@ -1,9 +1,9 @@
 import { EChartsAutoSize } from "echarts-solid"
 import { theme } from "./themes/theme"
-import { BasicWeek, HistoricLiceData } from "../types"
+import { BasicWeek, HistoricSiteData } from "../types"
 import { Accessor, Component, createEffect, createSignal, on } from "solid-js"
 
-const compare_historic_times = (a: HistoricLiceData, b: HistoricLiceData) => {
+const compare_historic_times = (a: HistoricSiteData, b: HistoricSiteData) => {
   if (a.year == b.year) {
     return (a.week > b.week) ? 1 : -1
   } else {
@@ -11,7 +11,7 @@ const compare_historic_times = (a: HistoricLiceData, b: HistoricLiceData) => {
   }
 }
 
-export const mapLiceData = (lice_data: Record<string, HistoricLiceData[]>, sites: BasicWeek[]): any => {
+export const mapLiceData = (lice_data: Record<string, HistoricSiteData[]>, sites: BasicWeek[]): any => {
   const names = sites.reduce((pre, cur) => { pre[cur.id] = cur.name; return pre; }, {})
   const locations: string[] = []
   const data: (number | null)[][] = []
@@ -27,7 +27,7 @@ export const mapLiceData = (lice_data: Record<string, HistoricLiceData[]>, sites
 }
 
 interface CorrelationChartProps {
-  liceData: Accessor<Record<string, HistoricLiceData[]>>,
+  liceData: Accessor<Record<string, HistoricSiteData[]>>,
   sites: BasicWeek[]
 }
 

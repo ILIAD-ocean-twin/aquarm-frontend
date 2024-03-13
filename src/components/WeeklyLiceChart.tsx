@@ -1,9 +1,9 @@
 import { EChartsAutoSize } from "echarts-solid"
 import { theme } from "./themes/theme"
-import { BasicWeek, HistoricLiceData } from "../types"
-import { Accessor, Component, createEffect, createSignal, on } from "solid-js"
+import { BasicWeek, HistoricSiteData } from "../types"
+import { Component, Resource, createEffect, createSignal, on } from "solid-js"
 
-export const mapLiceData = (lice_data: Record<string, HistoricLiceData[]>, sites: BasicWeek[]): any => {
+export const mapLiceData = (lice_data: Record<string, HistoricSiteData[]>, sites: BasicWeek[]): any => {
   const names = sites.reduce((pre, cur) => { pre[cur.id] = cur.name; return pre; }, {})
   const locations: string[] = []
   const data: (number | null)[][] = []
@@ -18,7 +18,7 @@ export const mapLiceData = (lice_data: Record<string, HistoricLiceData[]>, sites
 }
 
 interface WeeklyLiceChartProps {
-  liceData: Accessor<Record<string, HistoricLiceData[]>>,
+  data: Resource<Record<string, HistoricSiteData[]>>,
   sites: BasicWeek[]
 }
 
@@ -51,7 +51,7 @@ export const WeeklyLiceChart: Component<WeeklyLiceChartProps> = (props) => {
     }
   })
 
-  createEffect(on(props.liceData, ld => {
+  createEffect(on(props.data, ld => {
     const { locations, timestamps, data } = mapLiceData(ld, props.sites);
     setOptions({
       ...options(),

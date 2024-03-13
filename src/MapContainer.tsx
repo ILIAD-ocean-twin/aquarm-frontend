@@ -42,7 +42,6 @@ export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers })
   onMount(async () => {
     map = new Map({
       layers: [
-
         new TileLayer({
           source: new XYZ({
             url: "https://{1-4}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png",
@@ -50,7 +49,7 @@ export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers })
           })
         })
         /*new TileLayer({
-          source: new OSM(),
+            source: new OSM(),
         })*/
       ],
       view: new View({
