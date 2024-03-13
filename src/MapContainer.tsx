@@ -151,8 +151,12 @@ export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers })
   })
 
   createEffect(on(filteredData, d => {
-    if (map && d)
-      sitesLayer.updateSource(d);
+    if (map && d) {
+      const ids = selectedFeatures.map(f => f.get("siteId"));
+      selectedFeatures = [];
+      sitesLayer.updateSource(d, ids);
+      selectedFeatures = sitesLayer.layer.getSource().getFeatures().filter(f => ids.includes(f.get("siteId")));
+    }
   }))
 
   createEffect(() => {

@@ -101,23 +101,23 @@ export class AquacultureSitesLayer {
         };
 
         this.layer = new WebGLPointsLayer({
-            source: this.getSource([]),
+            source: this.getSource([], []),
             style: this.style
         })
     }
 
-    public updateSource(data: BasicWeek[]) {
+    public updateSource(data: BasicWeek[], selected: number[]) {
         this.layer.getSource().clear();
-        this.layer.getSource().addFeatures(this.getFeatures(data));
+        this.layer.getSource().addFeatures(this.getFeatures(data, selected));
     }
 
-    private getSource(data: BasicWeek[]) {
+    private getSource(data: BasicWeek[], selected: number[]) {
         return new VectorSource({
-            features: this.getFeatures(data)
+            features: this.getFeatures(data, selected)
         })
     }
 
-    private getFeatures(data: BasicWeek[]) {
+    private getFeatures(data: BasicWeek[], selected: number[]) {
         return data.map(dp => new Feature({
             siteId: dp.id,
             name: dp.name,
@@ -126,6 +126,7 @@ export class AquacultureSitesLayer {
             fallow: dp.isFallow ? 1 : 0,
             lat: dp.lat,
             lon: dp.lon,
+            selected: selected.includes(dp.id),
             geometry: new Point(
                 transform([dp.lon, dp.lat], 'EPSG:4326', 'EPSG:3857')
             )
