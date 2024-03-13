@@ -14,5 +14,6 @@ export const LAYERS = [
   "Weather warnings",
   "Trajectory simulations",
   "Sea temperature",
-  "Production areas"
+  "Production areas",
+  "Municipalities"
 ] as const;

@@ -13,6 +13,7 @@ import { getOceanTempLayer, getOceanTempSource } from './layers/OceanTempLayer';
 import Layer from 'ol/layer/Layer';
 import { getProductionAreaLayer } from './layers/ProductionAreaLayer';
 import { useState } from './state';
+import { getMunicipalityLayer } from './layers/MunicipalityLayer';
 
 
 interface MapContainerProps {
@@ -36,7 +37,8 @@ export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers })
     'Weather warnings': undefined,
     'Trajectory simulations': undefined,
     'Sea temperature': undefined,
-    'Production areas': undefined
+    'Production areas': undefined,
+    'Municipalities': undefined
   };
 
   onMount(async () => {
@@ -73,8 +75,8 @@ export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers })
         // @ts-ignore
         features[0].set('hover', 1);
         setHoveredFeature(features[0]);
-        tooltip.style.left = ev.pixel[0] - 70 + "px";
-        tooltip.style.top = (ev.pixel[1] - tooltip.clientHeight - 30) + "px";
+        tooltip.style.left = ev.pixel[0] - 80 + "px";
+        tooltip.style.top = (ev.pixel[1] - tooltip.clientHeight - 16) + "px";
       } else {
         setHoveredFeature(null);
       }
@@ -115,6 +117,7 @@ export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers })
     layers["Trajectory simulations"] = await getTrajectoryLayer();
     layers['Sea temperature'] = getOceanTempLayer(state.time.year, state.time.week);
     layers['Production areas'] = await getProductionAreaLayer();
+    layers['Municipalities'] = await getMunicipalityLayer();
     Object.values(layers).forEach(l => map.addLayer(l));
   })
 
@@ -189,18 +192,27 @@ export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers })
 
   return (
     <div ref={mapElement} class="w-full h-full rounded-2xl shadow-lg relative">
-      <div ref={tooltip} class="absolute bg-white py-1 px-2 z-50 rounded shadow text-black opacity-80">
-        <Switch fallback={<h2 class="font-semibold">{hoveredFeature()?.get("name") ?? "Ukjent"}</h2>}>
+      <div ref={tooltip} class="absolute text-black z-50 w-[160px] pointer-events-none flex">
+        <Switch fallback={
+          <div class="mx-auto py-1 px-2 rounded shadow-lg bg-white/80 font-semibold">
+            {hoveredFeature()?.get("name") ?? "Ukjent"}
+          </div>
+        }>
           <Match when={hoveredFeature()?.get('awareness_level') != undefined}>
-            <div class="w-[180px]">
+            <div class="w-full bg-white py-1 px-2 z-50 rounded shadow-lg bg-white/80">
               <h2 class="font-semibold">{hoveredFeature()?.get('area')}</h2>
               <p class="text-sm">{hoveredFeature()?.get('description')}</p>
             </div>
           </Match>
           <Match when={hoveredFeature()?.get('siteId') != undefined}>
-            <div class="w-[140px]">
+            <div class="mx-auto py-1 px-2 rounded shadow-lg bg-white/80">
               <h2 class="font-semibold">{hoveredFeature()?.get("name") ?? "Ukjent"}</h2>
               <div><span>Lusetall:</span> {hoveredFeature()?.get("lice")?.toFixed(2) ?? "ikke målt"}</div>
+            </div>
+          </Match>
+          <Match when={hoveredFeature()?.get('kommunenavn') != undefined}>
+            <div class="bg-white py-1 px-2 rounded shadow-lg bg-white/80 w-auto text-center font-semibold">
+              {hoveredFeature()?.get('kommunenavn')}
             </div>
           </Match>
         </Switch>

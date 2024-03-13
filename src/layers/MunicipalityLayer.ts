@@ -6,12 +6,12 @@ import Stroke from "ol/style/Stroke";
 import Style from "ol/style/Style";
 import { dataProj, mapProj } from "../constants";
 
-const geoJsonConsumer = async () => fetch('/kommunegrenser.geojson')
+const geoJsonConsumer = async () => fetch('/kommuner_2024_komprimert.json')
   .then(response => response.json())
 
 const style = new Style({
   fill: new Fill({
-    color: '#eeeeee',
+    color: 'rgba(127, 160, 220, 0.075)',
   }),
   stroke: new Stroke({
     color: 'rgba(127, 127, 127, 0.3)',
@@ -19,7 +19,7 @@ const style = new Style({
   }),
 });
 
-export const getCountyLayer = () => {
+export const getMunicipalityLayer = () => {
   let countySource;
   return geoJsonConsumer()
     .then((data) => {
