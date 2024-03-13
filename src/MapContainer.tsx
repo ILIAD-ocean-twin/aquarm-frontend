@@ -1,11 +1,11 @@
-import { onMount, type Component, Accessor, createEffect, onCleanup, on, createSignal, Setter, Switch, Match } from 'solid-js';
+import { onMount, type Component, Accessor, createEffect, onCleanup, on, createSignal, Switch, Match } from 'solid-js';
 import TileLayer from 'ol/layer/Tile';
 import Map from 'ol/Map';
 import XYZ from 'ol/source/XYZ';
 import OSM from 'ol/source/OSM.js';
 import { transform } from 'ol/proj';
 import { View } from 'ol';
-import { BasicWeek, Filters, LayerName, SiteSelection } from './types';
+import { BasicWeek, LayerName } from './types';
 import { AquacultureSitesLayer } from './layers/AquacultureSitesLayer';
 import { getRiskLayer } from './layers/RiskLayer';
 import { getTrajectoryLayer } from './layers/TrajectoryLayer';
@@ -13,37 +13,37 @@ import { getOceanTempLayer, getOceanTempSource } from './layers/OceanTempLayer';
 import Layer from 'ol/layer/Layer';
 import { getProductionAreaLayer } from './layers/ProductionAreaLayer';
 import { useState } from './state';
+import { getMunicipalityLayer } from './layers/MunicipalityLayer';
 
 
 interface MapContainerProps {
   data: Accessor<BasicWeek[]>,
-  dataLayers: { name: LayerName; visible: boolean; }[],
-  setSelectedSites: Setter<SiteSelection[]>
+  dataLayers: { name: LayerName; visible: boolean; }[]
 }
 
-export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers, setSelectedSites }) => {
-  const [filteredData, setFilteredData] = createSignal<BasicWeek[]>([]);
-  const [selectedFeatures, setSelectedFeatures] = createSignal<any[]>([]);
-  const [hoveredFeature, setHoveredFeature] = createSignal<any>(null);
-
+export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers }) => {
   const [state, setState] = useState();
+
+  const [filteredData, setFilteredData] = createSignal<BasicWeek[]>([]);
+  const [hoveredFeature, setHoveredFeature] = createSignal<any>(null);
 
   let map: Map;
   let mapElement: HTMLDivElement;
   let tooltip: HTMLDivElement;
   let sitesLayer: AquacultureSitesLayer;
+  let selectedFeatures = [];
 
   let layers: Record<LayerName, Layer> = {
     'Weather warnings': undefined,
     'Trajectory simulations': undefined,
     'Sea temperature': undefined,
-    'Production areas': undefined
+    'Production areas': undefined,
+    'Municipalities': undefined
   };
 
   onMount(async () => {
     map = new Map({
       layers: [
-
         new TileLayer({
           source: new XYZ({
             url: "https://{1-4}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png",
@@ -51,7 +51,7 @@ export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers, s
           })
         })
         /*new TileLayer({
-          source: new OSM(),
+            source: new OSM(),
         })*/
       ],
       view: new View({
@@ -68,14 +68,15 @@ export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers, s
       }
 
       const features = map.getFeaturesAtPixel(ev.pixel)
-        .filter(f => f.get('siteId') || f.get('area'));
+        .filter(f => f.getGeometry().getType() != "LineString"); //  f.get('siteId') || f.get('area'));
+
       features.sort(f => f.get('siteId') ? -1 : 1);
       if (features.length) {
         // @ts-ignore
         features[0].set('hover', 1);
         setHoveredFeature(features[0]);
-        tooltip.style.left = ev.pixel[0] - 70 + "px";
-        tooltip.style.top = (ev.pixel[1] - tooltip.clientHeight - 30) + "px";
+        tooltip.style.left = ev.pixel[0] - 80 + "px";
+        tooltip.style.top = (ev.pixel[1] - tooltip.clientHeight - 16) + "px";
       } else {
         setHoveredFeature(null);
       }
@@ -84,26 +85,26 @@ export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers, s
     map.on('click', function (ev) {
       const features = map.getFeaturesAtPixel(ev.pixel).filter(f => f.get('siteId'));
       if (features.length == 0) {
-        selectedFeatures().forEach(f => f.set('selected', 0));
-        setSelectedFeatures([]);
+        selectedFeatures.forEach(f => f.set('selected', 0));
+        selectedFeatures = [];
       }
       else {
         const f = features[0];
         const sID = f.get('siteId');
-        if (!sID) {
-          return;
-        }
-        if (selectedFeatures().every(v => v.get('siteId') != sID)) {
-          setSelectedFeatures([f, ...selectedFeatures()]);
-          // @ts-ignore
-          f.set('selected', 1);
-        }
-        else {
-          // @ts-ignore
-          f.set('selected', 0);
-          setSelectedFeatures(selectedFeatures().filter(v => v.get('siteId') != sID));
+        if (sID) {
+          if (selectedFeatures.every(v => v.get('siteId') != sID)) {
+            selectedFeatures.push(f);
+            // @ts-ignore
+            f.set('selected', 1);
+          }
+          else {
+            // @ts-ignore
+            f.set('selected', 0);
+            selectedFeatures = selectedFeatures.filter(v => v.get('siteId') != sID);
+          }
         }
       }
+      setState("selectedSites", selectedFeatures.map(f => f.get("siteId")));
     });
 
     // @ts-ignore
@@ -116,6 +117,7 @@ export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers, s
     layers["Trajectory simulations"] = await getTrajectoryLayer();
     layers['Sea temperature'] = getOceanTempLayer(state.time.year, state.time.week);
     layers['Production areas'] = await getProductionAreaLayer();
+    layers['Municipalities'] = await getMunicipalityLayer();
     Object.values(layers).forEach(l => map.addLayer(l));
   })
 
@@ -137,13 +139,10 @@ export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers, s
     mapElement.classList.toggle('cursor-pointer', !!f?.get('siteId'));
   }))
 
-  // Propagate selected sites upward (to App)
   createEffect(() => {
-    const sites = selectedFeatures().map(f => ({
-      id: f.get("siteId"),
-      coords: [f.get('lon'), f.get('lat')]
-    }));
-    setSelectedSites(sites);
+    const sites = state.selectedSites;
+    selectedFeatures.forEach(f => f.set('selected', sites.includes(f.get('siteId'))));
+    selectedFeatures = selectedFeatures.filter(f => sites.includes(f.get('siteId')));
   })
 
   createEffect(() => {
@@ -155,8 +154,12 @@ export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers, s
   })
 
   createEffect(on(filteredData, d => {
-    if (map && d)
-      sitesLayer.updateSource(d);
+    if (map && d) {
+      const ids = selectedFeatures.map(f => f.get("siteId"));
+      selectedFeatures = [];
+      sitesLayer.updateSource(d, ids);
+      selectedFeatures = sitesLayer.layer.getSource().getFeatures().filter(f => ids.includes(f.get("siteId")));
+    }
   }))
 
   createEffect(() => {
@@ -189,15 +192,27 @@ export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers, s
 
   return (
     <div ref={mapElement} class="w-full h-full rounded-2xl shadow-lg relative">
-      <div ref={tooltip} class="absolute bg-white p-1 w-[140px] z-50 rounded shadow text-black opacity-90">
-        <Switch fallback={<>
-          <h2 class="font-semibold">{hoveredFeature()?.get("name") ?? "Ukjent"}</h2>
-          <div><span>Lusetall:</span> {hoveredFeature()?.get("lice")?.toFixed(2) ?? "ikke målt"}</div>
-        </>}>
+      <div ref={tooltip} class="absolute text-black z-50 w-[160px] pointer-events-none flex">
+        <Switch fallback={
+          <div class="mx-auto py-1 px-2 rounded shadow-lg bg-white/80 font-semibold">
+            {hoveredFeature()?.get("name") ?? "Ukjent"}
+          </div>
+        }>
           <Match when={hoveredFeature()?.get('awareness_level') != undefined}>
-            <div>
+            <div class="w-full bg-white py-1 px-2 z-50 rounded shadow-lg bg-white/80">
               <h2 class="font-semibold">{hoveredFeature()?.get('area')}</h2>
               <p class="text-sm">{hoveredFeature()?.get('description')}</p>
+            </div>
+          </Match>
+          <Match when={hoveredFeature()?.get('siteId') != undefined}>
+            <div class="mx-auto py-1 px-2 rounded shadow-lg bg-white/80">
+              <h2 class="font-semibold">{hoveredFeature()?.get("name") ?? "Ukjent"}</h2>
+              <div><span>Lusetall:</span> {hoveredFeature()?.get("lice")?.toFixed(2) ?? "ikke målt"}</div>
+            </div>
+          </Match>
+          <Match when={hoveredFeature()?.get('kommunenavn') != undefined}>
+            <div class="bg-white py-1 px-2 rounded shadow-lg bg-white/80 w-auto text-center font-semibold">
+              {hoveredFeature()?.get('kommunenavn')}
             </div>
           </Match>
         </Switch>

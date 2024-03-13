@@ -1,32 +1,15 @@
 import { EChartsAutoSize } from "echarts-solid"
 import { theme } from "./themes/theme"
-import { BasicWeek } from "../types"
-import { Accessor, Component, createEffect, createSignal, on } from "solid-js"
+import { BasicWeek, HistoricSiteData } from "../types"
+import { Component, Resource, createEffect, createSignal, on } from "solid-js"
 
-export interface HistoricLiceData {
-  year: number,
-  week: number,
-  avgAdultFemaleLice: number | null,
-  avgMobileLice: number | null,
-  rank: number | null
-}
-
-const compare_historic_times = (a: HistoricLiceData, b: HistoricLiceData) => {
-  if (a.year == b.year) {
-    return (a.week > b.week) ? 1 : -1
-  } else {
-    return (a.year > b.year) ? 1 : -1
-  }
-}
-
-export const mapLiceData = (lice_data: Record<string, HistoricLiceData[]>, sites: BasicWeek[]): any => {
+export const mapLiceData = (lice_data: Record<string, HistoricSiteData[]>, sites: BasicWeek[]): any => {
   const names = sites.reduce((pre, cur) => { pre[cur.id] = cur.name; return pre; }, {})
   const locations: string[] = []
   const data: (number | null)[][] = []
   const timestamps = Object.values(lice_data)[0].map(d => `W${d.week}/${d.year}`);
 
   Object.keys(lice_data).forEach((location) => {
-    lice_data[location].sort(compare_historic_times);
     locations.push(names[location]);
     data.push(lice_data[location].map(d => d.avgAdultFemaleLice));
   })
@@ -34,12 +17,12 @@ export const mapLiceData = (lice_data: Record<string, HistoricLiceData[]>, sites
   return { locations, timestamps, data }
 }
 
-interface WeekLineChartProps {
-  liceData: Accessor<Record<string, HistoricLiceData[]>>,
+interface WeeklyLiceChartProps {
+  data: Resource<Record<string, HistoricSiteData[]>>,
   sites: BasicWeek[]
 }
 
-export const WeekLineChart: Component<WeekLineChartProps> = (props) => {
+export const WeeklyLiceChart: Component<WeeklyLiceChartProps> = (props) => {
   const [options, setOptions] = createSignal<any>({
     animation: false,
     grid: {
@@ -56,7 +39,7 @@ export const WeekLineChart: Component<WeekLineChartProps> = (props) => {
     },
     xAxis: {
       type: 'category',
-      splitline: {show: false},
+      splitline: { show: false },
       data: [],
       splitArea: { show: true }
     },
@@ -68,7 +51,7 @@ export const WeekLineChart: Component<WeekLineChartProps> = (props) => {
     }
   })
 
-  createEffect(on(props.liceData, ld => {
+  createEffect(on(props.data, ld => {
     const { locations, timestamps, data } = mapLiceData(ld, props.sites);
     setOptions({
       ...options(),

@@ -4,8 +4,9 @@
         {
             "id": 1,
             "type": "Feature",
-            "properties": {},
-            "name": "Svenskegrensen til Jæren",
+            "properties": {
+                "name": "Svenskegrensen til Jæren"
+            },
             "geometry": {
                 "type": "Polygon",
                 "coordinates": [
@@ -244,30 +245,14 @@
                         ]
                     ]
                 ]
-            },
-            "colors": [
-                {
-                    "color": "green",
-                    "fromDate": "2017-10-30T00:00:00+01:00",
-                    "toDate": "2020-02-03T00:00:00+01:00"
-                },
-                {
-                    "color": "green",
-                    "fromDate": "2020-02-04T00:00:00+01:00",
-                    "toDate": "2022-06-05T00:00:00+02:00"
-                },
-                {
-                    "color": "green",
-                    "fromDate": "2022-06-06T00:00:00+02:00",
-                    "toDate": null
-                }
-            ]
+            }
         },
         {
             "id": 2,
             "type": "Feature",
-            "properties": {},
-            "name": "Ryfylket",
+            "properties": {
+                "name": "Ryfylket"
+            },
             "geometry": {
                 "type": "Polygon",
                 "coordinates": [
@@ -334,30 +319,14 @@
                         ]
                     ]
                 ]
-            },
-            "colors": [
-                {
-                    "color": "yellow",
-                    "fromDate": "2017-10-30T00:00:00+01:00",
-                    "toDate": "2020-02-03T00:00:00+01:00"
-                },
-                {
-                    "color": "green",
-                    "fromDate": "2020-02-04T00:00:00+01:00",
-                    "toDate": "2022-06-05T00:00:00+02:00"
-                },
-                {
-                    "color": "yellow",
-                    "fromDate": "2022-06-06T00:00:00+02:00",
-                    "toDate": null
-                }
-            ]
+            }
         },
         {
             "id": 3,
             "type": "Feature",
-            "properties": {},
-            "name": "Karmøy til Sotra",
+            "properties": {
+                "name": "Karmøy til Sotra"
+            },
             "geometry": {
                 "type": "Polygon",
                 "coordinates": [
@@ -496,30 +465,14 @@
                         ]
                     ]
                 ]
-            },
-            "colors": [
-                {
-                    "color": "red",
-                    "fromDate": "2017-10-30T00:00:00+01:00",
-                    "toDate": "2020-02-03T00:00:00+01:00"
-                },
-                {
-                    "color": "yellow",
-                    "fromDate": "2020-02-04T00:00:00+01:00",
-                    "toDate": "2022-06-05T00:00:00+02:00"
-                },
-                {
-                    "color": "red",
-                    "fromDate": "2022-06-06T00:00:00+02:00",
-                    "toDate": null
-                }
-            ]
+            }
         },
         {
             "id": 4,
             "type": "Feature",
-            "properties": {},
-            "name": "Nordhordland til Stadt",
+            "properties": {
+                "name": "Nordhordland til Stadt"
+            },
             "geometry": {
                 "type": "Polygon",
                 "coordinates": [
@@ -646,30 +599,14 @@
                         ]
                     ]
                 ]
-            },
-            "colors": [
-                {
-                    "color": "red",
-                    "fromDate": "2017-10-30T00:00:00+01:00",
-                    "toDate": "2020-02-03T00:00:00+01:00"
-                },
-                {
-                    "color": "red",
-                    "fromDate": "2020-02-04T00:00:00+01:00",
-                    "toDate": "2022-06-05T00:00:00+02:00"
-                },
-                {
-                    "color": "red",
-                    "fromDate": "2022-06-06T00:00:00+02:00",
-                    "toDate": null
-                }
-            ]
+            }
         },
         {
             "id": 5,
             "type": "Feature",
-            "properties": {},
-            "name": "Stadt til Hustadvika",
+            "properties": {
+                "name": "Stadt til Hustadvika"
+            },
             "geometry": {
                 "type": "Polygon",
                 "coordinates": [
@@ -732,30 +669,14 @@
                         ]
                     ]
                 ]
-            },
-            "colors": [
-                {
-                    "color": "yellow",
-                    "fromDate": "2017-10-30T00:00:00+01:00",
-                    "toDate": "2020-02-03T00:00:00+01:00"
-                },
-                {
-                    "color": "red",
-                    "fromDate": "2020-02-04T00:00:00+01:00",
-                    "toDate": "2022-06-05T00:00:00+02:00"
-                },
-                {
-                    "color": "yellow",
-                    "fromDate": "2022-06-06T00:00:00+02:00",
-                    "toDate": null
-                }
-            ]
+            }
         },
         {
             "id": 6,
             "type": "Feature",
-            "properties": {},
-            "name": "Nordmøre og Sør-Trøndelag",
+            "properties": {
+                "name": "Nordmøre og Sør-Trøndelag"
+            },
             "geometry": {
                 "type": "Polygon",
                 "coordinates": [
@@ -826,30 +747,14 @@
                         ]
                     ]
                 ]
-            },
-            "colors": [
-                {
-                    "color": "yellow",
-                    "fromDate": "2017-10-30T00:00:00+01:00",
-                    "toDate": "2020-02-03T00:00:00+01:00"
-                },
-                {
-                    "color": "green",
-                    "fromDate": "2020-02-04T00:00:00+01:00",
-                    "toDate": "2022-06-05T00:00:00+02:00"
-                },
-                {
-                    "color": "green",
-                    "fromDate": "2022-06-06T00:00:00+02:00",
-                    "toDate": null
-                }
-            ]
+            }
         },
         {
             "id": 7,
             "type": "Feature",
-            "properties": {},
-            "name": "Nord-Trøndelag med Bindal",
+            "properties": {
+                "name": "Nord-Trøndelag med Bindal"
+            },
             "geometry": {
                 "type": "Polygon",
                 "coordinates": [
@@ -928,30 +833,14 @@
                         ]
                     ]
                 ]
-            },
-            "colors": [
-                {
-                    "color": "green",
-                    "fromDate": "2017-10-30T00:00:00+01:00",
-                    "toDate": "2020-02-03T00:00:00+01:00"
-                },
-                {
-                    "color": "green",
-                    "fromDate": "2020-02-04T00:00:00+01:00",
-                    "toDate": "2022-06-05T00:00:00+02:00"
-                },
-                {
-                    "color": "yellow",
-                    "fromDate": "2022-06-06T00:00:00+02:00",
-                    "toDate": null
-                }
-            ]
+            }
         },
         {
             "id": 8,
             "type": "Feature",
-            "properties": {},
-            "name": "Helgeland til Bodø",
+            "properties": {
+                "name": "Helgeland til Bodø"
+            },
             "geometry": {
                 "type": "Polygon",
                 "coordinates": [
@@ -1034,30 +923,14 @@
                         ]
                     ]
                 ]
-            },
-            "colors": [
-                {
-                    "color": "green",
-                    "fromDate": "2017-10-30T00:00:00+01:00",
-                    "toDate": "2020-02-03T00:00:00+01:00"
-                },
-                {
-                    "color": "green",
-                    "fromDate": "2020-02-04T00:00:00+01:00",
-                    "toDate": "2022-06-05T00:00:00+02:00"
-                },
-                {
-                    "color": "green",
-                    "fromDate": "2022-06-06T00:00:00+02:00",
-                    "toDate": null
-                }
-            ]
+            }
         },
         {
             "id": 9,
             "type": "Feature",
-            "properties": {},
-            "name": "Vestfjorden og Vesterålen",
+            "properties": {
+                "name": "Vestfjorden og Vesterålen"
+            },
             "geometry": {
                 "type": "Polygon",
                 "coordinates": [
@@ -1220,30 +1093,14 @@
                         ]
                     ]
                 ]
-            },
-            "colors": [
-                {
-                    "color": "green",
-                    "fromDate": "2017-10-30T00:00:00+01:00",
-                    "toDate": "2020-02-03T00:00:00+01:00"
-                },
-                {
-                    "color": "green",
-                    "fromDate": "2020-02-04T00:00:00+01:00",
-                    "toDate": "2022-06-05T00:00:00+02:00"
-                },
-                {
-                    "color": "green",
-                    "fromDate": "2022-06-06T00:00:00+02:00",
-                    "toDate": null
-                }
-            ]
+            }
         },
         {
             "id": 10,
             "type": "Feature",
-            "properties": {},
-            "name": "Andøya til Senja",
+            "properties": {
+                "name": "Andøya til Senja"
+            },
             "geometry": {
                 "type": "Polygon",
                 "coordinates": [
@@ -1350,30 +1207,14 @@
                         ]
                     ]
                 ]
-            },
-            "colors": [
-                {
-                    "color": "green",
-                    "fromDate": "2017-10-30T00:00:00+01:00",
-                    "toDate": "2020-02-03T00:00:00+01:00"
-                },
-                {
-                    "color": "yellow",
-                    "fromDate": "2020-02-04T00:00:00+01:00",
-                    "toDate": "2022-06-05T00:00:00+02:00"
-                },
-                {
-                    "color": "green",
-                    "fromDate": "2022-06-06T00:00:00+02:00",
-                    "toDate": null
-                }
-            ]
+            }
         },
         {
             "id": 11,
             "type": "Feature",
-            "properties": {},
-            "name": "Kvaløya til Loppa",
+            "properties": {
+                "name": "Kvaløya til Loppa"
+            },
             "geometry": {
                 "type": "Polygon",
                 "coordinates": [
@@ -1460,30 +1301,14 @@
                         ]
                     ]
                 ]
-            },
-            "colors": [
-                {
-                    "color": "green",
-                    "fromDate": "2017-10-30T00:00:00+01:00",
-                    "toDate": "2020-02-03T00:00:00+01:00"
-                },
-                {
-                    "color": "green",
-                    "fromDate": "2020-02-04T00:00:00+01:00",
-                    "toDate": "2022-06-05T00:00:00+02:00"
-                },
-                {
-                    "color": "green",
-                    "fromDate": "2022-06-06T00:00:00+02:00",
-                    "toDate": null
-                }
-            ]
+            }
         },
         {
             "id": 12,
             "type": "Feature",
-            "properties": {},
-            "name": "Vest-Finnmark",
+            "properties": {
+                "name": "Vest-Finnmark"
+            },
             "geometry": {
                 "type": "Polygon",
                 "coordinates": [
@@ -1570,30 +1395,14 @@
                         ]
                     ]
                 ]
-            },
-            "colors": [
-                {
-                    "color": "green",
-                    "fromDate": "2017-10-30T00:00:00+01:00",
-                    "toDate": "2020-02-03T00:00:00+01:00"
-                },
-                {
-                    "color": "green",
-                    "fromDate": "2020-02-04T00:00:00+01:00",
-                    "toDate": "2022-06-05T00:00:00+02:00"
-                },
-                {
-                    "color": "green",
-                    "fromDate": "2022-06-06T00:00:00+02:00",
-                    "toDate": null
-                }
-            ]
+            }
         },
         {
             "id": 13,
             "type": "Feature",
-            "properties": {},
-            "name": "Øst-Finnmark",
+            "properties": {
+                "name": "Øst-Finnmark"
+            },
             "geometry": {
                 "type": "Polygon",
                 "coordinates": [
@@ -1700,24 +1509,7 @@
                         ]
                     ]
                 ]
-            },
-            "colors": [
-                {
-                    "color": "green",
-                    "fromDate": "2017-10-30T00:00:00+01:00",
-                    "toDate": "2020-02-03T00:00:00+01:00"
-                },
-                {
-                    "color": "green",
-                    "fromDate": "2020-02-04T00:00:00+01:00",
-                    "toDate": "2022-06-05T00:00:00+02:00"
-                },
-                {
-                    "color": "green",
-                    "fromDate": "2022-06-06T00:00:00+02:00",
-                    "toDate": null
-                }
-            ]
+            }
         }
     ]
 }

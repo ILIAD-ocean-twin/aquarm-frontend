@@ -6,19 +6,12 @@ import Stroke from "ol/style/Stroke";
 import Style from "ol/style/Style";
 import { dataProj, mapProj } from "../constants";
 
-
-const awareness_levels = {
-  '2; yellow; Moderate': 'rgba(255, 255, 0, 0.2)',
-  '3; orange; Severe': 'rgba(255, 165, 0, 0.2)',
-  '4; red; Extreme': 'rgba(255, 0, 0, 0.2)',
-}
-
-const geoJsonConsumer = async () => fetch('https://api.met.no/weatherapi/metalerts/1.1/.json')
+const geoJsonConsumer = async () => fetch('/kommuner_2024_komprimert.json')
   .then(response => response.json())
 
 const style = new Style({
   fill: new Fill({
-    color: '#eeeeee',
+    color: 'rgba(127, 160, 220, 0.075)',
   }),
   stroke: new Stroke({
     color: 'rgba(127, 127, 127, 0.3)',
@@ -26,23 +19,18 @@ const style = new Style({
   }),
 });
 
-export const getRiskLayer = (visible: boolean) => {
-  let weatherRiskSource;
+export const getMunicipalityLayer = () => {
+  let countySource;
   return geoJsonConsumer()
     .then((data) => {
-      weatherRiskSource = new VectorSource({
+      countySource = new VectorSource({
         features: new GeoJSON().readFeatures(data, { dataProjection: dataProj, featureProjection: mapProj })
       });
 
       return new VectorLayer({
-        visible,
-        source: weatherRiskSource,
-        style: (feature) => {
-          style.setFill(new Fill({
-            color: awareness_levels[feature.get('awareness_level')]
-          }))
-          return style
-        }
+        visible: false,
+        source: countySource,
+        style
       });
     })
 }

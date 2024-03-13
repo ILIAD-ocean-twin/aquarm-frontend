@@ -28,7 +28,7 @@ export default defineConfig({
       },
       '/windrose': {
         target: 'http://10.218.116.24'
-      },
+      }
     },
   },
   build: {

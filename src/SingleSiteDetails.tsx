@@ -1,105 +1,100 @@
-import { Component, Show, createEffect, createSignal } from "solid-js";
+import { Component, Show, createEffect, createResource } from "solid-js";
 import { BasicWeek } from "./types";
 import { Windrose } from "./components/windrose";
-import { WeekLineChart } from "./components/weeklyPlot";
+import { WeeklyLiceChart } from "./components/WeeklyLiceChart";
 import { useState } from "./state";
+import { Spinner } from "./components/Spinner";
+import { fetchHistoricData } from "./utils";
 
 
 interface SingleSiteDetailsProps {
-    site: BasicWeek
+  site: BasicWeek
 }
 
 export const SingleSiteDetails: Component<SingleSiteDetailsProps> = (props) => {
-    const [windData, setWindData] = createSignal<any>();
-    const [liceData, setLiceData] = createSignal<any>();
+  const [state, _] = useState();
 
-    const [state, _] = useState();
+  const [windData] = createResource(
+    [props.site.lat, props.site.lon],
+    fetchWindForecast);
 
-    const seaTemp = () => {
-        if (liceData())
-            return liceData()[props.site.id][liceData()[props.site.id].length - 1].seaTemperature?.toFixed(1) ?? "NA";
-        else
-            return "";
+  const [liceData] = createResource(
+    () => [[state.selectedSites[0]], state.time.year, state.time.week],
+    fetchHistoricData);
+
+  const seaTemp = () => {
+    if (!liceData.loading) {
+      const data = liceData()[props.site.id];
+      const temp = data[data.length - 1].seaTemperature?.toFixed(1);
+      return temp ? temp + "°c" : "NA";
     }
+    else
+      return undefined;
+  }
 
-    let marinogram: HTMLImageElement;
-    let meteogram: HTMLDivElement;
+  let marinogram: HTMLImageElement;
+  let meteogram: HTMLImageElement;
 
-    createEffect(() => {
-        fetch(`/windrose?lat=${props.site.lat}&lon=${props.site.lon}`)
-            .then(r => r.json())
-            .then(setWindData);
+  createEffect(() => {
+    meteogram.src = `https://www.yr.no/en/content/${props.site.lat},${props.site.lon}/meteogram.svg?mode=dark`;
+    marinogram.src = `https://jtimeseries.k8s.met.no/jtimeseries-webservices/marinogram?latitude=${props.site.lat}&longitude=${props.site.lon}&waterTemperature=true&airTemperature=true&dewpointTemperature=true&pressure=true&waveHeight=true&waveDirection=true&currentDirection=true&currentSpeed=true&windDirection=true&windSpeed=true&timezone=Europe%2FOslo&language=en`;
+  })
 
-        fetch(`/lice?localities=${props.site.id}&from_year=${state.time.year - 1}&from_week=${state.time.week}&to_year=${state.time.year}&to_week=${state.time.week}`)
-            .then(resp => resp.json())
-            .then(data => {
-                for (let d in data) {
-                    data[d].sort((a, b) => {
-                        if (a.year != b.year)
-                            return a.year - b.year;
-                        else
-                            return a.week - b.week;
-                    })
-                }
-                return data;
-            })
-            .then(setLiceData);
-
-        marinogram.src = `https://jtimeseries.k8s.met.no/jtimeseries-webservices/marinogram?latitude=${props.site.lat}&longitude=${props.site.lon}&waterTemperature=true&airTemperature=true&dewpointTemperature=true&pressure=true&waveHeight=true&waveDirection=true&currentDirection=true&currentSpeed=true&windDirection=true&windSpeed=true&timezone=Europe%2FOslo&language=en`;
-    })
-
-    return (
-        <div class="pl-64 ml-4 mt-4">
-            <div class="flex gap-2 items-center">
-                <div class="text-white font-bold text-2xl">{props.site.name}</div>
-                <div class="bg-neutral-800 text-neutral-300 text-sm px-2 py-[2px] rounded">
-                    week {state.time.week}
-                </div>
-            </div>
-
-            <div class="grid grid-cols-2 gap-x-8 gap-y-6 pb-12 mt-2 w-full justify-stretch">
-                <div class="flex flex-col justify-between">
-                    <div class="flex gap-8 py-4">
-                        <NumberDisplay value={props.site.lice?.toFixed(2) ?? "NA"} subtitle="Adult female lice" />
-                        <NumberDisplay value={`${seaTemp()}°c`} subtitle="Sea temperature" />
-                    </div>
-                    <div ref={meteogram}>
-                        <h3 class="text-white/80 font-semibold text-xl mb-1">Meteogram</h3>
-                        <img class="rounded-md" src={`https://www.yr.no/en/content/70.54,11.23/meteogram.svg?mode=dark`} />
-                    </div>
-                </div>
-
-                <div>
-                    <h3 class="text-white/80 font-semibold text-xl mb-1">Marinogram</h3>
-                    <img class="rounded-md" ref={marinogram} />
-                </div>
-
-                <div>
-                    <h3 class="text-white/80 font-semibold text-xl mb-1">Lice counts <span class="text-sm">(Adult female lice)</span></h3>
-                    <div class="h-[480px]">
-                        <Show when={liceData()} fallback={"loading..."}>
-                            <WeekLineChart liceData={liceData} sites={[props.site]} />
-                        </Show>
-                    </div>
-                </div>
-                <div>
-                    <h3 class="text-white/80 font-semibold text-xl">Wind rose <span class="text-sm">(9-day forecast)</span></h3>
-                    <div class="h-[480px]">
-                        <Show when={windData()} fallback={"loading..."}>
-                            <Windrose data={windData()} />
-                        </Show>
-                    </div>
-                </div>
-            </div>
+  return (
+    <div class="pl-64 ml-4 mt-4">
+      <div class="flex gap-2 items-center">
+        <div class="text-white font-bold text-2xl">{props.site.name}</div>
+        <div class="bg-neutral-800 text-neutral-300 text-sm px-2 py-[2px] rounded">
+          week {state.time.week}
         </div>
-    )
-}
+      </div>
 
-const NumberDisplay: Component<{ value: number | string, subtitle: string }> = (props) => {
-    return (
+      <div class="grid grid-cols-2 gap-x-8 gap-y-6 pb-12 mt-2 w-full justify-stretch">
+        <div class="flex flex-col justify-between">
+          <div class="flex gap-8 py-4">
+            <NumberDisplay value={props.site.lice?.toFixed(2) ?? "NA"} subtitle="Adult female lice" />
+            <NumberDisplay value={seaTemp()} subtitle="Sea temperature" />
+          </div>
+          <div>
+            <h3 class="text-white/80 font-semibold text-xl mb-1">Meteogram</h3>
+            <img class="rounded-md" ref={meteogram} />
+          </div>
+        </div>
+
         <div>
-            <h1 class="text-white text-4xl">{props.value}</h1>
-            <h2 class="text-iliad mt-[-5px]">{props.subtitle}</h2>
+          <h3 class="text-white/80 font-semibold text-xl mb-1">Marinogram</h3>
+          <img class="rounded-md" ref={marinogram} />
         </div>
-    )
+
+        <div>
+          <h3 class="text-white/80 font-semibold text-xl mb-1">Lice counts <span class="text-sm">(Adult female lice)</span></h3>
+          <div class="h-[480px]">
+            <Show when={!liceData.loading} fallback={"loading..."}>
+              <WeeklyLiceChart data={liceData} sites={[props.site]} />
+            </Show>
+          </div>
+        </div>
+        <div>
+          <h3 class="text-white/80 font-semibold text-xl">Wind rose <span class="text-sm">(9-day forecast)</span></h3>
+          <div class="h-[480px]">
+            <Show when={!windData.loading} fallback={"loading..."}>
+              <Windrose data={windData()} />
+            </Show>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
 }
+
+const NumberDisplay: Component<{ value?: number | string, subtitle: string }> = (props) => {
+  return (
+    <div>
+      <h1 class="text-white text-4xl">{props.value ?? <Spinner />}</h1>
+      <h2 class="text-iliad mt-[-5px]">{props.subtitle}</h2>
+    </div>
+  )
+}
+
+const fetchWindForecast = ([lat, lon]) =>
+  fetch(`/windrose?lat=${lat}&lon=${lon}`).then(r => r.json());
