@@ -67,7 +67,8 @@ export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers })
       }
 
       const features = map.getFeaturesAtPixel(ev.pixel)
-        .filter(f => f.get('siteId') || f.get('area'));
+        .filter(f => f.getGeometry().getType() != "LineString"); //  f.get('siteId') || f.get('area'));
+
       features.sort(f => f.get('siteId') ? -1 : 1);
       if (features.length) {
         // @ts-ignore
@@ -189,15 +190,18 @@ export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers })
 
   return (
     <div ref={mapElement} class="w-full h-full rounded-2xl shadow-lg relative">
-      <div ref={tooltip} class="absolute bg-white p-1 w-[140px] z-50 rounded shadow text-black opacity-90">
-        <Switch fallback={<>
-          <h2 class="font-semibold">{hoveredFeature()?.get("name") ?? "Ukjent"}</h2>
-          <div><span>Lusetall:</span> {hoveredFeature()?.get("lice")?.toFixed(2) ?? "ikke målt"}</div>
-        </>}>
+      <div ref={tooltip} class="absolute bg-white py-1 px-2 z-50 rounded shadow text-black opacity-80">
+        <Switch fallback={<h2 class="font-semibold">{hoveredFeature()?.get("name") ?? "Ukjent"}</h2>}>
           <Match when={hoveredFeature()?.get('awareness_level') != undefined}>
-            <div>
+            <div class="w-[180px]">
               <h2 class="font-semibold">{hoveredFeature()?.get('area')}</h2>
               <p class="text-sm">{hoveredFeature()?.get('description')}</p>
+            </div>
+          </Match>
+          <Match when={hoveredFeature()?.get('siteId') != undefined}>
+            <div class="w-[140px]">
+              <h2 class="font-semibold">{hoveredFeature()?.get("name") ?? "Ukjent"}</h2>
+              <div><span>Lusetall:</span> {hoveredFeature()?.get("lice")?.toFixed(2) ?? "ikke målt"}</div>
             </div>
           </Match>
         </Switch>
