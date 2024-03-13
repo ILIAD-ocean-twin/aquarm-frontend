@@ -62,8 +62,6 @@ export const WeeklyTemperatureChart: Component<WeeklyTemperatureChartProps> = (p
             series: locations.map((location, idx) => (
                 {
                     type: 'line',
-                    // stack: 'Total',
-                    // areaStyle: {},
                     data: data[idx],
                     name: location,
                     emphasis: {

@@ -48,7 +48,7 @@ export const MultiSelectDetails: Component<MultiSelectDetailsProps> = ({ sites }
 
             <div class="pb-12 mt-4 w-full">
                 <div>
-                    <h3 class="text-white/80 font-semibold text-xl mb-1">Lice counts</h3>
+                    <h3 class="text-white/80 font-semibold text-xl mb-1">Lice counts <span class="text-sm">(Adult female lice)</span></h3>
                     <div class="h-[360px] w-full">
                         <Show when={liceData()} fallback={"loading..."}>
                             <WeeklyLiceChart liceData={liceData} sites={sites()} />
@@ -56,7 +56,7 @@ export const MultiSelectDetails: Component<MultiSelectDetailsProps> = ({ sites }
                     </div>
                 </div>
                 <div>
-                    <h3 class="text-white/80 font-semibold text-xl mb-1">Sea temperature</h3>
+                    <h3 class="text-white/80 font-semibold text-xl mb-1">Sea temperature <span class="text-sm">(°C)</span></h3>
                     <div class="h-[360px] w-full">
                         <Show when={liceData()} fallback={"loading..."}>
                             <WeeklyTemperatureChart liceData={liceData} sites={sites()} />
