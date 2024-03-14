@@ -1,4 +1,4 @@
-import { Component, Show, createSignal, createEffect, createResource, For } from "solid-js";
+import { Component, Show, createSignal, createResource, For } from "solid-js";
 import Dismiss from "solid-dismiss";
 
 import { BasicWeek } from "./types";

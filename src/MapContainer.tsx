@@ -5,20 +5,16 @@ import XYZ from 'ol/source/XYZ';
 import OSM from 'ol/source/OSM.js';
 import { transform } from 'ol/proj';
 import { View } from 'ol';
-import { BasicWeek, LayerName } from './types';
+import { BasicWeek } from './types';
 import { AquacultureSitesLayer } from './layers/AquacultureSitesLayer';
-import { getRiskLayer } from './layers/RiskLayer';
-import { getTrajectoryLayer } from './layers/TrajectoryLayer';
-import { getOceanTempLayer, getOceanTempSource } from './layers/OceanTempLayer';
 import Layer from 'ol/layer/Layer';
-import { getProductionAreaLayer } from './layers/ProductionAreaLayer';
 import { useState } from './state';
-import { getMunicipalityLayer } from './layers/MunicipalityLayer';
+import { IDataLayer } from './layers/IDataLayer';
 
 
 interface MapContainerProps {
   data: Accessor<BasicWeek[]>,
-  dataLayers: { name: LayerName; visible: boolean; }[]
+  dataLayers: IDataLayer[]
 }
 
 export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers }) => {
@@ -32,14 +28,6 @@ export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers })
   let tooltip: HTMLDivElement;
   let sitesLayer: AquacultureSitesLayer;
   let selectedFeatures = [];
-
-  let layers: Record<LayerName, Layer> = {
-    'Weather warnings': undefined,
-    'Trajectory simulations': undefined,
-    'Sea temperature': undefined,
-    'Production areas': undefined,
-    'Municipalities': undefined
-  };
 
   onMount(async () => {
     map = new Map({
@@ -112,25 +100,12 @@ export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers })
 
     sitesLayer = new AquacultureSitesLayer(state.filters);
     map.addLayer(sitesLayer.layer);
-
-    layers["Weather warnings"] = await getRiskLayer(false);
-    layers["Trajectory simulations"] = await getTrajectoryLayer();
-    layers['Sea temperature'] = getOceanTempLayer(state.time.year, state.time.week);
-    layers['Production areas'] = await getProductionAreaLayer();
-    layers['Municipalities'] = await getMunicipalityLayer();
-    Object.values(layers).forEach(l => map.addLayer(l));
+    Object.values(dataLayers).forEach(l => map.addLayer(l.layer));
   })
 
   onCleanup(() => {
     sitesLayer?.layer.dispose();
     map.dispose();
-  })
-
-  // Toggle data layers' visibility
-  createEffect(() => {
-    dataLayers.forEach(({ name, visible }) => {
-      layers[name]?.setVisible(visible);
-    });
   })
 
   // Show/Hide tooltip on hover
@@ -147,9 +122,9 @@ export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers })
 
   createEffect(() => {
     const [year, week] = [state.time.year, state.time.week];
-    const layer = layers['Sea temperature'];
+    const layer = dataLayers.find(dl => dl.name == "Sea temperature");
     if (layer !== undefined) {
-      layer.setSource(getOceanTempSource(year, week));
+      layer.update(year, week);
     }
   })
 

@@ -1,5 +1,4 @@
 import { type Component, For, createEffect, Switch, Match, createResource } from 'solid-js';
-import { createStore } from "solid-js/store";
 import { MapContainer } from './MapContainer';
 import { BasicWeek } from './types';
 import { Select, createOptions } from "@thisbeyond/solid-select";
@@ -7,8 +6,13 @@ import "@thisbeyond/solid-select/style.css";
 import { SingleSiteDetails } from './SingleSiteDetails';
 import { OverviewDetails } from './OverviewDetails';
 import { MultiSelectDetails } from './MultiSelectDetails';
-import { LAYERS } from './constants';
 import { useState } from './state';
+import { IDataLayer } from './layers/IDataLayer';
+import { MunicipalityLayer } from './layers/MunicipalityLayer';
+import { ProductionAreaLayer } from './layers/ProductionAreaLayer';
+import { OceanTempLayer } from './layers/OceanTempLayer';
+import { WeatherWarningLayer } from './layers/RiskLayer';
+import { TrajectoryLayer } from './layers/TrajectoryLayer';
 
 
 const App: Component = () => {
@@ -17,13 +21,13 @@ const App: Component = () => {
   const selectedData = () => data().filter(d => state.selectedSites.includes(d.id));
   const numSelected = () => state.selectedSites.length;
 
-  const [layers, setLayers] = createStore(
-    LAYERS.map(name => ({ name, visible: false }))
-  );
-
-  const toggleLayer = (layer: string) => {
-    setLayers(l => l.name === layer, "visible", visible => !visible);
-  }
+  const layers: IDataLayer[] = [
+    new WeatherWarningLayer(),
+    new OceanTempLayer(state.time.year, state.time.week),
+    new TrajectoryLayer(),
+    new MunicipalityLayer(),
+    new ProductionAreaLayer()
+  ];
 
   const setSelectedOrgs = (orgs: string[]) => {
     setState("filters", "organizations", orgs)
@@ -92,7 +96,7 @@ const App: Component = () => {
                   <input
                     class="ml-2 cursor-pointer"
                     checked={dl.visible}
-                    onchange={() => toggleLayer(dl.name)}
+                    onchange={(ev) => dl.setVisible(ev.target.checked)}
                     type="checkbox" />
                 </label>
               }

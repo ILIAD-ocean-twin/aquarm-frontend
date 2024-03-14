@@ -5,11 +5,51 @@ import Fill from "ol/style/Fill";
 import Stroke from "ol/style/Stroke";
 import Style from "ol/style/Style";
 import { dataProj, mapProj } from "../constants";
+import { IDataLayer } from "./IDataLayer";
+import Layer from "ol/layer/Layer";
+import LayerRenderer from "ol/renderer/Layer";
+import Source from "ol/source/Source";
 
-const geoJsonConsumer = async () => fetch('/production_areas.geojson')
-  .then(response => response.json())
 
-const style = new Style({
+export class ProductionAreaLayer implements IDataLayer {
+  name = "Production areas";
+  description = "Production areas";
+  visible: boolean = false;
+  layer: Layer<Source, LayerRenderer<any>>;
+
+  _url: string;
+  _source: any;
+  _initiated: boolean = false;
+
+  constructor(dataUrl?: string) {
+    this._url = dataUrl ?? '/production_areas.geojson';
+    this.layer = new VectorLayer({
+      visible: false,
+      style: PRODUCTION_AREA_STYLE
+    })
+  }
+
+  public async setVisible(visible: boolean): Promise<void> {
+    if (visible && !this._initiated) {
+      this._source = await this.getGeoJson()
+        .then(data => new VectorSource({
+          features: new GeoJSON().readFeatures(data, { dataProjection: dataProj, featureProjection: mapProj })
+        }));
+      this.layer.setSource(this._source);
+      this._initiated = true;
+    }
+    this.visible = visible;
+    this.layer.setVisible(visible);
+  }
+
+  private async getGeoJson() {
+    return fetch(this._url)
+      .then(response => response.json())
+  }
+}
+
+
+const PRODUCTION_AREA_STYLE = new Style({
   fill: new Fill({
     color: 'rgba(127, 127, 127, 0.1)',
   }),
@@ -18,19 +58,3 @@ const style = new Style({
     width: 1,
   }),
 });
-
-export const getProductionAreaLayer = () => {
-  let paSource;
-  return geoJsonConsumer()
-    .then((data) => {
-      paSource = new VectorSource({
-        features: new GeoJSON().readFeatures(data, { dataProjection: dataProj, featureProjection: mapProj })
-      });
-
-      return new VectorLayer({
-        visible: false,
-        source: paSource,
-        style
-      });
-    })
-}
