@@ -1,4 +1,6 @@
-import { Component, Show, createEffect, createResource } from "solid-js";
+import { Component, Show, createSignal, createEffect, createResource } from "solid-js";
+import Dismiss from "solid-dismiss";
+
 import { BasicWeek } from "./types";
 import { Windrose } from "./components/windrose";
 import { WeeklyLiceChart } from "./components/WeeklyLiceChart";
@@ -32,14 +34,6 @@ export const SingleSiteDetails: Component<SingleSiteDetailsProps> = (props) => {
       return undefined;
   }
 
-  let marinogram: HTMLImageElement;
-  let meteogram: HTMLImageElement;
-
-  createEffect(() => {
-    meteogram.src = `https://www.yr.no/en/content/${props.site.lat},${props.site.lon}/meteogram.svg?mode=dark`;
-    marinogram.src = `https://jtimeseries.k8s.met.no/jtimeseries-webservices/marinogram?latitude=${props.site.lat}&longitude=${props.site.lon}&waterTemperature=true&airTemperature=true&dewpointTemperature=true&pressure=true&waveHeight=true&waveDirection=true&currentDirection=true&currentSpeed=true&windDirection=true&windSpeed=true&timezone=Europe%2FOslo&language=en`;
-  })
-
   return (
     <div class="pl-64 ml-4 mt-4">
       <div class="flex gap-2 items-center">
@@ -57,13 +51,13 @@ export const SingleSiteDetails: Component<SingleSiteDetailsProps> = (props) => {
           </div>
           <div>
             <h3 class="text-white/80 font-semibold text-xl mb-1">Meteogram</h3>
-            <img class="rounded-md" ref={meteogram} />
+            <ImageModal src={`https://www.yr.no/en/content/${props.site.lat},${props.site.lon}/meteogram.svg?mode=dark`} />
           </div>
         </div>
 
         <div>
           <h3 class="text-white/80 font-semibold text-xl mb-1">Marinogram</h3>
-          <img class="rounded-md" ref={marinogram} />
+          <ImageModal src={`https://jtimeseries.k8s.met.no/jtimeseries-webservices/marinogram?latitude=${props.site.lat}&longitude=${props.site.lon}&waterTemperature=true&airTemperature=true&dewpointTemperature=true&pressure=true&waveHeight=true&waveDirection=true&currentDirection=true&currentSpeed=true&windDirection=true&windSpeed=true&timezone=Europe%2FOslo&language=en`} />
         </div>
 
         <div>
@@ -98,3 +92,36 @@ const NumberDisplay: Component<{ value?: number | string, subtitle: string }> = 
 
 const fetchWindForecast = ([lat, lon]) =>
   fetch(`/windrose?lat=${lat}&lon=${lon}`).then(r => r.json());
+
+
+const ImageModal: Component<{ src: string }> = (props) => {
+  const [open, setOpen] = createSignal(false);
+  let imgElem: HTMLImageElement;
+
+  const onClickOverlay = (e) => {
+    if (e.target !== e.currentTarget) return;
+    setOpen(false);
+  };
+
+  return (
+    <>
+      <img class="rounded-md cursor-pointer" ref={imgElem} src={props.src} />
+      <Dismiss
+        menuButton={imgElem}
+        open={open}
+        setOpen={setOpen}
+        modal
+      >
+        <div
+          class="modal-container bg-black/50"
+          onClick={onClickOverlay}
+          role="presentation"
+        >
+          <div class="modal rounded-md border-2 border-white/50 shadow-xl" role="dialog" aria-modal="true" tabindex="-1">
+            <img class="rounded-md" src={props.src} />
+          </div>
+        </div>
+      </Dismiss>
+    </>
+  );
+};
