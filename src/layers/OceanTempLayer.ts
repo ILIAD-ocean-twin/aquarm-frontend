@@ -1,7 +1,7 @@
 import TileLayer from "ol/layer/Tile";
 import TileWMS from 'ol/source/TileWMS.js';
 
-const depth = -0;
+const depth = -10;
 const sourceLayer = 'temperature';
 const style = 'rainbow';
 const colorScaleRange = [-2, 10];

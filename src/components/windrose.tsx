@@ -54,13 +54,6 @@ export const Windrose = (props: { data: number[][] }) => {
     }
   }
 
-  return (
-    <>
-      <EChartsAutoSize
-        //@ts-ignore
-        option={options}
-        theme={theme}
-      />
-    </>
-  )
+  // @ts-ignore
+  return <EChartsAutoSize option={options} theme={theme} />
 }
