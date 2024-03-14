@@ -6,7 +6,7 @@ import Stroke from "ol/style/Stroke";
 import Style from "ol/style/Style";
 import { dataProj, mapProj } from "../constants";
 
-const geoJsonConsumer = async () => fetch('/kommuner_2024_komprimert.json')
+const geoJsonConsumer = async () => fetch('/kommuner_2024.json')
   .then(response => response.json())
 
 const style = new Style({
