@@ -38,6 +38,10 @@ export class TrajectoryLayer implements IDataLayer {
     this.layer.setVisible(visible);
   }
 
+  public getLegend() {
+    return undefined;
+  }
+
   private async getGeoJson() {
     return fetch(this._url)
       .then(response => response.json())

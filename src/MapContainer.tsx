@@ -1,4 +1,4 @@
-import { onMount, type Component, Accessor, createEffect, onCleanup, on, createSignal, Switch, Match } from 'solid-js';
+import { onMount, type Component, Accessor, createEffect, onCleanup, on, createSignal, Switch, Match, ParentComponent, For, Show } from 'solid-js';
 import TileLayer from 'ol/layer/Tile';
 import Map from 'ol/Map';
 import XYZ from 'ol/source/XYZ';
@@ -7,7 +7,6 @@ import { transform } from 'ol/proj';
 import { View } from 'ol';
 import { BasicWeek } from './types';
 import { AquacultureSitesLayer } from './layers/AquacultureSitesLayer';
-import Layer from 'ol/layer/Layer';
 import { useState } from './state';
 import { IDataLayer } from './layers/IDataLayer';
 
@@ -192,6 +191,34 @@ export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers })
           </Match>
         </Switch>
       </div>
+      <Legends>
+        <For each={dataLayers.filter(l => state.visibleLayers.includes(l.name))}>{l =>
+          <Legend content={l.getLegend()} title={l.name} />
+        }</For>
+      </Legends>
     </div>
   );
 };
+
+const Legends: ParentComponent = (props) => {
+  return (
+    <div class="absolute right-4 bottom-4 flex flex-col gap-2 pointer-events-none opacity-80" style={"z-index: 110;"}>
+      {props.children}
+    </div>
+  )
+}
+
+const Legend: Component<{ title: string, content?: HTMLElement }> = (props) => {
+  let elem;
+  onMount(() => {
+    if (props.content)
+      elem.appendChild(props.content);
+  });
+  return (
+    <Show when={props.content}>
+      <div ref={elem} class="bg-white px-2 py-1 rounded shadow pointer-events-none">
+        {props.title}
+      </div>
+    </Show>
+  )
+}

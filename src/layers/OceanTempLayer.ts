@@ -7,12 +7,12 @@ import { IDataLayer } from "./IDataLayer";
 
 const depth = -10;
 const sourceLayer = 'temperature';
-const style = 'rainbow';
+const style = 'spectral';
 const colorScaleRange = [-2, 10];
 const colorScale = `${colorScaleRange[0]}%2C${colorScaleRange[1]}`;
 const numColorBands = 20;
 const logScale = false;
-
+const legendTransparent = true;
 
 
 export class OceanTempLayer implements IDataLayer {
@@ -23,21 +23,21 @@ export class OceanTempLayer implements IDataLayer {
 
   _source: any;
   _initiated: boolean = false;
-  _initialYear: number;
-  _initialWeek: number;
+  _year: number;
+  _week: number;
 
   constructor(year: number, week: number) {
     this.layer = new TileLayer({
       visible: false,
       opacity: 0.5
     });
-    this._initialYear = year;
-    this._initialWeek = week;
+    this._year = year;
+    this._week = week;
   }
 
   public async setVisible(visible: boolean): Promise<void> {
     if (visible && !this._initiated) {
-      this.update(this._initialYear, this._initialWeek);
+      this.update(this._year, this._week);
       this._initiated = true;
     }
     this.visible = visible;
@@ -45,7 +45,24 @@ export class OceanTempLayer implements IDataLayer {
   }
 
   public update(year: number, week: number): void {
+    this._year = year;
+    this._week = week;
     this.layer.setSource(this.getOceanTempSource(year, week));
+  }
+
+  public getLegend(): HTMLElement {
+    const date = weekToDate(this._year, this._week);
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const day = date.getDate().toString().padStart(2, "0");
+    const img = document.createElement("img");
+    img.style.height = "220px";
+    img.style.width = "50px";
+    img.style.objectFit = "cover";
+    img.style.objectPosition = "0 0";
+    img.style.padding = "4px 0 6px";
+    img.src = `https://thredds.met.no/thredds/wms/fou-hi/norkyst800m/NorKyst-800m_ZDEPTHS_avg.an.${this._year}${month}${day}00.nc?REQUEST=GetLegendGraphic&LAYER=temperature&PALETTE=rainbow&fontColor=0x000033&bgColor=0xFFFFFF
+               &FORMAT=image/png&COLORSCALERANGE=${colorScale}&NUMCOLORBANDS=${numColorBands}&LOGSCALE=${logScale}`;
+    return img;
   }
 
   private getOceanTempSource(year: number, week: number): Source {

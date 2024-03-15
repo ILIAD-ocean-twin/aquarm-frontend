@@ -7,4 +7,5 @@ export interface IDataLayer {
   visible: boolean
   setVisible: (visible: boolean) => void
   update?: (year: number, week: number) => void
+  getLegend: () => HTMLElement | undefined
 }

@@ -33,6 +33,12 @@ const App: Component = () => {
     setState("filters", "organizations", orgs)
   }
 
+  const toggleLayer = (ev, l: IDataLayer) => {
+    const visible = ev.target.checked;
+    l.setVisible(visible);
+    setState("visibleLayers", (s) => visible ? [l.name, ...s] : s.filter(name => name != l.name));
+  }
+
   createEffect(() => {
     const orgs = [...data().reduce((agg, cur) => {
       cur.organizations?.forEach(org => agg.add(org));
@@ -96,7 +102,7 @@ const App: Component = () => {
                   <input
                     class="ml-2 cursor-pointer"
                     checked={dl.visible}
-                    onchange={(ev) => dl.setVisible(ev.target.checked)}
+                    onchange={(ev) => toggleLayer(ev, dl)}
                     type="checkbox" />
                 </label>
               }

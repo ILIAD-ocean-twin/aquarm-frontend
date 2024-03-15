@@ -6,12 +6,14 @@ type State = {
   time: TimeSelection
   filters: Filters
   selectedSites: number[]
+  visibleLayers: string[]
 }
 
 const initialState: State = {
   time: { year: 2024, week: 5 },
   filters: { fallow: true, organizations: [] },
-  selectedSites: []
+  selectedSites: [],
+  visibleLayers: []
 }
 
 export const makeStateContext = () => {
