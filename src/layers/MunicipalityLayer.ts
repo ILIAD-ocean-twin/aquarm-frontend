@@ -12,7 +12,7 @@ import Source from "ol/source/Source";
 
 export class MunicipalityLayer implements IDataLayer {
   name = "Municipalities";
-  description = "Norways municipalities";
+  description = "Norways municipalities based on data from Kartverket.";
   visible: boolean = false;
   layer: Layer<Source, LayerRenderer<any>>;
 

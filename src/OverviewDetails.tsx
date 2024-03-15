@@ -32,7 +32,7 @@ export const OverviewDetails: Component<OverviewDetailsProps> = ({ data }) => {
   })
 
   return (
-    <div class="pl-64 ml-4 mt-10 flex justify-between">
+    <div class="mt-10 flex justify-between">
       <NumberDisplay value={count()} subtitle="Number of sites" loading={data.loading} />
       <NumberDisplay value={avg()} subtitle="Avg. lice count" loading={data.loading} />
       <NumberDisplay value={over()} subtitle="Sites with lice > 0.5" loading={data.loading} />

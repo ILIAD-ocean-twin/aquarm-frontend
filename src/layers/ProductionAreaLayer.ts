@@ -13,7 +13,9 @@ import Source from "ol/source/Source";
 
 export class ProductionAreaLayer implements IDataLayer {
   name = "Production areas";
-  description = "Production areas";
+  description = `Production areas for fish farming in Norway as defined by 
+                <a href='https://lovdata.no/dokument/SF/forskrift/2017-01-16-61/KAPITTEL_5#KAPITTEL_5)'>Lovdata</a>. 
+                GeoJSON fetched from <a href='https://www.barentswatch.no/bwapi/openapi/index.html?urls.primaryName=Fishhealth%20API#/ProductionArea/get_v1_geodata_productionarea__productionAreaId___year___week_'>BarentsWatch</a>.`;
   visible: boolean = false;
   layer: Layer<Source, LayerRenderer<any>>;
 

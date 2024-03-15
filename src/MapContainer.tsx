@@ -3,12 +3,14 @@ import TileLayer from 'ol/layer/Tile';
 import Map from 'ol/Map';
 import XYZ from 'ol/source/XYZ';
 import OSM from 'ol/source/OSM.js';
+import { defaults } from 'ol/control'
 import { transform } from 'ol/proj';
 import { View } from 'ol';
 import { BasicWeek } from './types';
 import { AquacultureSitesLayer } from './layers/AquacultureSitesLayer';
 import { useState } from './state';
 import { IDataLayer } from './layers/IDataLayer';
+import { LayerSwitcher } from './LayerSwitcher';
 
 
 interface MapContainerProps {
@@ -36,8 +38,8 @@ export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers })
             url: "https://{1-4}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png",
             crossOrigin: 'anonymous',
           })
-        })
-        /*new TileLayer({
+        })/*
+        new TileLayer({
             source: new OSM(),
         })*/
       ],
@@ -46,7 +48,11 @@ export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers })
         zoom: 5
       }),
       target: mapElement,
-      controls: []
+      controls: defaults({
+        zoom: false,
+        attribution: true,
+        rotate: false
+      })
     })
 
     map.on('pointermove', function (ev) {
@@ -196,13 +202,14 @@ export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers })
           <Legend content={l.getLegend()} title={l.name} />
         }</For>
       </Legends>
+      <LayerSwitcher layers={dataLayers} />
     </div>
   );
 };
 
 const Legends: ParentComponent = (props) => {
   return (
-    <div class="absolute right-4 bottom-4 flex flex-col gap-2 pointer-events-none opacity-80" style={"z-index: 110;"}>
+    <div class="absolute right-3 bottom-8 flex flex-col gap-2 pointer-events-none opacity-90" style={"z-index: 110;"}>
       {props.children}
     </div>
   )
@@ -216,7 +223,7 @@ const Legend: Component<{ title: string, content?: HTMLElement }> = (props) => {
   });
   return (
     <Show when={props.content}>
-      <div ref={elem} class="bg-white px-2 py-1 rounded shadow pointer-events-none">
+      <div ref={elem} class="bg-white px-2 py-1 rounded shadow-md shadow-black/50 pointer-events-none">
         {props.title}
       </div>
     </Show>

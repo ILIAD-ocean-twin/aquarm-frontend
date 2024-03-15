@@ -12,12 +12,11 @@ const colorScaleRange = [-2, 10];
 const colorScale = `${colorScaleRange[0]}%2C${colorScaleRange[1]}`;
 const numColorBands = 20;
 const logScale = false;
-const legendTransparent = true;
 
 
 export class OceanTempLayer implements IDataLayer {
   name = "Sea temperature";
-  description = "Ocean temperature for the middle of the selected week. Fetched from Norkyst800.";
+  description = "Average sea temperature for the middle of the selected week. Fetched from the Norkyst800 model by MET.";
   visible: boolean = false;
   layer: Layer<Source, LayerRenderer<any>>;
 
@@ -51,17 +50,8 @@ export class OceanTempLayer implements IDataLayer {
   }
 
   public getLegend(): HTMLElement {
-    const date = weekToDate(this._year, this._week);
-    const month = (date.getMonth() + 1).toString().padStart(2, "0");
-    const day = date.getDate().toString().padStart(2, "0");
     const img = document.createElement("img");
-    img.style.height = "220px";
-    img.style.width = "50px";
-    img.style.objectFit = "cover";
-    img.style.objectPosition = "0 0";
-    img.style.padding = "4px 0 6px";
-    img.src = `https://thredds.met.no/thredds/wms/fou-hi/norkyst800m/NorKyst-800m_ZDEPTHS_avg.an.${this._year}${month}${day}00.nc?REQUEST=GetLegendGraphic&LAYER=temperature&PALETTE=rainbow&fontColor=0x000033&bgColor=0xFFFFFF
-               &FORMAT=image/png&COLORSCALERANGE=${colorScale}&NUMCOLORBANDS=${numColorBands}&LOGSCALE=${logScale}`;
+    img.src = "/sea_temperature_legend.png";
     return img;
   }
 

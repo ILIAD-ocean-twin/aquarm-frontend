@@ -35,7 +35,7 @@ export const SingleSiteDetails: Component<SingleSiteDetailsProps> = (props) => {
   }
 
   return (
-    <div class="pl-64 ml-4 mt-4">
+    <div class="mt-4">
       <div class="flex gap-2 items-center">
         <div class="text-white font-bold text-2xl">{props.site.name}</div>
         <div class="bg-neutral-800 text-neutral-300 text-sm px-2 py-[2px] rounded">

@@ -13,7 +13,7 @@ import { IDataLayer } from "./IDataLayer";
 
 export class WeatherWarningLayer implements IDataLayer {
   name = "Weather warnings";
-  description = "Current weather warnings from met.";
+  description = "Current weather warnings from MET.";
   visible: boolean = false;
   layer: Layer<Source, LayerRenderer<any>>;
 

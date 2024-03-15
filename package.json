@@ -25,6 +25,8 @@
     "echarts": "^5.4.3",
     "echarts-solid": "^0.1.0",
     "ol": "^8.2.0",
+    "solid-dismiss": "^1.7.122",
+    "solid-icons": "^1.1.0",
     "solid-js": "^1.8.11"
   }
 }

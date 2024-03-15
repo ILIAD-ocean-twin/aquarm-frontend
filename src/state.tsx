@@ -7,13 +7,15 @@ type State = {
   filters: Filters
   selectedSites: number[]
   visibleLayers: string[]
+  allOrganizations: string[]
 }
 
 const initialState: State = {
   time: { year: 2024, week: 5 },
   filters: { fallow: true, organizations: [] },
   selectedSites: [],
-  visibleLayers: []
+  visibleLayers: [],
+  allOrganizations: []
 }
 
 export const makeStateContext = () => {

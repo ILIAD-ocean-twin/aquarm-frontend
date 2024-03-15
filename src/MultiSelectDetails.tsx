@@ -27,7 +27,7 @@ export const MultiSelectDetails: Component<MultiSelectDetailsProps> = ({ sites }
   }
 
   return (
-    <div class="pl-64 ml-4 mt-4">
+    <div class="mt-4">
       <div class="flex gap-2 h-9">
         <For each={sites()}>{s =>
           <div
