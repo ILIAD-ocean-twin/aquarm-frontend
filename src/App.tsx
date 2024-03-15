@@ -13,6 +13,7 @@ import { ProductionAreaLayer } from './layers/ProductionAreaLayer';
 import { OceanTempLayer } from './layers/OceanTempLayer';
 import { WeatherWarningLayer } from './layers/RiskLayer';
 import { TrajectoryLayer } from './layers/TrajectoryLayer';
+import { API_URL } from './constants';
 
 
 const App: Component = () => {
@@ -72,7 +73,7 @@ const App: Component = () => {
 };
 
 const fetchBasic = async (time: number[]) =>
-  fetch(`/basic-all/${time[0]}/${time[1]}`)
+  fetch(API_URL + `/basic-all/${time[0]}/${time[1]}`)
     .then(d => d.json() as Promise<BasicWeek[]>)
     .then(d => d.filter(bw => bw.placement == "SJØ"));
 

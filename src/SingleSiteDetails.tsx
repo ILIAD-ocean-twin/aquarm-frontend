@@ -7,6 +7,7 @@ import { useState } from "./state";
 import { Spinner } from "./components/Spinner";
 import { fetchHistoricData } from "./utils";
 import { Windrose } from "./components/Windrose";
+import { API_URL } from "./constants";
 
 
 interface SingleSiteDetailsProps {
@@ -103,7 +104,7 @@ const NumberDisplay: Component<{ value?: number | string, subtitle: string }> = 
 }
 
 const fetchWindForecast = ([lat, lon]) =>
-  fetch(`/windrose?lat=${lat}&lon=${lon}`).then(r => r.json());
+  fetch(API_URL + `/windrose?lat=${lat}&lon=${lon}`).then(r => r.json());
 
 
 const ImageModal: Component<{ src: string }> = (props) => {

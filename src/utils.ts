@@ -1,7 +1,8 @@
+import { API_URL } from "./constants";
 import { HistoricSiteData } from "./types";
 
 export async function fetchHistoricData([locs, year, week]: [number[], number, number]): Promise<Record<string, HistoricSiteData[]>> {
-  return fetch(`/lice?localities=${locs.join(",")}&from_year=${year - 1}&from_week=${week}&to_year=${year}&to_week=${week}`)
+  return fetch(API_URL + `/lice?localities=${locs.join(",")}&from_year=${year - 1}&from_week=${week}&to_year=${year}&to_week=${week}`)
     .then(resp => resp.json())
     .then(data => {
       for (let d in data) {

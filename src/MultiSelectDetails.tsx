@@ -6,6 +6,7 @@ import { useState } from "./state";
 import { Spinner } from "./components/Spinner";
 import { fetchHistoricData } from "./utils";
 import { WeeklyTemperatureChart } from "./components/WeeklyTemperatureChart";
+import { API_URL } from "./constants";
 
 
 interface MultiSelectDetailsProps {
@@ -75,5 +76,5 @@ export const MultiSelectDetails: Component<MultiSelectDetailsProps> = ({ sites }
 }
 
 const fetchConnectivityData = async (locs: number[]) =>
-  fetch(`/connectivity?localities=${locs.join(",")}`)
+  fetch(API_URL + `/connectivity?localities=${locs.join(",")}`)
     .then(resp => resp.json());
