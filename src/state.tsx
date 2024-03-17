@@ -8,6 +8,7 @@ type State = {
   selectedSites: number[]
   visibleLayers: string[]
   allOrganizations: string[]
+  darkmode: boolean
 }
 
 const initialState: State = {
@@ -15,7 +16,8 @@ const initialState: State = {
   filters: { fallow: true, organizations: [] },
   selectedSites: [],
   visibleLayers: [],
-  allOrganizations: []
+  allOrganizations: [],
+  darkmode: true
 }
 
 export const makeStateContext = () => {

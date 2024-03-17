@@ -6,7 +6,7 @@ import { Select, createOptions } from "@thisbeyond/solid-select";
 
 export const LayerSwitcher: Component<{ layers: IDataLayer[] }> = (props) => {
   return (
-    <div class="absolute left-0 divide-y divide-slate-600 h-full w-64 rounded-l-2xl" style="z-index: 110">
+    <div class="absolute left-0 w-64 rounded-l-2xl" style="z-index: 110">
       <div class="text-iliad text-lg w-full bg-[#1e1e23] rounded-tl-2xl">
         <h2 class="py-2 px-4">Filters</h2>
       </div>
@@ -23,7 +23,7 @@ export const LayerSwitcher: Component<{ layers: IDataLayer[] }> = (props) => {
 }
 
 const LayerEntry: Component<{ layer: IDataLayer }> = (props) => {
-  let desc;
+  let description: HTMLDivElement;
   const [collapsed, setCollapsed] = createSignal<boolean>(true);
   const [_, setState] = useState();
 
@@ -34,7 +34,7 @@ const LayerEntry: Component<{ layer: IDataLayer }> = (props) => {
   }
 
   onMount(() => {
-    desc.innerHTML = props.layer.description;
+    description.innerHTML = props.layer.description;
   })
 
   return (
@@ -56,7 +56,7 @@ const LayerEntry: Component<{ layer: IDataLayer }> = (props) => {
           type="checkbox" />
       </div>
       <div style="transition: max-height ease-in 220ms" class="overflow-hidden" classList={{ "max-h-0": collapsed(), "max-h-28": !collapsed() }}>
-        <div ref={desc} class="p-2 bg-black/10 text-white/70 text-sm [&>a]:underline [&>a]:text-blue-500">
+        <div ref={description} class="p-2 bg-black/10 text-white/70 text-sm [&>a]:underline [&>a]:text-blue-500">
         </div>
       </div>
     </div>

@@ -11,6 +11,7 @@ import { AquacultureSitesLayer } from './layers/AquacultureSitesLayer';
 import { useState } from './state';
 import { IDataLayer } from './layers/IDataLayer';
 import { LayerSwitcher } from './LayerSwitcher';
+import { BsBrightnessHighFill, BsMoonFill } from 'solid-icons/bs';
 
 
 interface MapContainerProps {
@@ -30,18 +31,24 @@ export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers })
   let sitesLayer: AquacultureSitesLayer;
   let selectedFeatures = [];
 
+  const lightLayer = new TileLayer({
+    visible: !state.darkmode,
+    source: new OSM(),
+  });
+
+  const darkLayer = new TileLayer({
+    visible: state.darkmode,
+    source: new XYZ({
+      url: "https://{1-4}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png",
+      crossOrigin: 'anonymous',
+    })
+  });
+
   onMount(async () => {
     map = new Map({
       layers: [
-        new TileLayer({
-          source: new XYZ({
-            url: "https://{1-4}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png",
-            crossOrigin: 'anonymous',
-          })
-        })/*
-        new TileLayer({
-            source: new OSM(),
-        })*/
+        lightLayer,
+        darkLayer
       ],
       view: new View({
         center: transform([12.9, 65.5], 'EPSG:4326', 'EPSG:3857'),
@@ -111,6 +118,14 @@ export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers })
   onCleanup(() => {
     sitesLayer?.layer.dispose();
     map.dispose();
+  })
+
+  createEffect(() => {
+    const darkmode = state.darkmode;
+    if (lightLayer)
+      lightLayer.setVisible(!darkmode);
+    if (darkLayer)
+      darkLayer.setVisible(darkmode);
   })
 
   // Show/Hide tooltip on hover
@@ -197,6 +212,9 @@ export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers })
           </Match>
         </Switch>
       </div>
+
+      <DarkmodeButton />
+
       <Legends>
         <For each={dataLayers.filter(l => state.visibleLayers.includes(l.name))}>{l =>
           <Legend content={l.getLegend()} title={l.name} />
@@ -227,5 +245,22 @@ const Legend: Component<{ title: string, content?: HTMLElement }> = (props) => {
         {props.title}
       </div>
     </Show>
+  )
+}
+
+const DarkmodeButton: Component = () => {
+  const [state, setState] = useState();
+
+  return (
+    <div
+      title="Toggle dark base layer."
+      class="absolute top-3 right-3 shadow-md rounded-full bg-[#2e2e37] hover:bg-[#1e1e23] cursor-pointer p-3 text-white text-lg"
+      style={"z-index: 110;"}
+      onclick={() => setState("darkmode", dm => !dm)}
+    >
+      <Show when={state.darkmode} fallback={<BsMoonFill />}>
+        <BsBrightnessHighFill />
+      </Show>
+    </div>
   )
 }
