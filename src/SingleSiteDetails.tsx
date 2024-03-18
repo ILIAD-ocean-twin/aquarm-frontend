@@ -2,7 +2,7 @@ import { Component, Show, createSignal, createResource, For } from "solid-js";
 import Dismiss from "solid-dismiss";
 
 import { BasicWeek } from "./types";
-import { WeeklyLiceChart } from "./components/WeeklyLiceChart";
+import { LineChart } from "./components/LineChart";
 import { useState } from "./state";
 import { Spinner } from "./components/Spinner";
 import { fetchHistoricData } from "./utils";
@@ -21,18 +21,33 @@ export const SingleSiteDetails: Component<SingleSiteDetailsProps> = (props) => {
     [props.site.lat, props.site.lon],
     fetchWindForecast);
 
-  const [liceData] = createResource(
+  const [historicData] = createResource(
     () => [[state.selectedSites[0]], state.time.year, state.time.week],
     fetchHistoricData);
 
   const seaTemp = () => {
-    if (!liceData.loading) {
-      const data = liceData()[props.site.id];
+    if (!historicData.loading) {
+      const data = historicData()[props.site.id];
       const temp = data[data.length - 1].seaTemperature?.toFixed(1);
       return temp ? temp + "°c" : "NA";
     }
     else
       return undefined;
+  }
+
+  const liceData = () => {
+    const data = historicData();
+    if (!data)
+      return { series: [], ticks: [] };
+
+    const loc = data[props.site.id];
+    const series = [{
+      type: 'line',
+      name: props.site.name,
+      data: loc.map(l => l.avgAdultFemaleLice)
+    }];
+    const ticks = loc.map(d => `W${d.week}/${d.year}`);
+    return { series, ticks };
   }
 
   return (
@@ -76,9 +91,7 @@ export const SingleSiteDetails: Component<SingleSiteDetailsProps> = (props) => {
         <div>
           <h3 class="text-white/80 font-semibold text-xl mb-1">Lice counts <span class="text-sm">(Adult female lice)</span></h3>
           <div class="h-[440px]">
-            <Show when={!liceData.loading} fallback={"loading..."}>
-              <WeeklyLiceChart data={liceData} sites={[props.site]} />
-            </Show>
+            <LineChart data={liceData} />
           </div>
         </div>
         <div>

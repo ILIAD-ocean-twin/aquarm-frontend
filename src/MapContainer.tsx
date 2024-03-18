@@ -1,11 +1,10 @@
 import { onMount, type Component, Accessor, createEffect, onCleanup, on, createSignal, Switch, Match, ParentComponent, For, Show } from 'solid-js';
 import TileLayer from 'ol/layer/Tile';
 import Map from 'ol/Map';
-import XYZ from 'ol/source/XYZ';
-import OSM from 'ol/source/OSM.js';
+import View from 'ol/View';
+import { OSM, XYZ } from 'ol/source';
 import { defaults } from 'ol/control'
 import { transform } from 'ol/proj';
-import { View } from 'ol';
 import { BasicWeek } from './types';
 import { AquacultureSitesLayer } from './layers/AquacultureSitesLayer';
 import { useState } from './state';

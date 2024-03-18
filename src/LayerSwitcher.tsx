@@ -3,6 +3,7 @@ import { BsChevronRight, BsChevronDown } from "solid-icons/bs";
 import { IDataLayer } from "./layers/IDataLayer";
 import { useState } from "./state";
 import { Select, createOptions } from "@thisbeyond/solid-select";
+import "@thisbeyond/solid-select/style.css";
 
 export const LayerSwitcher: Component<{ layers: IDataLayer[] }> = (props) => {
   return (

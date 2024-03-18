@@ -1,8 +1,6 @@
-import { type Component, For, createEffect, Switch, Match, createResource } from 'solid-js';
+import { type Component, createEffect, Switch, Match, createResource } from 'solid-js';
 import { MapContainer } from './MapContainer';
 import { BasicWeek } from './types';
-import { Select, createOptions } from "@thisbeyond/solid-select";
-import "@thisbeyond/solid-select/style.css";
 import { SingleSiteDetails } from './SingleSiteDetails';
 import { OverviewDetails } from './OverviewDetails';
 import { MultiSelectDetails } from './MultiSelectDetails';
