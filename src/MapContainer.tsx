@@ -109,9 +109,9 @@ export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers })
     // @ts-ignore
     mapElement.getElementsByClassName("ol-viewport")[0].style.borderRadius = "16px";
 
+    Object.values(dataLayers).forEach(l => map.addLayer(l.layer));
     sitesLayer = new AquacultureSitesLayer(state.filters);
     map.addLayer(sitesLayer.layer);
-    Object.values(dataLayers).forEach(l => map.addLayer(l.layer));
   })
 
   onCleanup(() => {

@@ -12,6 +12,9 @@ import { OceanTempLayer } from './layers/OceanTempLayer';
 import { WeatherWarningLayer } from './layers/RiskLayer';
 import { TrajectoryLayer } from './layers/TrajectoryLayer';
 import { API_URL } from './constants';
+import { CurrentRatingLayer } from './layers/CurrentRatingLayer';
+import { TemperatureRatingLayer } from './layers/TemperatureRatingLayer';
+import { SalinityRatingLayer } from './layers/SalinityRatingLayer';
 
 
 const App: Component = () => {
@@ -25,7 +28,10 @@ const App: Component = () => {
     new OceanTempLayer(state.time.year, state.time.week),
     new TrajectoryLayer(),
     new MunicipalityLayer(),
-    new ProductionAreaLayer()
+    new ProductionAreaLayer(),
+    new CurrentRatingLayer(),
+    new TemperatureRatingLayer(),
+    new SalinityRatingLayer()
   ];
 
   createEffect(() => {
