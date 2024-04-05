@@ -1,6 +1,6 @@
 ## Env files
 
-required .env files are: ´env.development´ and  ´env.production´. In these files ´VITE_API_URL´ and ´VITE_RAZZER_URL´ must be defined.
+required .env files are: `env.development` and  `env.production`. In these files `VITE_API_URL` and `VITE_RAZZER_URL` must be defined.
 
 
 ## Usage
