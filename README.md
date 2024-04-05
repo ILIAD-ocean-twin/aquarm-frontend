@@ -1,3 +1,8 @@
+## Env files
+
+required .env files are: ´env.development´ and  ´env.production´. In these files ´VITE_API_URL´ and ´VITE_RAZZER_URL´ must be defined.
+
+
 ## Usage
 
 Those templates dependencies are maintained via [pnpm](https://pnpm.io) via `pnpm up -Lri`.

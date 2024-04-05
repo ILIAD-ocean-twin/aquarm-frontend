@@ -7,9 +7,9 @@ import { XYZ } from "ol/source";
 import { RAZZER_URL } from "../constants";
 
 
-export class CurrentRatingLayer implements IDataLayer {
-  name = "Sea currents rating";
-  description = "Geographic scoring of suitability for fish farming (salmon) based on historical sea current strengths.";
+export class StormRatingLayer implements IDataLayer {
+  name = "Storm exposure";
+  description = "Geographic scoring of storm susceptibility based on historical wind data.";
   visible: boolean = false;
   layer: Layer<Source, LayerRenderer<any>>;
 
@@ -18,12 +18,10 @@ export class CurrentRatingLayer implements IDataLayer {
       visible: false,
       opacity: 0.8,
     })
-    fetch(RAZZER_URL + "/metadata/current")
+    fetch(RAZZER_URL + "/metadata/storm")
       .then(resp => resp.json())
       .then(meta => {
-        const url = RAZZER_URL + "/singleband/current/{z}/{x}/{y}.png?colormap=spectral&stretch_range=[" + meta.range[0] + "," + (meta.range[1]) + "]";
-        console.log(url);
-
+        const url = RAZZER_URL + "/singleband/storm/{z}/{x}/{y}.png?colormap=spectral&stretch_range=[" + (meta.range[1]) + "," + (meta.range[0]) + "]";
         this.layer.setSource(new XYZ({
           url
         }))

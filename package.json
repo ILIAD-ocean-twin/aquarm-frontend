@@ -9,7 +9,6 @@
     "build": "vite build",
     "serve": "vite preview"
   },
-  "license": "MIT",
   "devDependencies": {
     "@types/ol": "^7.0.0",
     "autoprefixer": "^10.4.17",

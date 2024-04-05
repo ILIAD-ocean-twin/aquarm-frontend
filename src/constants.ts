@@ -11,4 +11,4 @@ export const mapProj = new Projection({
 })
 
 export const API_URL = import.meta.env.VITE_API_ENDPOINT;
-export const REPORTS_URL = API_URL + "/Report";
+export const RAZZER_URL = import.meta.env.VITE_RAZZER_ENDPOINT;

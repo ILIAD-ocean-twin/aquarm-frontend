@@ -4,6 +4,7 @@ import Source from "ol/source/Source";
 import { IDataLayer } from "./IDataLayer";
 import TileLayer from "ol/layer/Tile";
 import { XYZ } from "ol/source";
+import { RAZZER_URL } from "../constants";
 
 
 export class TemperatureRatingLayer implements IDataLayer {
@@ -17,12 +18,10 @@ export class TemperatureRatingLayer implements IDataLayer {
       visible: false,
       opacity: 0.8,
     })
-    fetch("http://localhost:8800/metadata/temperature")
+    fetch(RAZZER_URL + "/metadata/temperature")
       .then(resp => resp.json())
       .then(meta => {
-        const url = "http://localhost:8800/singleband/temperature/{z}/{x}/{y}.png?colormap=spectral&stretch_range=[" + (meta.range[0]) + "," + (meta.range[1]) + "]";
-        console.log(url);
-
+        const url = RAZZER_URL + "/singleband/temperature/{z}/{x}/{y}.png?colormap=spectral&stretch_range=[" + (meta.range[0]) + "," + (meta.range[1]) + "]";
         this.layer.setSource(new XYZ({
           url
         }))

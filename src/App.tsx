@@ -15,6 +15,7 @@ import { API_URL } from './constants';
 import { CurrentRatingLayer } from './layers/CurrentRatingLayer';
 import { TemperatureRatingLayer } from './layers/TemperatureRatingLayer';
 import { SalinityRatingLayer } from './layers/SalinityRatingLayer';
+import { StormRatingLayer } from './layers/StormRatingLayer';
 
 
 const App: Component = () => {
@@ -29,9 +30,10 @@ const App: Component = () => {
     new TrajectoryLayer(),
     new MunicipalityLayer(),
     new ProductionAreaLayer(),
+    new StormRatingLayer(),
     new CurrentRatingLayer(),
     new TemperatureRatingLayer(),
-    new SalinityRatingLayer()
+    new SalinityRatingLayer(),
   ];
 
   createEffect(() => {
