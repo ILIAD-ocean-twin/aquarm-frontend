@@ -34,3 +34,10 @@ export interface HistoricSiteData {
   rank: number | null
   seaTemperature: number
 }
+
+export interface OimEntry {
+  "name (no)": string
+  "name (en)": string
+  "description (no)": string
+  "description (en)": string
+}

@@ -14,7 +14,8 @@ export const Modal: ParentComponent<ModalProps> = (props) => {
                 class="bg-black/60 w-screen h-screen w-screen top-0 left-0 overflow-hidden absolute flex items-center cursor-pointer">
                 <div
                     onClick={ev => ev.stopPropagation()}
-                    class="w-96 min-h-64 px-3 py-2 bg-white rounded-lg mx-auto cursor-default pointer-events-auto">
+                    class="w-[32rem] min-h-64 px-6 py-5 bg-white rounded-lg mx-auto cursor-default pointer-events-auto"
+                >
                     {props.children}
                 </div>
             </div>

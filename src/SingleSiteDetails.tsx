@@ -1,4 +1,4 @@
-import { Component, Show, createSignal, createResource, For } from "solid-js";
+import { Component, Show, createSignal, createResource, For, ParentComponent } from "solid-js";
 import Dismiss from "solid-dismiss";
 
 import { BasicWeek } from "./types";
@@ -6,8 +6,9 @@ import { LineChart } from "./components/LineChart";
 import { useState } from "./state";
 import { Spinner } from "./components/Spinner";
 import { fetchHistoricData } from "./utils";
-import { Windrose } from "./components/Windrose";
 import { API_URL } from "./constants";
+import { OimTerm } from "./components/OimTerm";
+import { Windrose } from "./components/windrose";
 
 
 interface SingleSiteDetailsProps {
@@ -63,7 +64,9 @@ export const SingleSiteDetails: Component<SingleSiteDetailsProps> = (props) => {
         <div class="flex flex-col gap-6">
           <div class="flex gap-8 pt-4">
             <NumberDisplay value={props.site.lice?.toFixed(2) ?? "NA"} subtitle="Adult female lice" />
-            <NumberDisplay value={seaTemp()} subtitle="Sea temperature" />
+            <NumberDisplay value={seaTemp()}>
+              <OimTerm term="dwc-mbg:waterTemperatureInCelcius" title="Sea temperature" />
+            </NumberDisplay>
           </div>
 
           <div>
@@ -107,11 +110,18 @@ export const SingleSiteDetails: Component<SingleSiteDetailsProps> = (props) => {
   )
 }
 
-const NumberDisplay: Component<{ value?: number | string, subtitle: string }> = (props) => {
+const NumberDisplay: ParentComponent<{ value?: number | string, subtitle?: string }> = (props) => {
   return (
     <div>
       <h1 class="text-white text-4xl">{props.value ?? <Spinner />}</h1>
-      <h2 class="text-iliad mt-[-5px]">{props.subtitle}</h2>
+      <h2 class="text-iliad mt-[-5px]">
+        <Show when={props.children}>
+          {props.children}
+        </Show>
+        <Show when={!props.children}>
+          {props.subtitle}
+        </Show>
+      </h2>
     </div>
   )
 }

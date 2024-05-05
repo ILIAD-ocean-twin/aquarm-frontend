@@ -1,6 +1,6 @@
-import { type Component, createEffect, Switch, Match, createResource } from 'solid-js';
+import { type Component, createEffect, Switch, Match, createResource, onMount } from 'solid-js';
 import { MapContainer } from './MapContainer';
-import { BasicWeek } from './types';
+import { BasicWeek, OimEntry } from './types';
 import { SingleSiteDetails } from './SingleSiteDetails';
 import { OverviewDetails } from './OverviewDetails';
 import { MultiSelectDetails } from './MultiSelectDetails';
@@ -35,6 +35,11 @@ const App: Component = () => {
     new TemperatureRatingLayer(),
     new SalinityRatingLayer(),
   ];
+
+  onMount(() => {
+    fetchOimTerms()
+      .then(terms => setState("oim", terms))
+  })
 
   createEffect(() => {
     const orgs = [...data().reduce((agg, cur) => {
@@ -82,5 +87,9 @@ const fetchBasic = async (time: number[]) =>
   fetch(API_URL + `/basic-all/${time[0]}/${time[1]}`)
     .then(d => d.json() as Promise<BasicWeek[]>)
     .then(d => d.filter(bw => bw.placement == "SJØ"));
+
+const fetchOimTerms = async () =>
+  fetch(API_URL + "/oim")
+    .then(d => d.json())
 
 export default App;

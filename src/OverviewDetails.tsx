@@ -1,5 +1,5 @@
-import { Component, InitializedResource, ParentComponent, Show, batch, createEffect, createSignal } from "solid-js";
-import { BasicWeek } from "./types";
+import { Component, InitializedResource, ParentComponent, Resource, Show, batch, createEffect, createSignal, onMount } from "solid-js";
+import { BasicWeek, OimEntry } from "./types";
 import { useState } from "./state";
 import { Spinner } from "./components/Spinner";
 import { OimTerm } from "./components/OimTerm";
@@ -15,7 +15,7 @@ export const OverviewDetails: Component<OverviewDetailsProps> = ({ data }) => {
   const [over, setOver] = createSignal<number>();
   const [numFallow, setNumFallow] = createSignal<number>();
 
-  const [state, _] = useState();
+  const [state] = useState();
 
   createEffect(() => {
     const d = state.filters.organizations.length
@@ -39,7 +39,7 @@ export const OverviewDetails: Component<OverviewDetailsProps> = ({ data }) => {
       <NumberDisplay value={over()} subtitle="Sites with lice > 0.5" loading={data.loading} />
       <NumberDisplay value={numFallow()} subtitle="" loading={data.loading}>
         <div class="text-iliad">
-          Number of <OimTerm term="fallow" /> sites
+          Number of <OimTerm term="oim-aqc:isFallow" /> sites
         </div>
       </NumberDisplay>
     </div>
