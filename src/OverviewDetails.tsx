@@ -1,7 +1,8 @@
-import { Component, InitializedResource, Show, batch, createEffect, createSignal } from "solid-js";
+import { Component, InitializedResource, ParentComponent, Show, batch, createEffect, createSignal } from "solid-js";
 import { BasicWeek } from "./types";
 import { useState } from "./state";
 import { Spinner } from "./components/Spinner";
+import { OimTerm } from "./components/OimTerm";
 
 
 interface OverviewDetailsProps {
@@ -36,18 +37,22 @@ export const OverviewDetails: Component<OverviewDetailsProps> = ({ data }) => {
       <NumberDisplay value={count()} subtitle="Number of sites" loading={data.loading} />
       <NumberDisplay value={avg()} subtitle="Avg. lice count" loading={data.loading} />
       <NumberDisplay value={over()} subtitle="Sites with lice > 0.5" loading={data.loading} />
-      <NumberDisplay value={numFallow()} subtitle="Number of fallow sites" loading={data.loading} />
+      <NumberDisplay value={numFallow()} subtitle="" loading={data.loading}>
+        <div class="text-iliad">
+          Number of <OimTerm term="fallow" /> sites
+        </div>
+      </NumberDisplay>
     </div>
   )
 }
 
-const NumberDisplay: Component<{ value: number | string, subtitle: string, loading: boolean }> = (props) => {
+const NumberDisplay: ParentComponent<{ value: number | string, subtitle: string, loading: boolean }> = (props) => {
   return (
     <div class="text-center">
       <Show when={!props.loading} fallback={<Spinner />}>
         <h1 class="text-white text-4xl">{props.value}</h1>
       </Show>
-      <h2 class="text-iliad">{props.subtitle}</h2>
+      {props.children ?? <span class="text-iliad">{props.subtitle}</span>}
     </div>
   )
 }
