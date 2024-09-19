@@ -41,16 +41,17 @@ export class JellyfishLayer implements IDataLayer {
     for (let f of features) {
       const geom = new Point(fromLonLat([f.longitude, f.latitude]));
       const feature = new Feature(geom);
-      feature.set("name", this.getName(f));
+
+      const d = new Date(f.date);
+      const date_str = `${months[d.getMonth()]} ${d.getDate()}`
+
+      feature.set("date", date_str);
+      feature.set("specie", f.species);
+      feature.set("amount", f.amount);
+      feature.set("length", f.length);
+
       this._source.addFeature(feature);
     }
-  }
-
-  private getName(o: JellyfishObservation) {
-    const amount = o.amount > 0 ? o.amount : "unknown";
-    const specie = o.species ?? "unknown";
-
-    return `Specie: ${specie}  Amount: ${amount}`
   }
 
   public update(year: number, week: number) {
@@ -72,3 +73,5 @@ export class JellyfishLayer implements IDataLayer {
 const JELLYFISH_STYLE = new Style({
   image: new Icon({ src: "/jellyfish.png", scale: 0.7 })
 });
+
+const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Nov', 'Des'];

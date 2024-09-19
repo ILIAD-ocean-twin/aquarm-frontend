@@ -14,7 +14,7 @@ type State = {
 }
 
 const initialState: State = {
-  time: { year: 2023, week: 24 },
+  time: { year: 2024, week: 1 },
   filters: { fallow: true, organizations: [] },
   showSites: true,
   selectedSites: [],

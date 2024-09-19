@@ -212,6 +212,16 @@ export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers })
               {hoveredFeature()?.get('kommunenavn')}
             </div>
           </Match>
+          <Match when={hoveredFeature()?.get('specie') != undefined}>
+            <div class="bg-white py-1 px-2 rounded shadow-lg bg-white/80 w-auto text-center font-semibold">
+              <div class="font-bold">{hoveredFeature()?.get('date')}</div>
+              <div class="flex flex-col text-left">
+                <div>Specie: <span class="font-normal">{hoveredFeature()?.get('specie')}</span></div>
+                <div>Amount: <span class="font-normal">{hoveredFeature()?.get('amount')}</span></div>
+                <div>Length: <span class="font-normal">{hoveredFeature()?.get('length')}</span></div>
+              </div>
+            </div>
+          </Match>
         </Switch>
       </div>
 
