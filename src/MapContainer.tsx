@@ -110,7 +110,7 @@ export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers })
     mapElement.getElementsByClassName("ol-viewport")[0].style.borderRadius = "16px";
 
     Object.values(dataLayers).forEach(l => map.addLayer(l.layer));
-    sitesLayer = new AquacultureSitesLayer(state.filters);
+    sitesLayer = new AquacultureSitesLayer(state.filters, state.showSites);
     map.addLayer(sitesLayer.layer);
   })
 
@@ -141,10 +141,8 @@ export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers })
 
   createEffect(() => {
     const [year, week] = [state.time.year, state.time.week];
-    const layer = dataLayers.find(dl => dl.name == "Sea temperature");
-    if (layer !== undefined) {
-      layer.update(year, week);
-    }
+    const layers = dataLayers.filter(dl => dl.updates);
+    layers.forEach(l => l.update(year, week));
   })
 
   createEffect(on(filteredData, d => {
@@ -155,6 +153,11 @@ export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers })
       selectedFeatures = sitesLayer.layer.getSource().getFeatures().filter(f => ids.includes(f.get("siteId")));
     }
   }))
+
+  createEffect(() => {
+    const visible = state.showSites
+    sitesLayer.toggleVisible(visible);
+  })
 
   createEffect(() => {
     const showFallow = state.filters.fallow ? 1 : 0;

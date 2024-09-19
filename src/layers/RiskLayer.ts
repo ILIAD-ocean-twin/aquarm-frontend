@@ -16,6 +16,7 @@ export class WeatherWarningLayer implements IDataLayer {
   description = "Current weather warnings from MET.";
   visible: boolean = false;
   layer: Layer<Source, LayerRenderer<any>>;
+  updates = false;
 
   _url: string;
   _source: any;

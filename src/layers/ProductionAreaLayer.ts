@@ -18,6 +18,7 @@ export class ProductionAreaLayer implements IDataLayer {
                 GeoJSON fetched from <a href='https://www.barentswatch.no/bwapi/openapi/index.html?urls.primaryName=Fishhealth%20API#/ProductionArea/get_v1_geodata_productionarea__productionAreaId___year___week_'>BarentsWatch</a>.`;
   visible: boolean = false;
   layer: Layer<Source, LayerRenderer<any>>;
+  updates = false;
 
   _url: string;
   _source: any;

@@ -41,3 +41,14 @@ export interface OimEntry {
   "description (no)": string
   "description (en)": string
 }
+
+export interface JellyfishObservation {
+  "date": string
+  "latitude": number
+  "longitude": number
+  "amount": number
+  "length": number
+  "depth": number
+  "weight": number
+  "species": string
+}

@@ -15,6 +15,7 @@ export class MunicipalityLayer implements IDataLayer {
   description = "Norways municipalities based on data from Kartverket.";
   visible: boolean = false;
   layer: Layer<Source, LayerRenderer<any>>;
+  updates = false;
 
   _url: string;
   _source: any;

@@ -108,6 +108,17 @@ const Filters: Component = () => {
         </label>
       </div>
 
+      <div class="flex items-center h-12 pl-4">
+        <label class="select-none">
+          Show sites:
+          <input
+            class="ml-2 cursor-pointer"
+            checked={state.showSites}
+            onchange={() => setState("showSites", !state.showSites)}
+            type="checkbox" />
+        </label>
+      </div>
+
       <div class="flex items-center pl-4 py-2 text-black">
         <div>
           <h2 class="text-white mb-1">Owner organization:</h2>

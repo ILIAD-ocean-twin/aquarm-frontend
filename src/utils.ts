@@ -1,5 +1,5 @@
 import { API_URL } from "./constants";
-import { HistoricSiteData } from "./types";
+import { HistoricSiteData, JellyfishObservation } from "./types";
 
 export async function fetchHistoricData([locs, year, week]: [number[], number, number]): Promise<Record<string, HistoricSiteData[]>> {
   return fetch(API_URL + `/lice?localities=${locs.join(",")}&from_year=${year - 1}&from_week=${week}&to_year=${year}&to_week=${week}`)
@@ -18,4 +18,9 @@ function compareYearWeek(a: HistoricSiteData, b: HistoricSiteData) {
     return a.year - b.year;
   else
     return a.week - b.week;
+}
+
+export async function fetchJellyfish(year: number, week: number): Promise<JellyfishObservation[]> {
+  return fetch(API_URL + `/jellyfish?year=${year}&week=${week}`)
+    .then(resp => resp.json() as Promise<JellyfishObservation[]>);
 }
