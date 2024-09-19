@@ -16,6 +16,7 @@ import { CurrentRatingLayer } from './layers/CurrentRatingLayer';
 import { TemperatureRatingLayer } from './layers/TemperatureRatingLayer';
 import { SalinityRatingLayer } from './layers/SalinityRatingLayer';
 import { StormRatingLayer } from './layers/StormRatingLayer';
+import { JellyfishLayer } from './layers/JellyfishLayer';
 
 
 const App: Component = () => {
@@ -25,13 +26,13 @@ const App: Component = () => {
   const numSelected = () => state.selectedSites.length;
 
   const layers: IDataLayer[] = [
+    new JellyfishLayer(state.time.year, state.time.week),
     new WeatherWarningLayer(),
     new OceanTempLayer(state.time.year, state.time.week),
     new TrajectoryLayer(),
     new MunicipalityLayer(),
     new ProductionAreaLayer(),
     new StormRatingLayer(),
-    new CurrentRatingLayer(),
     new TemperatureRatingLayer(),
     new SalinityRatingLayer(),
   ];

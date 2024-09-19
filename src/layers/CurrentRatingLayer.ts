@@ -12,6 +12,7 @@ export class CurrentRatingLayer implements IDataLayer {
   description = "Geographic scoring of suitability for fish farming (salmon) based on historical sea current strengths.";
   visible: boolean = false;
   layer: Layer<Source, LayerRenderer<any>>;
+  updates = false;
 
   constructor() {
     this.layer = new TileLayer({
@@ -22,7 +23,6 @@ export class CurrentRatingLayer implements IDataLayer {
       .then(resp => resp.json())
       .then(meta => {
         const url = RAZZER_URL + "/singleband/current/{z}/{x}/{y}.png?colormap=spectral&stretch_range=[" + meta.range[0] + "," + (meta.range[1]) + "]";
-        console.log(url);
 
         this.layer.setSource(new XYZ({
           url

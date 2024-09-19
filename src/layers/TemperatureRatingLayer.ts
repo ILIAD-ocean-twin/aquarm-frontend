@@ -12,6 +12,7 @@ export class TemperatureRatingLayer implements IDataLayer {
   description = "Geographic scoring of suitability for fish farming (salmon) based on historical sea temperature.";
   visible: boolean = false;
   layer: Layer<Source, LayerRenderer<any>>;
+  updates = false;
 
   constructor() {
     this.layer = new TileLayer({

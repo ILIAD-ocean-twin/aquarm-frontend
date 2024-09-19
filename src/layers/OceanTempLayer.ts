@@ -19,6 +19,7 @@ export class OceanTempLayer implements IDataLayer {
   description = "Average sea temperature for the middle of the selected week. Fetched from the Norkyst800 model by MET.";
   visible: boolean = false;
   layer: Layer<Source, LayerRenderer<any>>;
+  updates = true;
 
   _source: any;
   _initiated: boolean = false;

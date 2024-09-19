@@ -13,6 +13,7 @@ export class TrajectoryLayer implements IDataLayer {
   description = "Simulated particle trajectories based on OpenDrift.";
   visible: boolean = false;
   layer: Layer<Source, LayerRenderer<any>>;
+  updates = false;
 
   _url: string;
   _source: any;

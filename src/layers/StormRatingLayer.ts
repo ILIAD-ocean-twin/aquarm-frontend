@@ -12,6 +12,7 @@ export class StormRatingLayer implements IDataLayer {
   description = "Geographic scoring of storm susceptibility based on historical wind data.";
   visible: boolean = false;
   layer: Layer<Source, LayerRenderer<any>>;
+  updates = false;
 
   constructor() {
     this.layer = new TileLayer({

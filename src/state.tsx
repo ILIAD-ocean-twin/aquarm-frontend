@@ -5,6 +5,7 @@ import { Filters, OimEntry, TimeSelection } from "./types";
 type State = {
   time: TimeSelection
   filters: Filters
+  showSites: boolean
   selectedSites: number[]
   visibleLayers: string[]
   allOrganizations: string[]
@@ -13,8 +14,9 @@ type State = {
 }
 
 const initialState: State = {
-  time: { year: 2024, week: 5 },
+  time: { year: 2023, week: 24 },
   filters: { fallow: true, organizations: [] },
+  showSites: true,
   selectedSites: [],
   visibleLayers: [],
   allOrganizations: [],
