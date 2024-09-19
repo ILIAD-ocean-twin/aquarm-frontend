@@ -16,7 +16,7 @@ const logScale = false;
 
 export class OceanTempLayer implements IDataLayer {
   name = "Sea temperature";
-  description = "Average sea temperature for the middle of the selected week. Fetched from the Norkyst800 model by MET.";
+  description = `Average sea temperature for the middle of the selected week. Fetched from the Norkyst800 model by <a href='https://www.met.no/en'>MET Norway</a>.`;
   visible: boolean = false;
   layer: Layer<Source, LayerRenderer<any>>;
   updates = true;

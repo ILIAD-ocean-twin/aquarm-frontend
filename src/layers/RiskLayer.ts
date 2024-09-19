@@ -13,7 +13,7 @@ import { IDataLayer } from "./IDataLayer";
 
 export class WeatherWarningLayer implements IDataLayer {
   name = "Weather warnings";
-  description = "Current weather warnings from MET.";
+  description = "Current weather warnings from <a href='https://www.met.no/en'>MET Norway</a>.";
   visible: boolean = false;
   layer: Layer<Source, LayerRenderer<any>>;
   updates = false;

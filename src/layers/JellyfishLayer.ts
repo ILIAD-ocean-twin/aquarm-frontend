@@ -1,10 +1,6 @@
 import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
-import GeoJSON from 'ol/format/GeoJSON.js';
-import Fill from "ol/style/Fill";
-import Stroke from "ol/style/Stroke";
 import Style from "ol/style/Style";
-import { dataProj, mapProj } from "../constants";
 import { IDataLayer } from "./IDataLayer";
 import Layer from "ol/layer/Layer";
 import LayerRenderer from "ol/renderer/Layer";
@@ -13,13 +9,12 @@ import { fetchJellyfish } from "../utils";
 import { Point } from "ol/geom";
 import Feature from "ol/Feature";
 import { fromLonLat } from "ol/proj";
-import jf from "../jellyfish.png"
 import Icon from "ol/style/Icon";
 import { JellyfishObservation } from "../types";
 
 export class JellyfishLayer implements IDataLayer {
   name = "Jellyfish";
-  description = "Jellyfish observations. Data from Dugnad for havet, a citizen science project by HI.";
+  description = `Jellyfish observations. The data is from <a href='https://dugnadforhavet.no/dataportal'>Dugnad for havet</a>, a citizen science project by <a href='https://www.hi.no'>Havforskningsinstituttet<a/>.`;
   visible: boolean = false;
   layer: Layer<Source, LayerRenderer<any>>;
   updates = true;
@@ -65,11 +60,6 @@ export class JellyfishLayer implements IDataLayer {
   }
 
   public async setVisible(visible: boolean): Promise<void> {
-    /*if (visible && !this._initiated) {
-      this.update()
-      this.layer.setSource(this._source);
-      this._initiated = true;
-    }*/
     this.visible = visible;
     this.layer.setVisible(visible);
   }
@@ -80,12 +70,5 @@ export class JellyfishLayer implements IDataLayer {
 }
 
 const JELLYFISH_STYLE = new Style({
-  image: new Icon({ src: "/jellyfish.png", scale: 0.7 }),
-  /*fill: new Fill({
-    color: 'rgba(127, 160, 220, 0.075)',
-  }),
-  stroke: new Stroke({
-    color: 'rgba(127, 127, 127, 0.3)',
-    width: 1,
-  }),*/
+  image: new Icon({ src: "/jellyfish.png", scale: 0.7 })
 });
