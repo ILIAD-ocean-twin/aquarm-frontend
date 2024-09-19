@@ -22,8 +22,6 @@ export class CurrentRatingLayer implements IDataLayer {
       .then(resp => resp.json())
       .then(meta => {
         const url = RAZZER_URL + "/singleband/current/{z}/{x}/{y}.png?colormap=spectral&stretch_range=[" + meta.range[0] + "," + (meta.range[1]) + "]";
-        console.log(url);
-
         this.layer.setSource(new XYZ({
           url
         }))

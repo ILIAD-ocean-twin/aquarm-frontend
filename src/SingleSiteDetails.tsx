@@ -8,7 +8,7 @@ import { Spinner } from "./components/Spinner";
 import { fetchHistoricData } from "./utils";
 import { API_URL } from "./constants";
 import { OimTerm } from "./components/OimTerm";
-import { Windrose } from "./components/windrose";
+import { Windrose } from "./components/Windrose";
 
 
 interface SingleSiteDetailsProps {
