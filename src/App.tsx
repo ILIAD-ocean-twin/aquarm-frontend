@@ -17,7 +17,7 @@ import { TemperatureRatingLayer } from './layers/TemperatureRatingLayer';
 import { SalinityRatingLayer } from './layers/SalinityRatingLayer';
 import { StormRatingLayer } from './layers/StormRatingLayer';
 import { JellyfishLayer } from './layers/JellyfishLayer';
-import { ChloroLayer } from './layers/ChloroLayer';
+import { AlgeaLayer } from './layers/AlgeaLayer';
 
 
 const App: Component = () => {
@@ -28,12 +28,12 @@ const App: Component = () => {
 
   const layers: IDataLayer[] = [
     new JellyfishLayer(state.time.year, state.time.week),
-    new WeatherWarningLayer(),
+    // new WeatherWarningLayer(),
     new OceanTempLayer(state.time.year, state.time.week),
     new TrajectoryLayer(),
     new MunicipalityLayer(),
     new ProductionAreaLayer(),
-    new ChloroLayer(),
+    new AlgeaLayer(),
     new StormRatingLayer(),
     new CurrentRatingLayer(),
     new TemperatureRatingLayer(),
@@ -67,7 +67,7 @@ const App: Component = () => {
       </nav>
 
       <div class="container mx-auto mt-6 font-nunito">
-        <div class="h-[884px]">
+        <div class="h-[810px]">
           <MapContainer data={data} dataLayers={layers} />
         </div>
 

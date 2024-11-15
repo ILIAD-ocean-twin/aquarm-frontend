@@ -7,9 +7,9 @@ import { XYZ } from "ol/source";
 import { RAZZER_URL } from "../constants";
 
 
-export class ChloroLayer implements IDataLayer {
-  name = "Chlorophyll";
-  description = "Satellite based chlorophyll concentrations. From ...";
+export class AlgeaLayer implements IDataLayer {
+  name = "Algea";
+  description = `Satellite based algal concentrations. Sentinel-3 data from <a href='https://dataspace.copernicus.eu/'>Copernicus</a>.`;
   visible: boolean = false;
   layer: Layer<Source, LayerRenderer<any>>;
   updates = false;
@@ -22,7 +22,7 @@ export class ChloroLayer implements IDataLayer {
     fetch(RAZZER_URL + "/metadata/salinity")
       .then(resp => resp.json())
       .then(meta => {
-        const url = RAZZER_URL + "/singleband/CHL/{z}/{x}/{y}.png?colormap=summer&stretch_range=[0.992,-0.63]";
+        const url = RAZZER_URL + "/singleband/CHL/{z}/{x}/{y}.png?colormap=ylgnbu&stretch_range=[-0.57,0.1]";
         this.layer.setSource(new XYZ({
           url
         }))
@@ -34,7 +34,9 @@ export class ChloroLayer implements IDataLayer {
     this.layer.setVisible(visible);
   }
 
-  public getLegend() {
-    return undefined;
+  public getLegend(): HTMLElement {
+    const img = document.createElement("img");
+    img.src = "/algea_legend.png";
+    return img;
   }
 }
