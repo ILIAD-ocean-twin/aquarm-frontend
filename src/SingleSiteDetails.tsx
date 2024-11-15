@@ -80,15 +80,13 @@ export const SingleSiteDetails: Component<SingleSiteDetailsProps> = (props) => {
             <div class="text-iliad">Organizations</div>
           </div>
           <div class="grow" />
-          <div>
-            <h3 class="text-white/80 font-semibold text-xl mb-1">Meteogram</h3>
-            <ImageModal src={`https://www.yr.no/en/content/${props.site.lat},${props.site.lon}/meteogram.svg?mode=dark`} />
-          </div>
         </div>
 
         <div>
+          {/*
           <h3 class="text-white/80 font-semibold text-xl mb-1">Marinogram</h3>
           <ImageModal src={`https://jtimeseries.k8s.met.no/jtimeseries-webservices/marinogram?latitude=${props.site.lat}&longitude=${props.site.lon}&waterTemperature=true&airTemperature=true&dewpointTemperature=true&pressure=true&waveHeight=true&waveDirection=true&currentDirection=true&currentSpeed=true&windDirection=true&windSpeed=true&timezone=Europe%2FOslo&language=en`} />
+          */}
         </div>
 
         <div>
@@ -104,6 +102,11 @@ export const SingleSiteDetails: Component<SingleSiteDetailsProps> = (props) => {
               <Windrose data={windData()} />
             </Show>
           </div>
+        </div>
+
+        <div>
+          <h3 class="text-white/80 font-semibold text-xl mb-1">Meteogram</h3>
+          <ImageModal src={`https://www.yr.no/en/content/${props.site.lat},${props.site.lon}/meteogram.svg?mode=dark`} />
         </div>
       </div>
     </div>

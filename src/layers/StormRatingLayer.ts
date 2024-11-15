@@ -34,7 +34,9 @@ export class StormRatingLayer implements IDataLayer {
     this.layer.setVisible(visible);
   }
 
-  public getLegend() {
-    return undefined;
+  public getLegend(): HTMLElement {
+    const img = document.createElement("img");
+    img.src = "/storm_exposure_legend.png";
+    return img;
   }
 }

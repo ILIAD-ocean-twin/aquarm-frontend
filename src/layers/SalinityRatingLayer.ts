@@ -22,7 +22,7 @@ export class SalinityRatingLayer implements IDataLayer {
     fetch(RAZZER_URL + "/metadata/salinity")
       .then(resp => resp.json())
       .then(meta => {
-        const url = RAZZER_URL + "/singleband/salinity/{z}/{x}/{y}.png?colormap=spectral&stretch_range=[" + (meta.range[0]) + "," + (meta.range[1]) + "]";
+        const url = RAZZER_URL + "/singleband/salinity/{z}/{x}/{y}.png?colormap=spectral&stretch_range=[4000,0]";
         this.layer.setSource(new XYZ({
           url
         }))
@@ -34,7 +34,9 @@ export class SalinityRatingLayer implements IDataLayer {
     this.layer.setVisible(visible);
   }
 
-  public getLegend() {
-    return undefined;
+  public getLegend(): HTMLElement {
+    const img = document.createElement("img");
+    img.src = "/spectral_rating_legend.png";
+    return img;
   }
 }

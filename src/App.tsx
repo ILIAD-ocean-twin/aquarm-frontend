@@ -17,6 +17,7 @@ import { TemperatureRatingLayer } from './layers/TemperatureRatingLayer';
 import { SalinityRatingLayer } from './layers/SalinityRatingLayer';
 import { StormRatingLayer } from './layers/StormRatingLayer';
 import { JellyfishLayer } from './layers/JellyfishLayer';
+import { ChloroLayer } from './layers/ChloroLayer';
 
 
 const App: Component = () => {
@@ -32,7 +33,9 @@ const App: Component = () => {
     new TrajectoryLayer(),
     new MunicipalityLayer(),
     new ProductionAreaLayer(),
+    new ChloroLayer(),
     new StormRatingLayer(),
+    new CurrentRatingLayer(),
     new TemperatureRatingLayer(),
     new SalinityRatingLayer(),
   ];
@@ -64,7 +67,7 @@ const App: Component = () => {
       </nav>
 
       <div class="container mx-auto mt-6 font-nunito">
-        <div class="h-[800px]">
+        <div class="h-[884px]">
           <MapContainer data={data} dataLayers={layers} />
         </div>
 
