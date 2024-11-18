@@ -17,7 +17,7 @@ import { TemperatureRatingLayer } from './layers/TemperatureRatingLayer';
 import { SalinityRatingLayer } from './layers/SalinityRatingLayer';
 import { StormRatingLayer } from './layers/StormRatingLayer';
 import { JellyfishLayer } from './layers/JellyfishLayer';
-import { AlgeaLayer } from './layers/AlgeaLayer';
+import { AlgaeLayer } from './layers/AlgaeLayer';
 
 
 const App: Component = () => {
@@ -33,7 +33,7 @@ const App: Component = () => {
     new TrajectoryLayer(),
     new MunicipalityLayer(),
     new ProductionAreaLayer(),
-    new AlgeaLayer(),
+    new AlgaeLayer(),
     new StormRatingLayer(),
     new CurrentRatingLayer(),
     new TemperatureRatingLayer(),
