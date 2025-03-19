@@ -80,7 +80,7 @@ const Filters: Component = () => {
           type='number'
           value={state.time.year}
           min={2012}
-          max={2024}
+          max={2025}
           onChange={e => setState("time", "year", e.target.valueAsNumber)}
         />
       </div>
