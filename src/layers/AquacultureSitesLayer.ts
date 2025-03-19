@@ -8,8 +8,9 @@ import { transform } from "ol/proj";
 export class AquacultureSitesLayer {
   public layer: WebGLPointsLayer<VectorSource>;
   public style: any;
+  public visible: boolean = true;
 
-  constructor(filters: Filters) {
+  constructor(filters: Filters, showSites: boolean) {
     this.style = {
       variables: {
         fallow: filters.fallow ? 1 : 0
@@ -102,8 +103,15 @@ export class AquacultureSitesLayer {
 
     this.layer = new WebGLPointsLayer({
       source: this.getSource([], []),
-      style: this.style
+      style: this.style,
+      visible: showSites
     })
+  }
+
+  public toggleVisible(visible: boolean) {
+    this.visible = visible;
+    this.layer.setVisible(visible);
+    this.layer.changed();
   }
 
   public updateSource(data: BasicWeek[], selected: number[]) {

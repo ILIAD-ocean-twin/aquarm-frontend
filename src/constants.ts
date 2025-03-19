@@ -10,10 +10,5 @@ export const mapProj = new Projection({
   units: "m"
 })
 
-export const LAYERS = [
-  "Weather warnings",
-  "Trajectory simulations",
-  "Sea temperature",
-  "Production areas",
-  "Municipalities"
-] as const;
+export const API_URL = import.meta.env.VITE_API_ENDPOINT;
+export const RAZZER_URL = import.meta.env.VITE_RAZZER_ENDPOINT;

@@ -1,14 +1,14 @@
 {
-  "name": "vite-template-solid",
+  "name": "aquaculture-pilot",
   "version": "0.0.0",
   "description": "",
+  "private": "true",
   "scripts": {
     "start": "vite",
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview"
   },
-  "license": "MIT",
   "devDependencies": {
     "@types/ol": "^7.0.0",
     "autoprefixer": "^10.4.17",
@@ -23,8 +23,9 @@
     "@thisbeyond/solid-select": "^0.14.0",
     "chroma-js": "^2.4.2",
     "echarts": "^5.4.3",
-    "echarts-solid": "^0.1.0",
     "ol": "^8.2.0",
+    "solid-dismiss": "^1.7.122",
+    "solid-icons": "^1.1.0",
     "solid-js": "^1.8.11"
   }
 }

@@ -1,14 +1,23 @@
-import { type Component, For, createEffect, Switch, Match, createResource } from 'solid-js';
-import { createStore } from "solid-js/store";
+import { type Component, createEffect, Switch, Match, createResource, onMount } from 'solid-js';
 import { MapContainer } from './MapContainer';
-import { BasicWeek } from './types';
-import { Select, createOptions } from "@thisbeyond/solid-select";
-import "@thisbeyond/solid-select/style.css";
+import { BasicWeek, OimEntry } from './types';
 import { SingleSiteDetails } from './SingleSiteDetails';
 import { OverviewDetails } from './OverviewDetails';
 import { MultiSelectDetails } from './MultiSelectDetails';
-import { LAYERS } from './constants';
 import { useState } from './state';
+import { IDataLayer } from './layers/IDataLayer';
+import { MunicipalityLayer } from './layers/MunicipalityLayer';
+import { ProductionAreaLayer } from './layers/ProductionAreaLayer';
+import { OceanTempLayer } from './layers/OceanTempLayer';
+import { WeatherWarningLayer } from './layers/RiskLayer';
+import { TrajectoryLayer } from './layers/TrajectoryLayer';
+import { API_URL } from './constants';
+import { CurrentRatingLayer } from './layers/CurrentRatingLayer';
+import { TemperatureRatingLayer } from './layers/TemperatureRatingLayer';
+import { SalinityRatingLayer } from './layers/SalinityRatingLayer';
+import { StormRatingLayer } from './layers/StormRatingLayer';
+import { JellyfishLayer } from './layers/JellyfishLayer';
+import { AlgaeLayer } from './layers/AlgaeLayer';
 
 
 const App: Component = () => {
@@ -17,17 +26,24 @@ const App: Component = () => {
   const selectedData = () => data().filter(d => state.selectedSites.includes(d.id));
   const numSelected = () => state.selectedSites.length;
 
-  const [layers, setLayers] = createStore(
-    LAYERS.map(name => ({ name, visible: false }))
-  );
+  const layers: IDataLayer[] = [
+    new JellyfishLayer(state.time.year, state.time.week),
+    // new WeatherWarningLayer(),
+    new OceanTempLayer(state.time.year, state.time.week),
+    new TrajectoryLayer(),
+    new MunicipalityLayer(),
+    new ProductionAreaLayer(),
+    new AlgaeLayer(),
+    new StormRatingLayer(),
+    new CurrentRatingLayer(),
+    new TemperatureRatingLayer(),
+    new SalinityRatingLayer(),
+  ];
 
-  const toggleLayer = (layer: string) => {
-    setLayers(l => l.name === layer, "visible", visible => !visible);
-  }
-
-  const setSelectedOrgs = (orgs: string[]) => {
-    setState("filters", "organizations", orgs)
-  }
+  onMount(() => {
+    fetchOimTerms()
+      .then(terms => setState("oim", terms))
+  })
 
   createEffect(() => {
     const orgs = [...data().reduce((agg, cur) => {
@@ -35,94 +51,49 @@ const App: Component = () => {
       return agg;
     }, new Set<string>())];
 
-    setState("filters", "organizations", orgs);
+    setState("allOrganizations", orgs);
   })
 
   return (
-    <div class="container mx-auto mt-6 font-nunito">
-      <div class="flex gap-4">
-        <div class="w-64 text-white">
-          <h2 class="text-lg font-semibold text-iliad mb-2">Filters</h2>
-          <div class="flex flex-col gap-4">
-            <div>
-              <h2 class="w-14 inline-block">Year</h2>
-              <input
-                class="bg-slate-500 p-1 w-20 rounded"
-                type='number'
-                value={state.time.year}
-                min={2012}
-                max={2024}
-                onChange={e => setState("time", "year", e.target.valueAsNumber)}
-              />
-            </div>
-
-            <div>
-              <h2 class="w-14 inline-block">Week</h2>
-              <input
-                class="bg-slate-500 p-1 w-20 rounded"
-                type="number"
-                value={state.time.week}
-                min={1}
-                max={52}
-                onChange={e => setState("time", "week", e.target.valueAsNumber)}
-              />
-            </div>
-
-            <label class="select-none">
-              Show fallow:
-              <input
-                class="ml-2 cursor-pointer"
-                checked={state.filters.fallow}
-                onchange={() => setState("filters", "fallow", !state.filters.fallow)}
-                type="checkbox" />
-            </label>
-
-            <div class="mb-3 text-black">
-              <h2 class="text-white mb-1">Owner organization:</h2>
-              <Select class='bg-slate-500 rounded text-sm' multiple {...createOptions(state.filters.organizations)} onChange={setSelectedOrgs} />
-            </div>
+    <>
+      <nav class="font-nunito bg-black/20 text-white py-1">
+        <div class="flex justify-between container mx-auto">
+          <div>ILIAD Aquaculture RM Pilot</div>
+          <div class="grow text-center">
+            <span class="text-amber-400"> Intended for demonstration only: </span>
+            <span class="text-amber-500"> There may be errors and inaccuracies present in the datasets and visualizations</span>
           </div>
-
-          <h2 class="text-lg font-semibold text-iliad my-2">Data layers</h2>
-          <div class="flex flex-col gap-4">
-            <For each={layers}>
-              {dl =>
-                <label class="select-none">
-                  {dl.name}:
-                  <input
-                    class="ml-2 cursor-pointer"
-                    checked={dl.visible}
-                    onchange={() => toggleLayer(dl.name)}
-                    type="checkbox" />
-                </label>
-              }
-            </For>
-          </div>
-
         </div>
-        <div class="grow h-[800px]">
+      </nav>
+
+      <div class="container mx-auto mt-6 font-nunito">
+        <div class="h-[810px]">
           <MapContainer data={data} dataLayers={layers} />
         </div>
-      </div>
 
-      <Switch>
-        <Match when={numSelected() == 0}>
-          <OverviewDetails data={data} />
-        </Match>
-        <Match when={numSelected() == 1}>
-          <SingleSiteDetails site={selectedData()[0]} />
-        </Match>
-        <Match when={numSelected() > 1}>
-          <MultiSelectDetails sites={selectedData} />
-        </Match>
-      </Switch>
-    </div>
+        <Switch>
+          <Match when={numSelected() == 0}>
+            <OverviewDetails data={data} />
+          </Match>
+          <Match when={numSelected() == 1}>
+            <SingleSiteDetails site={selectedData()[0]} />
+          </Match>
+          <Match when={numSelected() > 1}>
+            <MultiSelectDetails sites={selectedData} />
+          </Match>
+        </Switch>
+      </div>
+    </>
   );
 };
 
 const fetchBasic = async (time: number[]) =>
-  fetch(`/basic-all/${time[0]}/${time[1]}`)
+  fetch(API_URL + `/basic-all/${time[0]}/${time[1]}`)
     .then(d => d.json() as Promise<BasicWeek[]>)
     .then(d => d.filter(bw => bw.placement == "SJØ"));
+
+const fetchOimTerms = async () =>
+  fetch(API_URL + "/oim")
+    .then(d => d.json())
 
 export default App;

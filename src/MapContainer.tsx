@@ -1,24 +1,21 @@
-import { onMount, type Component, Accessor, createEffect, onCleanup, on, createSignal, Switch, Match } from 'solid-js';
+import { onMount, type Component, Accessor, createEffect, onCleanup, on, createSignal, Switch, Match, ParentComponent, For, Show } from 'solid-js';
 import TileLayer from 'ol/layer/Tile';
 import Map from 'ol/Map';
-import XYZ from 'ol/source/XYZ';
-import OSM from 'ol/source/OSM.js';
+import View from 'ol/View';
+import { OSM, XYZ } from 'ol/source';
+import { defaults } from 'ol/control'
 import { transform } from 'ol/proj';
-import { View } from 'ol';
-import { BasicWeek, LayerName } from './types';
+import { BasicWeek } from './types';
 import { AquacultureSitesLayer } from './layers/AquacultureSitesLayer';
-import { getRiskLayer } from './layers/RiskLayer';
-import { getTrajectoryLayer } from './layers/TrajectoryLayer';
-import { getOceanTempLayer, getOceanTempSource } from './layers/OceanTempLayer';
-import Layer from 'ol/layer/Layer';
-import { getProductionAreaLayer } from './layers/ProductionAreaLayer';
 import { useState } from './state';
-import { getMunicipalityLayer } from './layers/MunicipalityLayer';
+import { IDataLayer } from './layers/IDataLayer';
+import { LayerSwitcher } from './LayerSwitcher';
+import { BsBrightnessHighFill, BsMoonFill } from 'solid-icons/bs';
 
 
 interface MapContainerProps {
   data: Accessor<BasicWeek[]>,
-  dataLayers: { name: LayerName; visible: boolean; }[]
+  dataLayers: IDataLayer[]
 }
 
 export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers }) => {
@@ -33,33 +30,35 @@ export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers })
   let sitesLayer: AquacultureSitesLayer;
   let selectedFeatures = [];
 
-  let layers: Record<LayerName, Layer> = {
-    'Weather warnings': undefined,
-    'Trajectory simulations': undefined,
-    'Sea temperature': undefined,
-    'Production areas': undefined,
-    'Municipalities': undefined
-  };
+  const lightLayer = new TileLayer({
+    visible: !state.darkmode,
+    source: new OSM(),
+  });
+
+  const darkLayer = new TileLayer({
+    visible: state.darkmode,
+    source: new XYZ({
+      url: "https://{1-4}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png",
+      crossOrigin: 'anonymous',
+    })
+  });
 
   onMount(async () => {
     map = new Map({
       layers: [
-        new TileLayer({
-          source: new XYZ({
-            url: "https://{1-4}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png",
-            crossOrigin: 'anonymous',
-          })
-        })
-        /*new TileLayer({
-            source: new OSM(),
-        })*/
+        lightLayer,
+        darkLayer
       ],
       view: new View({
         center: transform([12.9, 65.5], 'EPSG:4326', 'EPSG:3857'),
         zoom: 5
       }),
       target: mapElement,
-      controls: []
+      controls: defaults({
+        zoom: false,
+        attribution: true,
+        rotate: false
+      })
     })
 
     map.on('pointermove', function (ev) {
@@ -110,15 +109,9 @@ export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers })
     // @ts-ignore
     mapElement.getElementsByClassName("ol-viewport")[0].style.borderRadius = "16px";
 
-    sitesLayer = new AquacultureSitesLayer(state.filters);
+    Object.values(dataLayers).forEach(l => map.addLayer(l.layer));
+    sitesLayer = new AquacultureSitesLayer(state.filters, state.showSites);
     map.addLayer(sitesLayer.layer);
-
-    layers["Weather warnings"] = await getRiskLayer(false);
-    layers["Trajectory simulations"] = await getTrajectoryLayer();
-    layers['Sea temperature'] = getOceanTempLayer(state.time.year, state.time.week);
-    layers['Production areas'] = await getProductionAreaLayer();
-    layers['Municipalities'] = await getMunicipalityLayer();
-    Object.values(layers).forEach(l => map.addLayer(l));
   })
 
   onCleanup(() => {
@@ -126,11 +119,12 @@ export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers })
     map.dispose();
   })
 
-  // Toggle data layers' visibility
   createEffect(() => {
-    dataLayers.forEach(({ name, visible }) => {
-      layers[name]?.setVisible(visible);
-    });
+    const darkmode = state.darkmode;
+    if (lightLayer)
+      lightLayer.setVisible(!darkmode);
+    if (darkLayer)
+      darkLayer.setVisible(darkmode);
   })
 
   // Show/Hide tooltip on hover
@@ -147,10 +141,8 @@ export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers })
 
   createEffect(() => {
     const [year, week] = [state.time.year, state.time.week];
-    const layer = layers['Sea temperature'];
-    if (layer !== undefined) {
-      layer.setSource(getOceanTempSource(year, week));
-    }
+    const layers = dataLayers.filter(dl => dl.updates);
+    layers.forEach(l => l.update(year, week));
   })
 
   createEffect(on(filteredData, d => {
@@ -161,6 +153,11 @@ export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers })
       selectedFeatures = sitesLayer.layer.getSource().getFeatures().filter(f => ids.includes(f.get("siteId")));
     }
   }))
+
+  createEffect(() => {
+    const visible = state.showSites
+    sitesLayer.toggleVisible(visible);
+  })
 
   createEffect(() => {
     const showFallow = state.filters.fallow ? 1 : 0;
@@ -215,8 +212,67 @@ export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers })
               {hoveredFeature()?.get('kommunenavn')}
             </div>
           </Match>
+          <Match when={hoveredFeature()?.get('specie') != undefined}>
+            <div class="bg-white py-1 px-2 rounded shadow-lg bg-white/80 w-auto text-center font-semibold">
+              <div class="font-bold">{hoveredFeature()?.get('date')}</div>
+              <div class="flex flex-col text-left">
+                <div>Specie: <span class="font-normal">{hoveredFeature()?.get('specie')}</span></div>
+                <div>Amount: <span class="font-normal">{hoveredFeature()?.get('amount')}</span></div>
+                <div>Length: <span class="font-normal">{hoveredFeature()?.get('length')}</span></div>
+              </div>
+            </div>
+          </Match>
         </Switch>
       </div>
+
+      <DarkmodeButton />
+
+      <Legends>
+        <For each={dataLayers.filter(l => state.visibleLayers.includes(l.name))}>{l =>
+          <Legend content={l.getLegend()} title={l.name} />
+        }</For>
+      </Legends>
+      <LayerSwitcher layers={dataLayers} />
     </div>
   );
 };
+
+const Legends: ParentComponent = (props) => {
+  return (
+    <div class="absolute right-3 bottom-8 flex flex-col gap-2 pointer-events-none opacity-90" style={"z-index: 110;"}>
+      {props.children}
+    </div>
+  )
+}
+
+const Legend: Component<{ title: string, content?: HTMLElement }> = (props) => {
+  let elem;
+  onMount(() => {
+    if (props.content)
+      elem.appendChild(props.content);
+  });
+  return (
+    <Show when={props.content}>
+      <div ref={elem} class="bg-white px-2 py-1 rounded shadow-md shadow-black/50 pointer-events-none">
+        {props.title}
+      </div>
+    </Show>
+  )
+}
+
+const DarkmodeButton: Component = () => {
+  const [state, setState] = useState();
+
+  return (
+    <div
+      title="Toggle dark base layer."
+      class="absolute top-3 right-3 shadow-md rounded-full bg-[#2e2e37] hover:bg-[#1e1e23] cursor-pointer p-3 text-white text-lg"
+      style={"z-index: 110;"}
+      onclick={() => setState("darkmode", dm => !dm)}
+    >
+      <Show when={state.darkmode} fallback={<BsMoonFill />}>
+        <BsBrightnessHighFill />
+      </Show>
+    </div>
+  )
+}

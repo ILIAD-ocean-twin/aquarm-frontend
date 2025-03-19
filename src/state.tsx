@@ -1,17 +1,27 @@
 import { createContext, useContext } from "solid-js";
 import { createStore } from "solid-js/store";
-import { Filters, TimeSelection } from "./types";
+import { Filters, OimEntry, TimeSelection } from "./types";
 
 type State = {
   time: TimeSelection
   filters: Filters
+  showSites: boolean
   selectedSites: number[]
+  visibleLayers: string[]
+  allOrganizations: string[]
+  darkmode: boolean
+  oim: { [key in string]: OimEntry }
 }
 
 const initialState: State = {
-  time: { year: 2024, week: 5 },
+  time: { year: 2024, week: 1 },
   filters: { fallow: true, organizations: [] },
-  selectedSites: []
+  showSites: true,
+  selectedSites: [],
+  visibleLayers: [],
+  allOrganizations: [],
+  darkmode: true,
+  oim: {}
 }
 
 export const makeStateContext = () => {

@@ -1,5 +1,3 @@
-import { LAYERS } from "./constants"
-
 export interface BasicWeek {
   id: number
   name: string
@@ -28,13 +26,6 @@ export interface Filters {
   organizations: string[]
 }
 
-export interface SiteSelection {
-  id: number
-  coords: number[]
-}
-
-export type LayerName = typeof LAYERS[number];
-
 export interface HistoricSiteData {
   year: number,
   week: number,
@@ -42,4 +33,22 @@ export interface HistoricSiteData {
   avgMobileLice: number | null,
   rank: number | null
   seaTemperature: number
+}
+
+export interface OimEntry {
+  "name (no)": string
+  "name (en)": string
+  "description (no)": string
+  "description (en)": string
+}
+
+export interface JellyfishObservation {
+  "date": string
+  "latitude": number
+  "longitude": number
+  "amount": number
+  "length": number
+  "depth": number
+  "weight": number
+  "species": string
 }

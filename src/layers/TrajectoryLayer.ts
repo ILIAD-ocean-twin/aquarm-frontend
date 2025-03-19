@@ -2,7 +2,52 @@ import VectorSource from "ol/source/Vector";
 import GeoJSON from 'ol/format/GeoJSON.js';
 import WebGLVectorLayerRenderer from 'ol/renderer/webgl/VectorLayer.js';
 import Layer from "ol/layer/Layer";
+import LayerRenderer from "ol/renderer/Layer";
+import Source from "ol/source/Source";
 import { dataProj, mapProj } from "../constants";
+import { IDataLayer } from "./IDataLayer";
+
+
+export class TrajectoryLayer implements IDataLayer {
+  name = "Trajectory simulations";
+  description = "Simulated particle trajectories based on OpenDrift.";
+  visible: boolean = false;
+  layer: Layer<Source, LayerRenderer<any>>;
+  updates = false;
+
+  _url: string;
+  _source: any;
+  _initiated: boolean = false;
+
+  constructor(dataUrl?: string) {
+    this._url = dataUrl ?? '/2023-03-30T12-trajectories-5.json';
+    this.layer = new WebGLLayer({
+      visible: false
+    })
+  }
+
+  public async setVisible(visible: boolean): Promise<void> {
+    if (visible && !this._initiated) {
+      this._source = await this.getGeoJson()
+        .then(data => new VectorSource({
+          features: new GeoJSON().readFeatures(data, { dataProjection: dataProj, featureProjection: mapProj })
+        }));
+      this.layer.setSource(this._source);
+      this._initiated = true;
+    }
+    this.visible = visible;
+    this.layer.setVisible(visible);
+  }
+
+  public getLegend() {
+    return undefined;
+  }
+
+  private async getGeoJson() {
+    return fetch(this._url)
+      .then(response => response.json())
+  }
+}
 
 class WebGLLayer extends Layer {
   createRenderer() {
@@ -15,22 +60,4 @@ class WebGLLayer extends Layer {
       }
     });
   }
-}
-
-const geoJsonConsumer = async () => fetch('/2023-03-30T12-trajectories-5.json') //('/trajectory')
-  .then(response => response.json())
-
-export const getTrajectoryLayer = () => {
-  let trajectorySource;
-  return geoJsonConsumer()
-    .then((data) => {
-      trajectorySource = new VectorSource({
-        features: new GeoJSON().readFeatures(data, { dataProjection: dataProj, featureProjection: mapProj })
-      });
-
-      return new WebGLLayer({
-        visible: false,
-        source: trajectorySource
-      });
-    })
 }
