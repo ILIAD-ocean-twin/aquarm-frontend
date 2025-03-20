@@ -1,3 +1,7 @@
+# Acuaculture Risk Metrics - ILIAD Pilot
+This repository contains the source code for the frontend of the AquaRM pilot. It's a website created with solid-js and depends on the web-API provided by `iliad-pilot-server` and the WMS-server provided by `Acuaculture TC`.
+
+
 ## Env files
 
 required .env files are: `env.development` and  `env.production`. In these files `VITE_API_URL` and `VITE_RAZZER_URL` must be defined.
