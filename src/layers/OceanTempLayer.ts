@@ -63,7 +63,7 @@ export class OceanTempLayer implements IDataLayer {
 
     return new TileWMS({
       attributions:
-        'Tiles © <a href="https://thredds.met.no/thredds/fou-hi/norkyst800v2.html"' +
+        'Sea temperature tiles © <a href="https://thredds.met.no/thredds/fou-hi/norkyst800v2.html"' +
         ' target="_blank">MET</a>',
       url: `https://thredds.met.no/thredds/wms/fou-hi/norkyst800m/NorKyst-800m_ZDEPTHS_avg.an.${year}${month}${day}00.nc`,
       params: {
