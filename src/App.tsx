@@ -19,6 +19,7 @@ import { StormRatingLayer } from './layers/StormRatingLayer';
 import { JellyfishLayer } from './layers/JellyfishLayer';
 import { AlgaeLayer } from './layers/AlgaeLayer';
 import { OilLayer } from './layers/OilLayer';
+import { OffshoreLayer } from './layers/OffshoreLayer';
 
 
 const App: Component = () => {
@@ -27,12 +28,15 @@ const App: Component = () => {
   const selectedData = () => data().filter(d => state.selectedSites.includes(d.id));
   const numSelected = () => state.selectedSites.length;
 
+  const offshoreLayer = new OffshoreLayer();
+
   const layers: IDataLayer[] = [
     // new JellyfishLayer(state.time.year, state.time.week),
     // new WeatherWarningLayer(),
+    offshoreLayer,
     new MunicipalityLayer(),
     new ProductionAreaLayer(),
-    new OilLayer(),
+    // new OilLayer(),
     new OceanTempLayer(state.time.year, state.time.week),
     new StormRatingLayer(),
     new CurrentRatingLayer(),
@@ -55,6 +59,8 @@ const App: Component = () => {
 
     setState("allOrganizations", orgs);
   })
+
+  createEffect(() => offshoreLayer.setData(data()))
 
   return (
     <>
