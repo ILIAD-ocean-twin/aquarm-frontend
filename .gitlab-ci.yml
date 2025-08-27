@@ -1,0 +1,24 @@
+build-docker:
+  image: docker:cli
+  stage: build
+  tags:
+    - dind
+  services:
+    - docker:dind
+  variables:
+    # image name ends up as
+    # gitlab.sintef.no:5050/iliad-nord/aquaculture-pilot:sha-XXXXXXX
+    DOCKER_IMAGE_NAME: $CI_REGISTRY_IMAGE:sha-$CI_COMMIT_SHORT_SHA
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+  script:
+    - docker build --pull -t "$DOCKER_IMAGE_NAME" .
+    - docker push "$DOCKER_IMAGE_NAME"
+    - |
+      if [[ "$CI_COMMIT_BRANCH" == "$CI_DEFAULT_BRANCH" ]]; then
+        docker tag "$DOCKER_IMAGE_NAME" "$CI_REGISTRY_IMAGE:latest"
+        docker push "$CI_REGISTRY_IMAGE:latest"
+      fi
+  # rules:
+  #   - changes:
+  #       - aquaculturedemo_deployment/opendrift/*
