@@ -2,12 +2,14 @@
 This repository contains the source code for the frontend of the AquaRM pilot. It's a website created with solid-js and depends on the web-API provided by `iliad-pilot-server` and the WMS-server provided by `Acuaculture TC`.
 
 
-## Env files
+## Bare Metal
+
+### Env files
 
 required .env files are: `env.development` and  `env.production`. In these files `VITE_API_URL` and `VITE_RAZZER_URL` must be defined.
 
 
-## Usage
+### Usage
 
 Those templates dependencies are maintained via [pnpm](https://pnpm.io) via `pnpm up -Lri`.
 
@@ -17,20 +19,20 @@ This is the reason you see a `pnpm-lock.yaml`. That being said, any package mana
 $ npm install # or pnpm install or yarn install
 ```
 
-### Learn more on the [Solid Website](https://solidjs.com) and come chat with us on our [Discord](https://discord.com/invite/solidjs)
+#### Learn more on the [Solid Website](https://solidjs.com) and come chat with us on our [Discord](https://discord.com/invite/solidjs)
 
-## Available Scripts
+### Available Scripts
 
 In the project directory, you can run:
 
-### `npm run dev` or `npm start`
+#### `npm run dev` or `npm start`
 
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.<br>
 
-### `npm run build`
+#### `npm run build`
 
 Builds the app for production to the `dist` folder.<br>
 It correctly bundles Solid in production mode and optimizes the build for the best performance.
@@ -38,6 +40,26 @@ It correctly bundles Solid in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.<br>
 Your app is ready to be deployed!
 
-## Deployment
+### Deployment
 
 You can deploy the `dist` folder to any static host provider (netlify, surge, now, etc.)
+
+## Docker
+
+### Build
+
+```bash
+$ docker buildx build --tag aquaculture-pilot .
+```
+
+### Run
+
+```bash
+$ docker run \
+    --interactive \
+    --tty \
+    --env VITE_API_ENDPOINT=http://localhost:5001/api \
+    --env VITE_RAZZER_URL=http://localhost:5001/api \
+    --publish 3000:3000 \
+    aquaculture-pilot
+```
