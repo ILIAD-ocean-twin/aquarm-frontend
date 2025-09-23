@@ -1,0 +1,812 @@
+[
+    {
+        "from_CODE": "277853",
+        "to_localityId": "12449",
+        "count": "1",
+        "median_impact_parameter_in_m": "3040.37"
+    },
+    {
+        "from_CODE": "277853",
+        "to_localityId": "35377",
+        "count": "2",
+        "median_impact_parameter_in_m": "2811.925"
+    },
+    {
+        "from_CODE": "277853",
+        "to_localityId": "36877",
+        "count": "2",
+        "median_impact_parameter_in_m": "1531.045"
+    },
+    {
+        "from_CODE": "283761",
+        "to_localityId": "45196",
+        "count": "53",
+        "median_impact_parameter_in_m": "1517.25"
+    },
+    {
+        "from_CODE": "284069",
+        "to_localityId": "34857",
+        "count": "1",
+        "median_impact_parameter_in_m": "2734.57"
+    },
+    {
+        "from_CODE": "284069",
+        "to_localityId": "39957",
+        "count": "2",
+        "median_impact_parameter_in_m": "3134.795"
+    },
+    {
+        "from_CODE": "284069",
+        "to_localityId": "45239",
+        "count": "1",
+        "median_impact_parameter_in_m": "249.76"
+    },
+    {
+        "from_CODE": "284097",
+        "to_localityId": "34857",
+        "count": "1",
+        "median_impact_parameter_in_m": "3126.55"
+    },
+    {
+        "from_CODE": "284125",
+        "to_localityId": "10232",
+        "count": "1",
+        "median_impact_parameter_in_m": "2050.92"
+    },
+    {
+        "from_CODE": "284125",
+        "to_localityId": "12357",
+        "count": "1",
+        "median_impact_parameter_in_m": "2075.98"
+    },
+    {
+        "from_CODE": "284125",
+        "to_localityId": "12394",
+        "count": "1",
+        "median_impact_parameter_in_m": "1994.1"
+    },
+    {
+        "from_CODE": "284125",
+        "to_localityId": "12435",
+        "count": "1",
+        "median_impact_parameter_in_m": "2861.46"
+    },
+    {
+        "from_CODE": "284125",
+        "to_localityId": "12449",
+        "count": "2",
+        "median_impact_parameter_in_m": "2723.29"
+    },
+    {
+        "from_CODE": "284125",
+        "to_localityId": "14042",
+        "count": "12",
+        "median_impact_parameter_in_m": "2607.46"
+    },
+    {
+        "from_CODE": "284125",
+        "to_localityId": "24456",
+        "count": "2",
+        "median_impact_parameter_in_m": "2879.93"
+    },
+    {
+        "from_CODE": "284125",
+        "to_localityId": "24696",
+        "count": "1",
+        "median_impact_parameter_in_m": "2207.17"
+    },
+    {
+        "from_CODE": "284125",
+        "to_localityId": "30437",
+        "count": "5",
+        "median_impact_parameter_in_m": "2799.64"
+    },
+    {
+        "from_CODE": "284125",
+        "to_localityId": "31557",
+        "count": "3",
+        "median_impact_parameter_in_m": "2791.12"
+    },
+    {
+        "from_CODE": "284125",
+        "to_localityId": "34857",
+        "count": "23",
+        "median_impact_parameter_in_m": "1973.9"
+    },
+    {
+        "from_CODE": "284125",
+        "to_localityId": "35377",
+        "count": "6",
+        "median_impact_parameter_in_m": "1935.4099999999999"
+    },
+    {
+        "from_CODE": "284125",
+        "to_localityId": "36877",
+        "count": "10",
+        "median_impact_parameter_in_m": "2040.295"
+    },
+    {
+        "from_CODE": "284125",
+        "to_localityId": "39957",
+        "count": "3",
+        "median_impact_parameter_in_m": "378.75"
+    },
+    {
+        "from_CODE": "284153",
+        "to_localityId": "10232",
+        "count": "3",
+        "median_impact_parameter_in_m": "2614.93"
+    },
+    {
+        "from_CODE": "284153",
+        "to_localityId": "12357",
+        "count": "3",
+        "median_impact_parameter_in_m": "2991.93"
+    },
+    {
+        "from_CODE": "284153",
+        "to_localityId": "12394",
+        "count": "2",
+        "median_impact_parameter_in_m": "2730.495"
+    },
+    {
+        "from_CODE": "284153",
+        "to_localityId": "12435",
+        "count": "3",
+        "median_impact_parameter_in_m": "1221.22"
+    },
+    {
+        "from_CODE": "284153",
+        "to_localityId": "12449",
+        "count": "3",
+        "median_impact_parameter_in_m": "2647.08"
+    },
+    {
+        "from_CODE": "284153",
+        "to_localityId": "14042",
+        "count": "14",
+        "median_impact_parameter_in_m": "2272.6"
+    },
+    {
+        "from_CODE": "284153",
+        "to_localityId": "24456",
+        "count": "6",
+        "median_impact_parameter_in_m": "2739.5"
+    },
+    {
+        "from_CODE": "284153",
+        "to_localityId": "24696",
+        "count": "1",
+        "median_impact_parameter_in_m": "2875.97"
+    },
+    {
+        "from_CODE": "284153",
+        "to_localityId": "30437",
+        "count": "10",
+        "median_impact_parameter_in_m": "2384.48"
+    },
+    {
+        "from_CODE": "284153",
+        "to_localityId": "31557",
+        "count": "4",
+        "median_impact_parameter_in_m": "2675.175"
+    },
+    {
+        "from_CODE": "284153",
+        "to_localityId": "34857",
+        "count": "20",
+        "median_impact_parameter_in_m": "1187.9"
+    },
+    {
+        "from_CODE": "284153",
+        "to_localityId": "35377",
+        "count": "9",
+        "median_impact_parameter_in_m": "2316.87"
+    },
+    {
+        "from_CODE": "284153",
+        "to_localityId": "36877",
+        "count": "15",
+        "median_impact_parameter_in_m": "1949.36"
+    },
+    {
+        "from_CODE": "284153",
+        "to_localityId": "39957",
+        "count": "8",
+        "median_impact_parameter_in_m": "2285.74"
+    },
+    {
+        "from_CODE": "284153",
+        "to_localityId": "45239",
+        "count": "1",
+        "median_impact_parameter_in_m": "3040.78"
+    },
+    {
+        "from_CODE": "284349",
+        "to_localityId": "12435",
+        "count": "10",
+        "median_impact_parameter_in_m": "2632.3450000000003"
+    },
+    {
+        "from_CODE": "284349",
+        "to_localityId": "15375",
+        "count": "1",
+        "median_impact_parameter_in_m": "2416.33"
+    },
+    {
+        "from_CODE": "284349",
+        "to_localityId": "24456",
+        "count": "10",
+        "median_impact_parameter_in_m": "2886.755"
+    },
+    {
+        "from_CODE": "284349",
+        "to_localityId": "31557",
+        "count": "1",
+        "median_impact_parameter_in_m": "2856.1"
+    },
+    {
+        "from_CODE": "284349",
+        "to_localityId": "34857",
+        "count": "17",
+        "median_impact_parameter_in_m": "1513.01"
+    },
+    {
+        "from_CODE": "284349",
+        "to_localityId": "35377",
+        "count": "4",
+        "median_impact_parameter_in_m": "2601.7200000000003"
+    },
+    {
+        "from_CODE": "284349",
+        "to_localityId": "36877",
+        "count": "5",
+        "median_impact_parameter_in_m": "1845.74"
+    },
+    {
+        "from_CODE": "284349",
+        "to_localityId": "39957",
+        "count": "8",
+        "median_impact_parameter_in_m": "1786.1599999999999"
+    },
+    {
+        "from_CODE": "284685",
+        "to_localityId": "45196",
+        "count": "45",
+        "median_impact_parameter_in_m": "1544.89"
+    },
+    {
+        "from_CODE": "284741",
+        "to_localityId": "45196",
+        "count": "45",
+        "median_impact_parameter_in_m": "1380.7"
+    },
+    {
+        "from_CODE": "284769",
+        "to_localityId": "45196",
+        "count": "45",
+        "median_impact_parameter_in_m": "1568.85"
+    },
+    {
+        "from_CODE": "284797",
+        "to_localityId": "45196",
+        "count": "37",
+        "median_impact_parameter_in_m": "1373.06"
+    },
+    {
+        "from_CODE": "284909",
+        "to_localityId": "45196",
+        "count": "36",
+        "median_impact_parameter_in_m": "1224.83"
+    },
+    {
+        "from_CODE": "284993",
+        "to_localityId": "45196",
+        "count": "52",
+        "median_impact_parameter_in_m": "1284.545"
+    },
+    {
+        "from_CODE": "285049",
+        "to_localityId": "45196",
+        "count": "54",
+        "median_impact_parameter_in_m": "1374.5549999999998"
+    },
+    {
+        "from_CODE": "285077",
+        "to_localityId": "45196",
+        "count": "47",
+        "median_impact_parameter_in_m": "1781.51"
+    },
+    {
+        "from_CODE": "285105",
+        "to_localityId": "45196",
+        "count": "41",
+        "median_impact_parameter_in_m": "1751.72"
+    },
+    {
+        "from_CODE": "285161",
+        "to_localityId": "45196",
+        "count": "31",
+        "median_impact_parameter_in_m": "1318.74"
+    },
+    {
+        "from_CODE": "285189",
+        "to_localityId": "45196",
+        "count": "43",
+        "median_impact_parameter_in_m": "1173.36"
+    },
+    {
+        "from_CODE": "285217",
+        "to_localityId": "45196",
+        "count": "45",
+        "median_impact_parameter_in_m": "1367.18"
+    },
+    {
+        "from_CODE": "285245",
+        "to_localityId": "45196",
+        "count": "43",
+        "median_impact_parameter_in_m": "1800.06"
+    },
+    {
+        "from_CODE": "285329",
+        "to_localityId": "45196",
+        "count": "40",
+        "median_impact_parameter_in_m": "1469.185"
+    },
+    {
+        "from_CODE": "285385",
+        "to_localityId": "45196",
+        "count": "42",
+        "median_impact_parameter_in_m": "1442.49"
+    },
+    {
+        "from_CODE": "285749",
+        "to_localityId": "13886",
+        "count": "2",
+        "median_impact_parameter_in_m": "2458.38"
+    },
+    {
+        "from_CODE": "285749",
+        "to_localityId": "15375",
+        "count": "1",
+        "median_impact_parameter_in_m": "2570.02"
+    },
+    {
+        "from_CODE": "285749",
+        "to_localityId": "36877",
+        "count": "13",
+        "median_impact_parameter_in_m": "2764.24"
+    },
+    {
+        "from_CODE": "285749",
+        "to_localityId": "45239",
+        "count": "2",
+        "median_impact_parameter_in_m": "1746.77"
+    },
+    {
+        "from_CODE": "287373",
+        "to_localityId": "45196",
+        "count": "474",
+        "median_impact_parameter_in_m": "1796.135"
+    },
+    {
+        "from_CODE": "287653",
+        "to_localityId": "10232",
+        "count": "1",
+        "median_impact_parameter_in_m": "3122.41"
+    },
+    {
+        "from_CODE": "287653",
+        "to_localityId": "12435",
+        "count": "1",
+        "median_impact_parameter_in_m": "152.95"
+    },
+    {
+        "from_CODE": "287653",
+        "to_localityId": "24456",
+        "count": "1",
+        "median_impact_parameter_in_m": "472.02"
+    },
+    {
+        "from_CODE": "287653",
+        "to_localityId": "31557",
+        "count": "1",
+        "median_impact_parameter_in_m": "3107.08"
+    },
+    {
+        "from_CODE": "287653",
+        "to_localityId": "34857",
+        "count": "2",
+        "median_impact_parameter_in_m": "2854.385"
+    },
+    {
+        "from_CODE": "287653",
+        "to_localityId": "35377",
+        "count": "1",
+        "median_impact_parameter_in_m": "2427.19"
+    },
+    {
+        "from_CODE": "287653",
+        "to_localityId": "38797",
+        "count": "1",
+        "median_impact_parameter_in_m": "2911.82"
+    },
+    {
+        "from_CODE": "287653",
+        "to_localityId": "39957",
+        "count": "4",
+        "median_impact_parameter_in_m": "1538.955"
+    },
+    {
+        "from_CODE": "287653",
+        "to_localityId": "45196",
+        "count": "11",
+        "median_impact_parameter_in_m": "2323.52"
+    },
+    {
+        "from_CODE": "356244",
+        "to_localityId": "12435",
+        "count": "12",
+        "median_impact_parameter_in_m": "2276.91"
+    },
+    {
+        "from_CODE": "356244",
+        "to_localityId": "12449",
+        "count": "1",
+        "median_impact_parameter_in_m": "2502.85"
+    },
+    {
+        "from_CODE": "356244",
+        "to_localityId": "14042",
+        "count": "3",
+        "median_impact_parameter_in_m": "2827.0"
+    },
+    {
+        "from_CODE": "356244",
+        "to_localityId": "24456",
+        "count": "12",
+        "median_impact_parameter_in_m": "2825.96"
+    },
+    {
+        "from_CODE": "356244",
+        "to_localityId": "31557",
+        "count": "1",
+        "median_impact_parameter_in_m": "2336.36"
+    },
+    {
+        "from_CODE": "356244",
+        "to_localityId": "34857",
+        "count": "8",
+        "median_impact_parameter_in_m": "1529.35"
+    },
+    {
+        "from_CODE": "356244",
+        "to_localityId": "35377",
+        "count": "1",
+        "median_impact_parameter_in_m": "1136.46"
+    },
+    {
+        "from_CODE": "356244",
+        "to_localityId": "36877",
+        "count": "2",
+        "median_impact_parameter_in_m": "1543.19"
+    },
+    {
+        "from_CODE": "356244",
+        "to_localityId": "39957",
+        "count": "19",
+        "median_impact_parameter_in_m": "2152.49"
+    },
+    {
+        "from_CODE": "371178",
+        "to_localityId": "45196",
+        "count": "12",
+        "median_impact_parameter_in_m": "1756.505"
+    },
+    {
+        "from_CODE": "371216",
+        "to_localityId": "45196",
+        "count": "8",
+        "median_impact_parameter_in_m": "1370.2150000000001"
+    },
+    {
+        "from_CODE": "391213",
+        "to_localityId": "10232",
+        "count": "2",
+        "median_impact_parameter_in_m": "1974.495"
+    },
+    {
+        "from_CODE": "391213",
+        "to_localityId": "12394",
+        "count": "2",
+        "median_impact_parameter_in_m": "1943.835"
+    },
+    {
+        "from_CODE": "391213",
+        "to_localityId": "12435",
+        "count": "4",
+        "median_impact_parameter_in_m": "2487.875"
+    },
+    {
+        "from_CODE": "391213",
+        "to_localityId": "12449",
+        "count": "1",
+        "median_impact_parameter_in_m": "3003.19"
+    },
+    {
+        "from_CODE": "391213",
+        "to_localityId": "14042",
+        "count": "13",
+        "median_impact_parameter_in_m": "2326.3"
+    },
+    {
+        "from_CODE": "391213",
+        "to_localityId": "24456",
+        "count": "4",
+        "median_impact_parameter_in_m": "2413.8450000000003"
+    },
+    {
+        "from_CODE": "391213",
+        "to_localityId": "24696",
+        "count": "2",
+        "median_impact_parameter_in_m": "2323.435"
+    },
+    {
+        "from_CODE": "391213",
+        "to_localityId": "30437",
+        "count": "9",
+        "median_impact_parameter_in_m": "2749.7"
+    },
+    {
+        "from_CODE": "391213",
+        "to_localityId": "31557",
+        "count": "1",
+        "median_impact_parameter_in_m": "2957.97"
+    },
+    {
+        "from_CODE": "391213",
+        "to_localityId": "34857",
+        "count": "23",
+        "median_impact_parameter_in_m": "1686.78"
+    },
+    {
+        "from_CODE": "391213",
+        "to_localityId": "35377",
+        "count": "6",
+        "median_impact_parameter_in_m": "2707.12"
+    },
+    {
+        "from_CODE": "391213",
+        "to_localityId": "36877",
+        "count": "10",
+        "median_impact_parameter_in_m": "1694.315"
+    },
+    {
+        "from_CODE": "391213",
+        "to_localityId": "39957",
+        "count": "9",
+        "median_impact_parameter_in_m": "1440.88"
+    },
+    {
+        "from_CODE": "395215",
+        "to_localityId": "45196",
+        "count": "42",
+        "median_impact_parameter_in_m": "1411.31"
+    },
+    {
+        "from_CODE": "406437",
+        "to_localityId": "45196",
+        "count": "20",
+        "median_impact_parameter_in_m": "2335.0150000000003"
+    },
+    {
+        "from_CODE": "415218",
+        "to_localityId": "45196",
+        "count": "4",
+        "median_impact_parameter_in_m": "2549.79"
+    },
+    {
+        "from_CODE": "425460",
+        "to_localityId": "12394",
+        "count": "3",
+        "median_impact_parameter_in_m": "2173.26"
+    },
+    {
+        "from_CODE": "425460",
+        "to_localityId": "12449",
+        "count": "3",
+        "median_impact_parameter_in_m": "1876.7"
+    },
+    {
+        "from_CODE": "425460",
+        "to_localityId": "13886",
+        "count": "1",
+        "median_impact_parameter_in_m": "2526.9"
+    },
+    {
+        "from_CODE": "425460",
+        "to_localityId": "15375",
+        "count": "4",
+        "median_impact_parameter_in_m": "2323.925"
+    },
+    {
+        "from_CODE": "425460",
+        "to_localityId": "24696",
+        "count": "3",
+        "median_impact_parameter_in_m": "2445.45"
+    },
+    {
+        "from_CODE": "425460",
+        "to_localityId": "31557",
+        "count": "3",
+        "median_impact_parameter_in_m": "2689.21"
+    },
+    {
+        "from_CODE": "425460",
+        "to_localityId": "34857",
+        "count": "7",
+        "median_impact_parameter_in_m": "2651.68"
+    },
+    {
+        "from_CODE": "425460",
+        "to_localityId": "35377",
+        "count": "4",
+        "median_impact_parameter_in_m": "2123.92"
+    },
+    {
+        "from_CODE": "425460",
+        "to_localityId": "36877",
+        "count": "8",
+        "median_impact_parameter_in_m": "2428.39"
+    },
+    {
+        "from_CODE": "425460",
+        "to_localityId": "39957",
+        "count": "2",
+        "median_impact_parameter_in_m": "2025.05"
+    },
+    {
+        "from_CODE": "425460",
+        "to_localityId": "45239",
+        "count": "2",
+        "median_impact_parameter_in_m": "3118.675"
+    },
+    {
+        "from_CODE": "432093",
+        "to_localityId": "12357",
+        "count": "3",
+        "median_impact_parameter_in_m": "3114.03"
+    },
+    {
+        "from_CODE": "432093",
+        "to_localityId": "12435",
+        "count": "4",
+        "median_impact_parameter_in_m": "2148.095"
+    },
+    {
+        "from_CODE": "432093",
+        "to_localityId": "14042",
+        "count": "14",
+        "median_impact_parameter_in_m": "1954.2"
+    },
+    {
+        "from_CODE": "432093",
+        "to_localityId": "24456",
+        "count": "5",
+        "median_impact_parameter_in_m": "2082.17"
+    },
+    {
+        "from_CODE": "432093",
+        "to_localityId": "30437",
+        "count": "10",
+        "median_impact_parameter_in_m": "2155.12"
+    },
+    {
+        "from_CODE": "432093",
+        "to_localityId": "31557",
+        "count": "1",
+        "median_impact_parameter_in_m": "2794.12"
+    },
+    {
+        "from_CODE": "432093",
+        "to_localityId": "34857",
+        "count": "29",
+        "median_impact_parameter_in_m": "1435.72"
+    },
+    {
+        "from_CODE": "432093",
+        "to_localityId": "35377",
+        "count": "7",
+        "median_impact_parameter_in_m": "2345.13"
+    },
+    {
+        "from_CODE": "432093",
+        "to_localityId": "36877",
+        "count": "10",
+        "median_impact_parameter_in_m": "2026.345"
+    },
+    {
+        "from_CODE": "432093",
+        "to_localityId": "38797",
+        "count": "1",
+        "median_impact_parameter_in_m": "3192.52"
+    },
+    {
+        "from_CODE": "432093",
+        "to_localityId": "39957",
+        "count": "5",
+        "median_impact_parameter_in_m": "2922.77"
+    },
+    {
+        "from_CODE": "434044",
+        "to_localityId": "12357",
+        "count": "5",
+        "median_impact_parameter_in_m": "2387.01"
+    },
+    {
+        "from_CODE": "434044",
+        "to_localityId": "12394",
+        "count": "1",
+        "median_impact_parameter_in_m": "2980.46"
+    },
+    {
+        "from_CODE": "434044",
+        "to_localityId": "12435",
+        "count": "3",
+        "median_impact_parameter_in_m": "2828.89"
+    },
+    {
+        "from_CODE": "434044",
+        "to_localityId": "12449",
+        "count": "2",
+        "median_impact_parameter_in_m": "3179.2"
+    },
+    {
+        "from_CODE": "434044",
+        "to_localityId": "14042",
+        "count": "15",
+        "median_impact_parameter_in_m": "2025.44"
+    },
+    {
+        "from_CODE": "434044",
+        "to_localityId": "24456",
+        "count": "5",
+        "median_impact_parameter_in_m": "2608.56"
+    },
+    {
+        "from_CODE": "434044",
+        "to_localityId": "30437",
+        "count": "11",
+        "median_impact_parameter_in_m": "2355.58"
+    },
+    {
+        "from_CODE": "434044",
+        "to_localityId": "31557",
+        "count": "3",
+        "median_impact_parameter_in_m": "3017.06"
+    },
+    {
+        "from_CODE": "434044",
+        "to_localityId": "34857",
+        "count": "22",
+        "median_impact_parameter_in_m": "1234.39"
+    },
+    {
+        "from_CODE": "434044",
+        "to_localityId": "35377",
+        "count": "9",
+        "median_impact_parameter_in_m": "2600.79"
+    },
+    {
+        "from_CODE": "434044",
+        "to_localityId": "36877",
+        "count": "8",
+        "median_impact_parameter_in_m": "1837.42"
+    },
+    {
+        "from_CODE": "434044",
+        "to_localityId": "39957",
+        "count": "6",
+        "median_impact_parameter_in_m": "1578.97"
+    }
+]

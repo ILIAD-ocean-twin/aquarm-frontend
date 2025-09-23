@@ -1,0 +1,4165 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.8459833,
+          57.1110806
+        ]
+      },
+      "properties": {
+        "platform_id": "271665",
+        "name": "ULA QP",
+        "operator": "Aker BP ASA",
+        "coast_dist": 231616.063283
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.4373944,
+          56.2277111
+        ]
+      },
+      "properties": {
+        "platform_id": "280961",
+        "name": "VALHALL FLANKE SØR",
+        "operator": "Aker BP ASA",
+        "coast_dist": 281698.242746
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.9352194,
+          60.7004972
+        ]
+      },
+      "properties": {
+        "platform_id": "277489",
+        "name": "OSEBERG ØST",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 92467.8005761
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.2015222,
+          64.2709889
+        ]
+      },
+      "properties": {
+        "platform_id": "277713",
+        "name": "NJORD A",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 73848.4842263
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1.8386444,
+          61.2244167
+        ]
+      },
+      "properties": {
+        "platform_id": "272589",
+        "name": "STATFJORD B-OLS",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 144913.426747
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.2230444,
+          56.5453778
+        ]
+      },
+      "properties": {
+        "platform_id": "364198",
+        "name": "EKOFISK M",
+        "operator": "ConocoPhillips Skandinavia AS",
+        "coast_dist": 262830.825223
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.4498583,
+          59.2660583
+        ]
+      },
+      "properties": {
+        "platform_id": "280849",
+        "name": "RINGHORNE",
+        "operator": "Vår Energi ASA",
+        "coast_dist": 136505.734631
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.1443444,
+          61.4493361
+        ]
+      },
+      "properties": {
+        "platform_id": "272085",
+        "name": "SNORRE A",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 130734.298078
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.8282528,
+          60.4933389
+        ]
+      },
+      "properties": {
+        "platform_id": "272897",
+        "name": "OSEBERG B",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 105093.422899
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.2013,
+          61.2029167
+        ]
+      },
+      "properties": {
+        "platform_id": "271917",
+        "name": "GULLFAKS B",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 125283.816838
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1.853875,
+          61.2556833
+        ]
+      },
+      "properties": {
+        "platform_id": "271273",
+        "name": "STATFJORD A",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 144580.03236
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.2183944,
+          56.4193306
+        ]
+      },
+      "properties": {
+        "platform_id": "271609",
+        "name": "ELDFISK B",
+        "operator": "ConocoPhillips Skandinavia AS",
+        "coast_dist": 274459.993375
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.3863583,
+          59.4552556
+        ]
+      },
+      "properties": {
+        "platform_id": "279393",
+        "name": "JOTUN A",
+        "operator": "Vår Energi ASA",
+        "coast_dist": 141033.098772
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.2658028,
+          56.3768806
+        ]
+      },
+      "properties": {
+        "platform_id": "271581",
+        "name": "ELDFISK A",
+        "operator": "ConocoPhillips Skandinavia AS",
+        "coast_dist": 276744.741268
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.0467972,
+          60.5425583
+        ]
+      },
+      "properties": {
+        "platform_id": "277405",
+        "name": "BRAGE",
+        "operator": "Wintershall Dea Norge AS",
+        "coast_dist": 92296.2343784
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.3175,
+          65.3258333
+        ]
+      },
+      "properties": {
+        "platform_id": "272421",
+        "name": "HEIDRUN",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 158665.314477
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.18915,
+          61.1761056
+        ]
+      },
+      "properties": {
+        "platform_id": "271833",
+        "name": "GULLFAKS A",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 125577.942493
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.2036889,
+          56.5653528
+        ]
+      },
+      "properties": {
+        "platform_id": "271413",
+        "name": "EKOFISK B",
+        "operator": "ConocoPhillips Skandinavia AS",
+        "coast_dist": 261746.541403
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.2194472,
+          56.4182389
+        ]
+      },
+      "properties": {
+        "platform_id": "286029",
+        "name": "ELDFISK B-FL",
+        "operator": "ConocoPhillips Skandinavia AS",
+        "coast_dist": 274523.466815
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.6114444,
+          60.8863222
+        ]
+      },
+      "properties": {
+        "platform_id": "279421",
+        "name": "TROLL C",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 50707.6004471
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.2189444,
+          56.5476389
+        ]
+      },
+      "properties": {
+        "platform_id": "278525",
+        "name": "EKOFISK X",
+        "operator": "ConocoPhillips Skandinavia AS",
+        "coast_dist": 262776.653561
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.7969611,
+          60.3901722
+        ]
+      },
+      "properties": {
+        "platform_id": "280205",
+        "name": "OSEBERG SØR",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 109534.495445
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.8978583,
+          60.7827056
+        ]
+      },
+      "properties": {
+        "platform_id": "277321",
+        "name": "VESLEFRIKK A",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 91130.440139
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.3955806,
+          56.2755222
+        ]
+      },
+      "properties": {
+        "platform_id": "406276",
+        "name": "VALHALL PH",
+        "operator": "Aker BP ASA",
+        "coast_dist": 279474.153099
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.9587806,
+          56.9827556
+        ]
+      },
+      "properties": {
+        "platform_id": "280793",
+        "name": "TAMBAR",
+        "operator": "Aker BP ASA",
+        "coast_dist": 236400.585074
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1.7437222,
+          58.8452222
+        ]
+      },
+      "properties": {
+        "platform_id": "410651",
+        "name": "GUDRUN",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 184376.804438
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.2061056,
+          56.5658028
+        ]
+      },
+      "properties": {
+        "platform_id": "271469",
+        "name": "EKOFISK K",
+        "operator": "ConocoPhillips Skandinavia AS",
+        "coast_dist": 261617.494571
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.3874167,
+          59.1916056
+        ]
+      },
+      "properties": {
+        "platform_id": "279841",
+        "name": "BALDER FPU",
+        "operator": "Vår Energi ASA",
+        "coast_dist": 140572.396894
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1.8306361,
+          61.2069111
+        ]
+      },
+      "properties": {
+        "platform_id": "271301",
+        "name": "STATFJORD B",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 145111.254072
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.2482639,
+          56.3332306
+        ]
+      },
+      "properties": {
+        "platform_id": "277377",
+        "name": "EMBLA",
+        "operator": "ConocoPhillips Skandinavia AS",
+        "coast_dist": 281113.872479
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.3526417,
+          56.3243611
+        ]
+      },
+      "properties": {
+        "platform_id": "361248",
+        "name": "VALHALL FLANKE NORD",
+        "operator": "Aker BP ASA",
+        "coast_dist": 277318.209885
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.2659333,
+          56.3757194
+        ]
+      },
+      "properties": {
+        "platform_id": "272057",
+        "name": "ELDFISK FTP",
+        "operator": "ConocoPhillips Skandinavia AS",
+        "coast_dist": 276848.254171
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.2652056,
+          56.3750861
+        ]
+      },
+      "properties": {
+        "platform_id": "280093",
+        "name": "ELDFISK E",
+        "operator": "ConocoPhillips Skandinavia AS",
+        "coast_dist": 276931.969359
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.2212833,
+          56.5472
+        ]
+      },
+      "properties": {
+        "platform_id": "277937",
+        "name": "EKOFISK J",
+        "operator": "ConocoPhillips Skandinavia AS",
+        "coast_dist": 262730.969208
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.2256583,
+          56.54405
+        ]
+      },
+      "properties": {
+        "platform_id": "425058",
+        "name": "EKOFISK Z",
+        "operator": "ConocoPhillips Skandinavia AS",
+        "coast_dist": 262855.352775
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.8485694,
+          57.1117556
+        ]
+      },
+      "properties": {
+        "platform_id": "272029",
+        "name": "ULA PP",
+        "operator": "Aker BP ASA",
+        "coast_dist": 231451.279011
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.8273139,
+          60.4918639
+        ]
+      },
+      "properties": {
+        "platform_id": "271245",
+        "name": "OSEBERG A",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 105180.844471
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.3963778,
+          56.2765694
+        ]
+      },
+      "properties": {
+        "platform_id": "278385",
+        "name": "VALHALL WP",
+        "operator": "Aker BP ASA",
+        "coast_dist": 279354.729663
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.7274444,
+          65.0644167
+        ]
+      },
+      "properties": {
+        "platform_id": "279785",
+        "name": "ÅSGARD A",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 154801.277984
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.8986111,
+          60.7813889
+        ]
+      },
+      "properties": {
+        "platform_id": "277349",
+        "name": "VESLEFRIKK B",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 91136.4896493
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.0883583,
+          66.0272917
+        ]
+      },
+      "properties": {
+        "platform_id": "279589",
+        "name": "NORNE FPSO",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 152564.295135
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.2115056,
+          61.5254389
+        ]
+      },
+      "properties": {
+        "platform_id": "280485",
+        "name": "SNORRE B",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 128428.023137
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.7755972,
+          60.6083389
+        ]
+      },
+      "properties": {
+        "platform_id": "272225",
+        "name": "OSEBERG C",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 104360.8975
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.4589167,
+          61.3701556
+        ]
+      },
+      "properties": {
+        "platform_id": "277685",
+        "name": "VISUND",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 113256.227601
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1.9025472,
+          61.2965833
+        ]
+      },
+      "properties": {
+        "platform_id": "271329",
+        "name": "STATFJORD C",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 142764.576407
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.4873889,
+          59.1652389
+        ]
+      },
+      "properties": {
+        "platform_id": "283285",
+        "name": "GRANE",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 135189.553535
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.8968194,
+          61.3323639
+        ]
+      },
+      "properties": {
+        "platform_id": "406672",
+        "name": "GJØA",
+        "operator": "Neptune Energy Norge AS",
+        "coast_dist": 36275.7158071
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.2155167,
+          56.5478417
+        ]
+      },
+      "properties": {
+        "platform_id": "271441",
+        "name": "EKOFISK C",
+        "operator": "ConocoPhillips Skandinavia AS",
+        "coast_dist": 262883.309499
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.3963389,
+          56.2765167
+        ]
+      },
+      "properties": {
+        "platform_id": "282529",
+        "name": "VALHALL IP",
+        "operator": "Aker BP ASA",
+        "coast_dist": 279360.688305
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.5354361,
+          57.8160889
+        ]
+      },
+      "properties": {
+        "platform_id": "403167",
+        "name": "YME WHM",
+        "operator": "Repsol Norge AS",
+        "coast_dist": 103878.278751
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.8473306,
+          57.1114306
+        ]
+      },
+      "properties": {
+        "platform_id": "271889",
+        "name": "ULA DP",
+        "operator": "Aker BP ASA",
+        "coast_dist": 231530.341304
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.5031806,
+          60.774375
+        ]
+      },
+      "properties": {
+        "platform_id": "278273",
+        "name": "TROLL B",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 61008.6781934
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.7826056,
+          64.3531722
+        ]
+      },
+      "properties": {
+        "platform_id": "272393",
+        "name": "DRAUGEN",
+        "operator": "OKEA ASA",
+        "coast_dist": 61140.2399368
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.8289861,
+          60.4906667
+        ]
+      },
+      "properties": {
+        "platform_id": "280541",
+        "name": "OSEBERG D",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 105121.725233
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.2738694,
+          61.2149444
+        ]
+      },
+      "properties": {
+        "platform_id": "272645",
+        "name": "GULLFAKS C",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 121608.314814
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.4587306,
+          61.3704083
+        ]
+      },
+      "properties": {
+        "platform_id": "284405",
+        "name": "34/8-A-10 H",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 113267.722046
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.1891944,
+          61.1761056
+        ]
+      },
+      "properties": {
+        "platform_id": "287317",
+        "name": "GULLFAKS A SSIV",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 125575.567931
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.5816667,
+          60.8493278
+        ]
+      },
+      "properties": {
+        "platform_id": "280429",
+        "name": "TROLL U1",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 53631.635217
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.2767361,
+          61.0972861
+        ]
+      },
+      "properties": {
+        "platform_id": "279673",
+        "name": "GULLFAKS SØR G",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 120228.327875
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.4382444,
+          60.7761694
+        ]
+      },
+      "properties": {
+        "platform_id": "278161",
+        "name": "TROLL F",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 64080.0450847
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.0667,
+          61.3206806
+        ]
+      },
+      "properties": {
+        "platform_id": "356166",
+        "name": "VIGDIS F",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 134084.517295
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.6397944,
+          60.7558389
+        ]
+      },
+      "properties": {
+        "platform_id": "280009",
+        "name": "TROLL K2",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 54798.5132057
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.4597583,
+          61.3701583
+        ]
+      },
+      "properties": {
+        "platform_id": "284377",
+        "name": "34/8-A-1 H",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 113211.324832
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.192775,
+          61.0967472
+        ]
+      },
+      "properties": {
+        "platform_id": "279617",
+        "name": "GULLFAKS SØR L",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 124750.107997
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.4421417,
+          60.7535222
+        ]
+      },
+      "properties": {
+        "platform_id": "278189",
+        "name": "TROLL G",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 65038.4787592
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.4457389,
+          60.7992167
+        ]
+      },
+      "properties": {
+        "platform_id": "278133",
+        "name": "TROLL E",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 62623.0084422
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.5725944,
+          60.83105
+        ]
+      },
+      "properties": {
+        "platform_id": "280457",
+        "name": "TROLL U2",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 54869.9736177
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.4589861,
+          61.3703694
+        ]
+      },
+      "properties": {
+        "platform_id": "284601",
+        "name": "34/8-A-8 H",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 113253.844428
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.192675,
+          61.0970528
+        ]
+      },
+      "properties": {
+        "platform_id": "281017",
+        "name": "GULLFAKS SØR M",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 124756.742841
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1.9821889,
+          61.0438778
+        ]
+      },
+      "properties": {
+        "platform_id": "372575",
+        "name": "33/12-N-5",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 136047.812953
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.0369111,
+          61.0553889
+        ]
+      },
+      "properties": {
+        "platform_id": "280653",
+        "name": "GULLFAKS SØR I",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 133082.663112
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.2119444,
+          61.5255556
+        ]
+      },
+      "properties": {
+        "platform_id": "282249",
+        "name": "SNORRE MDU",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 128407.404477
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.0154944,
+          61.1360722
+        ]
+      },
+      "properties": {
+        "platform_id": "280765",
+        "name": "GULLFAKS SØR K",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 134512.331389
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.2230444,
+          56.5453778
+        ]
+      },
+      "properties": {
+        "platform_id": "364234",
+        "name": "EKOFISK M-BS",
+        "operator": "ConocoPhillips Skandinavia AS",
+        "coast_dist": 262830.825223
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.0739472,
+          61.0556472
+        ]
+      },
+      "properties": {
+        "platform_id": "280709",
+        "name": "GULLFAKS SØR H",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 131082.905886
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.6265528,
+          60.9156028
+        ]
+      },
+      "properties": {
+        "platform_id": "279057",
+        "name": "TROLL M1",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 49001.9978876
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.4588639,
+          61.3699194
+        ]
+      },
+      "properties": {
+        "platform_id": "284545",
+        "name": "34/8-A-19 H",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 113257.592304
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.45925,
+          61.3699722
+        ]
+      },
+      "properties": {
+        "platform_id": "282977",
+        "name": "34/8-A-22 H/AH",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 113237.308694
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.5775972,
+          60.7285417
+        ]
+      },
+      "properties": {
+        "platform_id": "279953",
+        "name": "TROLL I2",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 58683.8712938
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.4591667,
+          61.3697222
+        ]
+      },
+      "properties": {
+        "platform_id": "283453",
+        "name": "VISUND SDU-1",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 113240.2213
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.2606583,
+          61.1106667
+        ]
+      },
+      "properties": {
+        "platform_id": "279701",
+        "name": "GULLFAKS SØR E",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 121162.057604
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.5866083,
+          60.9156889
+        ]
+      },
+      "properties": {
+        "platform_id": "279729",
+        "name": "TROLL N1",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 51100.4187523
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.2122222,
+          61.5258333
+        ]
+      },
+      "properties": {
+        "platform_id": "285357",
+        "name": "SNORRE SDU-1",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 128398.445107
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.1199056,
+          61.2748722
+        ]
+      },
+      "properties": {
+        "platform_id": "282445",
+        "name": "TORDIS EXTENSION",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 130867.722631
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.2442917,
+          61.1240417
+        ]
+      },
+      "properties": {
+        "platform_id": "277517",
+        "name": "GULLFAKS SØR D",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 122127.76321
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.4448028,
+          60.8567278
+        ]
+      },
+      "properties": {
+        "platform_id": "278105",
+        "name": "TROLL D",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 60344.3100577
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.2116194,
+          61.5259444
+        ]
+      },
+      "properties": {
+        "platform_id": "285413",
+        "name": "SNORRE SDU-2",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 128432.214755
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.5560417,
+          60.7851222
+        ]
+      },
+      "properties": {
+        "platform_id": "279029",
+        "name": "TROLL L1",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 57899.8380451
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.4593833,
+          61.3700028
+        ]
+      },
+      "properties": {
+        "platform_id": "283005",
+        "name": "34/8-A-23 H",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 113230.382048
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.5931972,
+          60.8080861
+        ]
+      },
+      "properties": {
+        "platform_id": "280401",
+        "name": "TROLL T2",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 54931.4965387
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.11765,
+          61.3970806
+        ]
+      },
+      "properties": {
+        "platform_id": "279169",
+        "name": "VIGDIS B",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 131639.738179
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.067925,
+          61.3985611
+        ]
+      },
+      "properties": {
+        "platform_id": "279197",
+        "name": "VIGDIS E",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 134300.635102
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.4588639,
+          61.3703889
+        ]
+      },
+      "properties": {
+        "platform_id": "284657",
+        "name": "34/8-A-9 H",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 113260.487317
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.459625,
+          61.3702556
+        ]
+      },
+      "properties": {
+        "platform_id": "283117",
+        "name": "34/8-A-3 H",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 113219.040428
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.0032972,
+          61.0641222
+        ]
+      },
+      "properties": {
+        "platform_id": "280681",
+        "name": "GULLFAKS SØR J",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 134897.982237
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.4597389,
+          61.3700944
+        ]
+      },
+      "properties": {
+        "platform_id": "283089",
+        "name": "34/8-A-26  H",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 113211.966202
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.1033917,
+          61.3804306
+        ]
+      },
+      "properties": {
+        "platform_id": "277657",
+        "name": "VIGDIS C",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 132292.123762
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.6537583,
+          60.8963389
+        ]
+      },
+      "properties": {
+        "platform_id": "282921",
+        "name": "TROLL PILOT",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 48177.64703
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.6565472,
+          60.7292972
+        ]
+      },
+      "properties": {
+        "platform_id": "279981",
+        "name": "TROLL J2",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 54448.2360171
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.581725,
+          60.7410111
+        ]
+      },
+      "properties": {
+        "platform_id": "279113",
+        "name": "TROLL I1",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 58199.9496974
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.1152306,
+          61.2747778
+        ]
+      },
+      "properties": {
+        "platform_id": "377386",
+        "name": "TORDIS SSIB",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 131112.118861
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.212575,
+          61.52285
+        ]
+      },
+      "properties": {
+        "platform_id": "287569",
+        "name": "SNORRE B SBV",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 128320.457657
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.2263444,
+          61.4893278
+        ]
+      },
+      "properties": {
+        "platform_id": "273961",
+        "name": "SNORRE UPA",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 126984.136035
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.61135,
+          60.7683139
+        ]
+      },
+      "properties": {
+        "platform_id": "279449",
+        "name": "TROLL K1",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 56134.300438
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.0728694,
+          61.3456139
+        ]
+      },
+      "properties": {
+        "platform_id": "359965",
+        "name": "VIGDIS D",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 133783.641269
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.4591194,
+          61.3699611
+        ]
+      },
+      "properties": {
+        "platform_id": "282865",
+        "name": "34/8-A-21 H/AH",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 113244.211201
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.4943083,
+          60.8765806
+        ]
+      },
+      "properties": {
+        "platform_id": "280261",
+        "name": "TROLL P2",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 57104.4852504
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.5103778,
+          60.7144972
+        ]
+      },
+      "properties": {
+        "platform_id": "278301",
+        "name": "TROLL H",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 62599.7582871
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.5663889,
+          60.8895722
+        ]
+      },
+      "properties": {
+        "platform_id": "279757",
+        "name": "TROLL O1",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 52935.0316334
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.4594444,
+          61.37
+        ]
+      },
+      "properties": {
+        "platform_id": "283481",
+        "name": "VISUND SDU-2",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 113227.103638
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.4593806,
+          61.3703083
+        ]
+      },
+      "properties": {
+        "platform_id": "283201",
+        "name": "34/8-A-5 H",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 113232.410697
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.608,
+          60.7432361
+        ]
+      },
+      "properties": {
+        "platform_id": "279141",
+        "name": "TROLL J1",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 56744.5544425
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.5579417,
+          60.8669944
+        ]
+      },
+      "properties": {
+        "platform_id": "279085",
+        "name": "TROLL P1",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 54151.796709
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.6642389,
+          60.9314194
+        ]
+      },
+      "properties": {
+        "platform_id": "280037",
+        "name": "TROLL M2",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 46592.8004638
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.5803694,
+          60.9463389
+        ]
+      },
+      "properties": {
+        "platform_id": "280317",
+        "name": "TROLL N2",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 50712.5941641
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.1181139,
+          61.2756333
+        ]
+      },
+      "properties": {
+        "platform_id": "282893",
+        "name": "TORDIS-MS",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 130977.851812
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.6718694,
+          60.8929806
+        ]
+      },
+      "properties": {
+        "platform_id": "280345",
+        "name": "TROLL S2",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 47356.8171797
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.6272278,
+          60.8446722
+        ]
+      },
+      "properties": {
+        "platform_id": "279477",
+        "name": "TROLL Q1",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 51538.4581624
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.6546417,
+          60.89505
+        ]
+      },
+      "properties": {
+        "platform_id": "280737",
+        "name": "TROLL S1",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 48175.4333341
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.6039778,
+          60.832575
+        ]
+      },
+      "properties": {
+        "platform_id": "280373",
+        "name": "TROLL T1",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 53237.86664
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.5559528,
+          60.8087722
+        ]
+      },
+      "properties": {
+        "platform_id": "280289",
+        "name": "TROLL L2",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 56723.1287789
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.1202444,
+          61.2761528
+        ]
+      },
+      "properties": {
+        "platform_id": "280597",
+        "name": "TORDIS ØST K",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 130876.381121
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.2738972,
+          61.2149444
+        ]
+      },
+      "properties": {
+        "platform_id": "287345",
+        "name": "GULLFAKS C SSIV",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 121606.837577
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.5229306,
+          60.9145056
+        ]
+      },
+      "properties": {
+        "platform_id": "283677",
+        "name": "TROLL O2",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 54490.2300292
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.2165694,
+          56.5476528
+        ]
+      },
+      "properties": {
+        "platform_id": "281353",
+        "name": "EKOFISK X-BS",
+        "operator": "ConocoPhillips Skandinavia AS",
+        "coast_dist": 262861.919805
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.2768056,
+          61.0975028
+        ]
+      },
+      "properties": {
+        "platform_id": "279645",
+        "name": "GULLFAKS SØR F",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 120225.542898
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.1062333,
+          61.3791889
+        ]
+      },
+      "properties": {
+        "platform_id": "377425",
+        "name": "VIGDIS G",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 132133.473041
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.9586861,
+          61.3403083
+        ]
+      },
+      "properties": {
+        "platform_id": "403298",
+        "name": "GJØA B",
+        "operator": "Neptune Energy Norge AS",
+        "coast_dist": 33092.9379419
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.2016028,
+          64.2707194
+        ]
+      },
+      "properties": {
+        "platform_id": "395215",
+        "name": "6407/7-A-4 H",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 73827.1860369
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1.99185,
+          61.4669417
+        ]
+      },
+      "properties": {
+        "platform_id": "279897",
+        "name": "SYGNA N",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 139033.452591
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.4929722,
+          65.0676389
+        ]
+      },
+      "properties": {
+        "platform_id": "278917",
+        "name": "ÅSGARD X",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 133622.165668
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.7232944,
+          64.3424028
+        ]
+      },
+      "properties": {
+        "platform_id": "284097",
+        "name": "6407/9-D-2 H",
+        "operator": "OKEA ASA",
+        "coast_dist": 62039.6496492
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.2788,
+          59.656625
+        ]
+      },
+      "properties": {
+        "platform_id": "429545",
+        "name": "25/4-F-1 H VILJE F1",
+        "operator": "Aker BP ASA",
+        "coast_dist": 151064.399327
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.0713444,
+          64.8889583
+        ]
+      },
+      "properties": {
+        "platform_id": "377615",
+        "name": "TYRIHANS A",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 129479.03867
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.3260833,
+          56.4926861
+        ]
+      },
+      "properties": {
+        "platform_id": "286953",
+        "name": "VALHALL VTS",
+        "operator": "Aker BP ASA",
+        "coast_dist": 263956.503093
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.5164639,
+          61.0847722
+        ]
+      },
+      "properties": {
+        "platform_id": "284713",
+        "name": "FRAM A1",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 53460.5043283
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.0982361,
+          66.0454722
+        ]
+      },
+      "properties": {
+        "platform_id": "279309",
+        "name": "NORNE E",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 152649.879388
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.2780278,
+          59.6561222
+        ]
+      },
+      "properties": {
+        "platform_id": "374865",
+        "name": "25/4-D1 H VILJE D1",
+        "operator": "Aker BP ASA",
+        "coast_dist": 151093.28676
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.7761694,
+          60.2645056
+        ]
+      },
+      "properties": {
+        "platform_id": "279925",
+        "name": "OSEBERG SØR K",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 115145.904013
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.2275333,
+          71.5693
+        ]
+      },
+      "properties": {
+        "platform_id": "370616",
+        "name": "SNØHVIT CDU-1",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 98194.220155
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.3585167,
+          59.1912444
+        ]
+      },
+      "properties": {
+        "platform_id": "430557",
+        "name": "BALDER SDU A",
+        "operator": "Vår Energi ASA",
+        "coast_dist": 142220.426921
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.1713556,
+          66.0491222
+        ]
+      },
+      "properties": {
+        "platform_id": "364750",
+        "name": "NORNE J",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 149566.275857
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.8065556,
+          60.5412139
+        ]
+      },
+      "properties": {
+        "platform_id": "272953",
+        "name": "30/9-B-50 H OSEBERG B-50",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 104865.168317
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.2017972,
+          64.2707639
+        ]
+      },
+      "properties": {
+        "platform_id": "285161",
+        "name": "6407/7-A-5 H",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 73822.6955598
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.2013611,
+          64.2713028
+        ]
+      },
+      "properties": {
+        "platform_id": "285049",
+        "name": "6407/7-A-16 H",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 73875.8893024
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.7206944,
+          65.798325
+        ]
+      },
+      "properties": {
+        "platform_id": "408694",
+        "name": "IDUN",
+        "operator": "Aker BP ASA",
+        "coast_dist": 162855.049337
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.2530806,
+          64.2720611
+        ]
+      },
+      "properties": {
+        "platform_id": "279561",
+        "name": "NJORD BRAVO",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 71952.3854194
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.1196917,
+          61.2759306
+        ]
+      },
+      "properties": {
+        "platform_id": "281605",
+        "name": "34/7-I-2 H TORDIS I-2",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 130900.886891
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.3693833,
+          65.3832944
+        ]
+      },
+      "properties": {
+        "platform_id": "283621",
+        "name": "HEIDRUN E",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 158251.810729
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.23925,
+          56.5204333
+        ]
+      },
+      "properties": {
+        "platform_id": "424664",
+        "name": "EKOFISK VB",
+        "operator": "ConocoPhillips Skandinavia AS",
+        "coast_dist": 264496.940258
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.5512556,
+          64.3581611
+        ]
+      },
+      "properties": {
+        "platform_id": "424593",
+        "name": "HYME",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 68723.3398884
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.0567806,
+          64.8116056
+        ]
+      },
+      "properties": {
+        "platform_id": "377652",
+        "name": "TYRIHANS B",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 122851.48173
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1.9898528,
+          61.0789944
+        ]
+      },
+      "properties": {
+        "platform_id": "372538",
+        "name": "SKINFAKS N",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 135640.073677
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1.8872306,
+          61.2635111
+        ]
+      },
+      "properties": {
+        "platform_id": "277741",
+        "name": "STATFJORD A-OLS",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 142945.397696
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.4591194,
+          61.37035
+        ]
+      },
+      "properties": {
+        "platform_id": "284573",
+        "name": "34/8-A-6 H",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 113246.609739
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.2026222,
+          64.27105
+        ]
+      },
+      "properties": {
+        "platform_id": "284741",
+        "name": "6407/7-A-10 H",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 73810.2229375
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.0863222,
+          59.5858667
+        ]
+      },
+      "properties": {
+        "platform_id": "375282",
+        "name": "ØST KAMELEON",
+        "operator": "Aker BP ASA",
+        "coast_dist": 160058.253989
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.0538889,
+          66.0136111
+        ]
+      },
+      "properties": {
+        "platform_id": "372501",
+        "name": "NORNE K",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 153710.13254
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.3658694,
+          65.3436194
+        ]
+      },
+      "properties": {
+        "platform_id": "287709",
+        "name": "HEIDRUN STL-II",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 157064.822394
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.557,
+          65.0051667
+        ]
+      },
+      "properties": {
+        "platform_id": "278945",
+        "name": "ÅSGARD Y",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 126415.719497
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.2022028,
+          64.2708639
+        ]
+      },
+      "properties": {
+        "platform_id": "285217",
+        "name": "6407/7-A-7 H",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 73813.8138268
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.3976333,
+          56.2772417
+        ]
+      },
+      "properties": {
+        "platform_id": "287009",
+        "name": "VALHALL BVS",
+        "operator": "Aker BP ASA",
+        "coast_dist": 279246.8733
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.1151917,
+          61.2756167
+        ]
+      },
+      "properties": {
+        "platform_id": "394821",
+        "name": "34/7-R-1 H TORDIS R-1",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 131131.468567
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.0542,
+          66.0151694
+        ]
+      },
+      "properties": {
+        "platform_id": "279225",
+        "name": "NORNE B",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 153737.657432
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.4587333,
+          61.3699028
+        ]
+      },
+      "properties": {
+        "platform_id": "284489",
+        "name": "34/8-A-14 H",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 113264.461172
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.120975,
+          61.36605
+        ]
+      },
+      "properties": {
+        "platform_id": "360052",
+        "name": "34/7-E-5 H VIGDIS E5",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 131280.761653
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.941875,
+          65.0401722
+        ]
+      },
+      "properties": {
+        "platform_id": "363659",
+        "name": "ÅSGARD Q",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 146921.350706
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.599775,
+          61.0427833
+        ]
+      },
+      "properties": {
+        "platform_id": "371520",
+        "name": "FRAM B2",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 48720.9849259
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.477875,
+          65.1369722
+        ]
+      },
+      "properties": {
+        "platform_id": "405160",
+        "name": "MOR-A",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 168261.761369
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.8793889,
+          65.0229944
+        ]
+      },
+      "properties": {
+        "platform_id": "278889",
+        "name": "ÅSGARD P",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 146934.462336
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.3258111,
+          56.4924944
+        ]
+      },
+      "properties": {
+        "platform_id": "286981",
+        "name": "VALHALL SSPR",
+        "operator": "Aker BP ASA",
+        "coast_dist": 263983.618394
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1.98865,
+          59.5465361
+        ]
+      },
+      "properties": {
+        "platform_id": "375092",
+        "name": "KNELER B",
+        "operator": "Aker BP ASA",
+        "coast_dist": 164737.635721
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.5757361,
+          61.0393778
+        ]
+      },
+      "properties": {
+        "platform_id": "371482",
+        "name": "FRAM B1",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 50019.2418795
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.4099417,
+          59.1995472
+        ]
+      },
+      "properties": {
+        "platform_id": "430724",
+        "name": "BALDER SDU D",
+        "operator": "Vår Energi ASA",
+        "coast_dist": 139212.90521
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.2488194,
+          66.078325
+        ]
+      },
+      "properties": {
+        "platform_id": "364789",
+        "name": "NORNE G",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 147134.825949
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.2530806,
+          64.2720611
+        ]
+      },
+      "properties": {
+        "platform_id": "287737",
+        "name": "NJORD STL",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 71952.3854194
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.1196111,
+          61.2759306
+        ]
+      },
+      "properties": {
+        "platform_id": "281577",
+        "name": "34/7-I-1 H TORDIS I-1",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 130905.132942
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.0190694,
+          59.5478167
+        ]
+      },
+      "properties": {
+        "platform_id": "375056",
+        "name": "KNELER A",
+        "operator": "Aker BP ASA",
+        "coast_dist": 163061.706681
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.6221389,
+          64.9708056
+        ]
+      },
+      "properties": {
+        "platform_id": "278973",
+        "name": "ÅSGARD Z",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 121514.273959
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1.9998972,
+          61.3412556
+        ]
+      },
+      "properties": {
+        "platform_id": "278021",
+        "name": "STATFJORD ØST M",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 137678.280234
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.9589222,
+          61.3413222
+        ]
+      },
+      "properties": {
+        "platform_id": "403414",
+        "name": "GJØA D",
+        "operator": "Neptune Energy Norge AS",
+        "coast_dist": 33096.4036733
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.5891222,
+          61.4350278
+        ]
+      },
+      "properties": {
+        "platform_id": "424989",
+        "name": "VISUND NORD ITS",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 106992.20977
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.9000778,
+          60.3544889
+        ]
+      },
+      "properties": {
+        "platform_id": "281745",
+        "name": "OSEBERG SØR J",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 105250.796782
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.2297278,
+          61.1672528
+        ]
+      },
+      "properties": {
+        "platform_id": "439911",
+        "name": "GULLFAKS OLS-2",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 123304.442654
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.1193278,
+          61.2762972
+        ]
+      },
+      "properties": {
+        "platform_id": "281549",
+        "name": "34/7-I-10 H TORDIS I-10",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 130927.663295
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.1193444,
+          61.2761722
+        ]
+      },
+      "properties": {
+        "platform_id": "281661",
+        "name": "34/7-I-11 H TORDIS I-11",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 130924.194056
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.2015222,
+          64.2709861
+        ]
+      },
+      "properties": {
+        "platform_id": "284685",
+        "name": "6407/7-A-1 H",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 73848.2951898
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.7127222,
+          64.3608889
+        ]
+      },
+      "properties": {
+        "platform_id": "391161",
+        "name": "6407/9-D-3 H",
+        "operator": "OKEA ASA",
+        "coast_dist": 63938.1141555
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.2024167,
+          64.2710889
+        ]
+      },
+      "properties": {
+        "platform_id": "284769",
+        "name": "6407/7-A-11 H",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 73820.7682698
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.4596306,
+          61.3700556
+        ]
+      },
+      "properties": {
+        "platform_id": "283061",
+        "name": "34/8-A-25 H/AH",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 113217.507566
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.0585556,
+          59.5815611
+        ]
+      },
+      "properties": {
+        "platform_id": "375130",
+        "name": "25/4-J-2 H",
+        "operator": "Aker BP ASA",
+        "coast_dist": 161509.115051
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1.6594278,
+          61.1674833
+        ]
+      },
+      "properties": {
+        "platform_id": "286449",
+        "name": "UK-NL",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 136617.702176
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.1412139,
+          61.3892583
+        ]
+      },
+      "properties": {
+        "platform_id": "417223",
+        "name": "VIGDIS H",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 130328.832391
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.1000722,
+          66.0447472
+        ]
+      },
+      "properties": {
+        "platform_id": "279337",
+        "name": "NORNE F",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 152548.407793
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.4597361,
+          61.3702194
+        ]
+      },
+      "properties": {
+        "platform_id": "282697",
+        "name": "34/8-A-2 H",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 113212.88696
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.7296,
+          64.2631639
+        ]
+      },
+      "properties": {
+        "platform_id": "434044",
+        "name": "ROGN SØR MANIFOLD",
+        "operator": "OKEA ASA",
+        "coast_dist": 55077.6010688
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1.9865222,
+          61.3294028
+        ]
+      },
+      "properties": {
+        "platform_id": "277993",
+        "name": "STATFJORD ØST L",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 138379.711914
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.9458889,
+          65.0161111
+        ]
+      },
+      "properties": {
+        "platform_id": "278833",
+        "name": "ÅSGARD S",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 144564.503602
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.0578667,
+          66.0137194
+        ]
+      },
+      "properties": {
+        "platform_id": "279281",
+        "name": "NORNE D",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 153537.690931
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.2020083,
+          64.2708139
+        ]
+      },
+      "properties": {
+        "platform_id": "285189",
+        "name": "6407/7-A-6 H",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 73817.9340348
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.4083806,
+          59.1432028
+        ]
+      },
+      "properties": {
+        "platform_id": "426277",
+        "name": "SVALIN C",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 139974.092997
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.7958167,
+          64.4002639
+        ]
+      },
+      "properties": {
+        "platform_id": "277853",
+        "name": "DRAUGEN B",
+        "operator": "OKEA ASA",
+        "coast_dist": 64980.6011221
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1.9251111,
+          61.43425
+        ]
+      },
+      "properties": {
+        "platform_id": "278469",
+        "name": "STATFJORD NORD E",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 142203.977802
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.2012444,
+          64.2709861
+        ]
+      },
+      "properties": {
+        "platform_id": "285329",
+        "name": "NJORD SDU-1",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 73859.0026907
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.9907167,
+          64.7797389
+        ]
+      },
+      "properties": {
+        "platform_id": "377726",
+        "name": "TYRIHANS D",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 121969.449856
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.3359889,
+          65.3618889
+        ]
+      },
+      "properties": {
+        "platform_id": "283593",
+        "name": "HEIDRUN D",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 158994.386679
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.1167306,
+          61.2757861
+        ]
+      },
+      "properties": {
+        "platform_id": "281689",
+        "name": "34/7-I-4 H TORDIS I-4",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 131053.892267
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.3330278,
+          66.2346306
+        ]
+      },
+      "properties": {
+        "platform_id": "417781",
+        "name": "DOMPAP S",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 147650.973979
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.0578278,
+          59.5817972
+        ]
+      },
+      "properties": {
+        "platform_id": "375168",
+        "name": "25/4-J-1 H",
+        "operator": "Aker BP ASA",
+        "coast_dist": 161554.369358
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.0560333,
+          66.0144139
+        ]
+      },
+      "properties": {
+        "platform_id": "279253",
+        "name": "NORNE C",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 153636.859455
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.0117278,
+          64.7898611
+        ]
+      },
+      "properties": {
+        "platform_id": "377689",
+        "name": "TYRIHANS C",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 122228.838359
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.1171111,
+          61.276175
+        ]
+      },
+      "properties": {
+        "platform_id": "281633",
+        "name": "34/7-I-3 H TORDIS I-3",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 131041.901028
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.7308417,
+          64.2624722
+        ]
+      },
+      "properties": {
+        "platform_id": "284125",
+        "name": "6407/9-E-1 H",
+        "operator": "OKEA ASA",
+        "coast_dist": 54979.8459911
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1.9563333,
+          61.4447222
+        ]
+      },
+      "properties": {
+        "platform_id": "278497",
+        "name": "STATFJORD NORD F",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 140652.759927
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1.9141667,
+          61.4473611
+        ]
+      },
+      "properties": {
+        "platform_id": "278441",
+        "name": "STATFJORD NORD D",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 142919.299129
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.378375,
+          59.1778556
+        ]
+      },
+      "properties": {
+        "platform_id": "430668",
+        "name": "BALDER SDU B",
+        "operator": "Vår Energi ASA",
+        "coast_dist": 141233.713225
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1.9237056,
+          59.57655
+        ]
+      },
+      "properties": {
+        "platform_id": "375245",
+        "name": "BOA",
+        "operator": "Aker BP ASA",
+        "coast_dist": 168905.825925
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.7384083,
+          64.3107111
+        ]
+      },
+      "properties": {
+        "platform_id": "356244",
+        "name": "DRAUGEN C",
+        "operator": "OKEA ASA",
+        "coast_dist": 58907.5125535
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.2019889,
+          64.2711722
+        ]
+      },
+      "properties": {
+        "platform_id": "284909",
+        "name": "6407/7-A-13 H",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 73842.8780225
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.3644861,
+          59.4575278
+        ]
+      },
+      "properties": {
+        "platform_id": "287177",
+        "name": "JOTUN SSIV",
+        "operator": "Vår Energi ASA",
+        "coast_dist": 142294.241637
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.2017806,
+          64.2712111
+        ]
+      },
+      "properties": {
+        "platform_id": "284993",
+        "name": "6407/7-A-14 H",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 73853.5315047
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.4583111,
+          61.3704306
+        ]
+      },
+      "properties": {
+        "platform_id": "284461",
+        "name": "34/8-A-13 H",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 113290.250023
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.2784,
+          59.6563694
+        ]
+      },
+      "properties": {
+        "platform_id": "376298",
+        "name": "25/4-E1 H VILJE E1",
+        "operator": "Aker BP ASA",
+        "coast_dist": 151079.488391
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1.9089861,
+          61.2968083
+        ]
+      },
+      "properties": {
+        "platform_id": "287205",
+        "name": "STATFJ-NORD SSIV",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 142430.063968
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.2145167,
+          56.5483528
+        ]
+      },
+      "properties": {
+        "platform_id": "281157",
+        "name": "EKOFISK BS3",
+        "operator": "ConocoPhillips Skandinavia AS",
+        "coast_dist": 262873.847626
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.5573889,
+          57.8241833
+        ]
+      },
+      "properties": {
+        "platform_id": "404044",
+        "name": "YME SLS",
+        "operator": "Repsol Norge AS",
+        "coast_dist": 102303.896143
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.1775167,
+          56.4949694
+        ]
+      },
+      "properties": {
+        "platform_id": "426442",
+        "name": "EKOFISK VB-T",
+        "operator": "ConocoPhillips Skandinavia AS",
+        "coast_dist": 269025.259571
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.2024111,
+          64.2709028
+        ]
+      },
+      "properties": {
+        "platform_id": "285245",
+        "name": "6407/7-A-8 H",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 73808.4136225
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.6815944,
+          60.4681194
+        ]
+      },
+      "properties": {
+        "platform_id": "374139",
+        "name": "OSEBERG DELTA",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 113585.211646
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.9583472,
+          61.3408417
+        ]
+      },
+      "properties": {
+        "platform_id": "403356",
+        "name": "GJØA C",
+        "operator": "Neptune Energy Norge AS",
+        "coast_dist": 33119.2640602
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.7308611,
+          64.2620194
+        ]
+      },
+      "properties": {
+        "platform_id": "284153",
+        "name": "6407/9-E-2 H",
+        "operator": "OKEA ASA",
+        "coast_dist": 54938.7561929
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.2625,
+          65.3127778
+        ]
+      },
+      "properties": {
+        "platform_id": "278049",
+        "name": "HEIDRUN B",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 160744.848972
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.2120056,
+          56.5381333
+        ]
+      },
+      "properties": {
+        "platform_id": "409166",
+        "name": "EKOFISK VA",
+        "operator": "ConocoPhillips Skandinavia AS",
+        "coast_dist": 263884.047073
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.2026389,
+          64.2709444
+        ]
+      },
+      "properties": {
+        "platform_id": "283761",
+        "name": "6407/7-A-9 H",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 73802.4457396
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.1176444,
+          61.2764556
+        ]
+      },
+      "properties": {
+        "platform_id": "281717",
+        "name": "34/7-I-5 H TORDIS I-5",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 131019.628789
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.1175472,
+          61.3970917
+        ]
+      },
+      "properties": {
+        "platform_id": "430070",
+        "name": "VIGDIS NORDØST T",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 131645.298059
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.3687194,
+          57.7563
+        ]
+      },
+      "properties": {
+        "platform_id": "403775",
+        "name": "YME BETA",
+        "operator": "Repsol Norge AS",
+        "coast_dist": 115728.128143
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.5169917,
+          61.0854694
+        ]
+      },
+      "properties": {
+        "platform_id": "285133",
+        "name": "FRAM A2",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 53439.4861037
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1.9651222,
+          59.4960611
+        ]
+      },
+      "properties": {
+        "platform_id": "408227",
+        "name": "VOLUND",
+        "operator": "Aker BP ASA",
+        "coast_dist": 165273.093351
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.2015222,
+          64.2709861
+        ]
+      },
+      "properties": {
+        "platform_id": "285385",
+        "name": "NJORD SDU-2",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 73848.2951898
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.7244667,
+          64.3423333
+        ]
+      },
+      "properties": {
+        "platform_id": "280989",
+        "name": "DRAUGEN D",
+        "operator": "OKEA ASA",
+        "coast_dist": 61996.934239
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.4595111,
+          61.3702833
+        ]
+      },
+      "properties": {
+        "platform_id": "283145",
+        "name": "34/8-A-4 H/AH",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 113225.290888
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.7238417,
+          64.342425
+        ]
+      },
+      "properties": {
+        "platform_id": "284069",
+        "name": "6407/9-D-1 H",
+        "operator": "OKEA ASA",
+        "coast_dist": 62024.3311886
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.4595167,
+          61.3700306
+        ]
+      },
+      "properties": {
+        "platform_id": "283033",
+        "name": "34/8-A-24 H",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 113223.432971
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.7036556,
+          64.2564917
+        ]
+      },
+      "properties": {
+        "platform_id": "432093",
+        "name": "6407/9-E-4 H",
+        "operator": "OKEA ASA",
+        "coast_dist": 55248.4571218
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.2011417,
+          64.2713472
+        ]
+      },
+      "properties": {
+        "platform_id": "285077",
+        "name": "6407/7-A-17 H",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 73887.3422
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.2508278,
+          66.0776278
+        ]
+      },
+      "properties": {
+        "platform_id": "364827",
+        "name": "NORNE H",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 147024.851426
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1.99845,
+          59.5675167
+        ]
+      },
+      "properties": {
+        "platform_id": "375206",
+        "name": "ALVHEIM FPSO",
+        "operator": "Aker BP ASA",
+        "coast_dist": 164573.042468
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.8458639,
+          64.3473111
+        ]
+      },
+      "properties": {
+        "platform_id": "425460",
+        "name": "DRAUGEN FSL",
+        "operator": "OKEA ASA",
+        "coast_dist": 58773.5501291
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.1061583,
+          61.3797833
+        ]
+      },
+      "properties": {
+        "platform_id": "360009",
+        "name": "34/7-C-5 H VIGDIS C5",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 132140.80672
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.4972472,
+          65.1631528
+        ]
+      },
+      "properties": {
+        "platform_id": "405219",
+        "name": "MOR-B",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 170054.326252
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1.9727778,
+          61.3439444
+        ]
+      },
+      "properties": {
+        "platform_id": "277909",
+        "name": "STATFJORD ØST K",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 139134.041347
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.2009333,
+          64.2713694
+        ]
+      },
+      "properties": {
+        "platform_id": "285105",
+        "name": "6407/7-A-18 H",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 73896.8720582
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.3176306,
+          65.3257639
+        ]
+      },
+      "properties": {
+        "platform_id": "279533",
+        "name": "HEIDRUN TEMPLATE",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 158657.34078
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.3815556,
+          65.3205528
+        ]
+      },
+      "properties": {
+        "platform_id": "287681",
+        "name": "HEIDRUN STL-I",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 155634.412195
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.9019556,
+          65.0334028
+        ]
+      },
+      "properties": {
+        "platform_id": "278861",
+        "name": "ÅSGARD R",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 147310.767229
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.73205,
+          64.26225
+        ]
+      },
+      "properties": {
+        "platform_id": "391213",
+        "name": "6407/9-E-3 H",
+        "operator": "OKEA ASA",
+        "coast_dist": 54925.0968853
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.6856056,
+          60.5376278
+        ]
+      },
+      "properties": {
+        "platform_id": "363907",
+        "name": "OSEBERG VESTFLANKE",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 111293.130464
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.1578194,
+          61.19145
+        ]
+      },
+      "properties": {
+        "platform_id": "438710",
+        "name": "GULLFAKS OLS-1",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 127443.975815
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.2021889,
+          64.2711333
+        ]
+      },
+      "properties": {
+        "platform_id": "284797",
+        "name": "6407/7-A-12 H",
+        "operator": "Equinor Energy AS",
+        "coast_dist": 73832.5444227
+      }
+    }
+  ]
+}
