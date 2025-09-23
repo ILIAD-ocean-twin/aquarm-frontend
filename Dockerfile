@@ -13,14 +13,6 @@ RUN npm ci
 # Copy source code
 COPY . .
 
-# Build arguments for environment variables
-ARG VITE_API_ENDPOINT
-ARG VITE_RAZZER_URL
-
-# Set environment variables
-ENV VITE_API_ENDPOINT=${VITE_API_ENDPOINT}
-ENV VITE_RAZZER_URL=${VITE_RAZZER_URL}
-
 # Build the application
 RUN npm run build
 
@@ -30,8 +22,15 @@ FROM nginx:alpine
 # Copy built assets from builder stage
 COPY --from=builder /app/dist /usr/share/nginx/html
 
+# Copy all static assets from public
+COPY --from=builder /app/public/ /usr/share/nginx/html/
+
 # Copy custom nginx configuration
 COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
+
+# Add entrypoint script to generate config.js from env vars
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
 # Expose port 3000 to match the development setup
 EXPOSE 3000
@@ -39,6 +38,8 @@ EXPOSE 3000
 # Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
     CMD curl -f http://localhost:3000 || exit 1
+
+ENTRYPOINT ["/entrypoint.sh"]
 
 # Start nginx
 CMD ["nginx", "-g", "daemon off;"]

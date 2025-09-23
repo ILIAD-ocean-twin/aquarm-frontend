@@ -10,5 +10,23 @@ export const mapProj = new Projection({
   units: "m"
 })
 
-export const API_URL = import.meta.env.VITE_API_ENDPOINT;
-export const RAZZER_URL = import.meta.env.VITE_RAZZER_ENDPOINT;
+interface FrontendConfig {
+  API_URL: string;
+  RAZZER_URL: string;
+}
+
+declare global {
+  interface Window {
+    config: FrontendConfig;
+  }
+}
+
+const apiUrl = typeof window !== "undefined" && window.config?.VITE_API_URL
+  ? window.config.VITE_API_URL
+  : import.meta.env.VITE_API_URL;
+const razzerUrl = typeof window !== "undefined" && window.config?.VITE_RAZZER_URL
+  ? window.config.VITE_RAZZER_URL
+  : import.meta.env.VITE_RAZZER_URL;
+
+export const API_URL = apiUrl;
+export const RAZZER_URL = razzerUrl;

@@ -46,20 +46,32 @@ You can deploy the `dist` folder to any static host provider (netlify, surge, no
 
 ## Docker
 
-### Build
+### Build, Local Development
 
 ```bash
 $ docker buildx build --tag aquaculture-pilot .
 ```
 
-### Run
+### Run, Local Development
 
 ```bash
 $ docker run \
     --interactive \
     --tty \
-    --env VITE_API_ENDPOINT=http://localhost:5001/api \
+    --env VITE_API_URL=http://localhost:5001/api \
     --env VITE_RAZZER_URL=http://localhost:5001/api \
+    --publish 3000:3000 \
+    aquaculture-pilot
+```
+
+### Run, With Production Backend
+
+```bash
+$ docker run \
+    --interactive \
+    --tty \
+    --env VITE_API_URL=https://aquaculture-demo.teinekroken.no \
+    --env VITE_RAZZER_URL=https://aquaculture-demo.teinekroken.no/razzer \
     --publish 3000:3000 \
     aquaculture-pilot
 ```
