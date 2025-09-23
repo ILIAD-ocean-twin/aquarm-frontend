@@ -24,7 +24,7 @@ export class WeatherWarningLayer implements IDataLayer {
 
   constructor(dataUrl?: string) {
     let style = WEATHER_WARNING_STYLE;
-    this._url = dataUrl ?? 'https://api.met.no/weatherapi/metalerts/1.1/.json';
+    this._url = dataUrl ?? 'https://api.met.no/weatherapi/metalerts/2.0/current.json';
     this.layer = new VectorLayer({
       visible: false,
       style: (feature) => {
