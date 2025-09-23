@@ -41,4 +41,7 @@ jobs:
         push: true
         tags: ${{ steps.meta-main.outputs.tags }}
         labels: ${{ steps.meta-main.outputs.labels }}
+        build-args: |
+          VITE_API_ENDPOINT=https://aquaculture-demo.teinekroken.no
+          VITE_RAZZER_URL=https://aquaculture-demo.teinekroken.no/razzer
 
