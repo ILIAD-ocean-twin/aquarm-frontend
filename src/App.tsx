@@ -20,85 +20,42 @@ import { JellyfishLayer } from './layers/JellyfishLayer';
 import { AlgaeLayer } from './layers/AlgaeLayer';
 import { OilLayer } from './layers/OilLayer';
 import { OffshoreLayer } from './layers/OffshoreLayer';
+import { TemperatureLayer } from './layers/TemperatureLayer';
 
 
 const App: Component = () => {
   const [state, setState] = useState();
-  const [data] = createResource(() => [state.time.year, state.time.week], fetchBasic, { initialValue: [] })
-  const selectedData = () => data().filter(d => state.selectedSites.includes(d.id));
-  const numSelected = () => state.selectedSites.length;
-
-  const offshoreLayer = new OffshoreLayer();
 
   const layers: IDataLayer[] = [
-    // new JellyfishLayer(state.time.year, state.time.week),
-    // new WeatherWarningLayer(),
-    offshoreLayer,
-    new MunicipalityLayer(),
-    new ProductionAreaLayer(),
-    // new OilLayer(),
-    new OceanTempLayer(state.time.year, state.time.week),
-    new StormRatingLayer(),
-    new CurrentRatingLayer(),
-    new TemperatureRatingLayer(),
-    new SalinityRatingLayer(),
-    new TrajectoryLayer(),
-    new AlgaeLayer(),
+    new TemperatureLayer(),
+    //new AlgaeLayer(),
   ];
 
   onMount(() => {
-    fetchOimTerms()
-      .then(terms => setState("oim", terms))
+    // fetchOimTerms()
+    //   .then(terms => setState("oim", terms))
   })
-
-  createEffect(() => {
-    const orgs = [...data().reduce((agg, cur) => {
-      cur.organizations?.forEach(org => agg.add(org));
-      return agg;
-    }, new Set<string>())];
-
-    setState("allOrganizations", orgs);
-  })
-
-  createEffect(() => offshoreLayer.setData(data()))
 
   return (
     <>
       <nav class="font-nunito bg-black/20 text-white py-1">
         <div class="flex justify-between container mx-auto">
-          <div>ILIAD Aquaculture RM Pilot</div>
+          <div>ILIAD Marine Protected Areas Pilot</div>
           <div class="grow text-center">
-            <span class="text-amber-400"> Intended for demonstration only: </span>
-            <span class="text-amber-500"> There may be errors and inaccuracies present in the datasets and visualizations</span>
+            <span class="text-amber-400/70"> Intended for demonstration only: </span>
+            <span class="text-amber-500/70"> There may be errors and inaccuracies present in the datasets and visualizations</span>
           </div>
         </div>
       </nav>
 
       <div class="container mx-auto mt-6 font-nunito">
         <div class="h-[810px]">
-          <MapContainer data={data} dataLayers={layers} />
+          <MapContainer dataLayers={layers} center={[-2.0, 54.5]} zoom={6} />
         </div>
-
-        <Switch>
-          <Match when={numSelected() == 0}>
-            <OverviewDetails data={data} />
-          </Match>
-          <Match when={numSelected() == 1}>
-            <SingleSiteDetails site={selectedData()[0]} />
-          </Match>
-          <Match when={numSelected() > 1}>
-            <MultiSelectDetails sites={selectedData} />
-          </Match>
-        </Switch>
       </div>
     </>
   );
 };
-
-const fetchBasic = async (time: number[]) =>
-  fetch(API_URL + `/basic-all/${time[0]}/${time[1]}`)
-    .then(d => d.json() as Promise<BasicWeek[]>)
-    .then(d => d.filter(bw => bw.placement == "SJØ"));
 
 const fetchOimTerms = async () =>
   fetch(API_URL + "/oim")

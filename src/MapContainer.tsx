@@ -1,11 +1,10 @@
-import { onMount, type Component, Accessor, createEffect, onCleanup, on, createSignal, Switch, Match, ParentComponent, For, Show } from 'solid-js';
+import { onMount, type Component, createEffect, onCleanup, on, createSignal, Switch, Match, ParentComponent, For, Show } from 'solid-js';
 import TileLayer from 'ol/layer/Tile';
 import Map from 'ol/Map';
 import View from 'ol/View';
 import { OSM, XYZ } from 'ol/source';
 import { defaults } from 'ol/control'
 import { transform } from 'ol/proj';
-import { BasicWeek } from './types';
 import { AquacultureSitesLayer } from './layers/AquacultureSitesLayer';
 import { useState } from './state';
 import { IDataLayer } from './layers/IDataLayer';
@@ -14,14 +13,14 @@ import { BsBrightnessHighFill, BsMoonFill } from 'solid-icons/bs';
 
 
 interface MapContainerProps {
-  data: Accessor<BasicWeek[]>,
-  dataLayers: IDataLayer[]
+  dataLayers: IDataLayer[],
+  center?: [number, number],
+  zoom?: number
 }
 
-export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers }) => {
+export const MapContainer: Component<MapContainerProps> = ({ dataLayers, center, zoom }) => {
   const [state, setState] = useState();
 
-  const [filteredData, setFilteredData] = createSignal<BasicWeek[]>([]);
   const [hoveredFeature, setHoveredFeature] = createSignal<any>(null);
 
   let map: Map;
@@ -50,8 +49,8 @@ export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers })
         darkLayer
       ],
       view: new View({
-        center: transform([12.9, 65.5], 'EPSG:4326', 'EPSG:3857'),
-        zoom: 5
+        center: transform(center ?? [12.9, 65.5], 'EPSG:4326', 'EPSG:3857'),
+        zoom: zoom ?? 5
       }),
       target: mapElement,
       controls: defaults({
@@ -142,17 +141,8 @@ export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers })
   createEffect(() => {
     const [year, week] = [state.time.year, state.time.week];
     const layers = dataLayers.filter(dl => dl.updates);
-    layers.forEach(l => l.update(year, week));
+    layers.forEach(l => l.update({ year, week }));
   })
-
-  createEffect(on(filteredData, d => {
-    if (map && d) {
-      const ids = selectedFeatures.map(f => f.get("siteId"));
-      selectedFeatures = [];
-      sitesLayer.updateSource(d, ids);
-      selectedFeatures = sitesLayer.layer.getSource().getFeatures().filter(f => ids.includes(f.get("siteId")));
-    }
-  }))
 
   createEffect(() => {
     const visible = state.showSites
@@ -166,26 +156,6 @@ export const MapContainer: Component<MapContainerProps> = ({ data, dataLayers })
       map.render();
     }
   })
-
-  createEffect((prev) => {
-    const orgs = state.filters.organizations;
-    if (orgs !== prev || !filteredData().length) {
-      if (!orgs.length) {
-        setFilteredData(data());
-      } else {
-        setFilteredData(data().filter(bw => !bw.organizations.every(o => !state.filters.organizations.includes(o))));
-      }
-    }
-    return orgs;
-  }, state.filters.organizations)
-
-  createEffect(on(data, d => {
-    if (!state.filters.organizations.length) {
-      setFilteredData(d);
-    } else {
-      setFilteredData(d.filter(bw => !bw.organizations.every(o => !state.filters.organizations.includes(o))));
-    }
-  }))
 
   return (
     <div ref={mapElement} class="w-full h-full rounded-2xl shadow-lg relative">

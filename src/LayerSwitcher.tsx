@@ -67,45 +67,21 @@ const LayerEntry: Component<{ layer: IDataLayer }> = (props) => {
 const Filters: Component = () => {
   const [state, setState] = useState();
 
-  const setSelectedOrgs = (orgs: string[]) => {
-    setState("filters", "organizations", orgs)
-  }
+  const today = new Date().toISOString().split('T')[0];
 
   return (
     <div class="flex flex-col divide-y divide-slate-600 bg-[#2e2e37] text-[#e9e9f4]">
-      <div class="flex items-center h-12 pl-4">
-        <h2 class="w-14 inline-block">Year</h2>
-        <input
-          class="bg-slate-500 p-1 w-20 rounded"
-          type='number'
-          value={state.time.year}
-          min={2012}
-          max={2025}
-          onChange={e => setState("time", "year", e.target.valueAsNumber)}
-        />
-      </div>
 
-      <div class="flex items-center h-12 pl-4">
-        <h2 class="w-14 inline-block">Week</h2>
+      <div class="flex items-center gap-4 h-12 p-4">
+        <h2 class="select-none">Date:</h2>
         <input
-          class="bg-slate-500 p-1 w-20 rounded"
-          type="number"
-          value={state.time.week}
-          min={1}
-          max={52}
-          onChange={e => setState("time", "week", e.target.valueAsNumber)}
+          class="bg-slate-500 p-1 rounded grow"
+          type="date"
+          name="selected-date"
+          value={today}
+          min="2025-01-01"
+          max={today}
         />
-      </div>
-
-      <div class="flex items-center h-12 pl-4">
-        <label class="select-none">
-          Show fallow:
-          <input
-            class="ml-2 cursor-pointer"
-            checked={state.filters.fallow}
-            onchange={() => setState("filters", "fallow", !state.filters.fallow)}
-            type="checkbox" />
-        </label>
       </div>
 
       <div class="flex items-center h-12 pl-4">
@@ -117,13 +93,6 @@ const Filters: Component = () => {
             onchange={() => setState("showSites", !state.showSites)}
             type="checkbox" />
         </label>
-      </div>
-
-      <div class="flex items-center pl-4 py-2 text-black">
-        <div>
-          <h2 class="text-white mb-1">Owner organization:</h2>
-          <Select class='bg-slate-500 rounded text-sm max-w-56' multiple {...createOptions(state.allOrganizations)} onChange={setSelectedOrgs} />
-        </div>
       </div>
     </div>
   )

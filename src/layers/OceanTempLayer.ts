@@ -37,17 +37,17 @@ export class OceanTempLayer implements IDataLayer {
 
   public async setVisible(visible: boolean): Promise<void> {
     if (visible && !this._initiated) {
-      this.update(this._year, this._week);
+      this.update({ year: this._year, week: this._week });
       this._initiated = true;
     }
     this.visible = visible;
     this.layer.setVisible(visible);
   }
 
-  public update(year: number, week: number): void {
-    this._year = year;
-    this._week = week;
-    this.layer.setSource(this.getOceanTempSource(year, week));
+  public update(params: { year: number, week: number }): void {
+    this._year = params.year;
+    this._week = params.week;
+    this.layer.setSource(this.getOceanTempSource(params));
   }
 
   public getLegend(): HTMLElement {
@@ -56,8 +56,8 @@ export class OceanTempLayer implements IDataLayer {
     return img;
   }
 
-  private getOceanTempSource(year: number, week: number): Source {
-    const date = weekToDate(year, week);
+  private getOceanTempSource(params: { year: number, week: number }): Source {
+    const date = weekToDate(params.year, params.week);
     const month = (date.getMonth() + 1).toString().padStart(2, "0");
     const day = date.getDate().toString().padStart(2, "0");
 
@@ -65,11 +65,11 @@ export class OceanTempLayer implements IDataLayer {
       attributions:
         'Sea temperature tiles © <a href="https://thredds.met.no/thredds/fou-hi/norkyst800v2.html"' +
         ' target="_blank">MET</a>',
-      url: `https://thredds.met.no/thredds/wms/fou-hi/norkyst800m/NorKyst-800m_ZDEPTHS_avg.an.${year}${month}${day}00.nc`,
+      url: `https://thredds.met.no/thredds/wms/fou-hi/norkyst800m/NorKyst-800m_ZDEPTHS_avg.an.${params.year}${month}${day}00.nc`,
       params: {
         LAYERS: sourceLayer,
         elevation: depth,
-        time: `${year}-${month}-${day}T12:00:00.000Z`,
+        time: `${params.year}-${month}-${day}T12:00:00.000Z`,
         TRANSPARENT: true,
         STYLES: `boxfill/${style}`,
         COLORSCALERANGE: colorScale,
