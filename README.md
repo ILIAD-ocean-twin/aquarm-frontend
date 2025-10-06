@@ -4,7 +4,7 @@ This repository contains the source code for the frontend of the AquaRM pilot. I
 
 ## Env Files
 
-For development (and production), you will need the environment files `env.development` and  `env.production`. In these files `VITE_API_URL` and `VITE_RAZZER_URL` must be defined.
+For development (and production), you will need the environment files `.env.development` and  `.env.production`. In these files `VITE_API_URL` and `VITE_RAZZER_URL` must be defined.
 
 ## Usage, Bare Metal
 
