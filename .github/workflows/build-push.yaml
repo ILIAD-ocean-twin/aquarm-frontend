@@ -24,14 +24,16 @@ jobs:
       - name: Set dynamic image tags
         id: set-tags
         run: |
-          # Sanitize branch for Docker tag
-          SAFE_BRANCH=$(echo "${GITHUB_REF_NAME}" | tr '/' '-' | tr -cd '[:alnum:]-_.')
-          SHORT_SHA=$(echo "${GITHUB_SHA}" | cut -c1-7)
+          # Sanitize branch for Docker tag (slashes -> -, remove invalid chars, lowercase)
+          SAFE_BRANCH=$(echo "${GITHUB_REF_NAME}" | tr '/' '-' | tr -cd '[:alnum:]-_.' | tr '[:upper:]' '[:lower:]')
+          SHORT_SHA=${GITHUB_SHA::7}
 
+          # Lowercase repository name
+          REPO_NAME=$(echo "${{ env.IMAGE_NAME }}" | tr '[:upper:]' '[:lower:]')
           if [[ "${GITHUB_REF_NAME}" == "main" ]]; then
-            echo "DOCKER_TAGS=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:sha-${SHORT_SHA},${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest" >> $GITHUB_ENV
+            echo "DOCKER_TAGS=${{ env.REGISTRY }}/${REPO_NAME}:sha-${SHORT_SHA},${{ env.REGISTRY }}/${REPO_NAME}:latest" >> $GITHUB_ENV
           else
-            echo "DOCKER_TAGS=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-${SAFE_BRANCH}:sha-${SHORT_SHA},${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-${SAFE_BRANCH}:latest" >> $GITHUB_ENV
+            echo "DOCKER_TAGS=${{ env.REGISTRY }}/${REPO_NAME}-${SAFE_BRANCH}:sha-${SHORT_SHA},${{ env.REGISTRY }}/${REPO_NAME}-${SAFE_BRANCH}:latest" >> $GITHUB_ENV
           fi
       - name: Extract metadata (labels only)
         id: meta
