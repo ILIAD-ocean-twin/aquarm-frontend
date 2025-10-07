@@ -19,7 +19,8 @@ build-docker:
         SAFE_BRANCH=$(echo "$CI_COMMIT_BRANCH" | tr '/' '-' | tr -cd '[:alnum:]-_.')
         export DOCKER_IMAGE_NAME="$CI_REGISTRY_IMAGE:$SAFE_BRANCH:sha-$CI_COMMIT_SHORT_SHA"
       fi
-    - echo "Building image: $DOCKER_IMAGE_NAME"
+    - |
+      echo "Building image: $DOCKER_IMAGE_NAME"
     # Build and push
     - docker build --pull -t "$DOCKER_IMAGE_NAME" .
     - docker push "$DOCKER_IMAGE_NAME"
