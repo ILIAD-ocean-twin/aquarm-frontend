@@ -50,10 +50,9 @@ export class HabitatSuitabilityLayer implements IDataLayer {
     }
 
     public getLegend(): HTMLElement {
-        return undefined;
-        // const img = document.createElement("img");
-        // img.src = "/sea_temperature_legend.png";
-        // return img;
+        const img = document.createElement("img");
+        img.src = "https://ows.emodnet.eu/geoserver/ows?service=WMS&request=GetLegendGraphic&version=1.1.0&format=image%2Fpng&layer=biology%3Aoccurrence_probability_fish";
+        return img;
     }
 
     private getSuitabilitySource(date: string): Source {
@@ -63,8 +62,6 @@ export class HabitatSuitabilityLayer implements IDataLayer {
         });
 
         options.dimensions.time = `${date}T00:00:00.000Z`;
-
-        console.log(options);
 
         return new WMTS({
             ...options,
