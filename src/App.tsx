@@ -21,6 +21,7 @@ import { AlgaeLayer } from './layers/AlgaeLayer';
 import { OilLayer } from './layers/OilLayer';
 import { OffshoreLayer } from './layers/OffshoreLayer';
 import { TemperatureLayer } from './layers/TemperatureLayer';
+import { CMEMSChlorophyllLayer } from './layers/CMEMCSClorophyllLayer';
 
 
 const App: Component = () => {
@@ -28,7 +29,7 @@ const App: Component = () => {
 
   const layers: IDataLayer[] = [
     new TemperatureLayer(state.date),
-    //new AlgaeLayer(),
+    new CMEMSChlorophyllLayer(state.date)
   ];
 
   onMount(() => {
