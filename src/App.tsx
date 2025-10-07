@@ -8,6 +8,7 @@ import { CMEMSChlorophyllLayer } from './layers/CMEMCSClorophyllLayer';
 import { HabitatSuitabilityLayer } from './layers/HabitatSuitabilityLayer';
 import { ESRISatelliteImageryLayer } from './layers/ESRISatelliteImageryLayer';
 import { BathymetryLayer } from './layers/BathymetryLayer';
+import { MPALayer } from './layers/MPALayer';
 
 
 const App: Component = () => {
@@ -18,7 +19,8 @@ const App: Component = () => {
     new CMEMSChlorophyllLayer(state.date),
     new HabitatSuitabilityLayer(state.date),
     new ESRISatelliteImageryLayer(),
-    new BathymetryLayer()
+    new BathymetryLayer(),
+    new MPALayer()
   ];
 
   onMount(() => {
