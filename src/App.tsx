@@ -1,29 +1,13 @@
-import { type Component, createEffect, Switch, Match, createResource, onMount } from 'solid-js';
+import { type Component, onMount } from 'solid-js';
 import { MapContainer } from './MapContainer';
-import { BasicWeek, OimEntry } from './types';
-import { SingleSiteDetails } from './SingleSiteDetails';
-import { OverviewDetails } from './OverviewDetails';
-import { MultiSelectDetails } from './MultiSelectDetails';
 import { useState } from './state';
 import { IDataLayer } from './layers/IDataLayer';
-import { MunicipalityLayer } from './layers/MunicipalityLayer';
-import { ProductionAreaLayer } from './layers/ProductionAreaLayer';
-import { OceanTempLayer } from './layers/OceanTempLayer';
-import { WeatherWarningLayer } from './layers/RiskLayer';
-import { TrajectoryLayer } from './layers/TrajectoryLayer';
 import { API_URL } from './constants';
-import { CurrentRatingLayer } from './layers/CurrentRatingLayer';
-import { TemperatureRatingLayer } from './layers/TemperatureRatingLayer';
-import { SalinityRatingLayer } from './layers/SalinityRatingLayer';
-import { StormRatingLayer } from './layers/StormRatingLayer';
-import { JellyfishLayer } from './layers/JellyfishLayer';
-import { AlgaeLayer } from './layers/AlgaeLayer';
-import { OilLayer } from './layers/OilLayer';
-import { OffshoreLayer } from './layers/OffshoreLayer';
 import { TemperatureLayer } from './layers/TemperatureLayer';
 import { CMEMSChlorophyllLayer } from './layers/CMEMCSClorophyllLayer';
 import { HabitatSuitabilityLayer } from './layers/HabitatSuitabilityLayer';
 import { ESRISatelliteImageryLayer } from './layers/ESRISatelliteImageryLayer';
+import { BathymetryLayer } from './layers/BathymetryLayer';
 
 
 const App: Component = () => {
@@ -33,7 +17,8 @@ const App: Component = () => {
     new TemperatureLayer(state.date),
     new CMEMSChlorophyllLayer(state.date),
     new HabitatSuitabilityLayer(state.date),
-    new ESRISatelliteImageryLayer()
+    new ESRISatelliteImageryLayer(),
+    new BathymetryLayer()
   ];
 
   onMount(() => {
