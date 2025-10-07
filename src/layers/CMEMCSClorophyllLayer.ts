@@ -64,8 +64,6 @@ export class CMEMSChlorophyllLayer implements IDataLayer {
 
         options.dimensions.time = `${date}T00:00:00.000Z`;
 
-        console.log(options);
-
         return new WMTS({
             ...options,
             attributions: "Chlorophyll from <a href='https://data.marine.copernicus.eu/product/IBI_ANALYSISFORECAST_BGC_005_004/services'>Copernicus</a>"

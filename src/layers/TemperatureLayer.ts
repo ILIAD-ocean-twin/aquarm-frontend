@@ -43,7 +43,6 @@ export class TemperatureLayer implements IDataLayer {
 
     public update(params: { date: string }): void {
         this._date = params.date;
-        console.log("updating", params.date)
         if (this._initiated) {
             const source = this.getOceanTempSource(params.date);
             this.layer.setSource(source);
@@ -64,8 +63,6 @@ export class TemperatureLayer implements IDataLayer {
         });
 
         options.dimensions.time = `${date}T00:00:00.000Z`;
-
-        console.log(options);
 
         return new WMTS({
             ...options,
