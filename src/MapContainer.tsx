@@ -139,9 +139,9 @@ export const MapContainer: Component<MapContainerProps> = ({ dataLayers, center,
   })
 
   createEffect(() => {
-    const [year, week] = [state.time.year, state.time.week];
+    const date = state.date;
     const layers = dataLayers.filter(dl => dl.updates);
-    layers.forEach(l => l.update({ year, week }));
+    layers.forEach(l => l.update({ date }));
   })
 
   createEffect(() => {

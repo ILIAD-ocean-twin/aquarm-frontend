@@ -27,7 +27,7 @@ const App: Component = () => {
   const [state, setState] = useState();
 
   const layers: IDataLayer[] = [
-    new TemperatureLayer(),
+    new TemperatureLayer(state.date),
     //new AlgaeLayer(),
   ];
 

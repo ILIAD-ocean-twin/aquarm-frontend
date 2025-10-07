@@ -67,8 +67,6 @@ const LayerEntry: Component<{ layer: IDataLayer }> = (props) => {
 const Filters: Component = () => {
   const [state, setState] = useState();
 
-  const today = new Date().toISOString().split('T')[0];
-
   return (
     <div class="flex flex-col divide-y divide-slate-600 bg-[#2e2e37] text-[#e9e9f4]">
 
@@ -78,9 +76,9 @@ const Filters: Component = () => {
           class="bg-slate-500 p-1 rounded grow"
           type="date"
           name="selected-date"
-          value={today}
+          value={state.date}
           min="2023-01-01"
-          max={today}
+          onChange={(ev) => setState("date", ev.target.value)}
         />
       </div>
 

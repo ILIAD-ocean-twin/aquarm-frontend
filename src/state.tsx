@@ -4,6 +4,7 @@ import { Filters, OimEntry, TimeSelection } from "./types";
 
 type State = {
   time: TimeSelection
+  date: string
   filters: Filters
   showSites: boolean
   selectedSites: number[]
@@ -15,6 +16,7 @@ type State = {
 
 const initialState: State = {
   time: { year: 2024, week: 1 },
+  date: new Date().toISOString().split('T')[0],
   filters: { fallow: true, organizations: [] },
   showSites: true,
   selectedSites: [],

@@ -1,5 +1,4 @@
 import TileLayer from "ol/layer/Tile";
-import TileWMS from 'ol/source/TileWMS.js';
 import WMTS from 'ol/source/WMTS';
 import Layer from "ol/layer/Layer";
 import { optionsFromCapabilities } from 'ol/source/WMTS';
@@ -8,18 +7,10 @@ import LayerRenderer from "ol/renderer/Layer";
 import Source from "ol/source/Source";
 import { IDataLayer } from "./IDataLayer";
 
-const depth = -10;
-const sourceLayer = 'temperature';
-const style = 'spectral';
-const colorScaleRange = [-2, 10];
-const colorScale = `${colorScaleRange[0]}%2C${colorScaleRange[1]}`;
-const numColorBands = 20;
-const logScale = false;
-
 
 export class TemperatureLayer implements IDataLayer {
     name = "Sea temperature";
-    description = ``;
+    description = `Ocean temperatures from <a href='https://data.marine.copernicus.eu/product/IBI_ANALYSISFORECAST_PHY_005_001/services'>Copernicus Marine Services</a>.`;
     visible: boolean = false;
     layer: Layer<Source, LayerRenderer<any>>;
     updates = true;
@@ -29,7 +20,8 @@ export class TemperatureLayer implements IDataLayer {
     _date: string;
     _capabilities: {};
 
-    constructor() {
+    constructor(date: string) {
+        this._date = date;
         this.layer = new TileLayer({
             visible: false,
             opacity: 0.5
@@ -41,8 +33,8 @@ export class TemperatureLayer implements IDataLayer {
             this.getCapabilities()
                 .then(c => this._capabilities = c)
                 .then(() => {
-                    this.update({ date: this._date });
                     this._initiated = true;
+                    this.update({ date: this._date });
                 });
         }
         this.visible = visible;
@@ -51,7 +43,8 @@ export class TemperatureLayer implements IDataLayer {
 
     public update(params: { date: string }): void {
         this._date = params.date;
-        if (this._capabilities != undefined) {
+        console.log("updating", params.date)
+        if (this._initiated) {
             const source = this.getOceanTempSource(params.date);
             this.layer.setSource(source);
         }
@@ -68,12 +61,16 @@ export class TemperatureLayer implements IDataLayer {
         const options = optionsFromCapabilities(this._capabilities, {
             layer: 'IBI_ANALYSISFORECAST_PHY_005_001/cmems_mod_ibi_phy_anfc_0.027deg-2D_PT1H-m_202411/thetao',
             matrixSet: 'EPSG:4326',
-            //dimensions: {
-            //    'time': '2024-11-15T12:00:00Z'
-            //}
         });
 
-        return new WMTS(options);
+        options.dimensions.time = `${date}T00:00:00.000Z`;
+
+        console.log(options);
+
+        return new WMTS({
+            ...options,
+            attributions: "Temperatures from <a href='https://data.marine.copernicus.eu/product/IBI_ANALYSISFORECAST_PHY_005_001/services'>Copernicus</a>"
+        });
     }
 
     private async getCapabilities(): Promise<{}> {
