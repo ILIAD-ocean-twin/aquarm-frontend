@@ -79,7 +79,7 @@ const Filters: Component = () => {
           type="date"
           name="selected-date"
           value={today}
-          min="2025-01-01"
+          min="2023-01-01"
           max={today}
         />
       </div>
