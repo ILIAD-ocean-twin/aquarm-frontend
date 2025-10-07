@@ -2,7 +2,7 @@ name: Build and Push Docker Image for Aquaculture Risk Metrics
 on:
   push:
     branches:
-      - main
+      - "**" # build on all branches
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ILIAD-ocean-twin/aquarm-frontend
@@ -21,20 +21,34 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Extract metadata (tags, labels) for main image
-        id: meta-main
+      - name: Set dynamic image tags
+        id: set-tags
+        run: |
+          # Sanitize branch for Docker tag
+          SAFE_BRANCH=$(echo "${GITHUB_REF_NAME}" | tr '/' '-' | tr -cd '[:alnum:]-_.')
+          SHORT_SHA=$(echo "${GITHUB_SHA}" | cut -c1-7)
+
+          if [[ "${GITHUB_REF_NAME}" == "main" ]]; then
+            echo "DOCKER_TAGS=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:sha-${SHORT_SHA},${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest" >> $GITHUB_ENV
+          else
+            echo "DOCKER_TAGS=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-${SAFE_BRANCH}:sha-${SHORT_SHA},${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-${SAFE_BRANCH}:latest" >> $GITHUB_ENV
+          fi
+      - name: Extract metadata (labels only)
+        id: meta
         uses: docker/metadata-action@v5
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-          tags: |
-            type=schedule
+          # We skip auto tags and use manual tags instead
+          tags: ${{ env.DOCKER_TAGS }}
+          labels: |
             type=ref,event=branch
             type=ref,event=tag
             type=ref,event=pr
             type=sha
+            type=semver
       - name: Build and push Docker main image
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: ${{ steps.meta-main.outputs.tags }}
-          labels: ${{ steps.meta-main.outputs.labels }}
+          tags: ${{ env.DOCKER_TAGS }}
+          labels: ${{ steps.meta.outputs.labels }}
