@@ -22,10 +22,10 @@ export class MPALayer implements IDataLayer {
     _initiated: boolean = false;
 
     constructor(dataUrl?: string) {
-        this._url = dataUrl ?? '/kommuner_2024.json';
+        this._url = dataUrl ?? '/mpa_uk.geojson';
         this.layer = new VectorLayer({
             visible: false,
-            style: MUNICIPALITY_STYLE
+            style: MPA_STYLE
         })
     }
 
@@ -53,12 +53,12 @@ export class MPALayer implements IDataLayer {
     }
 }
 
-const MUNICIPALITY_STYLE = new Style({
+const MPA_STYLE = new Style({
     fill: new Fill({
-        color: 'rgba(127, 160, 220, 0.075)',
+        color: 'rgba(127, 160, 220, 0.35)',
     }),
     stroke: new Stroke({
-        color: 'rgba(127, 127, 127, 0.3)',
+        color: 'rgba(127, 127, 127, 0.5)',
         width: 1,
     }),
 });

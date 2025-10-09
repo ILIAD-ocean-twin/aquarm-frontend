@@ -159,14 +159,14 @@ export const MapContainer: Component<MapContainerProps> = ({ dataLayers, center,
 
   return (
     <div ref={mapElement} class="w-full h-full rounded-2xl shadow-lg relative">
-      <div ref={tooltip} class="absolute text-black z-50 w-[160px] pointer-events-none flex">
+      <div ref={tooltip} class="absolute text-black z-50 w-[200px] pointer-events-none flex">
         <Switch fallback={
-          <div class="mx-auto py-1 px-2 rounded shadow-lg bg-white/80 font-semibold">
+          <div class="mx-auto py-1 px-2 rounded shadow-lg bg-white/50 font-semibold">
             {hoveredFeature()?.get("name") ?? "Ukjent"}
           </div>
         }>
           <Match when={hoveredFeature()?.get('awareness_level') != undefined}>
-            <div class="w-full bg-white py-1 px-2 z-50 rounded shadow-lg bg-white/80">
+            <div class="w-full py-1 px-2 z-50 rounded shadow-lg bg-white/80">
               <h2 class="font-semibold">{hoveredFeature()?.get('area')}</h2>
               <p class="text-sm">{hoveredFeature()?.get('description')}</p>
             </div>
@@ -182,8 +182,15 @@ export const MapContainer: Component<MapContainerProps> = ({ dataLayers, center,
               {hoveredFeature()?.get('kommunenavn')}
             </div>
           </Match>
+          <Match when={hoveredFeature()?.get('protection_focus') != undefined}>
+            <div class="bg-white/75 py-1 px-2 rounded shadow-lg w-auto font-semibold text-sm">
+              <div>Site ID: <div class="font-normal">{hoveredFeature()?.get('site_id')}</div></div>
+              <div>Designation: <div class="font-normal">{hoveredFeature()?.get('designation')}</div></div>
+              <div>Protection focus: <div class="font-normal">{hoveredFeature()?.get('protection_focus')}</div></div>
+            </div>
+          </Match>
           <Match when={hoveredFeature()?.get('specie') != undefined}>
-            <div class="bg-white py-1 px-2 rounded shadow-lg bg-white/80 w-auto text-center font-semibold">
+            <div class="py-1 px-2 rounded shadow-lg bg-white/80 w-auto text-center font-semibold">
               <div class="font-bold">{hoveredFeature()?.get('date')}</div>
               <div class="flex flex-col text-left">
                 <div>Specie: <span class="font-normal">{hoveredFeature()?.get('specie')}</span></div>
