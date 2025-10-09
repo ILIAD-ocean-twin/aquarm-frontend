@@ -10,7 +10,7 @@ import { IDataLayer } from "./IDataLayer";
 
 export class TemperatureLayer implements IDataLayer {
     name = "Sea temperature";
-    description = `Ocean temperatures from <a href='https://data.marine.copernicus.eu/product/IBI_ANALYSISFORECAST_PHY_005_001/services'>Copernicus Marine Services</a>.`;
+    description = `Ocean temperatures from <a href='https://data.marine.copernicus.eu/product/NWSHELF_ANALYSISFORECAST_PHY_004_013/services'>Copernicus Marine Services</a>.`;
     visible: boolean = false;
     layer: Layer<Source, LayerRenderer<any>>;
     updates = true;
@@ -66,7 +66,7 @@ export class TemperatureLayer implements IDataLayer {
 
         return new WMTS({
             ...options,
-            attributions: "Temperatures from <a href='https://data.marine.copernicus.eu/product/IBI_ANALYSISFORECAST_PHY_005_001/services'>Copernicus</a>"
+            attributions: "Temperatures from <a href='https://data.marine.copernicus.eu/product/NWSHELF_ANALYSISFORECAST_PHY_004_013/services'>Copernicus</a>"
         });
     }
 

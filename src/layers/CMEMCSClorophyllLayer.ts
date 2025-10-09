@@ -10,7 +10,7 @@ import { IDataLayer } from "./IDataLayer";
 
 export class CMEMSChlorophyllLayer implements IDataLayer {
     name = "Chlorophyll";
-    description = `Chlorophyll from <a href='https://data.marine.copernicus.eu/product/IBI_ANALYSISFORECAST_BGC_005_004/services'>Copernicus Marine Services</a>.`;
+    description = `Chlorophyll from <a href='https://data.marine.copernicus.eu/product/NWSHELF_ANALYSISFORECAST_BGC_004_002/services'>Copernicus Marine Services</a>.`;
     visible: boolean = false;
     layer: Layer<Source, LayerRenderer<any>>;
     updates = true;
@@ -58,7 +58,7 @@ export class CMEMSChlorophyllLayer implements IDataLayer {
 
     private getChloropyhllSource(date: string): Source {
         const options = optionsFromCapabilities(this._capabilities, {
-            layer: 'IBI_ANALYSISFORECAST_BGC_005_004/cmems_mod_ibi_bgc_anfc_0.027deg-3D_P1D-m_202411/chl',
+            layer: 'NWSHELF_ANALYSISFORECAST_BGC_004_002/cmems_mod_nws_bgc_anfc_0.027deg-3D_P1D-m_202411/chl',
             matrixSet: 'EPSG:4326',
         });
 
@@ -66,12 +66,12 @@ export class CMEMSChlorophyllLayer implements IDataLayer {
 
         return new WMTS({
             ...options,
-            attributions: "Chlorophyll from <a href='https://data.marine.copernicus.eu/product/IBI_ANALYSISFORECAST_BGC_005_004/services'>Copernicus</a>"
+            attributions: "Chlorophyll from <a href='https://data.marine.copernicus.eu/product/NWSHELF_ANALYSISFORECAST_BGC_004_002/services'>Copernicus</a>"
         });
     }
 
     private async getCapabilities(): Promise<{}> {
-        return fetch('https://wmts.marine.copernicus.eu/teroWmts/IBI_ANALYSISFORECAST_BGC_005_004/cmems_mod_ibi_bgc_anfc_0.027deg-3D_P1D-m_202411?request=GetCapabilities&service=WMS')
+        return fetch('https://wmts.marine.copernicus.eu/teroWmts/NWSHELF_ANALYSISFORECAST_BGC_004_002/cmems_mod_nws_bgc_anfc_0.027deg-3D_P1D-m_202411?request=GetCapabilities&service=WMS')
             .then(response => response.text())
             .then(text => {
                 const parser = new WMTSCapabilities();
