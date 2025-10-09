@@ -10,7 +10,7 @@ import { IDataLayer } from "./IDataLayer";
 
 export class BathymetryLayer implements IDataLayer {
     name = "Bathymetry";
-    description = `CMEMS Bathymetry data from <a href='https://data.marine.copernicus.eu/product/IBI_ANALYSISFORECAST_PHY_005_001/services'>Copernicus Marine Services</a>.`;
+    description = `CMEMS Bathymetry data from <a href='https://data.marine.copernicus.eu/product/NWSHELF_ANALYSISFORECAST_PHY_004_013/services'>Copernicus Marine Services</a>.`;
     visible: boolean = false;
     layer: Layer<Source, LayerRenderer<any>>;
     updates = false;
@@ -56,18 +56,18 @@ export class BathymetryLayer implements IDataLayer {
 
     private getSource(): Source {
         const options = optionsFromCapabilities(this._capabilities, {
-            layer: 'IBI_ANALYSISFORECAST_PHY_005_001/cmems_mod_ibi_phy_anfc_0.027deg-3D_static_202411--ext--bathy/deptho',
+            layer: 'NWSHELF_ANALYSISFORECAST_PHY_004_013/cmems_mod_nws_phy_anfc_0.027deg-3D_static_202411--ext--bathy/deptho',
             matrixSet: 'EPSG:4326',
         });
 
         return new WMTS({
             ...options,
-            attributions: "CMEMS Bathymetry from <a href='https://data.marine.copernicus.eu/product/IBI_ANALYSISFORECAST_PHY_005_001/services'>Copernicus</a>"
+            attributions: "CMEMS Bathymetry from <a href='https://data.marine.copernicus.eu/product/NWSHELF_ANALYSISFORECAST_PHY_004_013/services'>Copernicus</a>"
         });
     }
 
     private async getCapabilities(): Promise<{}> {
-        return fetch('https://wmts.marine.copernicus.eu/teroWmts/IBI_ANALYSISFORECAST_PHY_005_001/cmems_mod_ibi_phy_anfc_0.027deg-3D_static_202411--ext--bathy?request=GetCapabilities&service=WMS')
+        return fetch('https://wmts.marine.copernicus.eu/teroWmts/NWSHELF_ANALYSISFORECAST_PHY_004_013/cmems_mod_nws_phy_anfc_0.027deg-3D_static_202411--ext--bathy?request=GetCapabilities&service=WMS')
             .then(response => response.text())
             .then(text => {
                 const parser = new WMTSCapabilities();
