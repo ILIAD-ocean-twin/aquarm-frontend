@@ -31,12 +31,8 @@ const App: Component = () => {
   return (
     <>
       <nav class="font-nunito bg-black/20 text-white py-1">
-        <div class="flex justify-between container mx-auto">
+        <div class="container mx-auto">
           <div>ILIAD Marine Protected Areas Pilot</div>
-          <div class="grow text-center">
-            <span class="text-amber-400/70"> Intended for demonstration only: </span>
-            <span class="text-amber-500/70"> There may be errors and inaccuracies present in the datasets and visualizations</span>
-          </div>
         </div>
       </nav>
 
