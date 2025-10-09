@@ -58,7 +58,7 @@ export class TemperatureLayer implements IDataLayer {
 
     private getOceanTempSource(date: string): Source {
         const options = optionsFromCapabilities(this._capabilities, {
-            layer: 'IBI_ANALYSISFORECAST_PHY_005_001/cmems_mod_ibi_phy_anfc_0.027deg-2D_PT1H-m_202411/thetao',
+            layer: 'NWSHELF_ANALYSISFORECAST_PHY_004_013/cmems_mod_nws_phy_anfc_0.027deg-2D_PT1H-m_202411/thetao',
             matrixSet: 'EPSG:4326',
         });
 
@@ -71,7 +71,7 @@ export class TemperatureLayer implements IDataLayer {
     }
 
     private async getCapabilities(): Promise<{}> {
-        return fetch('https://wmts.marine.copernicus.eu/teroWmts/IBI_ANALYSISFORECAST_PHY_005_001/cmems_mod_ibi_phy_anfc_0.027deg-2D_PT1H-m_202411?request=GetCapabilities&service=WMTS')
+        return fetch('https://wmts.marine.copernicus.eu/teroWmts/NWSHELF_ANALYSISFORECAST_PHY_004_013/cmems_mod_nws_phy_anfc_0.027deg-2D_PT1H-m_202411?request=GetCapabilities&service=WMS')
             .then(response => response.text())
             .then(text => {
                 const parser = new WMTSCapabilities();
