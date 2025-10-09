@@ -1,77 +1,64 @@
-import TileLayer from "ol/layer/Tile";
-import WMTS from 'ol/source/WMTS';
+import VectorLayer from "ol/layer/Vector";
+import VectorSource from "ol/source/Vector";
+import GeoJSON from 'ol/format/GeoJSON.js';
+import Fill from "ol/style/Fill";
+import Stroke from "ol/style/Stroke";
+import Style from "ol/style/Style";
+import { dataProj, mapProj } from "../constants";
+import { IDataLayer } from "./IDataLayer";
 import Layer from "ol/layer/Layer";
-import { optionsFromCapabilities } from 'ol/source/WMTS';
-import WMTSCapabilities from 'ol/format/WMTSCapabilities';
 import LayerRenderer from "ol/renderer/Layer";
 import Source from "ol/source/Source";
-import { IDataLayer } from "./IDataLayer";
-
 
 export class MPALayer implements IDataLayer {
-    name = "Marine protected areas";
-    description = `Marine protected areas. Data from <a href='https://ows.emodnet-humanactivities.eu/geoserver/web/?0'>EMODnet Human Activities</a>.`;
+    name = "Protected areas";
+    description = "ProtectedSeas® Navigator GIS layers are provided on the Ocean Data Platform under the license CC-BY-4.0.";
     visible: boolean = false;
     layer: Layer<Source, LayerRenderer<any>>;
     updates = false;
 
+    _url: string;
     _source: any;
     _initiated: boolean = false;
-    _date: string;
-    _capabilities: {};
 
-    constructor() {
-        this.layer = new TileLayer({
+    constructor(dataUrl?: string) {
+        this._url = dataUrl ?? '/kommuner_2024.json';
+        this.layer = new VectorLayer({
             visible: false,
-            opacity: 0.5
-        });
+            style: MUNICIPALITY_STYLE
+        })
     }
 
     public async setVisible(visible: boolean): Promise<void> {
         if (visible && !this._initiated) {
-            this.getCapabilities()
-                .then(c => this._capabilities = c)
-                .then(() => {
-                    this._initiated = true;
-                    this.update();
-                });
+            this._source = await this.getGeoJson()
+                .then(data => new VectorSource({
+                    features: new GeoJSON().readFeatures(data, { dataProjection: dataProj, featureProjection: mapProj }),
+                    attributions: 'ProtectedSeas® Navigator GIS layers are provided on the Ocean Data Platform under the license CC-BY-4.0.'
+                }));
+            this.layer.setSource(this._source);
+            this._initiated = true;
         }
         this.visible = visible;
         this.layer.setVisible(visible);
     }
 
-    public update(): void {
-        if (this._initiated) {
-            const source = this.getSource();
-            this.layer.setSource(source);
-        }
-    }
-
-    public getLegend(): HTMLElement {
+    public getLegend() {
         return undefined;
-        // const img = document.createElement("img");
-        // img.src = "/sea_temperature_legend.png";
-        // return img;
     }
 
-    private getSource(): Source {
-        const options = optionsFromCapabilities(this._capabilities, {
-            layer: 'emodnet:wdpaareas',
-            matrixSet: 'EPSG:4326',
-        });
-
-        return new WMTS({
-            ...options,
-            attributions: "Marine protected areas from <a href='https://ows.emodnet-humanactivities.eu/geoserver/web/?0'>EMODnet Human Activities</a>"
-        });
-    }
-
-    private async getCapabilities(): Promise<{}> {
-        return fetch('https://ows.emodnet-humanactivities.eu/geoserver/gwc/service/wmts?service=WMTS&version=1.1.1&request=GetCapabilities')
-            .then(response => response.text())
-            .then(text => {
-                const parser = new WMTSCapabilities();
-                return parser.read(text);
-            });
+    private async getGeoJson() {
+        return fetch(this._url)
+            .then(response => response.json())
     }
 }
+
+const MUNICIPALITY_STYLE = new Style({
+    fill: new Fill({
+        color: 'rgba(127, 160, 220, 0.075)',
+    }),
+    stroke: new Stroke({
+        color: 'rgba(127, 127, 127, 0.3)',
+        width: 1,
+    }),
+});
