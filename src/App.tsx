@@ -9,6 +9,7 @@ import { HabitatSuitabilityLayer } from './layers/HabitatSuitabilityLayer';
 import { ESRISatelliteImageryLayer } from './layers/ESRISatelliteImageryLayer';
 import { BathymetryLayer } from './layers/BathymetryLayer';
 import { MPALayer } from './layers/MPALayer';
+import { ProtectedAreaDetails } from './ProtectedAreaDetails';
 
 
 const App: Component = () => {
@@ -20,7 +21,7 @@ const App: Component = () => {
     new HabitatSuitabilityLayer(state.date),
     new ESRISatelliteImageryLayer(),
     new BathymetryLayer(),
-    new MPALayer()
+    new MPALayer("/mpa_uk_light.geojson")
   ];
 
   onMount(() => {
@@ -40,6 +41,7 @@ const App: Component = () => {
         <div class="h-[810px]">
           <MapContainer dataLayers={layers} center={[-2.0, 54.5]} zoom={6} />
         </div>
+        <ProtectedAreaDetails areas={state.selectedAreas} />
       </div>
     </>
   );

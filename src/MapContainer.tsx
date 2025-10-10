@@ -81,13 +81,32 @@ export const MapContainer: Component<MapContainerProps> = ({ dataLayers, center,
     });
 
     map.on('click', function (ev) {
-      const features = map.getFeaturesAtPixel(ev.pixel).filter(f => f.get('siteId'));
+      const features = map.getFeaturesAtPixel(ev.pixel);
+      const clickedLayers = features.map(f => f.get("layerName"));
       if (features.length == 0) {
+        Object.values(dataLayers).filter(l => l.clickable).forEach(l => l.featuresClicked([]));
+        setState("selectedAreas", [])
+      } else {
+        Object.values(dataLayers)
+          .filter(l => l.clickable && clickedLayers.includes(l.name))
+          .forEach(l => {
+            const f = features[0];
+            if (f.get("layerName") == l.name) {
+              l.featuresClicked([f])
+            }
+            if (f.get("layerName") == "Protected areas") {
+              setState("selectedAreas", [f.getProperties()])
+            }
+          });
+      }
+
+      const sitesClicked = map.getFeaturesAtPixel(ev.pixel).filter(f => f.get('siteId'));
+      if (sitesClicked.length == 0) {
         selectedFeatures.forEach(f => f.set('selected', 0));
         selectedFeatures = [];
       }
       else {
-        const f = features[0];
+        const f = sitesClicked[0];
         const sID = f.get('siteId');
         if (sID) {
           if (selectedFeatures.every(v => v.get('siteId') != sID)) {
@@ -115,7 +134,7 @@ export const MapContainer: Component<MapContainerProps> = ({ dataLayers, center,
 
   onCleanup(() => {
     sitesLayer?.layer.dispose();
-    map.dispose();
+    map?.dispose();
   })
 
   createEffect(() => {
@@ -183,10 +202,10 @@ export const MapContainer: Component<MapContainerProps> = ({ dataLayers, center,
             </div>
           </Match>
           <Match when={hoveredFeature()?.get('protection_focus') != undefined}>
-            <div class="bg-white/75 py-1 px-2 rounded shadow-lg w-auto font-semibold text-sm">
-              <div>Site ID: <div class="font-normal">{hoveredFeature()?.get('site_id')}</div></div>
-              <div>Designation: <div class="font-normal">{hoveredFeature()?.get('designation')}</div></div>
-              <div>Protection focus: <div class="font-normal">{hoveredFeature()?.get('protection_focus')}</div></div>
+            <div class="bg-white/75 py-1 px-2 rounded shadow-lg w-auto font-semibold text-sm text-center">
+              <div>{hoveredFeature()?.get('site_name')}</div>
+              <div class="w-5 h-[1px] bg-slate-600/50 mx-auto my-1"></div>
+              <div class="font-normal">{hoveredFeature()?.get('designation')}</div>
             </div>
           </Match>
           <Match when={hoveredFeature()?.get('specie') != undefined}>
