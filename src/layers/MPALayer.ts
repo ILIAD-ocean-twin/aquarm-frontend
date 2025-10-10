@@ -70,17 +70,17 @@ export class MPALayer implements IDataLayer {
 
 const MPA_STYLE = new Style({
     fill: new Fill({
-        color: 'rgba(127, 200, 220, 0.35)',
+        color: 'rgba(255, 165, 0, 0.35)',
     }),
     stroke: new Stroke({
-        color: 'rgba(0, 208, 110, 0.6)',
+        color: 'rgba(255, 165, 0, 0.6)',
         width: 1,
     }),
 });
 
 const MPA_STYLE_SELECTED = new Style({
     fill: new Fill({
-        color: 'rgba(127, 230, 220, 0.8)',
+        color: 'rgba(0, 208, 110, 0.8)',
     }),
     stroke: new Stroke({
         color: "#00D06E",

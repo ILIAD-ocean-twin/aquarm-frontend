@@ -1,4 +1,4 @@
-import { type Component, onMount } from 'solid-js';
+import { type Component, createSignal, onMount } from 'solid-js';
 import { MapContainer } from './MapContainer';
 import { useState } from './state';
 import { IDataLayer } from './layers/IDataLayer';
@@ -24,9 +24,15 @@ const App: Component = () => {
     new MPALayer("/mpa_uk_light.geojson")
   ];
 
+  const [maxConn, setMaxConn] = createSignal(0);
+  const [lookup, setLookup] = createSignal({});
+
   onMount(() => {
-    // fetchOimTerms()
-    //   .then(terms => setState("oim", terms))
+    fetchCSVAsArray("/mpa_connectivity.csv")
+      .then(res => {
+        setMaxConn(res[0]);
+        setLookup(res[1]);
+      })
   })
 
   return (
@@ -41,14 +47,35 @@ const App: Component = () => {
         <div class="h-[810px]">
           <MapContainer dataLayers={layers} center={[-2.0, 54.5]} zoom={6} />
         </div>
-        <ProtectedAreaDetails areas={state.selectedAreas} />
+        <ProtectedAreaDetails areas={state.selectedAreas} maxConn={maxConn()} lookup={lookup()} />
       </div>
     </>
   );
 };
 
-const fetchOimTerms = async () =>
-  fetch(API_URL + "/oim")
-    .then(d => d.json())
+async function fetchCSVAsArray(url: string): Promise<[number, {}]> {
+  const response = await fetch(url);
+  const csvText = await response.text();
+
+  const rows = csvText.trim().split('\n');
+  const data = rows.map(row => row.split(','));
+
+  let maxConn = 0;
+  const lookup = {};
+  data.forEach(r => {
+    const conn = parseFloat(r[2]);
+    if (conn > 0 && r[0] != r[1]) {
+      maxConn = Math.max(maxConn, conn);
+      if (lookup[r[0]] !== undefined) {
+        lookup[r[0]].push([r[1], parseFloat(r[2])])
+      } else {
+        lookup[r[0]] = [[r[1], parseFloat(r[2])]]
+      }
+    }
+  })
+
+  return [maxConn, lookup];
+}
+
 
 export default App;
