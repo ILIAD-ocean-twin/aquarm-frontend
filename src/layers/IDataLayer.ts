@@ -10,5 +10,5 @@ export interface IDataLayer {
   update?: (params: { year?: number, week?: number, date?: string }) => void
   getLegend: () => HTMLElement | undefined
   clickable?: boolean
-  featuresClicked?: (features: any[]) => void
+  featureClicked?: (feature: any) => void
 }

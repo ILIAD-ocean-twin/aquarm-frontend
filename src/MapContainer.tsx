@@ -84,18 +84,18 @@ export const MapContainer: Component<MapContainerProps> = ({ dataLayers, center,
       const features = map.getFeaturesAtPixel(ev.pixel);
       const clickedLayers = features.map(f => f.get("layerName"));
       if (features.length == 0) {
-        Object.values(dataLayers).filter(l => l.clickable).forEach(l => l.featuresClicked([]));
-        setState("selectedAreas", [])
+        Object.values(dataLayers).filter(l => l.clickable).forEach(l => l.featureClicked(undefined));
+        setState("selectedArea", undefined)
       } else {
         Object.values(dataLayers)
           .filter(l => l.clickable && clickedLayers.includes(l.name))
           .forEach(l => {
             const f = features[0];
             if (f.get("layerName") == l.name) {
-              l.featuresClicked([f])
+              l.featureClicked(f)
             }
             if (f.get("layerName") == "Protected areas") {
-              setState("selectedAreas", [f.getProperties()])
+              setState("selectedArea", f.getProperties())
             }
           });
       }

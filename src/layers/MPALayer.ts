@@ -9,7 +9,6 @@ import { IDataLayer } from "./IDataLayer";
 import Layer from "ol/layer/Layer";
 import LayerRenderer from "ol/renderer/Layer";
 import Source from "ol/source/Source";
-import { FeatureLike } from "ol/Feature";
 
 export class MPALayer implements IDataLayer {
     name = "Protected areas";
@@ -23,7 +22,7 @@ export class MPALayer implements IDataLayer {
     _source: any;
     _initiated: boolean = false;
 
-    selectedFeatures = [];
+    selectedFeature = undefined;
 
     constructor(dataUrl: string) {
         this._url = dataUrl;
@@ -33,10 +32,14 @@ export class MPALayer implements IDataLayer {
         })
     }
 
-    public featuresClicked(features: any[]) {
-        this.selectedFeatures.forEach(f => deselect(f))
-        this.selectedFeatures = features;
-        this.selectedFeatures.forEach(f => select(f))
+    public featureClicked(feature: any) {
+        if (this.selectedFeature) {
+            deselect(this.selectedFeature)
+        }
+        this.selectedFeature = feature;
+        if (feature) {
+            select(feature)
+        }
     }
 
     public async setVisible(visible: boolean): Promise<void> {

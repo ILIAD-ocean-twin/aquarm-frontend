@@ -25,14 +25,16 @@ const App: Component = () => {
   ];
 
   const [maxConn, setMaxConn] = createSignal(0);
-  const [lookup, setLookup] = createSignal({});
+  const [connectivityLookup, setConnectivityLookup] = createSignal({});
+  const [areaNamelookup, setAreaNameLookup] = createSignal({});
 
   onMount(() => {
     fetchCSVAsArray("/mpa_connectivity.csv")
       .then(res => {
         setMaxConn(res[0]);
-        setLookup(res[1]);
+        setConnectivityLookup(res[1]);
       })
+    fetchMPANames("/mpa_uk_light.geojson").then(setAreaNameLookup);
   })
 
   return (
@@ -47,7 +49,11 @@ const App: Component = () => {
         <div class="h-[810px]">
           <MapContainer dataLayers={layers} center={[-2.0, 54.5]} zoom={6} />
         </div>
-        <ProtectedAreaDetails areas={state.selectedAreas} maxConn={maxConn()} lookup={lookup()} />
+        <ProtectedAreaDetails
+          area={state.selectedArea}
+          maxConn={maxConn()}
+          connectivityLookup={connectivityLookup()}
+          areaNameLookup={areaNamelookup()} />
       </div>
     </>
   );
@@ -77,5 +83,16 @@ async function fetchCSVAsArray(url: string): Promise<[number, {}]> {
   return [maxConn, lookup];
 }
 
+async function fetchMPANames(url: string): Promise<{}> {
+  return fetch(url)
+    .then(response => response.json())
+    .then(d => {
+      const areaNames = {};
+      d["features"].forEach(f => {
+        areaNames[f["properties"]["site_id"]] = f["properties"]["site_name"]
+      });
+      return areaNames;
+    });
+}
 
 export default App;
