@@ -1,4 +1,4 @@
-import { type Component, createEffect, createSignal, onMount } from 'solid-js';
+import { type Component, createEffect, createResource, createSignal, onMount } from 'solid-js';
 import { MapContainer } from './MapContainer';
 import { useState } from './state';
 import { IDataLayer } from './layers/IDataLayer';
@@ -30,6 +30,8 @@ const App: Component = () => {
   const [connectivityLookup, setConnectivityLookup] = createSignal<Record<string, Record<string, number>>>({});
   const [areaNamelookup, setAreaNameLookup] = createSignal<Record<string, string>>({});
 
+  const [lundyObservations] = createResource(() => fetchLundyObservations("/obis_in_mpa_lundy_per_year.csv"));
+
   onMount(() => {
     fetchConnectivity("/mpa_connectivity.csv")
       .then(res => {
@@ -57,7 +59,9 @@ const App: Component = () => {
           area={state.selectedArea}
           maxConn={maxConn()}
           connectivityLookup={connectivityLookup()}
-          areaNameLookup={areaNamelookup()} />
+          areaNameLookup={areaNamelookup()}
+          observations={lundyObservations()}
+        />
       </div>
     </>
   );
@@ -106,6 +110,30 @@ async function fetchMPANames(url: string): Promise<{}> {
       });
       return areaNames;
     });
+}
+
+async function fetchLundyObservations(url: string): Promise<Record<string, Record<string, number>>> {
+  const response = await fetch(url);
+  const csvText = await response.text();
+
+  const rows = csvText.trim().split('\n');
+  const data = rows.map(row => row.split(','));
+
+  const observations: Record<string, Record<string, number>> = {};
+
+  data.slice(1).forEach(r => {
+    const year = r[1];
+    const specie = r[0];
+    const count = parseInt(r[2]);
+
+    if (!observations[year]) {
+      observations[year] = {};
+    }
+
+    observations[year][specie] = count;
+  });
+
+  return observations;
 }
 
 export default App;

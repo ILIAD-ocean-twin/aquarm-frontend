@@ -1,4 +1,4 @@
-import { Component, createEffect, For, Show } from "solid-js";
+import { Component, createEffect, createSignal, For, Resource, Show } from "solid-js";
 import chroma from 'chroma-js';
 
 const colorScale = chroma.scale('OrRd').padding([0.25, 0.1]);;
@@ -8,6 +8,7 @@ interface ProtectedAreaDetailsProps {
     maxConn: number
     connectivityLookup: Record<string, Record<string, number>>
     areaNameLookup: {}
+    observations: Record<string, Record<string, number>>
 }
 
 export const ProtectedAreaDetails: Component<ProtectedAreaDetailsProps> = (props) => {
@@ -67,6 +68,9 @@ export const ProtectedAreaDetails: Component<ProtectedAreaDetailsProps> = (props
                         <Show when={connectivity().length == 0}>
                             <div class="text-white/30">Our latest drift simulation shows no connectivity for this area</div>
                         </Show>
+                        <Show when={props.observations && props.area["site_name"] == "Lundy"}>
+                            <Observations observations={props.observations} />
+                        </Show>
                     </ol>
                 </div>
             </div>
@@ -79,3 +83,30 @@ const ConnectivityIndicator: Component<{ value: number, maxValue: number }> = (p
         class="size-3 bg-red-500 ml-3 inline-block"
         style={{ "background": colorScale(props.value / props.maxValue) }}
     />
+
+const Observations: Component<{ observations: Record<string, Record<string, number>> }> = ({ observations }) => {
+    const years = Object.keys(observations).map(k => parseInt(k)).sort((a, b) => b - a)
+    const mostRecentYear = Math.max(...years);
+    const [year, setYear] = createSignal(mostRecentYear.toString());
+
+    return (
+        <div class="mt-6">
+            <h3 class="text-iliad font-semibold mt-2">Specie observations in the area
+                <select
+                    onChange={ev => setYear(ev.target.value)}
+                    class="px-2 py-1 ml-3 inline-block rounded text-white/90 bg-slate-500/80">
+                    <For each={Array.from(new Set(years))}>
+                        {y => <option value={y}>{y}</option>}
+                    </For>
+                </select>
+            </h3>
+            <div class="text-white/80">
+                <For each={Object.entries(observations[year()]).sort(([, a], [, b]) => b - a)}>
+                    {(s) =>
+                        <div>{s[0]} - {s[1]}</div>
+                    }
+                </For>
+            </div>
+        </div>
+    )
+}
