@@ -9,6 +9,11 @@ import { IDataLayer } from "./IDataLayer";
 import Layer from "ol/layer/Layer";
 import LayerRenderer from "ol/renderer/Layer";
 import Source from "ol/source/Source";
+import { Feature } from "ol";
+import chroma from 'chroma-js';
+
+
+const colorScale = chroma.scale('OrRd').padding([0.25, 0.1]);;
 
 export class MPALayer implements IDataLayer {
     name = "Protected areas";
@@ -21,6 +26,8 @@ export class MPALayer implements IDataLayer {
     _url: string;
     _source: any;
     _initiated: boolean = false;
+    _lookup: Record<string, Record<string, number>> = {};
+    _connectivityMax: number = 0;
 
     selectedFeature = undefined;
 
@@ -32,14 +39,18 @@ export class MPALayer implements IDataLayer {
         })
     }
 
+    public setConnectivityLookup(lookup: Record<string, Record<string, number>>) {
+        this._lookup = lookup;
+    }
+
+    public setConnectivityMax(maxValue: number) {
+        this._connectivityMax = maxValue;
+    }
+
     public featureClicked(feature: any) {
-        if (this.selectedFeature) {
-            deselect(this.selectedFeature)
-        }
         this.selectedFeature = feature;
-        if (feature) {
-            select(feature)
-        }
+        // @ts-ignore 
+        this.layer.setStyle(createStyleFunction(this.selectedFeature, this._lookup, this._connectivityMax));
     }
 
     public async setVisible(visible: boolean): Promise<void> {
@@ -91,10 +102,42 @@ const MPA_STYLE_SELECTED = new Style({
     }),
 });
 
-function deselect(f): void {
-    f.setStyle(MPA_STYLE);
-}
+const MPA_STYLE_HIDDEN = new Style({
+    fill: new Fill({
+        color: 'rgba(100, 90, 50, 0.1)',
+    }),
+    stroke: new Stroke({
+        color: 'rgba(255, 165, 0, 0.1)',
+        width: 1
+    }),
+});
 
-function select(f): void {
-    f.setStyle(MPA_STYLE_SELECTED);
+function createStyleFunction(selected: any, connectivity: Record<string, Record<string, number>>, max: number) {
+    if (selected == undefined) {
+        return MPA_STYLE;
+    }
+
+    const selectedId = selected.get("site_id");
+    const connections = connectivity[selectedId] ?? {};
+    const connectedIds = Object.keys(connections);
+    // const maxConnectivity = connectedIds.length ? Math.max(...Object.values(connections)) : 0;
+
+    return function (feature: Feature): Style {
+        const currentId = feature.get("site_id");
+        if (currentId == selectedId) {
+            return MPA_STYLE_SELECTED;
+        } if (connectedIds.includes(currentId)) {
+            return new Style({
+                fill: new Fill({
+                    color: colorScale(connections[currentId] / max).hex(),
+                }),
+                stroke: new Stroke({
+                    color: colorScale(connections[currentId] / max).hex(),
+                    width: 1
+                }),
+            });
+        }
+
+        return MPA_STYLE_HIDDEN;
+    };
 }

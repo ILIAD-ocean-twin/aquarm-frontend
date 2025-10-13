@@ -1,4 +1,4 @@
-import { type Component, createSignal, onMount } from 'solid-js';
+import { type Component, createEffect, createSignal, onMount } from 'solid-js';
 import { MapContainer } from './MapContainer';
 import { useState } from './state';
 import { IDataLayer } from './layers/IDataLayer';
@@ -15,25 +15,29 @@ import { ProtectedAreaDetails } from './ProtectedAreaDetails';
 const App: Component = () => {
   const [state, setState] = useState();
 
+  const MPA = new MPALayer("/mpa_uk_light.geojson");
+
   const layers: IDataLayer[] = [
     new TemperatureLayer(state.date),
     new CMEMSChlorophyllLayer(state.date),
     new HabitatSuitabilityLayer(state.date),
     new ESRISatelliteImageryLayer(),
     new BathymetryLayer(),
-    new MPALayer("/mpa_uk_light.geojson")
+    MPA
   ];
 
-  const [maxConn, setMaxConn] = createSignal(0);
-  const [connectivityLookup, setConnectivityLookup] = createSignal({});
-  const [areaNamelookup, setAreaNameLookup] = createSignal({});
+  const [maxConn, setMaxConn] = createSignal<number>(0);
+  const [connectivityLookup, setConnectivityLookup] = createSignal<Record<string, Record<string, number>>>({});
+  const [areaNamelookup, setAreaNameLookup] = createSignal<Record<string, string>>({});
 
   onMount(() => {
-    fetchCSVAsArray("/mpa_connectivity.csv")
+    fetchConnectivity("/mpa_connectivity.csv")
       .then(res => {
-        setMaxConn(res[0]);
-        setConnectivityLookup(res[1]);
-      })
+        setMaxConn(res["max"]);
+        setConnectivityLookup(res["lookup"]);
+        MPA.setConnectivityLookup(res["lookup"]);
+        MPA.setConnectivityMax(res["max"]);
+      });
     fetchMPANames("/mpa_uk_light.geojson").then(setAreaNameLookup);
   })
 
@@ -59,7 +63,7 @@ const App: Component = () => {
   );
 };
 
-async function fetchCSVAsArray(url: string): Promise<[number, {}]> {
+async function fetchConnectivity(url: string): Promise<{ max: number, lookup: Record<string, Record<string, number>> }> {
   const response = await fetch(url);
   const csvText = await response.text();
 
@@ -67,21 +71,30 @@ async function fetchCSVAsArray(url: string): Promise<[number, {}]> {
   const data = rows.map(row => row.split(','));
 
   let maxConn = 0;
-  const lookup = {};
-  data.forEach(r => {
-    const conn = parseFloat(r[2]);
-    if (conn > 0 && r[0] != r[1]) {
-      maxConn = Math.max(maxConn, conn);
-      if (lookup[r[0]] !== undefined) {
-        lookup[r[0]].push([r[1], parseFloat(r[2])])
-      } else {
-        lookup[r[0]] = [[r[1], parseFloat(r[2])]]
-      }
-    }
-  })
+  const lookup: Record<string, Record<string, number>> = {};
 
-  return [maxConn, lookup];
+  data.forEach(r => {
+    const source = r[0];
+    const target = r[1];
+    const conn = parseFloat(r[2]);
+
+    if (conn > 0 && source !== target) {
+      maxConn = Math.max(maxConn, conn);
+
+      if (!lookup[source]) {
+        lookup[source] = {};
+      }
+
+      lookup[source][target] = conn;
+    }
+  });
+
+  return {
+    max: maxConn, lookup
+  };
 }
+
+
 
 async function fetchMPANames(url: string): Promise<{}> {
   return fetch(url)

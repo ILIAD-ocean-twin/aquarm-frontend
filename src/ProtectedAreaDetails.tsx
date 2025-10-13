@@ -1,12 +1,12 @@
 import { Component, createEffect, For, Show } from "solid-js";
 import chroma from 'chroma-js';
 
-const colorScale = chroma.scale('OrRd');
+const colorScale = chroma.scale('OrRd').padding([0.25, 0.1]);;
 
 interface ProtectedAreaDetailsProps {
     area: any
     maxConn: number
-    connectivityLookup: {}
+    connectivityLookup: Record<string, Record<string, number>>
     areaNameLookup: {}
 }
 
@@ -15,12 +15,13 @@ export const ProtectedAreaDetails: Component<ProtectedAreaDetailsProps> = (props
         const area = props.area;
         if (area) {
             const conns = props.connectivityLookup[area["site_id"]];
-            if (conns?.length ?? false) {
-                return conns.toSorted((a, b) => a[1] < b[1]);
+            if (conns && Object.keys(conns).length > 0) {
+                return Object.entries(conns)
+                    .sort(([, a], [, b]) => b - a);
             }
         }
         return [];
-    }
+    };
 
     return (
         <Show when={props.area != undefined}>
@@ -63,6 +64,9 @@ export const ProtectedAreaDetails: Component<ProtectedAreaDetailsProps> = (props
                                 <ConnectivityIndicator value={conn[1]} maxValue={props.maxConn} />
                             </li>
                         }</For>
+                        <Show when={connectivity().length == 0}>
+                            <div class="text-white/30">Our latest drift simulation shows no connectivity for this area</div>
+                        </Show>
                     </ol>
                 </div>
             </div>
