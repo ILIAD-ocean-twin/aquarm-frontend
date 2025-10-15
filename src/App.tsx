@@ -10,6 +10,7 @@ import { ESRISatelliteImageryLayer } from './layers/ESRISatelliteImageryLayer';
 import { BathymetryLayer } from './layers/BathymetryLayer';
 import { MPALayer } from './layers/MPALayer';
 import { ProtectedAreaDetails } from './ProtectedAreaDetails';
+import { EssentialFishHabitatLayer } from './layers/EssentialFishHabitatLayer';
 
 
 const App: Component = () => {
@@ -18,12 +19,13 @@ const App: Component = () => {
   const MPA = new MPALayer("/mpa_uk_light.geojson");
 
   const layers: IDataLayer[] = [
+    MPA,
     new TemperatureLayer(state.date),
     new CMEMSChlorophyllLayer(state.date),
     new HabitatSuitabilityLayer(state.date),
     new ESRISatelliteImageryLayer(),
     new BathymetryLayer(),
-    MPA
+    new EssentialFishHabitatLayer()
   ];
 
   const [maxConn, setMaxConn] = createSignal<number>(0);
