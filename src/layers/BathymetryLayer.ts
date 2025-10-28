@@ -54,7 +54,7 @@ export class BathymetryLayer implements IDataLayer {
         // return img;
     }
 
-    private getSource(): Source {
+    private getSource(): WMTS {
         const options = optionsFromCapabilities(this._capabilities, {
             layer: 'NWSHELF_ANALYSISFORECAST_PHY_004_013/cmems_mod_nws_phy_anfc_0.027deg-3D_static_202411--ext--bathy/deptho',
             matrixSet: 'EPSG:4326',

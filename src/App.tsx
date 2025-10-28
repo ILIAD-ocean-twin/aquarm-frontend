@@ -1,4 +1,4 @@
-import { type Component, createEffect, createResource, createSignal, onMount } from 'solid-js';
+import { type Component, createResource, createSignal, onMount } from 'solid-js';
 import { MapContainer } from './MapContainer';
 import { useState } from './state';
 import { IDataLayer } from './layers/IDataLayer';
