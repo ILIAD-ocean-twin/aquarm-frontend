@@ -12,6 +12,8 @@ type State = {
   allOrganizations: string[]
   darkmode: boolean
   oim: { [key in string]: OimEntry }
+  selectedArea?: {}
+  areaNames?: { [key in string]: string }
 }
 
 const initialState: State = {
@@ -23,7 +25,9 @@ const initialState: State = {
   visibleLayers: [],
   allOrganizations: [],
   darkmode: true,
-  oim: {}
+  oim: {},
+  selectedArea: undefined,
+  areaNames: {}
 }
 
 export const makeStateContext = () => {

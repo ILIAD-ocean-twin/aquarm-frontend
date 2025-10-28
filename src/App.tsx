@@ -1,4 +1,4 @@
-import { type Component, onMount } from 'solid-js';
+import { type Component, createEffect, createResource, createSignal, onMount } from 'solid-js';
 import { MapContainer } from './MapContainer';
 import { useState } from './state';
 import { IDataLayer } from './layers/IDataLayer';
@@ -9,23 +9,40 @@ import { HabitatSuitabilityLayer } from './layers/HabitatSuitabilityLayer';
 import { ESRISatelliteImageryLayer } from './layers/ESRISatelliteImageryLayer';
 import { BathymetryLayer } from './layers/BathymetryLayer';
 import { MPALayer } from './layers/MPALayer';
+import { ProtectedAreaDetails } from './ProtectedAreaDetails';
+import { EssentialFishHabitatLayer } from './layers/EssentialFishHabitatLayer';
 
 
 const App: Component = () => {
   const [state, setState] = useState();
 
+  const MPA = new MPALayer("/mpa_uk_light.geojson");
+
   const layers: IDataLayer[] = [
+    MPA,
     new TemperatureLayer(state.date),
     new CMEMSChlorophyllLayer(state.date),
     new HabitatSuitabilityLayer(state.date),
     new ESRISatelliteImageryLayer(),
     new BathymetryLayer(),
-    new MPALayer()
+    new EssentialFishHabitatLayer()
   ];
 
+  const [maxConn, setMaxConn] = createSignal<number>(0);
+  const [connectivityLookup, setConnectivityLookup] = createSignal<Record<string, Record<string, number>>>({});
+  const [areaNamelookup, setAreaNameLookup] = createSignal<Record<string, string>>({});
+
+  const [lundyObservations] = createResource(() => fetchLundyObservations("/obis_in_mpa_lundy_per_year.csv"));
+
   onMount(() => {
-    // fetchOimTerms()
-    //   .then(terms => setState("oim", terms))
+    fetchConnectivity("/mpa_connectivity.csv")
+      .then(res => {
+        setMaxConn(res["max"]);
+        setConnectivityLookup(res["lookup"]);
+        MPA.setConnectivityLookup(res["lookup"]);
+        MPA.setConnectivityMax(res["max"]);
+      });
+    fetchMPANames("/mpa_uk_light.geojson").then(setAreaNameLookup);
   })
 
   return (
@@ -40,13 +57,85 @@ const App: Component = () => {
         <div class="h-[810px]">
           <MapContainer dataLayers={layers} center={[-2.0, 54.5]} zoom={6} />
         </div>
+        <ProtectedAreaDetails
+          area={state.selectedArea}
+          maxConn={maxConn()}
+          connectivityLookup={connectivityLookup()}
+          areaNameLookup={areaNamelookup()}
+          observations={lundyObservations()}
+        />
       </div>
     </>
   );
 };
 
-const fetchOimTerms = async () =>
-  fetch(API_URL + "/oim")
-    .then(d => d.json())
+async function fetchConnectivity(url: string): Promise<{ max: number, lookup: Record<string, Record<string, number>> }> {
+  const response = await fetch(url);
+  const csvText = await response.text();
+
+  const rows = csvText.trim().split('\n');
+  const data = rows.map(row => row.split(','));
+
+  let maxConn = 0;
+  const lookup: Record<string, Record<string, number>> = {};
+
+  data.forEach(r => {
+    const source = r[0];
+    const target = r[1];
+    const conn = parseFloat(r[2]);
+
+    if (conn > 0 && source !== target) {
+      maxConn = Math.max(maxConn, conn);
+
+      if (!lookup[source]) {
+        lookup[source] = {};
+      }
+
+      lookup[source][target] = conn;
+    }
+  });
+
+  return {
+    max: maxConn, lookup
+  };
+}
+
+
+
+async function fetchMPANames(url: string): Promise<{}> {
+  return fetch(url)
+    .then(response => response.json())
+    .then(d => {
+      const areaNames = {};
+      d["features"].forEach(f => {
+        areaNames[f["properties"]["site_id"]] = f["properties"]["site_name"]
+      });
+      return areaNames;
+    });
+}
+
+async function fetchLundyObservations(url: string): Promise<Record<string, Record<string, number>>> {
+  const response = await fetch(url);
+  const csvText = await response.text();
+
+  const rows = csvText.trim().split('\n');
+  const data = rows.map(row => row.split(','));
+
+  const observations: Record<string, Record<string, number>> = {};
+
+  data.slice(1).forEach(r => {
+    const year = r[1];
+    const specie = r[0];
+    const count = parseInt(r[2]);
+
+    if (!observations[year]) {
+      observations[year] = {};
+    }
+
+    observations[year][specie] = count;
+  });
+
+  return observations;
+}
 
 export default App;

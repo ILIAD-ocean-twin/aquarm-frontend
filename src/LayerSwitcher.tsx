@@ -6,7 +6,7 @@ import "@thisbeyond/solid-select/style.css";
 
 export const LayerSwitcher: Component<{ layers: IDataLayer[] }> = (props) => {
   return (
-    <div class="absolute left-0 w-64 rounded-l-2xl h-full overflow-scroll" style="z-index: 110">
+    <div class="bg-[#2e2e37] absolute left-0 w-64 rounded-l-2xl h-full overflow-auto" style="z-index: 110">
       <div class="text-iliad text-lg w-full bg-[#1e1e23] rounded-tl-2xl">
         <h2 class="py-2 px-4">Filters</h2>
       </div>
