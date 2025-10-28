@@ -1,8 +1,7 @@
-import { type Component, createResource, createSignal, onMount } from 'solid-js';
+import { type Component, createEffect, createResource, createSignal, onMount } from 'solid-js';
 import { MapContainer } from './MapContainer';
 import { useState } from './state';
 import { IDataLayer } from './layers/IDataLayer';
-import { API_URL } from './constants';
 import { TemperatureLayer } from './layers/TemperatureLayer';
 import { CMEMSChlorophyllLayer } from './layers/CMEMCSClorophyllLayer';
 import { HabitatSuitabilityLayer } from './layers/HabitatSuitabilityLayer';
@@ -11,15 +10,18 @@ import { BathymetryLayer } from './layers/BathymetryLayer';
 import { MPALayer } from './layers/MPALayer';
 import { ProtectedAreaDetails } from './ProtectedAreaDetails';
 import { EssentialFishHabitatLayer } from './layers/EssentialFishHabitatLayer';
+import { MPATrajectoryLayer } from './layers/MPATrajectoryLayer';
 
 
 const App: Component = () => {
   const [state, setState] = useState();
 
   const MPA = new MPALayer("/mpa_uk_light.geojson");
+  const MPATrajectories = new MPATrajectoryLayer();
 
   const layers: IDataLayer[] = [
     MPA,
+    MPATrajectories,
     new TemperatureLayer(state.date),
     new CMEMSChlorophyllLayer(state.date),
     new HabitatSuitabilityLayer(state.date),
@@ -33,6 +35,15 @@ const App: Component = () => {
   const [areaNamelookup, setAreaNameLookup] = createSignal<Record<string, string>>({});
 
   const [lundyObservations] = createResource(() => fetchLundyObservations("/obis_in_mpa_lundy_per_year.csv"));
+
+  createEffect(() => {
+    const site = state.selectedArea;
+    MPATrajectories.setVisible(false);
+    if (site) {
+      fetchTrajectory(site["site_id"])
+        .then(data => MPATrajectories.setSiteData(data));
+    }
+  })
 
   onMount(() => {
     fetchConnectivity("/mpa_connectivity.csv")
@@ -100,8 +111,6 @@ async function fetchConnectivity(url: string): Promise<{ max: number, lookup: Re
   };
 }
 
-
-
 async function fetchMPANames(url: string): Promise<{}> {
   return fetch(url)
     .then(response => response.json())
@@ -136,6 +145,11 @@ async function fetchLundyObservations(url: string): Promise<Record<string, Recor
   });
 
   return observations;
+}
+
+async function fetchTrajectory(site_id: string): Promise<{}> {
+  return fetch(`/trajectories/${site_id}.geojson`)
+    .then(response => response.json());
 }
 
 export default App;

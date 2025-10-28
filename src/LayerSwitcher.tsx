@@ -15,7 +15,7 @@ export const LayerSwitcher: Component<{ layers: IDataLayer[] }> = (props) => {
       <div class="text-iliad text-lg w-full bg-[#1e1e23]">
         <h2 class="py-2 px-4">Data Layers</h2>
       </div>
-      <For each={props.layers}>{l =>
+      <For each={props.layers.filter(l => l.name != "")}>{l =>
         <LayerEntry layer={l} />
       }</For>
     </div>
