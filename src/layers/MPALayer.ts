@@ -17,7 +17,7 @@ const colorScale = chroma.scale('OrRd').padding([0.25, 0.1]);;
 
 export class MPALayer implements IDataLayer {
     name = "Protected areas";
-    description = "ProtectedSeas® Navigator GIS layers are provided on the Ocean Data Platform under the license CC-BY-4.0.";
+    description = "Marine protected areas (MPA).<br /><br />If you click on an MPA, other MPAs that are connected through currents will be highlighted.<br /><br />We also show some representative drift trajectories.<br /><br />Additional information about the MPA become visible below the map.";
     visible: boolean = false;
     layer: Layer<Source, LayerRenderer<any>>;
     updates = false;
