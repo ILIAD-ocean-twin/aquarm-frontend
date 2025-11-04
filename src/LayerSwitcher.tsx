@@ -1,4 +1,4 @@
-import { Component, For, Show, createSignal, onMount } from "solid-js";
+import { Component, For, Show, createEffect, createSignal, onMount } from "solid-js";
 import { BsChevronRight, BsChevronDown } from "solid-icons/bs";
 import { IDataLayer } from "./layers/IDataLayer";
 import { useState } from "./state";
@@ -24,6 +24,7 @@ export const LayerSwitcher: Component<{ layers: IDataLayer[] }> = (props) => {
 
 const LayerEntry: Component<{ layer: IDataLayer }> = (props) => {
   let description: HTMLDivElement;
+  let collapsible: HTMLDivElement;
   const [collapsed, setCollapsed] = createSignal<boolean>(true);
   const [_, setState] = useState();
 
@@ -35,6 +36,14 @@ const LayerEntry: Component<{ layer: IDataLayer }> = (props) => {
 
   onMount(() => {
     description.innerHTML = props.layer.description;
+  })
+
+  createEffect(() => {
+    if (!collapsed()) {
+      collapsible.style.height = collapsible.scrollHeight + 'px';
+    } else {
+      collapsible.style.height = '0px';
+    }
   })
 
   return (
@@ -55,7 +64,7 @@ const LayerEntry: Component<{ layer: IDataLayer }> = (props) => {
           onchange={(ev) => toggleLayer(ev, props.layer)}
           type="checkbox" />
       </div>
-      <div style="transition: max-height ease-in 220ms" class="overflow-hidden" classList={{ "max-h-0": collapsed(), "max-h-28": !collapsed() }}>
+      <div ref={collapsible} style="transition: height 240ms" class="overflow-hidden">
         <div ref={description} class="p-2 bg-black/10 text-white/70 text-sm [&>a]:underline [&>a]:text-blue-500">
         </div>
       </div>
