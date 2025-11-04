@@ -11,6 +11,8 @@ import { MPALayer } from './layers/MPALayer';
 import { ProtectedAreaDetails } from './ProtectedAreaDetails';
 import { EssentialFishHabitatLayer } from './layers/EssentialFishHabitatLayer';
 import { MPATrajectoryLayer } from './layers/MPATrajectoryLayer';
+import { TemperatureRatingLayer } from './layers/TemperatureRatingLayer';
+import { GeoTiffLayer } from './layers/GeoTiffLayer';
 
 
 const App: Component = () => {
@@ -18,10 +20,22 @@ const App: Component = () => {
 
   const MPA = new MPALayer("/mpa_uk_light.geojson");
   const MPATrajectories = new MPATrajectoryLayer();
+  const DiversityLayer = new GeoTiffLayer(
+    "Biodiversity",
+    `<p>This layer shows Shannon diversity.</p>
+      <br/>
+      <p>
+        The dataset is a sample extract from the global Ocean Sensitive Areas (OSA) dataset developed by HUB Ocean. It represents data for the approximate marine region surrounding the United Kingdom and is provided for demonstration and testing purposes. The global OSA dataset integrates multiple layers of ecological information to support data-informed ocean governance and marine spatial planning.
+      </p>
+      `,
+    "https://minio.dive.edito.eu/oidc-volkerh/iliad-mpa/5194bda1-7838-4be2-8ca8-36fa1fdfe300_rescaled_cog.tif",
+    false);
+
 
   const layers: IDataLayer[] = [
     MPA,
     MPATrajectories,
+    DiversityLayer,
     new TemperatureLayer(state.date),
     new CMEMSChlorophyllLayer(state.date),
     new HabitatSuitabilityLayer(state.date),
