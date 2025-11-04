@@ -21,12 +21,8 @@ const App: Component = () => {
   const MPA = new MPALayer("/mpa_uk_light.geojson");
   const MPATrajectories = new MPATrajectoryLayer();
   const DiversityLayer = new GeoTiffLayer(
-    "Biodiversity",
-    `<p>This layer shows Shannon diversity.</p>
-      <br/>
-      <p>
-        The Shannon Index was calculated by HUB Ocean using species occurrence data from OBIS. The dataset is a sample extract from the global Ocean Sensitive Areas (OSA) dataset developed by HUB Ocean. It represents data for the approximate marine region surrounding the United Kingdom and is provided for demonstration and testing purposes. The global OSA dataset integrates multiple layers of ecological information to support data-informed ocean governance and marine spatial planning.
-      </p>
+    "Shannon diversity",
+    `<p>This layer is derived from HUB Ocean’s calculation of the Shannon index using species observation from OBIS. It represents data for the approximate marine region surrounding the United Kingdom and is provided for demonstration and testing purposes.<br /><br />For more information, see <a href="https://www.hubocean.earth/data-products">https://www.hubocean.earth/data-products</a>.</p>
       `,
     "https://minio.dive.edito.eu/oidc-volkerh/iliad-mpa/5194bda1-7838-4be2-8ca8-36fa1fdfe300_rescaled_cog.tif",
     false);
