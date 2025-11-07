@@ -18,7 +18,7 @@ const colorScale = chroma.scale('OrRd').padding([0.25, 0.1]);;
 export class MPALayer implements IDataLayer {
     name = "Protected areas";
     description = "Marine protected areas (MPA).<br /><br />If you click on an MPA, other MPAs that are connected through currents will be highlighted.<br /><br />We also show some representative drift trajectories.<br /><br />Additional information about the MPA become visible below the map.";
-    visible: boolean = false;
+    visible: boolean = true;
     layer: Layer<Source, LayerRenderer<any>>;
     updates = false;
     clickable = true;
@@ -36,7 +36,8 @@ export class MPALayer implements IDataLayer {
         this.layer = new VectorLayer({
             visible: false,
             style: MPA_STYLE
-        })
+        });
+        this.setVisible(true);
     }
 
     public setConnectivityLookup(lookup: Record<string, Record<string, number>>) {
