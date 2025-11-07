@@ -15,9 +15,16 @@ build-docker:
     # Adjust image name for non-default branches
     # E.g., gitlab.sintef.no:5050/iliad-nord/aquaculture-pilot:branchX:sha-XXXXXXX
     - |
-      if [[ "$CI_COMMIT_BRANCH" != "$CI_DEFAULT_BRANCH" ]]; then
+      if [[ -n "$CI_COMMIT_TAG" ]]; then
+        # Build for a tag (e.g., release version)
+        export DOCKER_IMAGE_NAME="$CI_REGISTRY_IMAGE:tag-$CI_COMMIT_TAG"
+      elif [[ "$CI_COMMIT_BRANCH" != "$CI_DEFAULT_BRANCH" ]]; then
+        # Build for a non-default branch
         SAFE_BRANCH=$(echo "$CI_COMMIT_BRANCH" | tr '/' '-' | tr -cd '[:alnum:]-_.')
         export DOCKER_IMAGE_NAME="$CI_REGISTRY_IMAGE/$SAFE_BRANCH:sha-$CI_COMMIT_SHORT_SHA"
+      else
+        # Default branch
+        export DOCKER_IMAGE_NAME="$CI_REGISTRY_IMAGE:sha-$CI_COMMIT_SHORT_SHA"
       fi
     - |
       echo "Building image: $DOCKER_IMAGE_NAME"
