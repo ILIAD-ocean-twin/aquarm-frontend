@@ -148,7 +148,7 @@ export const MapContainer: Component<MapContainerProps> = ({ dataLayers, center,
   // Show/Hide tooltip on hover
   createEffect(on(hoveredFeature, f => {
     tooltip.classList.toggle("hidden", !!!f);
-    mapElement.classList.toggle('cursor-pointer', !!f?.get('siteId'));
+    mapElement.classList.toggle('cursor-pointer', !!f?.get('siteId') || !!f?.get('site_id'));
   }))
 
   createEffect(() => {
