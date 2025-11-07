@@ -9,7 +9,7 @@ import { AquacultureSitesLayer } from './layers/AquacultureSitesLayer';
 import { useState } from './state';
 import { IDataLayer } from './layers/IDataLayer';
 import { LayerSwitcher } from './LayerSwitcher';
-import { BsBrightnessHighFill, BsMoonFill } from 'solid-icons/bs';
+import { BsBrightnessHighFill, BsMoonFill, BsQuestionLg } from 'solid-icons/bs';
 
 
 interface MapContainerProps {
@@ -221,7 +221,9 @@ export const MapContainer: Component<MapContainerProps> = ({ dataLayers, center,
         </Switch>
       </div>
 
+      <HelpBox />
       <DarkmodeButton />
+      <HelpButton />
 
       <Legends>
         <For each={dataLayers.filter(l => state.visibleLayers.includes(l.name))}>{l =>
@@ -262,7 +264,7 @@ const DarkmodeButton: Component = () => {
   return (
     <div
       title="Toggle dark base layer."
-      class="absolute top-3 right-3 shadow-md rounded-full bg-[#2e2e37] hover:bg-[#1e1e23] cursor-pointer p-3 text-white text-lg"
+      class="absolute top-16 right-3 shadow-md rounded-full bg-[#2e2e37] hover:bg-[#1e1e23] cursor-pointer p-3 text-white text-lg"
       style={"z-index: 110;"}
       onclick={() => setState("darkmode", dm => !dm)}
     >
@@ -270,5 +272,44 @@ const DarkmodeButton: Component = () => {
         <BsBrightnessHighFill />
       </Show>
     </div>
+  )
+}
+
+const HelpButton: Component = () => {
+  const [state, setState] = useState();
+
+  return (
+    <div
+      title="Show help"
+      class="absolute top-3 right-3 shadow-md rounded-full  hover:bg-[#1e1e23] cursor-pointer p-3 hover:text-white text-lg"
+      style={"z-index: 110;"}
+      classList={{
+        "text-white": !state.showHelp,
+        "text-black": state.showHelp,
+        "bg-[#2e2e37]": !state.showHelp,
+        "bg-white": state.showHelp
+      }}
+      onclick={() => setState("showHelp", h => !h)}
+    >
+      <BsQuestionLg />
+    </div>
+  )
+}
+
+const HelpBox: Component = () => {
+  const [state, setState] = useState();
+
+  return (
+    <Show when={state.showHelp}>
+      <div
+        title="Show help"
+        class="absolute top-3 right-16 rounded shadow-md bg-white/90 p-2 w-72"
+        style={"z-index: 110;"}
+      >
+        <p>
+          Put help text here
+        </p>
+      </div>
+    </Show>
   )
 }

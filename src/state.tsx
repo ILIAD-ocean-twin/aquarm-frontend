@@ -11,6 +11,7 @@ type State = {
   visibleLayers: string[]
   allOrganizations: string[]
   darkmode: boolean
+  showHelp: boolean
   oim: { [key in string]: OimEntry }
   selectedArea?: {}
   areaNames?: { [key in string]: string }
@@ -25,6 +26,7 @@ const initialState: State = {
   visibleLayers: [],
   allOrganizations: [],
   darkmode: true,
+  showHelp: true,
   oim: {},
   selectedArea: undefined,
   areaNames: {}
