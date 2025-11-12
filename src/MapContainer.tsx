@@ -303,12 +303,21 @@ const HelpBox: Component = () => {
     <Show when={state.showHelp}>
       <div
         title="Show help"
-        class="absolute top-3 right-16 rounded shadow-md bg-white/90 p-2 w-72"
+        class="absolute top-3 right-16 rounded shadow-md bg-white/90 p-2 w-72 text-sm"
         style={"z-index: 110;"}
       >
-        <p>
-          Put help text here
-        </p>
+        <p class="text-black/70 text-sm">
+          This is a Digital Twin of the UK waters with focus on biodiversity and conservation.
+          <br /><br />
+          Various map layers are available and can be enabled on the left.
+          <br /><br />
+          The layer for marine protected areas (MPAs) is interactive. When you enable it you can click on each MPA. You will see
+        </p><br />
+        <ul class="text-black/70 text-sm list-disc list-inside space-y-2">
+          <li>More information about the MPA (underneath the map)</li>
+          <li>Representative trajectories of drifters seeded in the MPA</li>
+          <li>Connectivity with other MPAs (indicated by colour of other MPAs)</li>
+        </ul>
       </div>
     </Show>
   )
