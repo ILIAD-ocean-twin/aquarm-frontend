@@ -24,7 +24,7 @@ build-docker:
         docker push "$DOCKER_IMAGE_NAME"
         echo "Tagging as latest"
         docker tag "$DOCKER_IMAGE_NAME" "$CI_REGISTRY_IMAGE:tag-latest"
-        docker push "$CI_REGISTRY_IMAGE:latest"
+        docker push "$CI_REGISTRY_IMAGE:tag-latest"
       elif [[ "$CI_COMMIT_BRANCH" != "$CI_DEFAULT_BRANCH" ]]; then
         # Build for a non-default branch
         SAFE_BRANCH=$(echo "$CI_COMMIT_BRANCH" | tr '/' '-' | tr -cd '[:alnum:]-_.')
