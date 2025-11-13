@@ -15,10 +15,12 @@ build-docker:
   before_script:
     - echo "$CI_JOB_TOKEN" | docker login $CI_REGISTRY -u $CI_REGISTRY_USER --password-stdin
     - docker buildx create --name mybuilder --use
-  script: docker buildx build
-    --push
-    --platform linux/amd64
-    --tag $DOCKER_IMAGE_NAME
-    .
+  script:
+    - docker buildx build \
+      --platform linux/amd64 \
+      --tag $DOCKER_IMAGE_NAME \
+      --load \
+      .
+    - docker push $DOCKER_IMAGE_NAME
   only:
     - tags
