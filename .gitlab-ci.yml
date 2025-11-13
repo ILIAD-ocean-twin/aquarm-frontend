@@ -1,55 +1,20 @@
 build-docker:
-  image: docker:cli
+  image:
+    name: docker:24-cli
+    pull_policy: always
   stage: build
   tags:
     - dind
   services:
-    - docker:dind
+    - docker:24-dind
   variables:
-    # Default image name, overridden later for non-default branches
-    # E.g., gitlab.sintef.no:5050/iliad-nord/aquaculture-pilot:sha-XXXXXXX
-    DOCKER_IMAGE_NAME: $CI_REGISTRY_IMAGE:sha-$CI_COMMIT_SHORT_SHA
+    DOCKER_TLS_CERTDIR: ""
+    DOCKER_IMAGE_NAME: $CI_REGISTRY_IMAGE:$CI_COMMIT_TAG
   before_script:
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - echo "$CI_JOB_TOKEN" | docker login $CI_REGISTRY -u $CI_REGISTRY_USER --password-stdin
+    - docker buildx create --name mybuilder --use
   script:
-    # Adjust image name for non-default branches
-    # E.g., gitlab.sintef.no:5050/iliad-nord/aquaculture-pilot:branchX:sha-XXXXXXX
-    - |
-      if [[ -n "$CI_COMMIT_TAG" ]]; then
-        # Build for a tag (e.g., release version)
-        export DOCKER_IMAGE_NAME="$CI_REGISTRY_IMAGE:tag-$CI_COMMIT_TAG"
-      elif [[ "$CI_COMMIT_BRANCH" != "$CI_DEFAULT_BRANCH" ]]; then
-        # Build for a non-default branch
-        SAFE_BRANCH=$(echo "$CI_COMMIT_BRANCH" | tr '/' '-' | tr -cd '[:alnum:]-_.')
-        export DOCKER_IMAGE_NAME="$CI_REGISTRY_IMAGE/$SAFE_BRANCH:sha-$CI_COMMIT_SHORT_SHA"
-      else
-        # Default branch
-        export DOCKER_IMAGE_NAME="$CI_REGISTRY_IMAGE:sha-$CI_COMMIT_SHORT_SHA"
-      fi
-    - |
-      echo "Building image: $DOCKER_IMAGE_NAME"
-    # Build and push
-    - docker build --pull -t "$DOCKER_IMAGE_NAME" .
-    - docker push "$DOCKER_IMAGE_NAME"
-    # Tag rules for latest (or branch:latest)
-    - |
-      # Tagging latest images
-      if [[ -n "$CI_COMMIT_TAG" ]]; then
-        echo "Tagging release as latest"
-        docker tag "$DOCKER_IMAGE_NAME" "$CI_REGISTRY_IMAGE:latest"
-        docker push "$CI_REGISTRY_IMAGE:latest"
-      elif [[ "$CI_COMMIT_BRANCH" == "$CI_DEFAULT_BRANCH" ]]; then
-        echo "Tagging default branch as latest"
-        docker tag "$DOCKER_IMAGE_NAME" "$CI_REGISTRY_IMAGE:latest"
-        docker push "$CI_REGISTRY_IMAGE:latest"
-      else
-        SAFE_BRANCH=$(echo "$CI_COMMIT_BRANCH" | tr '/' '-' | tr -cd '[:alnum:]-_.')
-        if [[ -n "$SAFE_BRANCH" ]]; then
-          echo "Tagging branch-specific latest: $SAFE_BRANCH:latest"
-          docker tag "$DOCKER_IMAGE_NAME" "$CI_REGISTRY_IMAGE/$SAFE_BRANCH:latest"
-          docker push "$CI_REGISTRY_IMAGE/$SAFE_BRANCH:latest"
-        fi
-      fi
-  # rules:
-  #   - changes:
-  #       - aquaculturedemo_deployment/opendrift/*
+    - docker buildx build --platform linux/amd64 --tag $DOCKER_IMAGE_NAME --load .
+    - docker push $DOCKER_IMAGE_NAME
+  only:
+    - tags
