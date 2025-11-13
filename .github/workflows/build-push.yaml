@@ -20,8 +20,10 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Construct Full Image (Lowercase)
+        run: echo "DOCKER_TAGS=$(echo ghcr.io/${GITHUB_REPOSITORY}:${GITHUB_REF_NAME} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
       - name: Build and push Docker main image
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: ghcr.io/${{ github.repository }}:${{ github.ref_name }}
+          tags: ${{ env.DOCKER_TAGS }}
