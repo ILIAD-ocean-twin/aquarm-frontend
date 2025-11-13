@@ -17,33 +17,44 @@ build-docker:
     # Tag     gitlab.sintef.no:5050/iliad-nord/aquaculture-pilot:tag
     - |
       if [[ -n "$CI_COMMIT_TAG" ]]; then
-        # Build for a tag (e.g., release version)
-        export DOCKER_IMAGE_NAME="$CI_REGISTRY_IMAGE:tag-$CI_COMMIT_TAG"
-        echo "Building tag image: $DOCKER_IMAGE_NAME"
-        docker build --pull -t "$DOCKER_IMAGE_NAME" .
-        docker push "$DOCKER_IMAGE_NAME"
-        # echo "Tagging as latest"
-        # docker tag "$DOCKER_IMAGE_NAME" "$CI_REGISTRY_IMAGE:tag-latest"
-        # docker push "$CI_REGISTRY_IMAGE:tag-latest"
+        echo "Running for Commit Tag: $CI_COMMIT_TAG"
+        if [[ "$CI_COMMIT_BRANCH" != "$CI_DEFAULT_BRANCH" ]]; then
+          # Git tag / non-default branch
+          echo "Running for Branch $CI_COMMIT_BRANCH"
+          SAFE_BRANCH=$(echo "$CI_COMMIT_BRANCH" | tr '/' '-' | tr -cd '[:alnum:]-_.')
+          export DOCKER_IMAGE_NAME="$CI_REGISTRY_IMAGE/$SAFE_BRANCH/tags/$CI_COMMIT_TAG"
+          echo "Image Name: $DOCKER_IMAGE_NAME"
+          docker build --pull --tag "$DOCKER_IMAGE_NAME" .
+          docker push "$DOCKER_IMAGE_NAME"
+        else
+          # Git tag / default branch
+          echo "Running for Default Branch ($CI_COMMIT_BRANCH)"
+          export DOCKER_IMAGE_NAME="$CI_REGISTRY_IMAGE/tags/$CI_COMMIT_TAG"
+          echo "Image Name: $DOCKER_IMAGE_NAME"
+          docker build --pull --tag "$DOCKER_IMAGE_NAME" .
+          docker push "$DOCKER_IMAGE_NAME"
+        fi
       elif [[ "$CI_COMMIT_BRANCH" != "$CI_DEFAULT_BRANCH" ]]; then
-        # Build for a non-default branch
+        # No Git tag / non-default branch
+        echo "Running for Branch $CI_COMMIT_BRANCH"
         SAFE_BRANCH=$(echo "$CI_COMMIT_BRANCH" | tr '/' '-' | tr -cd '[:alnum:]-_.')
-        export DOCKER_IMAGE_NAME="$CI_REGISTRY_IMAGE/$SAFE_BRANCH:sha-$CI_COMMIT_SHORT_SHA"
-        echo "Building image: $DOCKER_IMAGE_NAME"
-        docker build --pull -t "$DOCKER_IMAGE_NAME" .
+        export DOCKER_IMAGE_NAME="$CI_REGISTRY_IMAGE/$SAFE_BRANCH/sha-$CI_COMMIT_SHORT_SHA"
+        echo "Image Name: $DOCKER_IMAGE_NAME"
+        docker build --pull --tag "$DOCKER_IMAGE_NAME" .
         docker push "$DOCKER_IMAGE_NAME"
-        echo "Tagging branch-specific latest: $SAFE_BRANCH:latest"
-        docker tag "$DOCKER_IMAGE_NAME" "$CI_REGISTRY_IMAGE/$SAFE_BRANCH:latest"
-        docker push "$CI_REGISTRY_IMAGE/$SAFE_BRANCH:latest"
+        # echo "Tagging branch-specific latest: $SAFE_BRANCH:latest"
+        # docker tag "$DOCKER_IMAGE_NAME" "$CI_REGISTRY_IMAGE/$SAFE_BRANCH:latest"
+        # docker push "$CI_REGISTRY_IMAGE/$SAFE_BRANCH:latest"
       else
-        # Default branch
+        # No Git tag / default branch
+        echo "Building for Default Branch ($CI_COMMIT_BRANCH)"
         export DOCKER_IMAGE_NAME="$CI_REGISTRY_IMAGE:sha-$CI_COMMIT_SHORT_SHA"
-        echo "Building image: $DOCKER_IMAGE_NAME"
-        docker build --pull -t "$DOCKER_IMAGE_NAME" .
+        echo "Image Name: $DOCKER_IMAGE_NAME"
+        docker build --pull --tag "$DOCKER_IMAGE_NAME" .
         docker push "$DOCKER_IMAGE_NAME"
-        echo "Tagging default branch as latest"
-        docker tag "$DOCKER_IMAGE_NAME" "$CI_REGISTRY_IMAGE:latest"
-        docker push "$CI_REGISTRY_IMAGE:latest"
+        # echo "Tagging default branch as latest"
+        # docker tag "$DOCKER_IMAGE_NAME" "$CI_REGISTRY_IMAGE:latest"
+        # docker push "$CI_REGISTRY_IMAGE:latest"
       fi
   # rules:
   #   - changes:
