@@ -1,7 +1,7 @@
 build-docker:
   image:
     name: docker:24-cli
-    pull_policy: if-not-present
+    pull_policy: always
   stage: build
   tags:
     - dind
