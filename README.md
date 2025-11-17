@@ -1,6 +1,8 @@
-# Acuaculture Risk Metrics - ILIAD Pilot
+# ILIAD Marine Protected Area (MPA) Demo
 
-This repository contains the source code for the frontend of the AquaRM pilot. It's a website created with solid-js and depends on the web-API provided by `iliad-pilot-server` and the WMS-server provided by `Acuaculture TC`.
+This repository contains the source code for the frontend of the ILIAD MPA pilot. 
+
+The current deployment is live at [https://iliad-mpa.sintef.cloud](https://iliad-mpa.sintef.cloud)
 
 ## Env Files
 
@@ -53,7 +55,7 @@ You can deploy the `dist` folder to any static host provider (netlify, surge, no
 ### Build
 
 ```bash
-$ docker buildx build --tag aquaculture-pilot .
+$ docker buildx build --tag iliad-mpa .
 ```
 
 ### Run, Local Backend
@@ -65,7 +67,7 @@ $ docker run \
     --env VITE_API_URL=http://localhost:5001/api \
     --env VITE_RAZZER_URL=http://localhost:5001/api \
     --publish 3000:3000 \
-    aquaculture-pilot
+    iliad-mpa
 ```
 
 or
@@ -76,7 +78,7 @@ $ docker run \
     --tty \
     --env-file ./.env.development
     --publish 3000:3000 \
-    aquaculture-pilot
+    iliad-mpa
 ```
 
 ### Run, Production Backend
@@ -88,7 +90,7 @@ $ docker run \
     --env VITE_API_URL=https://aquaculture-demo.teinekroken.no \
     --env VITE_RAZZER_URL=https://aquaculture-demo.teinekroken.no/razzer \
     --publish 3000:3000 \
-    aquaculture-pilot
+    iliad-mpa
 ```
 
 or
@@ -99,7 +101,7 @@ $ docker run \
     --tty \
     --env-file ./.env.production
     --publish 3000:3000 \
-    aquaculture-pilot
+    iliad-mpa
 ```
 
 ## License
