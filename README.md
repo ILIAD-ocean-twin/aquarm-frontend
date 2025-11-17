@@ -101,3 +101,15 @@ $ docker run \
     --publish 3000:3000 \
     aquaculture-pilot
 ```
+
+## License
+
+See the [LICENSE](LICENSE.txt) file for license rights and limitations (Apache License 2.0).
+
+## Funding
+
+This work was supported by EU Horizon 2020 Research and Innovation Programme under Grant Agreement No 101037643 (project [ILIAD](https://ocean-twin.eu)).
+
+## Contact
+
+- Øystein Knutsen (oystein.knutsen@sintef.no)
