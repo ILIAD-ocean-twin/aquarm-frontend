@@ -9,7 +9,7 @@ interface OverviewDetailsProps {
   data: InitializedResource<BasicWeek[]>
 }
 
-export const OverviewDetails: Component<OverviewDetailsProps> = ({ data }) => {
+export const OverviewDetails: Component<OverviewDetailsProps> = (props) => {
   const [count, setCount] = createSignal<number>(0);
   const [avg, setAvg] = createSignal<string>();
   const [over, setOver] = createSignal<number>();
@@ -18,10 +18,11 @@ export const OverviewDetails: Component<OverviewDetailsProps> = ({ data }) => {
   const [state] = useState();
 
   createEffect(() => {
+    const data = props.data();
     const d = state.filters.organizations.length
-      ? data()
+      ? data
         .filter(bw => (!state.filters.fallow ? !bw.isFallow : true) && !bw.organizations.every(o => !state.filters.organizations.includes(o)))
-      : data()
+      : data
         .filter(bw => !state.filters.fallow ? !bw.isFallow : true);
 
     batch(() => {
@@ -34,10 +35,10 @@ export const OverviewDetails: Component<OverviewDetailsProps> = ({ data }) => {
 
   return (
     <div class="mt-10 flex justify-between">
-      <NumberDisplay value={count()} subtitle="Number of sites" loading={data.loading} />
-      <NumberDisplay value={avg()} subtitle="Avg. lice count" loading={data.loading} />
-      <NumberDisplay value={over()} subtitle="Sites with lice > 0.5" loading={data.loading} />
-      <NumberDisplay value={numFallow()} subtitle="" loading={data.loading}>
+      <NumberDisplay value={count()} subtitle="Number of sites" loading={props.data.loading} />
+      <NumberDisplay value={avg()} subtitle="Avg. lice count" loading={props.data.loading} />
+      <NumberDisplay value={over()} subtitle="Sites with lice > 0.5" loading={props.data.loading} />
+      <NumberDisplay value={numFallow()} subtitle="" loading={props.data.loading}>
         <div class="text-iliad">
           Number of <OimTerm term="oim-aqc:isFallow" /> sites
         </div>

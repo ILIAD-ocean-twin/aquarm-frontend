@@ -98,7 +98,11 @@ const App: Component = () => {
 const fetchBasic = async (time: number[]) =>
   fetch(API_URL + `/basic-all/${time[0]}/${time[1]}`)
     .then(d => d.json() as Promise<BasicWeek[]>)
-    .then(d => d.filter(bw => bw.placement == "SJØ"));
+    .then(d => d.filter(bw => bw.placement == "SJØ"))
+    .catch(e => {
+      console.error(e, "in fetching basic week");
+      return [];
+    });
 
 const fetchOimTerms = async () =>
   fetch(API_URL + "/oim")
