@@ -11,7 +11,6 @@ import { MPALayer } from './layers/MPALayer';
 import { ProtectedAreaDetails } from './ProtectedAreaDetails';
 import { EssentialFishHabitatLayer } from './layers/EssentialFishHabitatLayer';
 import { MPATrajectoryLayer } from './layers/MPATrajectoryLayer';
-import { TemperatureRatingLayer } from './layers/TemperatureRatingLayer';
 import { GeoTiffLayer } from './layers/GeoTiffLayer';
 
 
@@ -22,15 +21,13 @@ const App: Component = () => {
   const MPATrajectories = new MPATrajectoryLayer();
   const DiversityLayer = new GeoTiffLayer(
     "Shannon diversity",
-    `<p>This layer is derived from HUB Ocean’s calculation of the Shannon index using species observation from OBIS. It represents data for the approximate marine region surrounding the United Kingdom and is provided for demonstration and testing purposes.<br /><br />For more information, see <a href="https://www.hubocean.earth/data-products">https://www.hubocean.earth/data-products</a>.</p>
-      `,
+    `This layer is derived from HUB Ocean's calculation of the Shannon index using species observation from OBIS. It represents data for the approximate marine region surrounding the United Kingdom and is provided for demonstration and testing purposes.<br /><br />For more information, see <a href="https://www.hubocean.earth/data-products">HUB Ocean</a>.`,
     "https://minio.dive.edito.eu/oidc-volkerh/iliad-mpa/5194bda1-7838-4be2-8ca8-36fa1fdfe300_rescaled_cog.tif",
     false);
 
   const SpinyLobsterLayer = new GeoTiffLayer(
     "Spiny lobster",
-    `<p>Habitat suitability for the Spiny Lobster. Higher values indicate areas that are environmentally more suitable for the species compared to areas with lower values within the same study area.<br /><br />The maps shows areas where the species is predicted to be relatively more frequent. It does not show probability of occurance.<br /><br />For more information, see <a href="https://flowcell.ujuizi.com:8501">https://flowcell.ujuizi.com:8501</a>.</p>
-      `,
+    `Habitat suitability for the Spiny Lobster. Higher values indicate areas that are environmentally more suitable for the species compared to areas with lower values within the same study area.<br /><br />The maps shows areas where the species is predicted to be relatively more frequent. It does not show probability of occurance.<br /><br />For more information, see <a href="https://flowcell.ujuizi.com:8501">here</a>.`,
     "https://minio.dive.edito.eu/oidc-volkerh/iliad-mpa/maxent-predictions_spiny_lobster_cog.tif",
     false);
 
