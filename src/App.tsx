@@ -27,7 +27,7 @@ const App: Component = () => {
 
   const SpinyLobsterLayer = new GeoTiffLayer(
     "Spiny lobster",
-    `Habitat suitability for the Spiny Lobster. Higher values indicate areas that are environmentally more suitable for the species compared to areas with lower values within the same study area.<br /><br />The maps shows areas where the species is predicted to be relatively more frequent. It does not show probability of occurance.<br /><br />For more information, see <a href="https://flowcell.ujuizi.com:8501">here</a>.`,
+    `Habitat suitability for the Spiny Lobster. Higher values indicate areas that are environmentally more suitable for the species compared to areas with lower values within the same study area.<br /><br />The maps shows areas where the species is predicted to be relatively more frequent. It does not show probability of occurance.<br /><br />For more information, see this <a href="https://www.youtube.com/watch?v=JYNeamC3ddA&list=PLWYTiKKj2ZOLSTE4j7xlP0kf4z9yVOM37">video</a>, this <a href="https://flowcell.ujuizi.com/hub/user-redirect/lab/tree/shared/Copernicus_Marine/DTOs/Marine%20protected%20area%20(MPA)%20assessments/tutorial_ml4sdm_spiny_lobster/notebooks/ISRA_Elapid_spiny_lobster_explained.ipynb">Jupyter notebook</a>, and this <a href="https://flowcell.ujuizi.com:8501">application</a>.`,
     "https://minio.dive.edito.eu/oidc-volkerh/iliad-mpa/maxent-predictions_spiny_lobster_cog.tif",
     false);
 
