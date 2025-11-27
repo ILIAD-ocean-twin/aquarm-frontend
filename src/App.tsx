@@ -27,11 +27,19 @@ const App: Component = () => {
     "https://minio.dive.edito.eu/oidc-volkerh/iliad-mpa/5194bda1-7838-4be2-8ca8-36fa1fdfe300_rescaled_cog.tif",
     false);
 
+  const SpinyLobsterLayer = new GeoTiffLayer(
+    "Spiny lobster",
+    `<p>Habitat suitability for the Spiny Lobster. Higher values indicate areas that are environmentally more suitable for the species compared to areas with lower values within the same study area.<br /><br />The maps shows areas where the species is predicted to be relatively more frequent. It does not show probability of occurance.<br /><br />For more information, see <a href="https://flowcell.ujuizi.com:8501">https://flowcell.ujuizi.com:8501</a>.</p>
+      `,
+    "https://minio.dive.edito.eu/oidc-volkerh/iliad-mpa/maxent-predictions_spiny_lobster_cog.tif",
+    false);
+
 
   const layers: IDataLayer[] = [
     MPA,
     MPATrajectories,
     DiversityLayer,
+    SpinyLobsterLayer,
     new TemperatureLayer(state.date),
     new CMEMSChlorophyllLayer(state.date),
     new HabitatSuitabilityLayer(state.date),
