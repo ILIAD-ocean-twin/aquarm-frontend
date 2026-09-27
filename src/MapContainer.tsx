@@ -10,6 +10,7 @@ import { useState } from './state';
 import { IDataLayer } from './layers/IDataLayer';
 import { LayerSwitcher } from './LayerSwitcher';
 import { BsBrightnessHighFill, BsMoonFill, BsQuestionLg } from 'solid-icons/bs';
+import { CARTO_BASEMAPS_API_KEY } from './constants';
 
 
 interface MapContainerProps {
@@ -37,7 +38,7 @@ export const MapContainer: Component<MapContainerProps> = ({ dataLayers, center,
   const darkLayer = new TileLayer({
     visible: state.darkmode,
     source: new XYZ({
-      url: "https://{1-4}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png",
+      url: `https://{1-4}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png?key=${CARTO_BASEMAPS_API_KEY}`,
       crossOrigin: 'anonymous',
     })
   });

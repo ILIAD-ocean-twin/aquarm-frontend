@@ -8,6 +8,7 @@ cat <<EOF > /usr/share/nginx/html/config.js
 window.config = {
   VITE_API_URL: "${VITE_API_URL}",
   VITE_RAZZER_URL: "${VITE_RAZZER_URL}"
+  VITE_CARTO_BASEMAPS_API_KEY: "${VITE_CARTO_BASEMAPS_API_KEY}"
 };
 EOF
 
