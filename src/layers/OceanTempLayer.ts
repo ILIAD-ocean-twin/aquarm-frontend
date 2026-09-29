@@ -66,8 +66,8 @@ export class OceanTempLayer implements IDataLayer {
       url: `https://thredds.met.no/thredds/wms/fou-hi/norkystv3_800m_m00_be`,
       params: {
         LAYERS: sourceLayer,
-        elevation: depth,
-        time: `${year}-${month}-${day}T12:00:00.000Z`,
+        ELEVATION: depth,
+        TIME: `${year}-${month}-${day}T12:00:00.000Z`,
         TRANSPARENT: true,
         STYLES: style,
         COLORSCALERANGE: colorScaleRange.join(","),
