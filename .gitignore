@@ -1,4 +1,9 @@
 node_modules/
 dist/
 **/.DS_Store
+.ipynb_checkpoints
+__MACOSX
+notebooks/trajectories_in
+notebooks/trajectories_out
 .env.*.local
+
