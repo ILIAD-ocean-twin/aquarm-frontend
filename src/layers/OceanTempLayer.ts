@@ -1,22 +1,22 @@
 import TileLayer from "ol/layer/Tile";
-import TileWMS from 'ol/source/TileWMS.js';
+import TileWMS from "ol/source/TileWMS.js";
 import Layer from "ol/layer/Layer";
 import LayerRenderer from "ol/renderer/Layer";
 import Source from "ol/source/Source";
 import { IDataLayer } from "./IDataLayer";
 
-const depth = -10;
-const sourceLayer = 'temperature';
-const style = 'spectral';
+const depth = 10;
+const sourceLayer = "temperature";
+const palette = "div-Spectral";
+const style = `default-scalar/${palette}`;
 const colorScaleRange = [-2, 10];
-const colorScale = `${colorScaleRange[0]}%2C${colorScaleRange[1]}`;
 const numColorBands = 20;
 const logScale = false;
 
 
 export class OceanTempLayer implements IDataLayer {
   name = "Sea temperature";
-  description = `Average sea temperature for the middle of the selected week. Fetched from the Norkyst800 model by <a href='https://www.met.no/en'>MET Norway</a>.`;
+  description = `Average sea temperature for the middle of the selected week. Fetched from the NorKyst v3 (800 m) model by <a href='https://www.met.no/en'>MET Norway</a>.`;
   visible: boolean = false;
   layer: Layer<Source, LayerRenderer<any>>;
   updates = true;
@@ -51,8 +51,17 @@ export class OceanTempLayer implements IDataLayer {
   }
 
   public getLegend(): HTMLElement {
+    const params = new URLSearchParams({
+      REQUEST: "GetLegendGraphic",
+      LAYERS: sourceLayer,
+      STYLES: style,
+      PALETTE: palette,
+      COLORSCALERANGE: colorScaleRange.join(","),
+      NUMCOLORBANDS: String(numColorBands),
+      LOGSCALE: String(logScale),
+    });
     const img = document.createElement("img");
-    img.src = "/sea_temperature_legend.png";
+    img.src = `${WMS_URL}?${params.toString()}`;
     return img;
   }
 
@@ -63,21 +72,20 @@ export class OceanTempLayer implements IDataLayer {
 
     return new TileWMS({
       attributions:
-        'Sea temperature tiles © <a href="https://thredds.met.no/thredds/fou-hi/norkyst800v2.html"' +
-        ' target="_blank">MET</a>',
-      url: `https://thredds.met.no/thredds/wms/fou-hi/norkyst800m/NorKyst-800m_ZDEPTHS_avg.an.${year}${month}${day}00.nc`,
+        'Sea temperature tiles © <a href="https://www.met.no/en" target="_blank">MET Norway</a>',
+      url: `https://thredds.met.no/thredds/wms/fou-hi/norkystv3_800m_m00_be`,
       params: {
         LAYERS: sourceLayer,
-        elevation: depth,
-        time: `${year}-${month}-${day}T12:00:00.000Z`,
+        ELEVATION: depth,
+        TIME: `${year}-${month}-${day}T12:00:00.000Z`,
         TRANSPARENT: true,
-        STYLES: `boxfill/${style}`,
-        COLORSCALERANGE: colorScale,
+        STYLES: style,
+        COLORSCALERANGE: colorScaleRange.join(","),
         NUMCOLORBANDS: numColorBands,
         LOGSCALE: logScale,
         TILED: true,
-      }
-    })
+      },
+    });
   }
 }
 
