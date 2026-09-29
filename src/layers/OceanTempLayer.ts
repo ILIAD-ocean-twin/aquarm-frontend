@@ -7,7 +7,8 @@ import { IDataLayer } from "./IDataLayer";
 
 const depth = 10;
 const sourceLayer = 'temperature';
-const style = 'default-scalar/div-Spectral';
+const palette = "div-Spectral";
+const style = `default-scalar/${palette}`;
 const colorScaleRange = [-2, 10];
 const numColorBands = 20;
 const logScale = false;
@@ -50,8 +51,17 @@ export class OceanTempLayer implements IDataLayer {
   }
 
   public getLegend(): HTMLElement {
+    const params = new URLSearchParams({
+      REQUEST: "GetLegendGraphic",
+      LAYERS: sourceLayer,
+      STYLES: style,
+      PALETTE: palette,
+      COLORSCALERANGE: colorScaleRange.join(","),
+      NUMCOLORBANDS: String(numColorBands),
+      LOGSCALE: String(logScale),
+    });
     const img = document.createElement("img");
-    img.src = "/sea_temperature_legend.png";
+    img.src = `${WMS_URL}?${params.toString()}`;
     return img;
   }
 
