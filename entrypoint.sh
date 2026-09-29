@@ -3,11 +3,13 @@ set -e
 
 VITE_API_URL=${VITE_API_URL:-"http://localhost:8000/api"}
 VITE_RAZZER_URL=${VITE_RAZZER_URL:-"http://localhost:8000/razzer"}
+VITE_CARTO_BASEMAPS_API_KEY=${VITE_CARTO_BASEMAPS_API_KEY:-""}
 
 cat <<EOF > /usr/share/nginx/html/config.js
 window.config = {
   VITE_API_URL: "${VITE_API_URL}",
-  VITE_RAZZER_URL: "${VITE_RAZZER_URL}"
+  VITE_RAZZER_URL: "${VITE_RAZZER_URL}",
+  VITE_CARTO_BASEMAPS_API_KEY: "${VITE_CARTO_BASEMAPS_API_KEY}"
 };
 EOF
 

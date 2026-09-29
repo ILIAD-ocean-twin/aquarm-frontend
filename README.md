@@ -6,6 +6,10 @@ This repository contains the source code for the frontend of the AquaRM pilot. I
 
 For development (and production), you will need the environment files `.env.development` and  `.env.production`. In these files `VITE_API_URL` and `VITE_RAZZER_URL` must be defined.
 
+If you want the [CARTO dark basemap](https://carto.com/basemaps/) to you work, you will also need `VITE_CARTO_BASEMAPS_API_KEY`.
+
+[See here for more information](https://docs.carto.com/faqs/carto-basemaps#why-do-i-see-an-api-key-required-watermark) on getting an API key for the CARTO basemaps.
+
 ## Usage, Bare Metal
 
 The template dependencies are maintained via [pnpm](https://pnpm.io) via `pnpm up -Lri`.
@@ -64,6 +68,7 @@ $ docker run \
     --tty \
     --env VITE_API_URL=http://localhost:5001/api \
     --env VITE_RAZZER_URL=http://localhost:5001/api \
+    --env VITE_CARTO_BASEMAPS_API_KEY=XXX \
     --publish 3000:3000 \
     aquaculture-pilot
 ```
@@ -87,6 +92,7 @@ $ docker run \
     --tty \
     --env VITE_API_URL=https://aquaculture-demo.teinekroken.no \
     --env VITE_RAZZER_URL=https://aquaculture-demo.teinekroken.no/razzer \
+    --env VITE_CARTO_BASEMAPS_API_KEY=XXX \
     --publish 3000:3000 \
     aquaculture-pilot
 ```
@@ -97,7 +103,7 @@ or
 $ docker run \
     --interactive \
     --tty \
-    --env-file ./.env.production
+    --env-file ./.env.production \
     --publish 3000:3000 \
     aquaculture-pilot
 ```
