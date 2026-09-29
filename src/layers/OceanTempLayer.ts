@@ -1,12 +1,12 @@
 import TileLayer from "ol/layer/Tile";
-import TileWMS from 'ol/source/TileWMS.js';
+import TileWMS from "ol/source/TileWMS.js";
 import Layer from "ol/layer/Layer";
 import LayerRenderer from "ol/renderer/Layer";
 import Source from "ol/source/Source";
 import { IDataLayer } from "./IDataLayer";
 
 const depth = 10;
-const sourceLayer = 'temperature';
+const sourceLayer = "temperature";
 const palette = "div-Spectral";
 const style = `default-scalar/${palette}`;
 const colorScaleRange = [-2, 10];
